@@ -31,37 +31,34 @@ app.get('/sitemap.xml', (c) => {
   const base = 'https://thesavestore.com'
   const urls: string[] = []
 
+  // URL 세그먼트 조합을 encode하는 헬퍼
+  const buildUrl = (...segments: string[]) => {
+    return base + '/' + segments.map((s) => encodeURIComponent(s)).join('/')
+  }
+
   // 홈
   urls.push(base + '/')
 
   // 제품 3종
   for (const p of products) {
-    urls.push(base + '/제품/' + encodeURIComponent(p.slug))
+    urls.push(buildUrl('제품', p.slug))
   }
 
   // 업종 8종
   for (const i of industries) {
-    urls.push(base + '/업종/' + encodeURIComponent(i.slug))
+    urls.push(buildUrl('업종', i.slug))
   }
 
   // 지역 - 4단계
   for (const r of regions) {
-    urls.push(base + '/' + encodeURIComponent(r.nameKoShort))
+    urls.push(buildUrl(r.nameKoShort))
     for (const d of r.districts) {
-      urls.push(base + '/' + encodeURIComponent(r.nameKoShort) + '/' + encodeURIComponent(d.slug))
+      urls.push(buildUrl(r.nameKoShort, d.slug))
       for (const dong of d.dongs) {
-        const dongPath =
-          base +
-          '/' +
-          encodeURIComponent(r.nameKoShort) +
-          '/' +
-          encodeURIComponent(d.slug) +
-          '/' +
-          encodeURIComponent(dong.slug)
-        urls.push(dongPath)
+        urls.push(buildUrl(r.nameKoShort, d.slug, dong.slug))
         // 읍면동 × 제품 롱테일
         for (const p of products) {
-          urls.push(dongPath + '/' + encodeURIComponent(p.slug))
+          urls.push(buildUrl(r.nameKoShort, d.slug, dong.slug, p.slug))
         }
       }
     }
