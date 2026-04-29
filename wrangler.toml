@@ -1,24 +1,7 @@
 name = "thesavestore"
-main = "src/index.tsx"
-compatibility_date = "2025-01-01"
-compatibility_flags = ["nodejs_compat"]
+main = "src/index.js"
+compatibility_date = "2024-01-01"
 
-# 커스텀 도메인 연결
-routes = [
-  { pattern = "thesavestore.com", custom_domain = true },
-  { pattern = "www.thesavestore.com", custom_domain = true }
-]
-
-# KV 네임스페이스 예시 (나중에 지역 데이터 이관 시)
-# [[kv_namespaces]]
-# binding = "REGIONS_KV"
-# id = "xxxxxxxxxxxxxxxxxxxxx"
-
-# D1 데이터베이스 예시 (리드/문의 저장용)
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "thesavestore"
-# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-
-[observability]
-enabled = true
+[[routes]]
+pattern = "thesavestore.com/*"
+zone_name = "thesavestore.com"
