@@ -8,7 +8,7 @@
 
 ### 설치
 
-```bash
+```bash.
 npm install
 ```
 
