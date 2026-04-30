@@ -16146,12 +16146,47 @@ function __generateSEOContent(pathname) {
   // 인트로 — 박스 카드, 색상 강조
   const introHtml = `<div style="background:linear-gradient(135deg,#FFF8F4 0%,#FAF8F3 100%);border-left:4px solid #FF5500;border-radius:0 14px 14px 0;padding:24px 28px;margin-bottom:36px"><p style="font-size:15.5px;line-height:1.85;color:#222;margin:0;letter-spacing:-0.01em">${__highlight(intro.replace(/\{loc\}/g, loc))}</p></div>`;
   
-  // 본문 7단락 — 번호 박스 카드, 이모티콘, 색상 강조
+  // 일반 본문 7개 — 번호 없이, 부제목 이모티콘 + 단락 (자연스럽게)
   const bodyItems = bodies.map((p, i) => {
-    const num = i + 1;
     const emoji = __subEmojis[__seoHash(seed + ':e' + i) % __subEmojis.length];
-    return `<div style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:26px 28px;margin-bottom:18px;transition:all .2s"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;background:#000;color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;letter-spacing:-0.02em;flex-shrink:0">${num.toString().padStart(2,'0')}</div><h3 style="font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#000;line-height:1.3">${emoji} ${subheads[i].replace(/\{loc\}/g, loc)}</h3></div><p style="font-size:14.5px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(p.replace(/\{loc\}/g, loc))}</p></div>`;
+    return `<div style="margin-bottom:32px"><h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000;line-height:1.3">${emoji} ${subheads[i].replace(/\{loc\}/g, loc)}</h3><p style="font-size:15px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(p.replace(/\{loc\}/g, loc))}</p></div>`;
   }).join('');
+  
+  // 항목형 박스 — "체크포인트 5가지" (1,2,3,4,5 번호 카드 형태)
+  const __CHECK_TITLES = [
+    '{loc} 매장 사장님이 견적 받기 전 체크하실 5가지',
+    '{loc} 매장 설치 시 꼭 확인하실 5가지',
+    '{loc} 매장 운영비 절감 핵심 5가지',
+    '{loc} 매장 장비 도입 시 후회하지 않을 5가지'
+  ];
+  const __CHECK_ITEMS_POOL = [
+    [
+      {t:'VAN사별 수수료 비교 견적', d:'같은 단말기여도 VAN사에 따라 0.3~0.5%포인트 차이. 비교 견적 필수.'},
+      {t:'기존 단말기 무상 철거', d:'견적서에 무상 철거 조건 명시 여부 확인. 보통 표준 조건.'},
+      {t:'VAN 해지 수수료 대납', d:'기존 계약 위약금이 있으면 신규 업체가 대납 처리해주는지 확인.'},
+      {t:'1년 무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 즉시 출동 보장. 24시간 콜센터 운영 여부.'},
+      {t:'PCI-DSS Level 1 보안 인증', d:'카드 결제 데이터 보안 표준. 인증 단말기인지 확인 필수.'}
+    ],
+    [
+      {t:'매장 통신 환경 사전 점검', d:'외곽 매장은 LTE 백업, 도심은 인터넷 회선 안정성 확인.'},
+      {t:'결제 패턴별 단말기 추천', d:'카운터 위주는 유선, 테이블 결제는 무선, 시술 자리는 블루투스.'},
+      {t:'4년차 이상 단말기 점검', d:'평균 사용 연한 4년 4개월. 그 이후 응답 속도 저하 시작.'},
+      {t:'간편결제 호환 확인', d:'카카오페이·네이버페이·삼성페이 IC·MST·QR 모두 지원하는 모델.'},
+      {t:'설치 시간 영업 영향 최소화', d:'평균 28분 소요. 영업 중에도 진행 가능한지 사전 협의.'}
+    ],
+    [
+      {t:'카드 수수료 절감 효과', d:'VAN사 변경만으로 월 30~50만원 절감 사례 다수. 연간 360~600만원.'},
+      {t:'포스기 인건비 절감 효과', d:'배달앱 자동 수신·매출 자동 집계로 마감 1시간 단축, 인건비 25~40만원.'},
+      {t:'CCTV 보험료 인하 혜택', d:'4K 적외선 설치 시 보험사 인정. 도난 사고 보험료 인하 가능.'},
+      {t:'재고 자동 차감으로 손실 방지', d:'포스기 재고 관리 기능으로 월 평균 재고 손실 15만원 절감.'},
+      {t:'정기 점검 사고 예방 효과', d:'점검 매장은 그렇지 않은 매장보다 사고 빈도 60% 낮음.'}
+    ]
+  ];
+  
+  const __chkIdx = __seoHash(seed + ':chk') % __CHECK_TITLES.length;
+  const __chkItems = __CHECK_ITEMS_POOL[__chkIdx % __CHECK_ITEMS_POOL.length];
+  const __chkTitle = __CHECK_TITLES[__chkIdx].replace(/\{loc\}/g, loc);
+  const checkBox = `<div style="background:#fff;border:1px solid #EEE;border-radius:16px;padding:30px 28px;margin-bottom:32px"><h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 22px;color:#000">✅ ${__chkTitle}</h3><div style="display:flex;flex-direction:column;gap:14px">${__chkItems.map((it, i) => `<div style="display:flex;gap:14px;align-items:flex-start"><div style="width:28px;height:28px;background:#FF5500;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;margin-top:2px">${i+1}</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:#000;margin-bottom:4px;letter-spacing:-0.02em">${it.t}</div><div style="font-size:13.5px;color:#555;line-height:1.7">${__highlight(it.d)}</div></div></div>`).join('')}</div></div>`;
   
   // 사례 2개 — 다른 톤 (스토리 박스, 라벨)
   const caseItems = cases.map((p, i) => {
@@ -16164,6 +16199,7 @@ function __generateSEOContent(pathname) {
     <h2 style="font-size:26px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${h2}</h2>
     ${introHtml}
     ${bodyItems}
+    ${checkBox}
   </div></section>
   <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">실제 설치 사례</div>
@@ -16484,6 +16520,44 @@ const __wrapped_default = {
       }
     }
     
+    // /regions 페이지 — 모든 시·군·구·동 노출
+    if (__path === '/regions' || __path === '/regions/') {
+      const __regionsHost = new URL(request.url).host;
+      let __regionsHtml = '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>전국 지역 안내 — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="전국 17개 광역, 276개 시·군·구, 5,738개 동·읍·면 매장 설치 안내."><style>body{font-family:-apple-system,BlinkMacSystemFont,\'Pretendard\',sans-serif;margin:0;background:#FAF8F3;color:#222;line-height:1.6}.wrap{max-width:1100px;margin:0 auto;padding:48px 24px}h1{font-size:32px;font-weight:900;letter-spacing:-0.04em;margin:0 0 12px;color:#000}.sub{font-size:14px;color:#666;margin-bottom:36px}.region{background:#fff;border:1px solid #EEE;border-radius:14px;margin-bottom:18px;overflow:hidden}.region-head{padding:18px 24px;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center}.region-head a{color:#fff;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:-0.02em}.region-head .stat{font-size:12px;color:rgba(255,255,255,0.6);font-weight:600}.region-body{padding:18px 24px}.sg{margin-bottom:14px}.sg-name{font-size:14px;font-weight:800;color:#000;margin-bottom:6px;letter-spacing:-0.02em}.sg-name a{color:#FF5500;text-decoration:none}.dongs{font-size:12.5px;color:#444;line-height:1.85}.dongs a{color:#444;text-decoration:none;display:inline-block;padding:1px 4px;margin:0 2px 2px 0}.dongs a:hover{color:#FF5500;text-decoration:underline}@media(max-width:768px){.wrap{padding:24px 16px}h1{font-size:24px}.region-head{padding:14px 18px}.region-body{padding:14px 18px}}</style></head><body><div class="wrap"><h1>전국 지역 안내</h1><p class="sub">17개 광역 · 276개 시·군·구 · 5,738개 동·읍·면 매장 설치 정보</p>';
+      
+      // 광역별 그룹화
+      const __byRegion = {};
+      for (const __key of Object.keys(__URL_DONG_KO2EN)) {
+        const __parts = __key.split('/');
+        const __r = __parts[0], __s = __parts[1], __d = __parts[2];
+        if (!__byRegion[__r]) __byRegion[__r] = {};
+        if (!__byRegion[__r][__s]) __byRegion[__r][__s] = [];
+        __byRegion[__r][__s].push(__d);
+      }
+      
+      const __regionOrder = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
+      for (const __r of __regionOrder) {
+        if (!__byRegion[__r]) continue;
+        const __regEnX = __URL_REGION_KO2EN[__r];
+        const __sgList = Object.keys(__byRegion[__r]);
+        const __dongCount = __sgList.reduce((sum, s) => sum + __byRegion[__r][s].length, 0);
+        __regionsHtml += `<div class="region"><div class="region-head"><a href="/${__regEnX}">${__r}</a><span class="stat">${__sgList.length}개 시·군·구 · ${__dongCount}개 동·읍·면</span></div><div class="region-body">`;
+        for (const __s of __sgList) {
+          const __sgEnX = __URL_SG_KO2EN[`${__r}/${__s}`];
+          __regionsHtml += `<div class="sg"><div class="sg-name"><a href="/${__regEnX}/${__sgEnX}">${__s}</a> <span style="color:#999;font-weight:400;font-size:11.5px">${__byRegion[__r][__s].length}개</span></div><div class="dongs">`;
+          for (const __d of __byRegion[__r][__s]) {
+            const __dEnX = __URL_DONG_KO2EN[`${__r}/${__s}/${__d}`];
+            __regionsHtml += `<a href="/${__regEnX}/${__sgEnX}/${__dEnX}">${__d}</a> `;
+          }
+          __regionsHtml += '</div></div>';
+        }
+        __regionsHtml += '</div></div>';
+      }
+      __regionsHtml += '<div style="margin-top:36px;padding:24px;background:#fff;border-radius:14px;text-align:center"><div style="font-size:13px;color:#666;margin-bottom:10px">매장 설비 무료 견적 상담</div><a href="tel:010-9677-2356" style="font-size:24px;font-weight:900;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">📞 010-9677-2356</a></div></div></body></html>';
+      
+      return new Response(__regionsHtml, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+    }
+    
     let __isRegionProduct = false;
     let __rpRegion = '', __rpProduct = '';
     let __actualRequest = request;
@@ -16732,6 +16806,25 @@ const __wrapped_default = {
         const __dgEnC = __URL_DONG_KO2EN[`${__r3}/${__sg}/${__dg}`] || encodeURIComponent(__dg);
         const __dongCards3 = `<section style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">제품별 안내</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${__dg} 매장 설치 — 제품 종류로 골라보세요</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px"><a href="/${__regEnC}/${__sgEnC}/${__dgEnC}/card-terminal" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">💳</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} 카드단말기</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장에 맞는 카드단말기 설치.</p></a><a href="/${__regEnC}/${__sgEnC}/${__dgEnC}/pos" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">🖥️</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} 포스기</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장의 주문·결제·매출 통합 관리.</p></a><a href="/${__regEnC}/${__sgEnC}/${__dgEnC}/cctv" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">📹</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} CCTV</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장 사각지대 분석부터 원격 모니터링.</p></a></div></div></section>`;
         html = html.replace('<!--__POST_HERO__-->', __dongCards3);
+        
+        // 8e2. 동 페이지: 인근 동 5개 navigation
+        const __dongPrefix = `${__r3}/${__sg}/`;
+        const __nearby = [];
+        for (const __key of Object.keys(__URL_DONG_KO2EN)) {
+          if (__key.startsWith(__dongPrefix) && !__key.endsWith('/' + __dg)) {
+            const __nb = __key.split('/')[2];
+            __nearby.push(__nb);
+            if (__nearby.length >= 5) break;
+          }
+        }
+        if (__nearby.length > 0) {
+          const __nearbyCards = __nearby.map(__nb => {
+            const __nbEn = __URL_DONG_KO2EN[`${__r3}/${__sg}/${__nb}`];
+            return `<a href="/${__regEnC}/${__sgEnC}/${__nbEn}" style="background:#fff;border:1px solid #EEE;border-radius:12px;padding:18px 18px;display:block;color:inherit;text-decoration:none"><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:#FF5500;margin-bottom:6px">📍 ${__sg}</div><div style="font-size:15px;font-weight:800;letter-spacing:-0.025em;color:#000">${__nb}</div></a>`;
+          }).join('');
+          const __nbSec = `<section style="padding:48px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__sg} 인근 지역</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__sg}의 다른 동·읍·면도 살펴보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">${__nearbyCards}</div></div></section>`;
+          html = html.replace(/<footer\b/i, __nbSec + '<footer');
+        }
       }
       
       // 8g. 동×제품 페이지(4-segment) 하단 navigation: 다른 제품 + 같은 시군구 다른 동
@@ -16748,16 +16841,34 @@ const __wrapped_default = {
         const __prodEnMap2 = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv'};
         const __otherCardsHtml4 = __others4.map(p => `<a href="/${__regEnD}/${__sgEnD}/${__dgEnD}/${__prodEnMap2[p]}" style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 22px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">${__icons4[p]}</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg4} ${p}</h3><p style="font-size:12.5px;color:#666;line-height:1.6;margin:0">${__descs4[p]}</p></a>`).join('');
         
-        const __navBlock = `<section style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
-        // footer 직전 inject
+        const __navBlock = `<section style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
         html = html.replace(/<footer\b/i, __navBlock + '<footer');
+        
+        // 8g2. 동×제품 페이지: 인근 동 5개 (같은 제품)
+        const __dpPrefix = `${__r4}/${__sg4}/`;
+        const __dpProdEn = __URL_PROD_KO2EN[__pd4];
+        const __nearbyDP = [];
+        for (const __key of Object.keys(__URL_DONG_KO2EN)) {
+          if (__key.startsWith(__dpPrefix) && !__key.endsWith('/' + __dg4)) {
+            __nearbyDP.push(__key.split('/')[2]);
+            if (__nearbyDP.length >= 5) break;
+          }
+        }
+        if (__nearbyDP.length > 0) {
+          const __nearbyDPCards = __nearbyDP.map(__nb => {
+            const __nbEn = __URL_DONG_KO2EN[`${__r4}/${__sg4}/${__nb}`];
+            return `<a href="/${__regEnD}/${__sgEnD}/${__nbEn}/${__dpProdEn}" style="background:#fff;border:1px solid #EEE;border-radius:12px;padding:18px 18px;display:block;color:inherit;text-decoration:none"><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:#FF5500;margin-bottom:6px">📍 ${__sg4}</div><div style="font-size:14.5px;font-weight:800;letter-spacing:-0.025em;color:#000;margin-bottom:3px">${__nb}</div><div style="font-size:12px;color:#666">${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}</div></a>`;
+          }).join('');
+          const __nbDPSec = `<section style="padding:48px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__sg4} 인근 지역</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__sg4}의 다른 동·읍·면 ${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">${__nearbyDPCards}</div></div></section>`;
+          html = html.replace(/<footer\b/i, __nbDPSec + '<footer');
+        }
       }
       
 
       
       // 8d. 모든 하위 페이지: 새 SEO 콘텐츠 inject
       if ((__isRegional && __segs2.length >= 1 && __segs2.length <= 4) || __isRegionProduct) {
-        const __seoPath = __isRegionProduct ? '/' + encodeURIComponent(__rpRegion) + '/' + encodeURIComponent(__rpProduct) : url.pathname;
+        const __seoPath = __isRegionProduct ? '/' + encodeURIComponent(__rpRegion) + '/' + encodeURIComponent(__rpProduct) : __decPath;
         const __seoHtml = __generateSEOContent(__seoPath);
         if (__segs2.length === 1 || __isRegionProduct) {
           // 광역/광역×제품 — DISTRICTS 직전
@@ -16823,8 +16934,53 @@ const __wrapped_default = {
         return m;
       });
       
+      // 8z. 모바일 CSS inject + floating 버튼 아이콘만
+      const __mobileCSS = `<style>
+@media (max-width: 768px) {
+  /* 모든 카드 그리드 모바일 1열 */
+  div[style*="grid-template-columns:repeat(3,1fr)"],
+  div[style*="grid-template-columns:repeat(2,1fr)"],
+  div[style*="grid-template-columns:repeat(5,1fr)"],
+  [data-grid-mobile-1col] { grid-template-columns:1fr !important; gap:12px !important; }
+  /* 광역 카드 박스 padding 줄이기 */
+  div[style*="grid-template-columns:repeat(3,1fr)"] > a,
+  div[style*="grid-template-columns:repeat(2,1fr)"] > a { padding: 22px 20px !important; }
+  /* 메인페이지 통계 박스 wrap */
+  .stats { flex-wrap: wrap !important; gap: 18px !important; }
+  /* 메인페이지 hero text size */
+  .hero h1 { font-size: 32px !important; line-height: 1.2 !important; }
+  /* 컨테이너 padding */
+  .container { padding-left: 18px !important; padding-right: 18px !important; }
+  /* 푸터 모바일 세로 레이아웃 */
+  footer > div { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; padding: 0 20px !important; }
+  /* HOW IT WORKS 4단계 카드 모바일 1열 */
+  .process-steps { grid-template-columns: 1fr !important; gap: 12px !important; }
+}
+/* Floating 무료 상담 버튼 — 원형, 아이콘만 */
+.floating-phone {
+  width: 60px !important;
+  height: 60px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  bottom: 20px !important;
+  right: 20px !important;
+}
+.floating-phone > * { display: none !important; }
+.floating-phone::before {
+  content: '\\1F4DE' !important;
+  font-family: 'Apple Color Emoji','Segoe UI Emoji',sans-serif !important;
+  font-size: 26px !important;
+  display: block !important;
+}
+</style>`;
+      // </head> 직전 inject
+      html = html.replace('</head>', __mobileCSS + '</head>');
+      
       // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
-      const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/#regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
+      const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
       html = html.replace(/<footer[\s\S]*?<\/footer>/, __newFoo);
       
       // 남은 마커 정리
