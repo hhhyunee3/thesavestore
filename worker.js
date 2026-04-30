@@ -16337,6 +16337,28 @@ const __wrapped_default = {
       html = html.replace(/<a\b[^>]*href="(?:\/%EC%A0%9C%ED%92%88\/|\/제품\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
       html = html.replace(/<a\b[^>]*href="(?:\/%EC%97%85%EC%A2%85\/|\/업종\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
       
+      // 5. 푸터·topbar 검정 통일 (--brown 변수 검정으로)
+      html = html.replace(/--brown:\s*#3D2817/g, '--brown: #000000');
+      html = html.replace(/--brown-deep:\s*#2A1B0F/g, '--brown-deep: #000000');
+      
+      // 6. 푸터 정리 (빈 li/ul/컬럼 제거, /#industries 링크 제거)
+      html = html.replace(/<footer[\s\S]*?<\/footer>/, function(__fooHtml) {
+        let __c = __fooHtml;
+        // /#industries 링크가 있는 li 제거 (BY INDUSTRY 섹션 사라졌으니)
+        __c = __c.replace(/<li>\s*<a[^>]+href="\/#industries"[^>]*>[\s\S]*?<\/a>\s*<\/li>/g, '');
+        // 안이 다 빈 li인 ul 통째 제거
+        __c = __c.replace(/<ul[^>]*>(?:\s*<li>\s*<\/li>\s*)+<\/ul>/g, '');
+        // 남은 빈 li 제거
+        __c = __c.replace(/<li>\s*<\/li>/g, '');
+        // 빈 ul 제거
+        __c = __c.replace(/<ul[^>]*>\s*<\/ul>/g, '');
+        // footer-col-label만 있고 그 다음 형제가 ul이 아니거나 다음 label이 오는 경우 제거
+        __c = __c.replace(/<div\s+class="footer-col-label"[^>]*>[^<]*<\/div>(?=\s*(?:<div\s+class="footer-col-label"|<\/div>))/g, '');
+        // 빈 footer-col 통째 제거
+        __c = __c.replace(/<div\s+class="footer-col">\s*<\/div>/g, '');
+        return __c;
+      });
+      
       // 4. 메인페이지(/)에서 BY INDUSTRY (업종별 맞춤구성) 섹션 통째 제거
       if (url.pathname === '/' || url.pathname === '') {
         // sec-label "BY INDUSTRY"를 포함한 가장 가까운 <section>...</section> 제거
