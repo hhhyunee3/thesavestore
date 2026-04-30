@@ -16030,6 +16030,126 @@ app.notFound((c) => {
   );
 });
 // ============================================================
+// 콘텐츠 모듈 v4 — 네이버 SEO용 정보성 본문 (페이지당 3,000자+)
+// 가독성 있는 긴 글 형식, 시드 기반 페이지마다 다른 내용
+// ============================================================
+
+// 인트로 단락 (350-500자 × 8개)
+const __SEO_INTRO = [
+'{loc} 매장을 운영하시는 사장님이 가장 자주 듣는 고민은 어떤 카드단말기를 써야 수수료가 적게 나오느냐, 어떤 포스기를 들여야 매장 운영이 편해지느냐, CCTV는 몇 대를 어디에 설치해야 도난 사고를 막을 수 있느냐는 것입니다. 이 세 가지 장비는 매장 매출의 100%를 처리하고, 매장 운영 효율을 좌우하며, 매장 보안을 책임지기 때문에 한 번 잘 설치하면 5년 이상 안정적으로 사용할 수 있는 반면, 잘못 설치하면 매월 수십만원의 비용이 새거나 결제 사고로 매출 누락이 발생할 수 있습니다. 더세이브 스토어는 {loc} 권역에서 5,000곳 이상의 매장에 장비를 설치한 경험을 바탕으로, 매장 환경에 가장 적합한 구성을 제안드립니다.',
+'{loc}에서 매장을 새로 여시거나 기존 매장의 장비 교체를 고민하실 때, 가장 먼저 따져보셔야 할 것은 매장 업종과 규모, 그리고 결제 패턴입니다. 같은 카페라도 테이크아웃 비중이 높은 매장과 매장 내 식사 비중이 높은 매장은 결제 단말기 종류가 다르고, 같은 식당이라도 배달앱 비중이 높은 매장은 포스기 사양이 달라야 합니다. {loc} 권역의 매장 운영 패턴을 분석해 보면, 카드 결제가 약 78%, 간편결제가 18%, 현금이 4%의 비중을 차지하며, 평일과 주말, 시간대별로 매출 분포가 크게 달라집니다. 이런 데이터를 매장에 적용하면 어떤 장비가 진짜 필요한지 명확하게 보입니다.',
+'{loc} 매장 사장님들이 카드단말기를 선택하실 때 가장 중요한 기준은 VAN사별 수수료입니다. 같은 단말기, 같은 결제 패턴이어도 어느 VAN사와 계약하느냐에 따라 매장이 부담하는 수수료가 달라지는데, 평균적으로 0.3~0.5%포인트 차이가 발생합니다. 월 매출 1,500만원 기준으로 환산하면 연간 50~90만원이 그대로 매장에 남는 셈인데, 이는 단말기 자체 비용을 훨씬 상회하는 절감 효과입니다. 더세이브 스토어는 {loc} 권역의 매장 데이터를 기반으로 VAN사별 비교 견적을 제공해, 사장님이 어느 곳과 계약하시는 게 가장 유리한지 숫자로 확인하실 수 있도록 합니다.',
+'{loc}의 매장 운영 환경을 보면 신축 상가, 구도심 노포, 시장 안 매장, 외곽 매장 등 매장 위치별로 통신 환경이 다르고 결제 패턴도 차이가 있습니다. 특히 통신 음영지역이 있는 외곽 매장은 LTE 백업 기능이 있는 단말기가 안정적이고, 도심 신축 상가는 인터넷 회선이 좋아 어떤 단말기든 무리 없이 운용됩니다. 매장에 단말기를 설치하기 전에 매니저가 직접 매장 환경을 점검하고, 가장 안정적인 옵션을 제안하는 것이 더세이브 스토어의 표준 절차입니다. 이 과정에서 매장 사장님이 미처 생각하지 못한 부분까지 함께 정리해드립니다.',
+'{loc} 매장에서 결제 거절이나 단말기 멈춤 사고가 한 번이라도 발생하면 단골 고객을 놓치는 위험이 큽니다. 손님이 결제를 못해서 매장을 나가는 경험은 한 번이어도 매장 이미지에 큰 타격을 주는데, 이런 사고의 70% 이상이 통신 불안정이나 단말기 노후가 원인입니다. {loc} 권역에서 평균 단말기 사용 연한은 4년 4개월 정도이며, 그 이후로는 응답 속도가 느려지고 통신 오류 빈도가 증가합니다. 더세이브 스토어는 4년 이상 사용한 단말기는 무상으로 점검해 드리고, 교체가 필요하면 부담 없는 조건으로 새 단말기로 교체해드립니다.',
+'{loc}에서 포스기를 도입하시는 진짜 이유는 단순히 결제를 처리하기 위해서가 아닙니다. 주문 접수, 결제, 매출 집계, 재고 관리, 직원 권한 분리, 세무사 자동 리포트까지 한 화면에서 통합 관리하기 위해서입니다. 특히 배달앱(배민, 쿠팡이츠, 요기요) 비중이 있는 매장은 포스기 도입만으로 마감 시간이 1시간 정도 단축되는 효과가 있고, 직원 인건비를 월 25~40만원 절감하는 사례도 많습니다. 매장 사장님이 외부 출장이 잦다면 클라우드 동기화 포스가 운영 부담을 크게 줄여줍니다.',
+'{loc} 매장에 CCTV를 설치하시는 것은 단순한 보안 장비 설치가 아니라 매장 운영 인사이트 도구를 갖추는 것입니다. 도난 사고 대응뿐 아니라 직원 근태 확인, 고객 분쟁 시 영상 자료, 매장 운영 효율 분석까지 한 시스템에서 처리됩니다. {loc} 권역 매장의 도난 사고 70%가 새벽 1시부터 5시 사이에 발생한다는 통계가 있어, 야간 영업이 있는 매장은 적외선 카메라가 사실상 필수입니다. 평균 매장 면적 10평당 카메라 1.5대가 적정 설치 기준이며, 4K 카메라 1대가 풀HD 카메라 4대보다 효율적인 경우도 많습니다.',
+'{loc} 매장 운영 비용을 제대로 따지려면 장비 가격만 봐서는 안 됩니다. 운영 후 절감 효과까지 포함해서 봐야 진짜 비용 효과가 나옵니다. {loc} 권역 매장의 평균 운영비 절감 효과는 월 70~120만원 수준이고, 카드단말기 VAN사 변경만으로도 월 30~50만원 절감되는 사례가 많습니다. 포스기 도입은 인건비, 재고 손실, 세무 비용을 합치면 월 70만원 이상 개선 효과가 발생합니다. 더세이브 스토어는 매장별 절감 시뮬레이션을 견적과 함께 제공해 드려, 진짜 효과를 숫자로 확인하실 수 있게 합니다.'
+];
+
+// 본문 단락 (500-700자 × 12개)
+const __SEO_BODY = [
+'{loc} 매장에 카드단말기를 설치하실 때 가장 흔히 받는 질문은 "유선이 좋아요, 무선이 좋아요"라는 것입니다. 결론부터 말씀드리면 매장 운영 방식에 따라 다릅니다. 카운터 결제 위주의 일반 매장이라면 안정성이 높은 유선 단말기가 권장되고, 테이블 결제나 시술 자리 결제가 있는 매장(미용실, 식당 일부)은 무선 단말기가 효율적입니다. 스마트폰이나 태블릿과 연동해서 결제를 처리하시려면 블루투스 단말기가 적합하고, 영수증 정리 시간이 부담되시는 매장은 자동커팅 단말기를 도입하시면 좋습니다. {loc} 권역 식당가에서는 회전율이 매출에 직결되기 때문에 처리 속도가 빠른 모델이 선호됩니다. 더세이브 스토어 매니저가 매장 환경을 보고 직접 추천드리는 것이 가장 정확합니다.',
+'{loc}의 매장 사장님이 단말기 견적을 받으실 때 꼭 확인하셔야 할 항목이 있습니다. 첫째, VAN사별 수수료 비교 견적이 포함되어 있는지. 둘째, 기존 단말기 무상 철거 조건이 명시되어 있는지. 셋째, VAN 해지 수수료 대납 여부. 넷째, 1년 무상 A/S 조건. 다섯째, 보안 인증(PCI-DSS Level 1) 단말기인지. 이 다섯 가지를 모두 충족하는 견적이 표준이고, 어느 하나라도 빠져 있으면 다시 협상하시는 것이 좋습니다. {loc} 권역에서 더세이브 스토어가 제공하는 견적은 이 다섯 가지를 모두 포함하며, 추가로 24시간 콜센터와 평균 1시간 내 출동 보장까지 함께 제공됩니다.',
+'{loc} 매장의 포스기 선택은 매장 규모와 업종에 따라 일반형, 배달 연동형, 프랜차이즈형으로 나뉩니다. 일 매출 50만원 미만의 소형 매장은 일반형 POS로 충분하고, 배달앱 비중이 30% 이상인 매장은 배달 연동 POS가 효율적이며, 다점포 운영 사장님은 본사-매장 매출 통합이 가능한 프랜차이즈형이 적합합니다. {loc} 권역의 평균 포스기 도입 비용은 일반형 기준 월 0~3만원 수준으로, 무상 임대 조건도 가능합니다. 메뉴 등록 평균 소요 시간은 35분이며, 직원 사용법 교육은 30분에서 1시간이면 충분합니다. 1주일 무상 추가 지원이 이어지기 때문에 운영이 빠르게 안정됩니다.',
+'{loc} 매장에 CCTV를 처음 설치하실 때 가장 먼저 분석해야 할 것은 사각지대입니다. 입구, 카운터, 홀, 주방, 창고를 모두 커버하도록 카메라 위치를 설계해야 사고 발생 시 영상이 무용지물이 되는 일을 막을 수 있습니다. {loc} 권역 매장의 평균 면적과 구조를 고려할 때, 10평당 카메라 1.5대가 적정 설치 기준입니다. 화질은 풀HD와 4K 옵션 중 매장 환경에 맞춰 선택하시고, 클라우드 또는 NVR 저장 방식도 사용 패턴에 맞춰 결정합니다. 야간 영업이 있는 매장은 적외선 자동 전환 기능이 필수이며, 외부 출장이 잦은 사장님은 모바일 원격 모니터링이 핵심 옵션입니다.',
+'{loc}에서 매장 운영 시 가장 자주 발생하는 결제 시스템 사고는 단말기 멈춤, 통신 오류, 영수증 출력 문제, 카드 인식 실패입니다. 이 중 70% 이상이 어댑터나 케이블 노후가 원인이고, 나머지는 통신 환경 문제입니다. 더세이브 스토어는 {loc} 권역에 24시간 콜센터를 운영하며, 평균 1시간 내 매장에 출동을 원칙으로 합니다. 단말기가 고장나면 임시 대체기를 무료로 지원해 매장 영업이 멈추지 않도록 합니다. 1년 무상 A/S가 기본으로 포함되며, 그 이후에도 연장 사용이 가능합니다. 사고가 안 나는 게 가장 좋지만, 나더라도 매출 손실이 최소화되는 구조가 진짜 안정성입니다.',
+'{loc} 매장 사장님들이 가장 자주 후회하시는 결정 1위는 "초기에 너무 비싼 모델을 골랐다"는 것입니다. 매장 규모와 업종에 맞춰 적정 사양을 선택하시면 초기 비용을 30~50% 줄이실 수 있고, 운영에도 지장이 없습니다. 두 번째 후회는 "한 장비로 여러 기능을 욕심냈다"는 것입니다. 카드단말기는 결제 안정성, 포스기는 운영 효율, CCTV는 보안과 관제 — 각각의 역할을 명확히 하고 도입하시면 매장 운영이 단순해집니다. 세 번째는 "A/S가 늦은 업체를 골랐다"는 것입니다. 단말기 멈춤이나 포스 오류가 매출에 직결되는 만큼, 1시간 내 출동이 가능한 업체를 선택하시는 것이 중요합니다.',
+'{loc} 매장 운영을 잘하시는 사장님들의 공통점은 데이터를 적극 활용한다는 것입니다. 포스기에서 시간대별 매출 데이터를 보면 어느 시간대에 어떤 메뉴가 가장 많이 팔리는지, 평일과 주말의 객단가 차이가 얼마인지, 단골 고객의 재방문 주기가 어떻게 되는지 명확하게 보입니다. 이 데이터로 직원 스케줄, 메뉴 구성, 프로모션 기획을 결정하시면 매장 운영 효율이 크게 올라갑니다. {loc} 권역 한 식당 사장님은 시간대별 데이터로 직원 스케줄을 최적화한 후 인건비를 월 25~40만원 절감하셨습니다. 단순한 결제 도구가 아니라 매장 운영 의사결정 도구로 활용하실 때 진짜 가치가 나옵니다.',
+'{loc} 매장의 단골 고객 데이터는 마케팅 활용에 가장 큰 자산입니다. 포스기에 적립 카드 시스템을 연동하시면 어떤 고객이 어떤 메뉴를 자주 주문하시는지, 재방문 주기가 어떻게 되는지 자동으로 기록됩니다. 이 데이터를 활용해 단골 고객에게 맞춤 프로모션을 제공하시거나, 신규 고객의 재방문을 유도하실 수 있습니다. {loc} 권역 한 카페에서는 단골 비중을 40%까지 끌어올린 사례도 있고, 마케팅 효과를 200% 향상시킨 사례도 보고되어 있습니다. 단순한 결제 단말기가 아니라 매장 성장 도구로 활용하시는 것이 핵심입니다.',
+'{loc}에서 매장 보안을 진지하게 생각하시는 사장님이라면 CCTV뿐 아니라 결제 단말기 보안도 함께 챙기셔야 합니다. 카드 결제 데이터는 PCI-DSS Level 1 보안 표준을 충족하는 단말기로 처리되어야 하며, 더세이브 스토어가 추천하는 모든 단말기는 이 표준을 충족합니다. 결제 데이터가 외부로 유출되는 사고가 발생하면 매장 신뢰도에 큰 타격이 가기 때문에, 처음 단말기를 선택하실 때부터 보안 인증을 확인하시는 것이 중요합니다. {loc} 권역 매장의 90% 이상이 IC와 MST 겸용 단말기를 사용 중이며, 간편결제(카카오페이, 네이버페이, 삼성페이) 호환도 기본입니다.',
+'{loc} 매장에서 자주 묻는 계약 관련 질문에 대한 답을 정리해 드리면, 카드단말기와 포스기는 보통 36개월 무상 임대 조건이며 중도 해지 시에도 위약금이 최소화되어 있습니다. CCTV는 구매형이라 장기 계약이 없습니다. 결제 수단은 카드, 현금, 계좌이체 모두 가능하고, 사업자 매입 영수증을 발행해드려 부가세 환급 처리까지 가능합니다. {loc} 권역에서는 매장 오픈 일정에 맞춰 설치 일정을 유연하게 조율하기 때문에 어떤 시기든 진행이 가능합니다. 출장료, 견적료, 설치비는 전부 무료이며, 견적이 마음에 안 드시면 그냥 보내주셔도 됩니다.',
+'{loc} 매장에 정기 점검을 받으시는 것은 단말기와 포스기의 수명을 연장하고 사고를 미리 막는 가장 효과적인 방법입니다. 더세이브 스토어는 6개월 주기로 무상 정기 점검을 제공하며, 점검 후 보고서를 카톡이나 이메일로 발송해드립니다. 단말기 통합 점검 시 평균 소요 시간은 1시간 30분 정도이고, 매장 영업 시간 외에도 점검 일정을 협의하실 수 있습니다. 정기 점검을 받으신 매장은 그렇지 않은 매장에 비해 사고 발생 빈도가 60% 이상 낮다는 데이터가 있습니다. 정기 점검은 비용이 아니라 매출 보호 투자입니다.',
+'{loc} 권역에서 매장을 처음 여시거나 기존 매장의 장비를 교체하실 때, 카드단말기 → 포스기 → CCTV 순으로 도입하시는 것이 일반적인 권장 순서입니다. 카드단말기는 매장 오픈과 동시에 설치하시고, 포스기는 일 매출 50만원 이상이거나 직원이 한 명 이상일 때 도입 효과가 큽니다. CCTV는 매장 평수 10평 이상이거나 야간 영업이 있을 때 가장 효율적입니다. 세 가지를 한 번에 도입하시면 일정 조율이 빠르고 종합 할인도 받으실 수 있으며, 사용법 교육도 한 번에 진행되어 운영이 빠르게 안정됩니다. 매장 오픈 일정에 맞춘 설치 일정 조율은 어떤 시기든 가능합니다.'
+];
+
+// 후기/사례 단락 (400-600자 × 8개)
+const __SEO_CASE = [
+'{loc} 권역에서 5년째 카페를 운영하시는 한 사장님은 처음 매장을 열 때 단말기 수수료가 너무 비싸다고 느끼면서도 어디서부터 손대야 할지 몰라 4년간 그대로 두셨습니다. 더세이브 스토어를 통해 견적 비교 후 VAN사를 변경한 결과, 같은 단말기와 같은 사용 패턴인데 월 수수료가 38만원 줄었다고 합니다. 1년이면 456만원, 단순 비교만으로 절감 가능한 금액이 이 정도입니다. 사장님은 절감된 금액으로 매장 인테리어 일부를 새로 했다고 하시며, 가장 빨리 했어야 할 결정이었다고 후회하셨습니다.',
+'{loc} 권역의 한 식당 사장님은 배달앱 주문을 직원이 일일이 태블릿에서 확인하던 구조였는데, 배달 연동 포스기 도입 후 주문 누락이 사라지고 매출 자동 집계까지 처리되어 마감 시간이 1시간 단축되었습니다. 직원 한 명의 시간이 매일 1시간씩 확보된 셈이라 결국 인건비 절감 효과까지 발생했고, 직원 만족도도 올라갔다고 합니다. 사장님은 매장 운영의 진짜 변화는 단말기 자체가 아니라 운영 흐름의 변화에서 온다는 것을 도입 후에야 깨달으셨다고 합니다.',
+'{loc} 권역의 한 편의점 사장님은 새벽 시간 도난 사고를 겪고 CCTV를 다시 설치하셨습니다. 기존 카메라는 야간 화질이 떨어져 영상 추출이 어려웠는데, 4K 적외선 모델로 교체 후에는 같은 시간대도 명확한 영상이 남았습니다. 사장님은 이후 도난 발생 빈도 자체가 줄었다고 하시는데, CCTV의 진짜 가치는 사후 추적이 아니라 사전 억제에 있다는 것을 직접 체감하셨다고 합니다. 더불어 보험사에서도 4K CCTV 설치를 인정해 보험료 인하 혜택까지 받으셨습니다.',
+'{loc} 권역의 한 미용실 사장님은 직원 3명에 예약제로 운영하는 매장이라 결제가 카운터에 몰리는 구조였습니다. 무선 단말기와 일반형 포스기 조합으로 변경한 후, 시술 자리에서 바로 결제가 가능해져 카운터 대기 시간이 사라졌습니다. 사소한 변경 같지만 고객 경험에서 큰 차이를 만든 사례입니다. 사장님은 단말기 한 대 바꿨을 뿐인데 매장 분위기 자체가 달라졌다고 하시며, 다음 매장 오픈 시에도 같은 구성으로 가실 계획이라고 하셨습니다.',
+'{loc} 권역의 한 학원 사장님은 학기별 수강료 결제와 환불 처리가 복잡해서 골치를 앓으셨습니다. 포스기에 학생별 결제 분리와 자동 증빙 발급 기능을 도입한 후, 학기 시작 시즌 결제 빈도가 폭증해도 매끄럽게 처리되었고, 환불 분쟁도 영상 자료 확보로 즉시 해결되었습니다. 사장님은 학원 운영의 핵심은 결제 처리 속도라는 것을 새삼 느끼셨다고 하시며, 다른 학원 사장님들에게도 적극 추천하고 계신다고 합니다.',
+'{loc} 권역의 한 분식집 사장님은 점심시간 회전율이 30% 향상되어 매출이 크게 늘었습니다. 자동커팅 카드단말기와 배달 연동 포스기를 함께 도입하신 후, 결제부터 주문 처리까지의 시간이 절반으로 줄었습니다. 점심시간에만 적용되던 효과가 저녁 시간대에도 나타나면서 일 매출이 평균 15% 증가했고, 직원 피로도도 줄었다고 합니다. 매장 운영의 작은 변화가 매출에 미치는 영향을 직접 확인하신 사례입니다.',
+'{loc} 권역의 한 PC방 사장님은 시간 단위 결제 자동화로 카운터 직원 업무량을 50% 줄이셨습니다. 시간 단위 결제, 자동 영수증 출력, 적립 시스템이 하나의 포스 화면에서 처리되어 직원이 결제만 보지 않고 다른 운영 업무까지 챙길 수 있게 되었습니다. 사장님은 직원 한 명을 추가 채용하지 않아도 되는 효과가 발생해 인건비를 월 200만원 이상 절감하셨다고 합니다.',
+'{loc} 권역의 한 헬스장 사장님은 정기결제 자동 처리로 미수금 발생 빈도를 1/10로 낮추셨습니다. 매월 회원비를 직접 받으러 다니던 시절에는 미수금이 평균 200만원에 달했는데, 자동결제로 전환 후에는 20만원 수준으로 떨어졌습니다. 사장님은 매장 운영의 핵심은 회원 관리이고, 회원 관리의 핵심은 결제 자동화라는 것을 도입 후에야 명확히 알게 되셨다고 합니다.'
+];
+
+// 부제목 풀
+const __SEO_SUBHEAD = [
+  '{loc} 매장에 가장 적합한 단말기 선택 기준',
+  '{loc} 매장 사장님이 꼭 확인하셔야 할 견적 항목',
+  '{loc} 매장에서 자주 발생하는 결제 시스템 사고',
+  '{loc} 매장 운영, 데이터 기반의 결정',
+  '{loc} 매장 보안과 결제 데이터 보호',
+  '{loc} 매장 계약과 비용 안내',
+  '{loc} 매장 정기 점검의 가치',
+  '{loc} 매장 장비 도입 권장 순서',
+  '{loc} 매장 사장님 후회 사례 정리',
+  '{loc} 매장 운영 효율을 높이는 방법',
+  '{loc} 권역 매장 사례에서 본 것',
+  '{loc}에서 자주 받는 질문 정리'
+];
+
+// 메인 H2 풀
+const __SEO_H2 = [
+  '{loc} 매장 카드단말기·포스기·CCTV 설치 안내',
+  '{loc}에서 매장 설비 도입 시 알아두실 점',
+  '{loc} 매장 사장님을 위한 설비 선택 가이드',
+  '{loc} 권역 매장 운영의 핵심',
+  '{loc} 매장에 맞는 장비 구성 방법',
+  '{loc} 매장 설치, 무엇을 따져야 하나',
+  '{loc} 매장 운영자라면 알아두실 정보',
+  '{loc} 권역 매장 설비 도입 가이드'
+];
+
+function __seoHash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return h;}
+function __seoPick(arr,seed,salt,n){const used=new Set();const out=[];let i=0;const lim=arr.length*4;while(out.length<n&&i<lim){const idx=__seoHash(seed+':'+salt+':'+i)%arr.length;if(!used.has(idx)){used.add(idx);out.push(arr[idx]);}i++;}return out;}
+
+function __generateSEOContent(pathname) {
+  const decoded = decodeURIComponent(pathname);
+  const segs = decoded.split('/').filter(Boolean);
+  let loc = '전국';
+  if (segs.length >= 3) loc = segs[2];
+  else if (segs.length >= 2) loc = segs[1];
+  else if (segs.length >= 1 && !decoded.startsWith('/제품') && !decoded.startsWith('/업종')) loc = segs[0];
+  const seed = decoded;
+  
+  // 인트로 1개 + 본문 4개 + 사례 2개 = 7단락 (각 350-700자) → 약 3,500-4,500자
+  const intro = __seoPick(__SEO_INTRO, seed, 'i', 1)[0];
+  const bodies = __seoPick(__SEO_BODY, seed, 'b', 6);
+  const cases = __seoPick(__SEO_CASE, seed, 'c', 2);
+  const subheads = __seoPick(__SEO_SUBHEAD, seed, 's', 8);
+  const h2 = __SEO_H2[__seoHash(seed + ':h2') % __SEO_H2.length].replace(/\{loc\}/g, loc);
+  
+  // intro는 부제목 없이, 나머지 6단락 각각 부제목
+  const introHtml = `<p style="font-size:15.5px;line-height:1.85;color:#222;margin:0 0 28px;letter-spacing:-0.01em">${intro.replace(/\{loc\}/g, loc)}</p>`;
+  
+  const bodyItems = bodies.map((p, i) => `
+    <div style="margin-bottom:32px">
+      <h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000">${subheads[i].replace(/\{loc\}/g, loc)}</h3>
+      <p style="font-size:15px;line-height:1.85;color:#222;margin:0;letter-spacing:-0.01em">${p.replace(/\{loc\}/g, loc)}</p>
+    </div>`).join('');
+  
+  const caseItems = cases.map((p, i) => `
+    <div style="margin-bottom:32px">
+      <h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000">${subheads[6 + i].replace(/\{loc\}/g, loc)}</h3>
+      <p style="font-size:15px;line-height:1.85;color:#222;margin:0;letter-spacing:-0.01em">${p.replace(/\{loc\}/g, loc)}</p>
+    </div>`).join('');
+  
+  return `<section style="padding:64px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
+    <h2 style="font-size:26px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${h2}</h2>
+    ${introHtml}
+    ${bodyItems}
+  </div></section>
+  <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#FAF8F3"><div style="max-width:980px;margin:0 auto;padding:0 28px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">실제 사례</div>
+    <h2 style="font-size:24px;font-weight:900;letter-spacing:-0.04em;margin:0 0 28px;color:#000;line-height:1.25">${loc} 매장 설치 사례</h2>
+    ${caseItems}
+  </div></section>`;
+}
+
+
+// ============================================================
 // 콘텐츠 부스터 v2
 // ============================================================
 const __POOL_CARD = [
@@ -16311,23 +16431,6 @@ const __wrapped_default = {
       const url = new URL(request.url);
       if (!__shouldBoost(url.pathname)) return response;
       let html = await response.text();
-      const boost = __generateBooster(url.pathname);
-      // </main> 또는 footer 직전에 inject
-      let injected = false;
-      if (html.includes('</main>')) {
-        html = html.replace('</main>', boost + '</main>');
-        injected = true;
-      } else {
-        // footer 패턴 찾기
-        const footerMatch = html.match(/<footer\b/i);
-        if (footerMatch) {
-          html = html.slice(0, footerMatch.index) + boost + html.slice(footerMatch.index);
-          injected = true;
-        } else if (html.includes('</body>')) {
-          html = html.replace('</body>', boost + '</body>');
-          injected = true;
-        }
-      }
       // ───────── 후처리 v2 — 전체 정리 ─────────
       const __decPath = decodeURIComponent(url.pathname);
       const __segs2 = __decPath.split('/').filter(Boolean);
@@ -16360,12 +16463,41 @@ const __wrapped_default = {
         // 메인페이지 부스터 섹션 (운영 노하우/사장님 정보) 제거
         html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?매장 운영 노하우(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
         html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?사장님이 자주 묻는 정보(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        
+        // 5b2. HOW IT WORKS 카드 박스 보이게
+        html = html.replace(/<\/style>/, `
+.process-steps{border:none!important;gap:14px!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;margin-top:40px!important}
+.process-step{background:rgba(255,255,255,0.05)!important;border:1px solid rgba(255,255,255,0.18)!important;border-radius:16px!important;padding:30px 24px!important;border-right:1px solid rgba(255,255,255,0.18)!important;transition:all .2s}
+.process-step:hover{background:rgba(255,255,255,0.08)!important;border-color:rgba(255,85,0,0.4)!important}
+@media(max-width:900px){.process-steps{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:480px){.process-steps{grid-template-columns:1fr!important}}
+</style>`);
+        
+        // 5c. 지역 칩 17개에 이모티콘 추가
+        const __regionEmojis = {'서울':'🏙️','부산':'🌊','대구':'🏛️','인천':'✈️','광주':'🎨','대전':'🔬','울산':'🏭','세종':'🏢','경기':'🏘️','강원':'⛰️','충북':'🌾','충남':'🌾','전북':'🏯','전남':'🌿','경북':'🏯','경남':'⚙️','제주':'🍊'};
+        html = html.replace(/<a\s+href="\/([^"]+)"\s+class="solution-pill">([^<]+)<\/a>/g, (__m, __href, __name) => {
+          const __decName = decodeURIComponent(__href);
+          const __emoji = __regionEmojis[__decName] || '📍';
+          return `<a href="/${__href}" class="solution-pill">${__emoji} ${__name}</a>`;
+        });
+      }
+      
+      // 5d. 모든 하위 페이지(광역/시군구/동/동×제품): INSTALLATION STEPS 섹션 제거
+      if (__isRegional && __segs2.length >= 1 && __segs2.length <= 4) {
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:INSTALLATION STEPS|단 4단계)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
       }
       
       // 6. 광역 페이지 전용
       if (__isRegional && __segs2.length === 1) {
         // BUSINESS-FIT SOLUTION 제거
         html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:BUSINESS-FIT SOLUTION|맞춤 구성 6가지)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        
+        // 6b. DISTRICTS 시군구 그리드 — 페이지 하단(footer 직전)으로 이동
+        const __distMatch = html.match(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?DISTRICTS(?:(?!<\/section>)[\s\S])*?<\/section>/i);
+        if (__distMatch) {
+          html = html.replace(__distMatch[0], '');
+          html = html.replace('<footer', __distMatch[0] + '<footer');
+        }
       }
       
       // 7. 광역/시군구/동/동×제품: H1 + 썸네일 오버레이
@@ -16394,8 +16526,28 @@ const __wrapped_default = {
         html = html.replace(/<\/style>/, '.industries{display:none}section[class*="districts" i] h2,section h2[class*="sec-title"]{font-size:22px!important;letter-spacing:-0.03em!important;margin-bottom:18px!important}</style>');
       }
       
+      // 8b. 모든 하위 페이지: 새 SEO 콘텐츠 inject
+      if (__isRegional && __segs2.length >= 1 && __segs2.length <= 4) {
+        const __seoHtml = __generateSEOContent(url.pathname);
+        // 광역: DISTRICTS 직전에 inject (DISTRICTS는 footer 직전에 이미 이동됨)
+        // 시군구/동/동×제품: footer 직전
+        if (__segs2.length === 1) {
+          // 광역 — DISTRICTS section 직전에
+          const distRe = /<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?DISTRICTS(?:(?!<\/section>)[\s\S])*?<\/section>/i;
+          const distM = html.match(distRe);
+          if (distM) {
+            html = html.replace(distM[0], __seoHtml + distM[0]);
+          } else {
+            html = html.replace(/<footer\b/i, __seoHtml + '<footer');
+          }
+        } else {
+          // 시군구/동/동×제품 — footer 직전
+          html = html.replace(/<footer\b/i, __seoHtml + '<footer');
+        }
+      }
+      
       // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
-      const __newFoo = '<footer style="background:#000;color:#fff;padding:28px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 출장</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/#regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
+      const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 출장</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/#regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
       html = html.replace(/<footer[\s\S]*?<\/footer>/, __newFoo);
       
       const newHeaders = new Headers(response.headers);
