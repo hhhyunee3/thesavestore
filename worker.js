@@ -7178,9 +7178,6 @@ var regions = [
       { slug: "송파동", name: "송파동" },
       { slug: "석촌동", name: "석촌동" }
     ] },
-    { slug: "서울특별시", name: "서울특별시", nameEn: "", dongs: [
-      { slug: "서울특별시", name: "서울특별시" }
-    ] },
     { slug: "양천구", name: "양천구", nameEn: "", dongs: [
       { slug: "목동", name: "목동" },
       { slug: "신월동", name: "신월동" },
@@ -8196,9 +8193,6 @@ var regions = [
     { slug: "용인시", name: "용인시", nameEn: "", dongs: [
       { slug: "용인시", name: "용인시" }
     ] },
-    { slug: "경기도", name: "경기도", nameEn: "", dongs: [
-      { slug: "경기도", name: "경기도" }
-    ] },
     { slug: "수원시", name: "수원시", nameEn: "", dongs: [
       { slug: "수원시", name: "수원시" }
     ] },
@@ -8412,9 +8406,6 @@ var regions = [
       { slug: "관교동", name: "관교동" },
       { slug: "문학동", name: "문학동" }
     ] },
-    { slug: "인천광역시", name: "인천광역시", nameEn: "", dongs: [
-      { slug: "인천광역시", name: "인천광역시" }
-    ] },
     { slug: "부평구", name: "부평구", nameEn: "", dongs: [
       { slug: "부평구", name: "부평구" },
       { slug: "부평동", name: "부평동" },
@@ -8436,16 +8427,6 @@ var regions = [
       { slug: "영흥면", name: "영흥면" },
       { slug: "자월면", name: "자월면" },
       { slug: "연평면", name: "연평면" }
-    ] },
-    { slug: "남구", name: "남구", nameEn: "", dongs: [
-      { slug: "주안동", name: "주안동" },
-      { slug: "관교동", name: "관교동" },
-      { slug: "문학동", name: "문학동" },
-      { slug: "남구", name: "남구" },
-      { slug: "숭의동", name: "숭의동" },
-      { slug: "용현동", name: "용현동" },
-      { slug: "학익동", name: "학익동" },
-      { slug: "도화동", name: "도화동" }
     ] }
   ],
     districtCount: 10,
@@ -8706,9 +8687,6 @@ var regions = [
       { slug: "학장동", name: "학장동" },
       { slug: "엄궁동", name: "엄궁동" }
     ] },
-    { slug: "부산광역시", name: "부산광역시", nameEn: "", dongs: [
-      { slug: "부산광역시", name: "부산광역시" }
-    ] },
     { slug: "동구", name: "동구", nameEn: "", dongs: [
       { slug: "초량동", name: "초량동" },
       { slug: "수정동", name: "수정동" },
@@ -8939,9 +8917,6 @@ var regions = [
       { slug: "서구", name: "서구" },
       { slug: "원대동2가", name: "원대동2가" },
       { slug: "원대동3가", name: "원대동3가" }
-    ] },
-    { slug: "대구광역시", name: "대구광역시", nameEn: "", dongs: [
-      { slug: "대구광역시", name: "대구광역시" }
     ] },
     { slug: "군위군", name: "군위군", nameEn: "", dongs: [
       { slug: "우보면", name: "우보면" },
@@ -9261,9 +9236,6 @@ var regions = [
       { slug: "충장로4가", name: "충장로4가" },
       { slug: "금남로1가", name: "금남로1가" },
       { slug: "금남로2가", name: "금남로2가" }
-    ] },
-    { slug: "광주광역시", name: "광주광역시", nameEn: "", dongs: [
-      { slug: "광주광역시", name: "광주광역시" }
     ] }
   ],
     districtCount: 5,
@@ -9492,9 +9464,6 @@ var regions = [
       { slug: "신상동", name: "신상동" },
       { slug: "신하동", name: "신하동" },
       { slug: "판암동", name: "판암동" }
-    ] },
-    { slug: "대전광역시", name: "대전광역시", nameEn: "", dongs: [
-      { slug: "대전광역시", name: "대전광역시" }
     ] }
   ],
     districtCount: 5,
@@ -9632,9 +9601,6 @@ var regions = [
       { slug: "동구", name: "동구" },
       { slug: "방어동", name: "방어동" },
       { slug: "서부동", name: "서부동" }
-    ] },
-    { slug: "울산광역시", name: "울산광역시", nameEn: "", dongs: [
-      { slug: "울산광역시", name: "울산광역시" }
     ] }
   ],
     districtCount: 5,
@@ -9707,9 +9673,6 @@ var regions = [
       { slug: "아름동", name: "아름동" },
       { slug: "도담동", name: "도담동" },
       { slug: "세종시", name: "세종시" }
-    ] },
-    { slug: "세종특별자치시", name: "세종특별자치시", nameEn: "", dongs: [
-      { slug: "세종특별자치시", name: "세종특별자치시" }
     ] }
   ],
     districtCount: 1,
@@ -9826,9 +9789,6 @@ var regions = [
       { slug: "영남동", name: "영남동" },
       { slug: "대정읍", name: "대정읍" },
       { slug: "안덕면", name: "안덕면" }
-    ] },
-    { slug: "제주특별자치도", name: "제주특별자치도", nameEn: "", dongs: [
-      { slug: "제주특별자치도", name: "제주특별자치도" }
     ] }
   ],
     districtCount: 2,
@@ -10215,9 +10175,6 @@ var regions = [
       { slug: "금호동", name: "금호동" },
       { slug: "청학동", name: "청학동" },
       { slug: "교동", name: "교동" }
-    ] },
-    { slug: "강원도", name: "강원도", nameEn: "", dongs: [
-      { slug: "강원도", name: "강원도" }
     ] }
   ],
     districtCount: 18,
@@ -10540,9 +10497,6 @@ var regions = [
       { slug: "도안면", name: "도안면" },
       { slug: "증평군", name: "증평군" },
       { slug: "증평읍", name: "증평읍" }
-    ] },
-    { slug: "충청북도", name: "충청북도", nameEn: "", dongs: [
-      { slug: "충청북도", name: "충청북도" }
     ] },
     { slug: "청주시", name: "청주시", nameEn: "", dongs: [
       { slug: "청주시", name: "청주시" }
@@ -11071,9 +11025,6 @@ var regions = [
       { slug: "덕산면", name: "덕산면" },
       { slug: "광시면", name: "광시면" },
       { slug: "오가면", name: "오가면" }
-    ] },
-    { slug: "충청남도", name: "충청남도", nameEn: "", dongs: [
-      { slug: "충청남도", name: "충청남도" }
     ] },
     { slug: "천안시", name: "천안시", nameEn: "", dongs: [
       { slug: "천안시", name: "천안시" }
@@ -11620,9 +11571,6 @@ var regions = [
       { slug: "쌍치면", name: "쌍치면" },
       { slug: "인계면", name: "인계면" },
       { slug: "금과면", name: "금과면" }
-    ] },
-    { slug: "전라북도", name: "전라북도", nameEn: "", dongs: [
-      { slug: "전라북도", name: "전라북도" }
     ] }
   ],
     districtCount: 14,
@@ -12149,9 +12097,6 @@ var regions = [
       { slug: "학교면", name: "학교면" },
       { slug: "엄다면", name: "엄다면" },
       { slug: "대동면", name: "대동면" }
-    ] },
-    { slug: "전라남도", name: "전라남도", nameEn: "", dongs: [
-      { slug: "전라남도", name: "전라남도" }
     ] }
   ],
     districtCount: 22,
@@ -12799,9 +12744,6 @@ var regions = [
       { slug: "울릉읍", name: "울릉읍" },
       { slug: "서면", name: "서면" },
       { slug: "북면", name: "북면" }
-    ] },
-    { slug: "경상북도", name: "경상북도", nameEn: "", dongs: [
-      { slug: "경상북도", name: "경상북도" }
     ] },
     { slug: "군위군", name: "군위군", nameEn: "", dongs: [
       { slug: "효령면", name: "효령면" },
@@ -13474,10 +13416,6 @@ var regions = [
       { slug: "항남동", name: "항남동" },
       { slug: "중앙동", name: "중앙동" },
       { slug: "문화동", name: "문화동" }
-    ] },
-    { slug: "경상남도", name: "경상남도", nameEn: "", dongs: [
-      { slug: "경상남도", name: "경상남도" },
-      { slug: "남해군", name: "남해군" }
     ] },
     { slug: "창원시", name: "창원시", nameEn: "", dongs: [
       { slug: "창원시", name: "창원시" }
@@ -16344,10 +16282,9 @@ const __wrapped_default = {
     const __url = new URL(request.url);
     const __path = decodeURIComponent(__url.pathname);
     
-    // 라우트 차단: /제품/*, /업종/*, /광역/시군구/동/제품 (4-segment)
-    if (__path.startsWith('/제품/') ||
-        __path.startsWith('/업종/') ||
-        /^\/[^\/]+\/[^\/]+\/[^\/]+\/[^\/]+\/?$/.test(__path)) {
+    // 라우트 차단: 4-segment URL만 차단 (/광역/시군구/동/제품 — 동×제품 페이지)
+    const __segs = __path.split('/').filter(Boolean);
+    if (__segs.length >= 4 && !__path.startsWith('/제품/') && !__path.startsWith('/업종/') && !__path.startsWith('/sitemap')) {
       return new Response('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>Not Found</title></head><body><h1>404</h1><p><a href="/">홈으로</a></p></body></html>', { 
         status: 404, 
         headers: {'Content-Type':'text/html; charset=utf-8'} 
@@ -16360,8 +16297,6 @@ const __wrapped_default = {
     if (__path.startsWith('/sitemap') && (response.headers.get('content-type') || '').includes('xml')) {
       let __xml = await response.text();
       __xml = __xml.split('\n').filter(line => {
-        if (line.includes('/%EC%A0%9C%ED%92%88/') || line.includes('/제품/')) return false;
-        if (line.includes('/%EC%97%85%EC%A2%85/') || line.includes('/업종/')) return false;
         const m = line.match(/<loc>[^<]*<\/loc>/);
         if (m) {
           const urlMatch = m[0].match(/<loc>(.+)<\/loc>/);
