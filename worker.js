@@ -16116,9 +16116,9 @@ function __generateSEOContent(pathname) {
   
   // 인트로 1개 + 본문 4개 + 사례 2개 = 7단락 (각 350-700자) → 약 3,500-4,500자
   const intro = __seoPick(__SEO_INTRO, seed, 'i', 1)[0];
-  const bodies = __seoPick(__SEO_BODY, seed, 'b', 6);
+  const bodies = __seoPick(__SEO_BODY, seed, 'b', 7);
   const cases = __seoPick(__SEO_CASE, seed, 'c', 2);
-  const subheads = __seoPick(__SEO_SUBHEAD, seed, 's', 8);
+  const subheads = __seoPick(__SEO_SUBHEAD, seed, 's', 9);
   const h2 = __SEO_H2[__seoHash(seed + ':h2') % __SEO_H2.length].replace(/\{loc\}/g, loc);
   
   // intro는 부제목 없이, 나머지 6단락 각각 부제목
@@ -16132,7 +16132,7 @@ function __generateSEOContent(pathname) {
   
   const caseItems = cases.map((p, i) => `
     <div style="margin-bottom:32px">
-      <h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000">${subheads[6 + i].replace(/\{loc\}/g, loc)}</h3>
+      <h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000">${subheads[7 + i].replace(/\{loc\}/g, loc)}</h3>
       <p style="font-size:15px;line-height:1.85;color:#222;margin:0;letter-spacing:-0.01em">${p.replace(/\{loc\}/g, loc)}</p>
     </div>`).join('');
   
@@ -16507,9 +16507,20 @@ const __wrapped_default = {
         });
       }
       
-      // 5d. 모든 하위 페이지(광역/시군구/동/동×제품): INSTALLATION STEPS 섹션 제거
-      if (__isRegional && __segs2.length >= 1 && __segs2.length <= 4) {
+      // 5d. 모든 하위 페이지(광역/시군구/동/동×제품/광역×제품): 잡스러운 섹션 일괄 제거
+      if ((__isRegional && __segs2.length >= 1 && __segs2.length <= 4) || __isRegionProduct) {
+        // INSTALLATION STEPS / 단 4단계
         html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:INSTALLATION STEPS|단 4단계)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // BUSINESS-FIT SOLUTION / 맞춤 구성 6가지
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:BUSINESS-FIT SOLUTION|맞춤 구성 6가지)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // LOCAL INSIGHT
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?LOCAL INSIGHT(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // INSTALL LOG / 최근 설치된 기록
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:INSTALL LOG|최근 설치된 기록)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // FAQ — 하위 페이지 (메인엔 그대로 유지)
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:>FAQ<|자주 묻는 질문)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // CORE EQUIPMENT 9종 (메인의 3종은 따로 우리가 만든 거라 영향 없음)
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?핵심 장비 9종(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
       }
       
       // 6. 광역 페이지 전용
@@ -16539,7 +16550,7 @@ const __wrapped_default = {
           __h1 = `${__segs2[1]} 매장 설비<br><span style="color:#FF5500">출장 설치 전문</span>`;
           __label = 'DISTRICT'; __sub = `${__segs2[0]} ${__segs2[1]}`;
         } else if (__segs2.length === 3) {
-          __h1 = `${__segs2[2]} 매장에<br><span style="color:#FF5500">카드단말기·포스기·CCTV</span> 설치`;
+          __h1 = `${__segs2[1]} ${__segs2[2]} 매장 설비<br><span style="color:#FF5500">출장 설치 전문</span>`;
           __label = 'DONG'; __sub = `${__segs2[0]} ${__segs2[1]} ${__segs2[2]}`;
         } else {
           __h1 = `${__segs2[2]} ${__segs2[3]}<br><span style="color:#FF5500">출장 설치</span>`;
@@ -16574,14 +16585,21 @@ const __wrapped_default = {
         html = html.replace('<!--__POST_HERO__-->', __otherSec);
       }
       
+      // 8e. 동 페이지(3-segment): 동×제품 카드 3개 분기 추가
+      if (__isRegional && __segs2.length === 3) {
+        const __r3 = __segs2[0], __sg = __segs2[1], __dg = __segs2[2];
+        const __dongCards3 = `<section style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">제품별 안내</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${__dg} 매장 설치 — 제품 종류로 골라보세요</h2><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px"><a href="/${encodeURIComponent(__r3)}/${encodeURIComponent(__sg)}/${encodeURIComponent(__dg)}/${encodeURIComponent('카드단말기')}" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">💳</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} 카드단말기</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장에 맞는 카드단말기 출장 설치.</p></a><a href="/${encodeURIComponent(__r3)}/${encodeURIComponent(__sg)}/${encodeURIComponent(__dg)}/${encodeURIComponent('포스기')}" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">🖥️</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} 포스기</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장의 주문·결제·매출 통합 관리.</p></a><a href="/${encodeURIComponent(__r3)}/${encodeURIComponent(__sg)}/${encodeURIComponent(__dg)}/${encodeURIComponent('CCTV설치')}" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">📹</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg} CCTV</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__dg} 매장 사각지대 분석부터 원격 모니터링.</p></a></div></div></section>`;
+        html = html.replace('<!--__POST_HERO__-->', __dongCards3);
+      }
+      
+
+      
       // 8d. 모든 하위 페이지: 새 SEO 콘텐츠 inject
       if ((__isRegional && __segs2.length >= 1 && __segs2.length <= 4) || __isRegionProduct) {
         const __seoPath = __isRegionProduct ? '/' + encodeURIComponent(__rpRegion) + '/' + encodeURIComponent(__rpProduct) : url.pathname;
         const __seoHtml = __generateSEOContent(__seoPath);
-        // 광역/광역×제품: DISTRICTS 직전에 inject
-        // 시군구/동/동×제품: footer 직전
         if (__segs2.length === 1 || __isRegionProduct) {
-          // 광역 — DISTRICTS section 직전에
+          // 광역/광역×제품 — DISTRICTS 직전
           const distRe = /<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?DISTRICTS(?:(?!<\/section>)[\s\S])*?<\/section>/i;
           const distM = html.match(distRe);
           if (distM) {
@@ -16589,8 +16607,17 @@ const __wrapped_default = {
           } else {
             html = html.replace(/<footer\b/i, __seoHtml + '<footer');
           }
+        } else if (__segs2.length === 2) {
+          // 시군구 — DONG 그리드 직전 (있으면) 또는 footer 직전
+          const dongRe = /<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:>DONG<|읍면동별 상세)(?:(?!<\/section>)[\s\S])*?<\/section>/i;
+          const dongM = html.match(dongRe);
+          if (dongM) {
+            html = html.replace(dongM[0], __seoHtml + dongM[0]);
+          } else {
+            html = html.replace(/<footer\b/i, __seoHtml + '<footer');
+          }
         } else {
-          // 시군구/동/동×제품 — footer 직전
+          // 동/동×제품 — footer 직전
           html = html.replace(/<footer\b/i, __seoHtml + '<footer');
         }
       }
