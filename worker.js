@@ -16341,7 +16341,44 @@ var src_default = app;
 const __orig_default = src_default;
 const __wrapped_default = {
   async fetch(request, env, ctx) {
+    const __url = new URL(request.url);
+    const __path = decodeURIComponent(__url.pathname);
+    
+    // 라우트 차단: /제품/*, /업종/*, /광역/시군구/동/제품 (4-segment)
+    if (__path.startsWith('/제품/') ||
+        __path.startsWith('/업종/') ||
+        /^\/[^\/]+\/[^\/]+\/[^\/]+\/[^\/]+\/?$/.test(__path)) {
+      return new Response('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>Not Found</title></head><body><h1>404</h1><p><a href="/">홈으로</a></p></body></html>', { 
+        status: 404, 
+        headers: {'Content-Type':'text/html; charset=utf-8'} 
+      });
+    }
+    
     const response = await __orig_default.fetch(request, env, ctx);
+    
+    // 사이트맵에서도 차단된 URL 제거
+    if (__path.startsWith('/sitemap') && (response.headers.get('content-type') || '').includes('xml')) {
+      let __xml = await response.text();
+      __xml = __xml.split('\n').filter(line => {
+        if (line.includes('/%EC%A0%9C%ED%92%88/') || line.includes('/제품/')) return false;
+        if (line.includes('/%EC%97%85%EC%A2%85/') || line.includes('/업종/')) return false;
+        const m = line.match(/<loc>[^<]*<\/loc>/);
+        if (m) {
+          const urlMatch = m[0].match(/<loc>(.+)<\/loc>/);
+          if (urlMatch) {
+            try {
+              const u = new URL(urlMatch[1]);
+              const segs = decodeURIComponent(u.pathname).split('/').filter(Boolean);
+              if (segs.length >= 4) return false;
+            } catch(e) {}
+          }
+        }
+        return true;
+      }).join('\n');
+      const newH = new Headers(response.headers);
+      newH.delete('content-length');
+      return new Response(__xml, { status: response.status, headers: newH });
+    }
     try {
       const ct = response.headers.get('content-type') || '';
       if (!ct.includes('text/html')) return response;
