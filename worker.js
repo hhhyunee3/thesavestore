@@ -16328,84 +16328,80 @@ const __wrapped_default = {
           injected = true;
         }
       }
-      // ─── 추가 후처리: H1 교체, max-width, 썸네일 ───
-      // 1. max-width 일괄 변경 (1280 → 1100)
-      html = html.replace(/max-width:\s*1280px/g, 'max-width: 1100px');
+      // ───────── 후처리 v2 — 전체 정리 ─────────
+      const __decPath = decodeURIComponent(url.pathname);
+      const __segs2 = __decPath.split('/').filter(Boolean);
+      const __isHome = __decPath === '/' || __decPath === '';
+      const __isRegional = !__decPath.startsWith('/제품') && !__decPath.startsWith('/업종') && __segs2.length >= 1 && __segs2.length <= 4;
       
-      // 1b. /제품/* /업종/* 링크 통째로 제거 (메인페이지의 제품 카드, 업종 카드 등)
-      // <a href="/제품/...">...</a> 또는 인코딩된 형태를 a 태그 째로 제거
-      html = html.replace(/<a\b[^>]*href="(?:\/%EC%A0%9C%ED%92%88\/|\/제품\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
-      html = html.replace(/<a\b[^>]*href="(?:\/%EC%97%85%EC%A2%85\/|\/업종\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
-      
-      // 5. 푸터·topbar 검정 통일 (--brown 변수 검정으로)
+      // 1. CSS 색상 통일 (검정)
       html = html.replace(/--brown:\s*#3D2817/g, '--brown: #000000');
       html = html.replace(/--brown-deep:\s*#2A1B0F/g, '--brown-deep: #000000');
       
-      // 6. 푸터 정리 (빈 li/ul/컬럼 제거, /#industries 링크 제거)
-      html = html.replace(/<footer[\s\S]*?<\/footer>/, function(__fooHtml) {
-        let __c = __fooHtml;
-        // /#industries 링크가 있는 li 제거 (BY INDUSTRY 섹션 사라졌으니)
-        __c = __c.replace(/<li>\s*<a[^>]+href="\/#industries"[^>]*>[\s\S]*?<\/a>\s*<\/li>/g, '');
-        // 안이 다 빈 li인 ul 통째 제거
-        __c = __c.replace(/<ul[^>]*>(?:\s*<li>\s*<\/li>\s*)+<\/ul>/g, '');
-        // 남은 빈 li 제거
-        __c = __c.replace(/<li>\s*<\/li>/g, '');
-        // 빈 ul 제거
-        __c = __c.replace(/<ul[^>]*>\s*<\/ul>/g, '');
-        // footer-col-label만 있고 그 다음 형제가 ul이 아니거나 다음 label이 오는 경우 제거
-        __c = __c.replace(/<div\s+class="footer-col-label"[^>]*>[^<]*<\/div>(?=\s*(?:<div\s+class="footer-col-label"|<\/div>))/g, '');
-        // 빈 footer-col 통째 제거
-        __c = __c.replace(/<div\s+class="footer-col">\s*<\/div>/g, '');
-        return __c;
-      });
-      
-      // 4. 메인페이지(/)에서 BY INDUSTRY (업종별 맞춤구성) 섹션 통째 제거
-      if (url.pathname === '/' || url.pathname === '') {
-        // sec-label "BY INDUSTRY"를 포함한 가장 가까운 <section>...</section> 제거
-        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?BY INDUSTRY(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
-        // h2 "업종별 맞춤" 패턴도 제거 (만일을 위해)
-        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?업종별 맞춤(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      // 2. max-width: 메인은 1100, 하위 페이지는 980
+      html = html.replace(/max-width:\s*1280px/g, 'max-width: 1100px');
+      if (!__isHome) {
+        html = html.replace(/(\.container[^{]*\{[^}]*max-width:\s*)1100px/g, '$1980px');
       }
       
-      // 2. 광역/시군구/동 페이지의 H1 교체
-      const __segs2 = url.pathname.split('/').map(s => s ? decodeURIComponent(s) : s).filter(Boolean);
-      const __isProduct = url.pathname.startsWith('/%EC%A0%9C%ED%92%88') || decodeURIComponent(url.pathname).startsWith('/제품');
-      const __isIndustry = url.pathname.startsWith('/%EC%97%85%EC%A2%85') || decodeURIComponent(url.pathname).startsWith('/업종');
+      // 3. /제품/, /업종/ 링크 제거
+      html = html.replace(/<a\b[^>]*href="(?:\/%EC%A0%9C%ED%92%88\/|\/제품\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
+      html = html.replace(/<a\b[^>]*href="(?:\/%EC%97%85%EC%A2%85\/|\/업종\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
       
-      if (!__isProduct && !__isIndustry && __segs2.length >= 1 && __segs2.length <= 3) {
-        let __newH1, __thumbLabel;
+      // 4. 모든 페이지: "지금 전화 한 통이면" + BY INDUSTRY 섹션 제거
+      html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:FREE CONSULTATION|지금 전화 한 통이면)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:BY INDUSTRY|업종별 맞춤)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      
+      // 5. 메인페이지 전용
+      if (__isHome) {
+        // CORE EQUIPMENT — 9종 → 3종, 카드 3개로 새로 작성
+        const __cardSec = '<section style="padding:80px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div class="sec-label">CORE EQUIPMENT</div><h2 class="sec-title">결제부터 운영까지<br><span class="emph">핵심 장비 3종.</span></h2><p class="sec-sub" style="margin-bottom:48px">매장 규모와 업종에 맞는 단말기를 골라보세요. 전문 매니저가 현장 방문해 설치까지 완료합니다.</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px"><a href="#contact" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:32px 24px;display:block;color:inherit;text-decoration:none;transition:all .18s"><div style="width:64px;height:64px;background:#000;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:18px">💳</div><h3 style="font-size:20px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">카드단말기</h3><div style="font-size:12px;color:#FF5500;font-weight:700;letter-spacing:0.04em;margin-bottom:12px;display:inline-block;padding:3px 8px;background:#FFE6DC;border-radius:6px">유선·무선·블루투스</div><p style="font-size:13.5px;color:#666;line-height:1.7;margin:0">VAN사 비교로 수수료 인하부터, 매장 환경에 맞춘 단말기 출장 설치까지 한 번에.</p></a><a href="#contact" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:32px 24px;display:block;color:inherit;text-decoration:none;transition:all .18s"><div style="width:64px;height:64px;background:#000;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:18px">🖥️</div><h3 style="font-size:20px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">포스기</h3><div style="font-size:12px;color:#FF5500;font-weight:700;letter-spacing:0.04em;margin-bottom:12px;display:inline-block;padding:3px 8px;background:#FFE6DC;border-radius:6px">주문·결제·매출 통합</div><p style="font-size:13.5px;color:#666;line-height:1.7;margin:0">배달앱 자동 주문 수신, 매출 자동 리포트까지. 매장 운영 본부 역할을 하는 통합 시스템.</p></a><a href="#contact" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:32px 24px;display:block;color:inherit;text-decoration:none;transition:all .18s"><div style="width:64px;height:64px;background:#000;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:18px">📹</div><h3 style="font-size:20px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">CCTV</h3><div style="font-size:12px;color:#FF5500;font-weight:700;letter-spacing:0.04em;margin-bottom:12px;display:inline-block;padding:3px 8px;background:#FFE6DC;border-radius:6px">매장 보안·원격 관제</div><p style="font-size:13.5px;color:#666;line-height:1.7;margin:0">사각지대 분석부터 모바일 원격 모니터링까지. 5~10년 사용하는 매장 보안 인프라.</p></a></div></div></section>';
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?CORE EQUIPMENT(?:(?!<\/section>)[\s\S])*?<\/section>/i, __cardSec);
+        // 메인페이지 부스터 섹션 (운영 노하우/사장님 정보) 제거
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?매장 운영 노하우(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?사장님이 자주 묻는 정보(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      }
+      
+      // 6. 광역 페이지 전용
+      if (__isRegional && __segs2.length === 1) {
+        // BUSINESS-FIT SOLUTION 제거
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?(?:BUSINESS-FIT SOLUTION|맞춤 구성 6가지)(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      }
+      
+      // 7. 광역/시군구/동/동×제품: H1 + 썸네일 오버레이
+      if (__isRegional && __segs2.length >= 1 && __segs2.length <= 4) {
+        let __h1, __label, __sub;
         if (__segs2.length === 1) {
-          // 광역
-          __newH1 = `${__segs2[0]} 매장에<br><span style="color:var(--orange)">카드단말기·포스기·CCTV</span><br>출장 설치.`;
-          __thumbLabel = __segs2[0];
+          __h1 = `${__segs2[0]} 카드단말기·포스기·CCTV<br><span style="color:#FF5500">출장 설치</span>`;
+          __label = 'REGION'; __sub = `${__segs2[0]}`;
         } else if (__segs2.length === 2) {
-          // 시군구
-          __newH1 = `${__segs2[0]} ${__segs2[1]}<br><span style="color:var(--orange)">매장 설비</span><br>출장 설치 전문.`;
-          __thumbLabel = `${__segs2[0]} ${__segs2[1]}`;
+          __h1 = `${__segs2[1]} 매장 설비<br><span style="color:#FF5500">출장 설치 전문</span>`;
+          __label = 'DISTRICT'; __sub = `${__segs2[0]} ${__segs2[1]}`;
+        } else if (__segs2.length === 3) {
+          __h1 = `${__segs2[2]} 매장에<br><span style="color:#FF5500">카드단말기·포스기·CCTV</span> 설치`;
+          __label = 'DONG'; __sub = `${__segs2[0]} ${__segs2[1]} ${__segs2[2]}`;
         } else {
-          // 동
-          __newH1 = `${__segs2[2]} 매장도<br><span style="color:var(--orange)">카드단말기·포스기·CCTV</span><br>출장 갑니다.`;
-          __thumbLabel = `${__segs2[0]} ${__segs2[1]} ${__segs2[2]}`;
+          __h1 = `${__segs2[2]} ${__segs2[3]}<br><span style="color:#FF5500">출장 설치</span>`;
+          __label = 'PRODUCT'; __sub = `${__segs2[2]} · ${__segs2[3]}`;
         }
-        // 첫 번째 H1만 교체
-        html = html.replace(/<h1\b([^>]*)>[\s\S]*?<\/h1>/, `<h1$1 style="font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.04em;line-height:1.15;margin-bottom:20px;color:#000">${__newH1}</h1>`);
-        
-        // 3. 썸네일 inject: hero (page-header) 섹션 안에 추가
         const __seedSafe = encodeURIComponent(__segs2.join('-')).replace(/[%]/g, '');
-        const __thumbHtml = `<div style="width:100%;max-width:1100px;margin:24px auto 0;border-radius:16px;overflow:hidden;background:#FAF8F3;aspect-ratio:21/9;position:relative"><img src="https://picsum.photos/seed/${__seedSafe}/1100/470" alt="${__thumbLabel}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><div style="position:absolute;left:18px;bottom:16px;background:rgba(0,0,0,0.7);color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600">📍 ${__thumbLabel}</div></div>`;
-        // page-header section 닫기 직전에 inject
-        html = html.replace(/<\/section>/, __thumbHtml + '</section>');
+        const __hero = `<section style="padding:24px 0 0"><div class="container"><div style="position:relative;width:100%;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/8;min-height:320px"><img src="https://picsum.photos/seed/${__seedSafe}/1400/700" alt="${__sub}" loading="eager" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;opacity:0.55"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.4) 50%,rgba(0,0,0,0.85) 100%)"></div><div style="position:absolute;left:0;right:0;bottom:0;padding:32px"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__label}</div><h1 style="font-size:clamp(24px,3.4vw,40px);font-weight:900;letter-spacing:-0.04em;line-height:1.2;margin:0 0 16px;color:#fff">${__h1}</h1><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="#contact" style="background:#FF5500;color:#fff;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">무료 견적 받기 →</a><a href="tel:010-9677-2356" style="background:rgba(255,255,255,0.95);color:#000;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📞 010-9677-2356</a></div></div></div></div></section>`;
+        html = html.replace(/<section\b[^>]*class="[^"]*page-header[^"]*"[^>]*>[\s\S]*?<\/section>/i, __hero);
       }
       
-      if (!injected) {
-        const newHeaders0 = new Headers(response.headers);
-        newHeaders0.delete('content-length');
-        return new Response(html, { status: response.status, headers: newHeaders0 });
+      // 8. DISTRICTS 섹션 축소 (광역 페이지)
+      if (__isRegional && __segs2.length === 1) {
+        html = html.replace(/<\/style>/, '.industries{display:none}section[class*="districts" i] h2,section h2[class*="sec-title"]{font-size:22px!important;letter-spacing:-0.03em!important;margin-bottom:18px!important}</style>');
       }
+      
+      // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
+      const __newFoo = '<footer style="background:#000;color:#fff;padding:28px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 출장</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/#regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
+      html = html.replace(/<footer[\s\S]*?<\/footer>/, __newFoo);
+      
       const newHeaders = new Headers(response.headers);
       newHeaders.delete('content-length');
       return new Response(html, { status: response.status, headers: newHeaders });
-    } catch (e) {
+} catch (e) {
       return response;
     }
   }
