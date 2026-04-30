@@ -16282,9 +16282,9 @@ const __wrapped_default = {
     const __url = new URL(request.url);
     const __path = decodeURIComponent(__url.pathname);
     
-    // 라우트 차단: 4-segment URL만 차단 (/광역/시군구/동/제품 — 동×제품 페이지)
-    const __segs = __path.split('/').filter(Boolean);
-    if (__segs.length >= 4 && !__path.startsWith('/제품/') && !__path.startsWith('/업종/') && !__path.startsWith('/sitemap')) {
+    // 라우트 차단: /제품/, /업종/ 단독만 차단 (지역×제품 4-segment는 유지)
+    if (__path.startsWith('/제품/') ||
+        __path.startsWith('/업종/')) {
       return new Response('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>Not Found</title></head><body><h1>404</h1><p><a href="/">홈으로</a></p></body></html>', { 
         status: 404, 
         headers: {'Content-Type':'text/html; charset=utf-8'} 
@@ -16297,17 +16297,8 @@ const __wrapped_default = {
     if (__path.startsWith('/sitemap') && (response.headers.get('content-type') || '').includes('xml')) {
       let __xml = await response.text();
       __xml = __xml.split('\n').filter(line => {
-        const m = line.match(/<loc>[^<]*<\/loc>/);
-        if (m) {
-          const urlMatch = m[0].match(/<loc>(.+)<\/loc>/);
-          if (urlMatch) {
-            try {
-              const u = new URL(urlMatch[1]);
-              const segs = decodeURIComponent(u.pathname).split('/').filter(Boolean);
-              if (segs.length >= 4) return false;
-            } catch(e) {}
-          }
-        }
+        if (line.includes('/%EC%A0%9C%ED%92%88/') || line.includes('/제품/')) return false;
+        if (line.includes('/%EC%97%85%EC%A2%85/') || line.includes('/업종/')) return false;
         return true;
       }).join('\n');
       const newH = new Headers(response.headers);
@@ -16337,7 +16328,58 @@ const __wrapped_default = {
           injected = true;
         }
       }
-      if (!injected) return response;
+      // ─── 추가 후처리: H1 교체, max-width, 썸네일 ───
+      // 1. max-width 일괄 변경 (1280 → 1100)
+      html = html.replace(/max-width:\s*1280px/g, 'max-width: 1100px');
+      
+      // 1b. /제품/* /업종/* 링크 통째로 제거 (메인페이지의 제품 카드, 업종 카드 등)
+      // <a href="/제품/...">...</a> 또는 인코딩된 형태를 a 태그 째로 제거
+      html = html.replace(/<a\b[^>]*href="(?:\/%EC%A0%9C%ED%92%88\/|\/제품\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
+      html = html.replace(/<a\b[^>]*href="(?:\/%EC%97%85%EC%A2%85\/|\/업종\/)[^"]*"[^>]*>[\s\S]*?<\/a>/g, '');
+      
+      // 4. 메인페이지(/)에서 BY INDUSTRY (업종별 맞춤구성) 섹션 통째 제거
+      if (url.pathname === '/' || url.pathname === '') {
+        // sec-label "BY INDUSTRY"를 포함한 가장 가까운 <section>...</section> 제거
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?BY INDUSTRY(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+        // h2 "업종별 맞춤" 패턴도 제거 (만일을 위해)
+        html = html.replace(/<section\b[^>]*>(?:(?!<\/section>)[\s\S])*?업종별 맞춤(?:(?!<\/section>)[\s\S])*?<\/section>/gi, '');
+      }
+      
+      // 2. 광역/시군구/동 페이지의 H1 교체
+      const __segs2 = url.pathname.split('/').map(s => s ? decodeURIComponent(s) : s).filter(Boolean);
+      const __isProduct = url.pathname.startsWith('/%EC%A0%9C%ED%92%88') || decodeURIComponent(url.pathname).startsWith('/제품');
+      const __isIndustry = url.pathname.startsWith('/%EC%97%85%EC%A2%85') || decodeURIComponent(url.pathname).startsWith('/업종');
+      
+      if (!__isProduct && !__isIndustry && __segs2.length >= 1 && __segs2.length <= 3) {
+        let __newH1, __thumbLabel;
+        if (__segs2.length === 1) {
+          // 광역
+          __newH1 = `${__segs2[0]} 매장에<br><span style="color:var(--orange)">카드단말기·포스기·CCTV</span><br>출장 설치.`;
+          __thumbLabel = __segs2[0];
+        } else if (__segs2.length === 2) {
+          // 시군구
+          __newH1 = `${__segs2[0]} ${__segs2[1]}<br><span style="color:var(--orange)">매장 설비</span><br>출장 설치 전문.`;
+          __thumbLabel = `${__segs2[0]} ${__segs2[1]}`;
+        } else {
+          // 동
+          __newH1 = `${__segs2[2]} 매장도<br><span style="color:var(--orange)">카드단말기·포스기·CCTV</span><br>출장 갑니다.`;
+          __thumbLabel = `${__segs2[0]} ${__segs2[1]} ${__segs2[2]}`;
+        }
+        // 첫 번째 H1만 교체
+        html = html.replace(/<h1\b([^>]*)>[\s\S]*?<\/h1>/, `<h1$1 style="font-size:clamp(32px,4.4vw,56px);font-weight:900;letter-spacing:-0.04em;line-height:1.15;margin-bottom:20px;color:#000">${__newH1}</h1>`);
+        
+        // 3. 썸네일 inject: hero (page-header) 섹션 안에 추가
+        const __seedSafe = encodeURIComponent(__segs2.join('-')).replace(/[%]/g, '');
+        const __thumbHtml = `<div style="width:100%;max-width:1100px;margin:24px auto 0;border-radius:16px;overflow:hidden;background:#FAF8F3;aspect-ratio:21/9;position:relative"><img src="https://picsum.photos/seed/${__seedSafe}/1100/470" alt="${__thumbLabel}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><div style="position:absolute;left:18px;bottom:16px;background:rgba(0,0,0,0.7);color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600">📍 ${__thumbLabel}</div></div>`;
+        // page-header section 닫기 직전에 inject
+        html = html.replace(/<\/section>/, __thumbHtml + '</section>');
+      }
+      
+      if (!injected) {
+        const newHeaders0 = new Headers(response.headers);
+        newHeaders0.delete('content-length');
+        return new Response(html, { status: response.status, headers: newHeaders0 });
+      }
       const newHeaders = new Headers(response.headers);
       newHeaders.delete('content-length');
       return new Response(html, { status: response.status, headers: newHeaders });
