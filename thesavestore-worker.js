@@ -16062,18 +16062,18 @@ var __cssPatch = `<style>
 .install-slider{max-width:1100px!important;margin:0 auto;padding:8px 24px 12px}
 .consult-box{background:linear-gradient(180deg,#FFFFFF 0%,#FAFAFA 100%)!important;border-radius:24px!important;padding:48px 36px!important;max-width:520px!important;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.08),0 1px 0 rgba(0,0,0,0.04);border:none!important}
 .consult-box::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,#1E6FE0 0%,#1A1A1A 50%,#E03131 100%)}
-.consult-box::after{content:'\\u2706';position:absolute;top:24px;right:28px;font-size:80px;color:rgba(0,0,0,0.04);font-weight:900;line-height:1;pointer-events:none}
+.consult-box::after{content:'✆';position:absolute;top:24px;right:28px;font-size:80px;color:rgba(0,0,0,0.04);font-weight:900;line-height:1;pointer-events:none}
 .consult-phone{font-size:42px!important;font-weight:800!important;color:#1A1A1A!important;position:relative;display:inline-block}
 .consult-phone::before{content:'24/7';display:block;font-size:11px;font-weight:700;letter-spacing:0.18em;color:#1E6FE0;margin-bottom:8px;background:rgba(30,111,224,0.1);padding:4px 12px;border-radius:100px;width:fit-content;margin-left:auto;margin-right:auto}
 .consult-btn{padding:18px 24px!important;border-radius:14px!important;font-size:16px!important;font-weight:800!important;gap:10px!important}
 .consult-btn-primary{background:linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 100%)!important;color:#fff!important;box-shadow:0 8px 20px rgba(0,0,0,0.2)}
-.consult-btn-primary::before{content:'\\u{1F4DE}';margin-right:4px}
+.consult-btn-primary::before{content:'📞';margin-right:4px}
 .consult-btn-primary:hover{transform:translateY(-2px)!important;box-shadow:0 12px 28px rgba(0,0,0,0.3)!important;background:#000!important}
 .consult-btn-sms{background:#fff!important;color:#1E6FE0!important;border:2px solid #1E6FE0!important}
-.consult-btn-sms::before{content:'\\u2709\\uFE0F';margin-right:4px}
+.consult-btn-sms::before{content:'✉️';margin-right:4px}
 .consult-btn-sms:hover{background:#1E6FE0!important;color:#fff!important;transform:translateY(-2px);box-shadow:0 8px 20px rgba(30,111,224,0.25)}
 .consult-info{font-size:12.5px!important;color:#666!important;padding:16px 20px!important;margin-top:24px!important;background:#F8F9FB!important;border-radius:12px!important;display:flex!important;flex-direction:column!important;gap:4px!important;align-items:center!important;font-weight:500!important;border-top:none!important}
-.consult-info::before{content:'\\u{1F552} 365\\uC77C \\uC5F0\\uC911\\uBB34\\uD734 \\uC0C1\\uB2F4';display:block;font-size:13px;color:#1A1A1A;font-weight:700}
+.consult-info::before{content:'🕒 365일 연중무휴 상담';display:block;font-size:13px;color:#1A1A1A;font-weight:700}
 .consult-info br{display:none}
 .floating-phone{position:fixed!important;bottom:92px!important;right:24px!important;width:56px!important;height:56px!important;padding:0!important;background:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important;z-index:99!important;display:flex!important;align-items:center!important;justify-content:center!important;transition:transform .2s!important}
 .floating-phone:hover{transform:scale(1.1)!important}
