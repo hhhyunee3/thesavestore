@@ -17085,9 +17085,9 @@ const __wrapped_default = {
         if (__nearby.length > 0) {
           const __nearbyCards = __nearby.map(__nb => {
             const __nbEn = __URL_DONG_KO2EN[`${__r3}/${__sg}/${__nb}`];
-            return `<a href="/${__regEnC}/${__sgEnC}/${__nbEn}" style="color:#1A1A1A;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:-0.01em;padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 4px 4px 0;transition:all .15s">${__nb}</a>`;
+            return `<a href="/${__regEnC}/${__sgEnC}/${__nbEn}" style="color:#1A1A1A;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:-0.02em;padding:12px 18px;border-radius:10px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 8px 8px 0;transition:all .15s">${__nb}</a>`;
           }).join('');
-          const __nbSec = `<section data-nav-bottom="1" style="padding:18px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:#FF5500;margin-bottom:6px">${__sg} 인근 동·읍·면</div><h2 style="font-size:14px;font-weight:800;letter-spacing:-0.03em;margin:0 0 10px;color:#000">${__sg}의 다른 지역도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyCards}</div></div></section>`;
+          const __nbSec = `<section data-nav-bottom="1" style="padding:36px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__sg} 인근 동·읍·면</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.03em;margin:0 0 18px;color:#000">${__sg}의 다른 지역도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyCards}</div></div></section>`;
           html = html.replace(/<footer\b/i, __nbSec + '<footer');
         }
       }
@@ -17122,9 +17122,9 @@ const __wrapped_default = {
         if (__nearbyDP.length > 0) {
           const __nearbyDPCards = __nearbyDP.map(__nb => {
             const __nbEn = __URL_DONG_KO2EN[`${__r4}/${__sg4}/${__nb}`];
-            return `<a href="/${__regEnD}/${__sgEnD}/${__nbEn}/${__dpProdEn}" style="color:#1A1A1A;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:-0.01em;padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 4px 4px 0;transition:all .15s">${__nb}</a>`;
+            return `<a href="/${__regEnD}/${__sgEnD}/${__nbEn}/${__dpProdEn}" style="color:#1A1A1A;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:-0.02em;padding:12px 18px;border-radius:10px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 8px 8px 0;transition:all .15s">${__nb}</a>`;
           }).join('');
-          const __nbDPSec = `<section data-nav-bottom="1" style="padding:18px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:#FF5500;margin-bottom:6px">${__sg4} 인근 동·읍·면</div><h2 style="font-size:14px;font-weight:800;letter-spacing:-0.03em;margin:0 0 10px;color:#000">${__sg4}의 다른 지역 ${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyDPCards}</div></div></section>`;
+          const __nbDPSec = `<section data-nav-bottom="1" style="padding:36px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:12px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__sg4} 인근 동·읍·면</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.03em;margin:0 0 18px;color:#000">${__sg4}의 다른 지역 ${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyDPCards}</div></div></section>`;
           html = html.replace(/<footer\b/i, __nbDPSec + '<footer');
         }
       }
