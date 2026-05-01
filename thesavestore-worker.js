@@ -16584,7 +16584,172 @@ function __diversify(text, seed) {
 }
 
 function __seoHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}h^=h>>>13;h=Math.imul(h,16777619)>>>0;return h>>>0;}
-function __seoPick(arr,seed,salt,n){const used=new Set();const out=[];const startI=__seoHash(seed+':'+salt+':start')%arr.length;let i=startI;const lim=arr.length*4;let cnt=0;while(out.length<n&&cnt<lim){const idx=__seoHash(seed+':'+salt+':p'+i+':r'+cnt)%arr.length;if(!used.has(idx)){used.add(idx);out.push(arr[idx]);}i++;cnt++;}return out;}
+function __seoPick(arr,seed,salt,n){const used=new Set();const out=[];const startI=__seoHash(seed+':'+salt+':start')%arr.length;let i=startI;const lim=arr.length*4;let cnt=0;while(out.length<n&&cnt<lim){const idx=__seoHash(seed+':'+salt+':p'+i+':r'+cnt)%arr.length;if(!used.has(idx)){used.add(idx);out.push(arr[idx]);}i++;cnt++;}while(out.length<n){out.push(arr[out.length%arr.length]);}return out;}
+
+// 제품별 인트로
+const __SEO_INTRO_BY_PROD = {
+  '카드단말기': [
+    '{loc}에서 매장 카드단말기 설치를 고려하시는 사장님이 가장 먼저 따져보셔야 할 것은 VAN사 수수료와 단말기 사양입니다. 같은 카드 결제 1억원에 대해 VAN사별 수수료 차이가 30~50만원에 달하기 때문에, 단순한 단말기 비교가 아니라 비용 절감 도구를 선택하는 일입니다. 더세이브 스토어는 {loc} 권역에서 5,000곳 이상의 매장에 카드단말기를 설치한 경험으로 매장 환경에 가장 적합한 단말기와 VAN사를 함께 제안드립니다.',
+    '{loc} 매장의 카드단말기는 한 번 잘 설치하면 5년 이상 안정적으로 사용할 수 있는 반면, 잘못 설치하면 매월 수십만원의 카드 수수료가 새거나 결제 사고로 매출 누락이 발생할 수 있습니다. {loc} 권역의 평균 카드 수수료는 1.95% 수준이지만 비교 견적을 통해 1.5%대까지 인하되는 사례가 많습니다.',
+    '{loc} 매장에 카드단말기를 처음 설치하실 때 가장 흔히 받는 질문은 유선·무선·블루투스 중 어떤 것이 좋은가입니다. 결론은 매장 운영 방식에 따라 다르며, 카운터 결제 위주는 유선, 테이블 결제는 무선, 시술 자리는 블루투스가 효율적입니다. {loc} 권역의 단말기 평균 설치 시간은 28분으로 영업 중에도 진행이 가능합니다.'
+  ],
+  '포스기': [
+    '{loc}에서 포스기 도입을 고민하시는 사장님께 가장 중요한 것은 매장 업종과 운영 패턴에 맞는 사양 선택입니다. 일반형, 배달 연동형, 프랜차이즈형 중 어느 것이 적합한지에 따라 도입 비용과 운영 효율이 크게 달라집니다. 더세이브 스토어는 {loc} 권역에서 매장별 운영 데이터 분석을 통해 가장 적합한 포스기를 제안드립니다.',
+    '{loc} 매장의 포스기는 단순 결제 도구가 아니라 매장 운영 의사결정 도구입니다. 시간대별 매출, 메뉴별 판매량, 고객 재방문 패턴이 자동으로 분석되어 직원 스케줄, 메뉴 구성, 프로모션 기획에 활용됩니다. {loc} 권역에서 포스기 데이터를 적극 활용하시는 매장은 운영 효율이 평균 25% 향상되는 사례가 많습니다.',
+    '{loc} 매장의 포스기 평균 도입 비용은 일반형 기준 월 0~3만원 수준이며, 무상 임대 조건도 가능합니다. 메뉴 등록은 평균 35분, 직원 사용법 교육은 30분~1시간이면 충분합니다. {loc} 권역에서 포스기 도입 후 매장 정산 시간이 평균 5~10시간 단축되는 효과가 검증되어 있습니다.'
+  ],
+  'CCTV설치': [
+    '{loc}에서 매장 CCTV 설치를 고려하시는 사장님이 가장 먼저 분석해야 할 것은 사각지대입니다. 입구·카운터·홀·주방·창고를 모두 커버하도록 카메라 위치를 설계해야 사고 발생 시 영상이 무용지물이 되지 않습니다. {loc} 권역 매장의 평균 면적과 구조를 고려할 때 10평당 카메라 1.5대가 적정 설치 기준입니다.',
+    '{loc} 매장 CCTV의 진짜 가치는 사후 추적이 아니라 사전 억제에 있습니다. 매장 입구와 카운터에 명확히 보이는 카메라가 있는 것만으로도 도난 시도와 분쟁이 크게 감소합니다. {loc} 권역의 매장 사장님들이 CCTV 설치 후 도난 사고가 70% 이상 줄었다고 평가하시는 이유입니다.',
+    '{loc} 매장의 CCTV 화질은 풀HD와 4K 옵션 중 매장 환경에 맞춰 선택하시고, 클라우드 또는 NVR 저장 방식도 사용 패턴에 맞춰 결정합니다. 야간 영업이 있는 매장은 적외선 자동 전환 기능이 필수이며, {loc} 권역 매장의 도난 사고 70%가 새벽 1~5시 사이에 발생합니다.'
+  ],
+  '철거': [
+    '{loc}에서 매장 철거를 결정하셨다면 가장 먼저 확인하실 것은 철거 범위와 폐기물 처리 비용입니다. 일반 매장(15~20평) 기준 평균 철거 비용은 80~150만원 수준이고, 인테리어 자재가 많거나 주방 설비가 복잡한 매장은 200~350만원까지 발생할 수 있습니다. 더세이브 스토어는 {loc} 권역에서 무상 출장 견적을 기본으로 제공합니다.',
+    '{loc} 매장 철거는 단순한 장비 제거가 아닙니다. 카드단말기 VAN 해지, 포스기 데이터 백업, CCTV 영상 보존, 인테리어 정리, 폐기물 처리까지 동시에 진행되어야 매장이 깔끔하게 정리됩니다. {loc} 권역에서 더세이브 스토어 통합 철거 서비스는 모든 작업을 한 번의 출동으로 끝냅니다.',
+    '{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용한 야간 철거도 가능해 후속 임차인 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. 평균 작업 시간은 매장 평수에 따라 2~5시간 정도입니다.'
+  ]
+};
+
+// 제품별 사례
+const __SEO_CASE_BY_PROD = {
+  '카드단말기': [
+    '{loc} 권역에서 5년째 카페를 운영하시는 한 사장님은 처음 매장을 열 때 단말기 수수료가 너무 비싸다고 느끼면서도 어디서부터 손대야 할지 몰라 4년간 그대로 두셨습니다. 더세이브 스토어를 통해 카드단말기 견적 비교 후 VAN사를 변경한 결과, 같은 단말기와 같은 사용 패턴인데 월 수수료가 38만원 줄었다고 합니다. 1년이면 456만원 절감 효과입니다.',
+    '{loc} 권역의 한 미용실 사장님은 직원 3명에 예약제로 운영하는 매장이라 결제가 카운터에 몰리는 구조였습니다. 무선 카드단말기로 변경한 후, 시술 자리에서 바로 결제가 가능해져 카운터 대기 시간이 사라졌습니다. 사소한 변경 같지만 고객 경험에서 큰 차이를 만든 사례입니다.',
+    '{loc} 권역에서 분식집을 운영하시는 한 사장님은 점심시간 회전율이 30% 향상되어 매출이 크게 늘었습니다. 자동커팅 카드단말기 도입 후 결제부터 영수증 출력까지의 시간이 절반으로 줄었고, 일 매출이 평균 15% 증가했습니다.',
+    '{loc} 권역의 한 음식점 사장님은 외국인 관광객이 많은 위치라 해외 카드 결제 거절이 자주 발생했습니다. 해외 카드 대응 단말기로 교체 후 결제 거절이 사라졌고, 외국인 매출이 약 25% 증가했습니다. 작은 단말기 변경이 매출에 직접 영향을 준 사례입니다.',
+    '{loc} 권역의 한 떡집 사장님은 명절 시즌 주문이 폭주해서 결제 처리 속도가 매출에 결정적이었습니다. 응답 속도 0.3초의 자동커팅 단말기로 변경 후, 명절 시즌 주문 처리량이 약 40% 증가했고 손님 대기 시간이 크게 줄었습니다.',
+    '{loc} 권역의 한 정육점 사장님은 연중 무휴 영업하시는 매장이라 단말기 사고가 매출에 직격탄이었습니다. 임시 대체기 즉시 지원 보장 단말기로 변경 후, 단말기 멈춤 시 1시간 내 대체기가 도착해 영업 중단이 사라졌습니다.'
+  ],
+  '포스기': [
+    '{loc} 권역의 한 식당 사장님은 배달앱 주문을 직원이 일일이 태블릿에서 확인하던 구조였는데, 배달 연동 포스기 도입 후 주문 누락이 사라지고 매출 자동 집계까지 처리되어 마감 시간이 1시간 단축되었습니다. 직원 한 명의 시간이 매일 1시간씩 확보된 셈이라 인건비 절감 효과까지 발생했습니다.',
+    '{loc} 권역의 한 학원 사장님은 학기별 수강료 결제와 환불 처리가 복잡해서 골치를 앓으셨습니다. 포스기에 학생별 결제 분리와 자동 증빙 발급 기능을 도입한 후, 학기 시작 시즌 결제 빈도가 폭증해도 매끄럽게 처리되었습니다.',
+    '{loc} 권역의 한 PC방 사장님은 시간 단위 결제 자동화로 카운터 직원 업무량을 50% 줄이셨습니다. 시간 단위 결제, 자동 영수증 출력, 적립 시스템이 하나의 포스 화면에서 처리되어 직원이 결제만 보지 않고 다른 운영 업무까지 챙길 수 있게 되었습니다.',
+    '{loc} 권역의 한 헬스장 사장님은 포스기 정기결제 자동 처리로 미수금 발생 빈도를 1/10로 낮추셨습니다. 매월 회원비를 직접 받으러 다니던 시절에는 미수금이 평균 200만원에 달했는데, 자동결제로 전환 후에는 20만원 수준으로 떨어졌습니다.',
+    '{loc} 권역에서 빵집을 운영하시는 한 사장님은 시즌별 메뉴 교체가 잦아 단말기 메뉴 수정이 큰 부담이었습니다. 클라우드 동기화 포스기를 도입한 후 관리자 화면에서 메뉴를 수정하면 모든 결제 단말기에 자동 반영되어 시즌 교체 시간이 90% 줄었습니다.',
+    '{loc} 권역에서 카페 다섯 곳을 운영하시는 사장님은 본사-매장 매출 통합 관리가 가장 큰 고민이었습니다. 프랜차이즈형 포스기 도입 후 모든 매장의 매출이 본사 화면에서 실시간으로 확인되고 매월 정산이 자동으로 처리됩니다.'
+  ],
+  'CCTV설치': [
+    '{loc} 권역의 한 편의점 사장님은 새벽 시간 도난 사고를 겪고 CCTV를 다시 설치하셨습니다. 기존 카메라는 야간 화질이 떨어져 영상 추출이 어려웠는데, 4K 적외선 모델로 교체 후에는 같은 시간대도 명확한 영상이 남았습니다. CCTV의 진짜 가치는 사후 추적이 아니라 사전 억제에 있다는 것을 직접 체감하셨다고 합니다.',
+    '{loc} 권역의 한 술집 사장님은 새벽까지 영업하는 매장이라 야간 사고가 항상 걱정이었습니다. 4K 적외선 CCTV와 24시간 모니터링 시스템 도입 후 야간 도난 시도가 사라졌고, 손님 분쟁 발생 시 영상으로 즉시 해결할 수 있게 되었습니다. 보험사에서도 4K 설치를 인정해 보험료가 12% 인하되었습니다.',
+    '{loc} 권역에서 24시간 영업 편의점을 운영하시는 사장님은 새벽 도난 사고가 가장 큰 걱정이었습니다. 4K 적외선 CCTV에 AI 동작 감지 기능을 추가한 후, 새벽 도난 시도가 즉시 알림으로 전송되어 경찰 출동까지 평균 5분 만에 처리됩니다. 도난 사고가 거의 사라졌습니다.',
+    '{loc} 권역의 한 빨래방 사장님은 24시간 무인 매장이라 결제와 보안이 가장 중요했습니다. 4K CCTV 통합 시스템 도입 후, 사장님이 매장에 안 계셔도 모든 보안이 안정적으로 처리됩니다. 모바일로 매장 영상을 확인하시며 운영하시고, 사고 발생 빈도는 0건입니다.',
+    '{loc} 권역의 한 카페 사장님은 CCTV 모바일 원격 모니터링으로 매장 운영 패턴을 분석하셨습니다. 손님 동선과 피크 타임 흐름을 영상으로 확인하고 카운터 위치, 메뉴판 디자인을 조정한 후 일 매출이 평균 8% 증가했습니다. CCTV가 보안을 넘어 운영 도구로 활용된 사례입니다.',
+    '{loc} 권역의 한 옷가게 사장님은 도난 빈도가 높은 위치라 CCTV 의존도가 컸습니다. 4K 카메라와 AI 동작 감지를 도입한 후 도난 시도가 즉시 감지되고 경찰 신고까지 자동 진행되어, 매장 도난 사고가 6개월 동안 0건을 유지하고 있습니다.'
+  ],
+  '철거': [
+    '{loc} 권역에서 폐업을 결정하신 한 식당 사장님은 카드단말기 해지, 포스 데이터 백업, CCTV 영상 보존, 인테리어 정리까지 한 번에 처리해야 했습니다. 더세이브 스토어 통합 철거 서비스를 이용해 4시간 만에 모든 작업이 끝났고, 사장님은 폐업 스트레스가 크게 줄었다고 평가하셨습니다.',
+    '{loc} 권역의 한 카페 사장님은 매장 이전 시 기존 인테리어 철거와 신규 매장 설치를 동시에 진행하셨습니다. 단일 업체로 통합 진행해 비용이 35% 절감되었고, 작업 일정이 2주에서 5일로 단축되었습니다.',
+    '{loc} 권역에서 임대 계약 만료로 철거를 진행한 한 미용실 사장님은 원상복구 범위가 명확하지 않아 임대인과 분쟁이 우려되었습니다. 더세이브 스토어 철거 견적 단계에서 원상복구 범위를 명확히 정리해, 분쟁 없이 철거가 마무리되었습니다.',
+    '{loc} 권역의 한 음식점 사장님은 폐업 후 폐기물 처리 비용이 추가로 발생할까 걱정하셨습니다. 견적 단계에서 폐기물 처리 비용까지 포함된 통합 견적을 받으셔서, 철거 후 추가 비용 없이 작업이 완료되었습니다.',
+    '{loc} 권역에서 야간 철거를 진행한 한 술집 사장님은 영업 마지막 날 저녁부터 작업을 시작해 다음 날 오전 마무리했습니다. 후속 임차인의 입주 일정에 맞춰 빠르게 처리되었고, 임대인과의 관계도 좋게 마무리되었습니다.',
+    '{loc} 권역의 한 옷가게 사장님은 매장 위치 이전과 동시에 기존 매장 철거를 진행하셨습니다. 이전 + 철거 패키지로 단일 업체 진행 시 비용을 40% 절감하고 작업 기간도 단축할 수 있었습니다.'
+  ]
+};
+
+// 제품별 부제목
+const __SEO_SUBHEAD_BY_PROD = {
+  '카드단말기': ['{loc} 매장 카드단말기 설치 핵심','{loc}에서 카드단말기 견적 비교하실 때','{loc} 카드단말기 VAN사 비교','{loc} 매장에 맞는 카드단말기 선택','{loc} 카드단말기 설치 후 운영','{loc} 카드 수수료 절감 노하우','{loc} 카드단말기 보안과 안정성'],
+  '포스기': ['{loc} 매장 포스기 도입 핵심','{loc}에서 포스기 사양 선택','{loc} 포스기 운영 효율 향상','{loc} 매장에 맞는 포스기 종류','{loc} 포스기 직원 교육과 운영','{loc} 포스기 매출 데이터 활용','{loc} 포스기와 매장 운영 자동화'],
+  'CCTV설치': ['{loc} 매장 CCTV 설치 핵심','{loc}에서 CCTV 사각지대 분석','{loc} CCTV 화질과 저장 옵션','{loc} 매장에 맞는 CCTV 대수','{loc} CCTV 야간 영업 대응','{loc} CCTV 모바일 원격 관제','{loc} CCTV 사고 사후 대응'],
+  '철거': ['{loc} 매장 철거 작업 핵심','{loc}에서 철거 견적 받으실 때','{loc} 매장 철거 일정과 진행','{loc} 매장에 맞는 철거 범위','{loc} 철거 후 폐기물 처리','{loc} 철거 + 데이터 이전 통합','{loc} 매장 철거 안전과 사고 예방']
+};
+
+// 제품별 체크 박스
+const __SEO_CHECK_BY_PROD = {
+  '카드단말기': {
+    title: '{loc} 카드단말기 설치 시 꼭 확인하실 5가지',
+    items: [
+      {t:'VAN사별 수수료 비교 견적', d:'같은 단말기여도 VAN사에 따라 0.3~0.5%포인트 차이. 비교 견적 필수.'},
+      {t:'기존 카드단말기 무상 철거', d:'견적서에 무상 철거 조건 명시 여부 확인. 보통 표준 조건.'},
+      {t:'VAN 해지 수수료 대납', d:'기존 계약 위약금이 있으면 신규 업체가 대납 처리해주는지 확인.'},
+      {t:'1년 무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 즉시 출동 보장. 24시간 콜센터 운영 여부.'},
+      {t:'PCI-DSS Level 1 보안 인증', d:'카드 결제 데이터 보안 표준. 인증 단말기인지 확인 필수.'}
+    ]
+  },
+  '포스기': {
+    title: '{loc} 포스기 도입 시 꼭 확인하실 5가지',
+    items: [
+      {t:'매장 업종에 맞는 포스기 유형', d:'일반형/배달 연동/프랜차이즈형 중 매장 운영 패턴에 맞는 사양 선택.'},
+      {t:'배달앱 자동 연동 지원', d:'배달의민족·요기요·쿠팡이츠 자동 주문 수신. 메뉴 연동 가능 여부.'},
+      {t:'클라우드 매출 자동 백업', d:'단말기 고장에도 데이터 안전. 매출·고객 정보 클라우드 동기화.'},
+      {t:'세무 자동 정리 기능', d:'매월 매출 자동 분류. 세무사 전달 시 처리 시간 1~2시간 단축.'},
+      {t:'직원 권한 분리 + 사용 교육', d:'관리자/직원 권한 분리. 30분~1시간 교육으로 신규 직원도 사용 가능.'}
+    ]
+  },
+  'CCTV설치': {
+    title: '{loc} CCTV 설치 시 꼭 확인하실 5가지',
+    items: [
+      {t:'매장 사각지대 사전 분석', d:'입구·카운터·홀·주방·창고 5구역 커버. 10평당 카메라 1.5대 기준.'},
+      {t:'4K 적외선 카메라 필요 여부', d:'야간 영업 매장은 필수. 풀HD 4대보다 4K 1대가 효율적.'},
+      {t:'영상 보관 기간 설정', d:'최소 7일·권장 30일·클라우드 시 60일. 매장 환경에 맞춰 결정.'},
+      {t:'모바일 원격 모니터링 지원', d:'어디에서나 실시간 확인. 다점포 운영자에게 필수 기능.'},
+      {t:'24시간 콜센터 + AS', d:'카메라 고장·영상 추출 요청 시 24시간 응대. 정기 청소 6개월 주기.'}
+    ]
+  },
+  '철거': {
+    title: '{loc} 매장 철거 시 꼭 확인하실 5가지',
+    items: [
+      {t:'무상 출장 견적', d:'매장 직접 방문 후 정확한 비용 산정. 평수·인테리어·폐기물 점검.'},
+      {t:'폐기물 처리 비용 포함', d:'산업 폐기물 분류 처리. 견적에 포함되어야 추가 비용 발생 없음.'},
+      {t:'카드단말기·포스기 해지 처리', d:'VAN 해지·포스 데이터 백업까지 한 번에. 행정 처리 통합.'},
+      {t:'원상복구 범위 명시', d:'임대 계약 조건 확인. 견적 단계에서 복구 범위 명확히 정리.'},
+      {t:'야간/주말 작업 가능', d:'영업 종료 후 즉시 진행. 후속 임차인 입주 일정에 맞춰 조정.'}
+    ]
+  }
+};
+
+// 제품별 본문 단락 (페이지 키워드 매칭)
+const __SEO_BODY_CARD = [
+'{loc} 매장에 카드단말기를 설치하실 때 가장 흔히 받는 질문은 유선이 좋은지 무선이 좋은지입니다. 결론은 매장 운영 방식에 따라 다릅니다. 카운터 결제 위주의 일반 매장이라면 안정성이 높은 유선 단말기가 권장되고, 테이블 결제나 시술 자리 결제가 있는 매장은 무선 단말기가 효율적입니다. 스마트폰이나 태블릿과 연동해서 결제를 처리하시려면 블루투스 단말기가 적합하고, 영수증 정리 시간이 부담되시는 매장은 자동커팅 단말기를 도입하시면 좋습니다.',
+'{loc}의 매장 사장님이 단말기 견적을 받으실 때 꼭 확인하셔야 할 항목이 있습니다. 첫째, VAN사별 수수료 비교 견적이 포함되어 있는지. 둘째, 기존 단말기 무상 철거 조건이 명시되어 있는지. 셋째, VAN 해지 수수료 대납 여부. 넷째, 1년 무상 A/S 조건. 다섯째, 보안 인증(PCI-DSS Level 1) 단말기인지. 이 다섯 가지를 모두 충족하는 견적이 표준입니다.',
+'{loc} 매장에 단말기를 출장 설치하는 데 걸리는 시간은 평균 28분 정도입니다. 매장 영업 중에도 진행이 가능하기 때문에 결제 단말기 교체 때문에 매장을 닫으실 필요가 없습니다. 기존 단말기는 무상으로 철거하고, VAN 해지 수수료가 발생하는 경우에도 대납 처리해 드립니다. 견적부터 설치, 교육, A/S까지 같은 매니저가 담당합니다.',
+'{loc}에서 매장 운영 비용을 진짜로 절감하시려면 장비 가격이 아니라 VAN사 수수료를 줄이는 것이 효과적입니다. 카드 결제 1억원당 평균 수수료가 약 200만원인데, 0.3%포인트 차이만 나도 30만원이 매장에 남습니다. {loc} 권역의 매장 데이터를 기반으로 VAN사별 비교 견적을 무료로 제공해드리며, 평균 절감 효과는 월 30~50만원 수준입니다.',
+'{loc} 매장에서 단말기 한 대의 평균 사용 연한은 4년 4개월 정도입니다. 그 이후로는 결제 응답 속도가 느려지고 통신 오류 빈도가 늘어나기 때문에, 4년 차부터는 정기 점검을 받으시는 것이 안전합니다. {loc} 권역에서 가장 자주 보고되는 고장 원인은 어댑터·케이블 노후이고, 영업 중 갑자기 단말기가 멈춰 손님을 못 받는 일이 발생할 수 있습니다.',
+'{loc} 매장의 결제 환경 분석을 보면 카드 결제가 약 78%, 간편결제가 18%, 현금이 4% 수준입니다. 처음 단말기를 고르실 때 IC·MST·QR을 모두 지원하는 모델을 선택하시는 것이 안전합니다. 특히 {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기로 미리 준비하시면 결제 거절로 인한 매출 누수를 막으실 수 있습니다.',
+'{loc} 매장의 카드 수수료를 절감하는 가장 효과적인 방법은 VAN사 변경입니다. 같은 단말기와 같은 사용 패턴이어도 어느 VAN사와 계약하느냐에 따라 매장이 부담하는 수수료가 다릅니다. {loc} 권역의 평균 카드 수수료는 1.95% 수준이지만 비교 견적을 통해 1.5%대까지 인하되는 사례가 많고, 월 매출 1,500만원 매장 기준 연간 50~90만원이 매장에 남습니다.',
+'{loc}에서 카페나 식당을 운영하시는 사장님들은 매장 회전율이 매출에 직결됩니다. 결제 처리 속도가 느리면 손님이 줄을 서고, 줄이 길어지면 손님이 매장을 떠납니다. 추천 단말기는 평균 응답 속도 0.3초이며, 자동커팅 영수증 출력이 표준입니다. {loc} 권역의 점심시간 회전율 30% 향상 사례, 매출 15% 증가 사례 등 실제 효과가 검증된 모델만 추천드립니다.',
+'{loc} 매장의 카드단말기 보안은 PCI-DSS Level 1 보안 표준 단말기, 이중 통신 회선, 암호화 결제 데이터 처리, 정기 보안 점검 — 이 네 가지가 표준입니다. 카드 결제 데이터가 외부로 유출되는 사고가 발생하면 매장 신뢰도에 큰 타격이 가기 때문에, 처음 단말기를 선택하실 때부터 보안 인증을 확인하시는 것이 중요합니다.',
+'{loc} 매장의 결제 수단별 비중은 운영 패턴에 따라 다릅니다. 일반 카페는 카드 70%, 간편결제 25%, 현금 5% 수준이고, 식당은 카드 80%, 간편결제 15%, 현금 5%입니다. {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기를 미리 준비하시는 것이 좋습니다.'
+];
+
+const __SEO_BODY_POS = [
+'{loc} 매장의 포스기 선택은 매장 규모와 업종에 따라 일반형, 배달 연동형, 프랜차이즈형으로 나뉩니다. 일 매출 50만원 미만의 소형 매장은 일반형 POS로 충분하고, 배달앱 비중이 30% 이상인 매장은 배달 연동 POS가 효율적이며, 다점포 운영 사장님은 본사-매장 매출 통합이 가능한 프랜차이즈형이 적합합니다. {loc} 권역의 평균 포스기 도입 비용은 일반형 기준 월 0~3만원 수준입니다.',
+'{loc} 매장 운영을 잘하시는 사장님들의 공통점은 포스기 데이터를 적극 활용한다는 것입니다. 시간대별 매출 데이터를 보면 어느 시간대에 어떤 메뉴가 가장 많이 팔리는지, 평일과 주말의 객단가 차이가 얼마인지, 단골 고객의 재방문 주기가 어떻게 되는지 명확하게 보입니다. 이 데이터로 직원 스케줄, 메뉴 구성, 프로모션 기획을 결정하시면 매장 운영 효율이 크게 올라갑니다.',
+'{loc} 매장의 단골 고객 데이터는 포스기를 통한 마케팅 활용에 가장 큰 자산입니다. 적립 카드 시스템을 연동하시면 어떤 고객이 어떤 메뉴를 자주 주문하시는지, 재방문 주기가 어떻게 되는지 자동으로 기록됩니다. {loc} 권역 한 카페에서는 단골 비중을 40%까지 끌어올린 사례도 있고, 마케팅 효과를 200% 향상시킨 사례도 보고되어 있습니다.',
+'{loc} 매장의 시즌별 메뉴 교체는 포스기에 메뉴 즉시 반영 기능이 필수입니다. 관리자 화면에서 메뉴·가격·옵션을 수정하면 모든 결제 단말기에 자동 반영되는 구조라 운영 부담이 없습니다. {loc} 권역의 카페 사장님들이 이 기능에 가장 만족하시는데, 시즌 교체 시 매번 단말기를 일일이 수정할 필요가 없어 시간이 크게 절약됩니다.',
+'{loc} 매장의 임직원 권한 관리는 포스기 도입 후 가장 큰 변화 중 하나입니다. 매니저 권한, 일반 직원 권한, 알바 권한을 분리해서 매출 조회·취소·환불 권한을 제한할 수 있고, 직원별 출퇴근과 매출 처리 내역이 자동 기록됩니다. {loc} 권역에서 직원 5명 이상의 매장은 권한 분리만으로도 횡령·실수 사고가 50% 이상 감소한 사례가 많습니다.',
+'{loc} 매장의 매출 자동 리포트는 사장님 시간을 가장 크게 절약해주는 포스기 기능입니다. 매일 매출 마감, 주간 매출 분석, 월간 매출 리포트가 자동 생성되어 카톡이나 이메일로 발송됩니다. 세무사에게 보내는 매출 자료도 자동으로 정리되어 매월 세무 처리 시간이 평균 1~2시간 단축됩니다.',
+'{loc} 매장의 매월 정산 업무는 포스기 도입 후 가장 큰 변화 중 하나입니다. 매출, 카드 수수료, 직원 인건비, 재료비, 부가세 등 모든 항목이 자동 정리되어 세무사에게 바로 전달됩니다. {loc} 권역에서 매월 정산 시간이 평균 5~10시간 단축된 사례가 많고, 세무 처리 비용도 절감됩니다.',
+'{loc} 매장에서 적립 카드 시스템은 포스기를 활용한 단골 만들기의 핵심입니다. 포스기에 연동된 적립 시스템은 직원이 별도로 카드를 들고 다니지 않아도 자동으로 처리되며, 고객 휴대폰 번호 입력만으로 적립이 가능합니다. 단순한 결제 도구가 아니라 매장 성장 도구로 활용하실 때 진짜 가치가 나옵니다.',
+'{loc} 매장에서 포스기 도입 시 직원 사용법 교육은 평균 30분~1시간이면 충분합니다. {loc} 권역에서 직원이 자주 바뀌는 매장은 사용법 매뉴얼을 카톡으로 받으실 수 있어, 신규 직원 교육이 빠르게 진행됩니다. 메뉴 등록 평균 소요 시간은 35분이며, 도입 후 1주일 동안 추가 지원이 이어집니다.',
+'{loc} 매장에서 포스기와 카드단말기를 함께 도입하시면 통합 영수증 발행이 표준입니다. 결제 정보가 한 화면에서 처리되기 때문에 손님 응대 흐름이 매끄럽고, 영수증 누락이나 결제 분쟁이 줄어듭니다. {loc} 권역의 평균 포스 단말기 응답 속도는 0.3초 정도로 매장 회전율에 영향을 주지 않으며, 만족도도 87% 수준으로 높은 편입니다.'
+];
+
+const __SEO_BODY_CCTV = [
+'{loc} 매장에 CCTV를 처음 설치하실 때 가장 먼저 분석해야 할 것은 사각지대입니다. 입구, 카운터, 홀, 주방, 창고를 모두 커버하도록 카메라 위치를 설계해야 사고 발생 시 영상이 무용지물이 되는 일을 막을 수 있습니다. {loc} 권역 매장의 평균 면적과 구조를 고려할 때, 10평당 카메라 1.5대가 적정 설치 기준입니다.',
+'{loc}에서 CCTV의 진짜 가치는 사후 추적이 아니라 사전 억제에 있습니다. 매장 입구와 카운터에 명확히 보이는 카메라가 있는 것만으로도 도난 시도와 분쟁이 크게 감소합니다. {loc} 권역의 매장 사장님들이 CCTV 설치 후 도난 사고가 70% 이상 줄었다고 평가하시는 이유입니다. 또한 직원 근태 확인, 고객 분쟁 시 영상 자료 확보까지 한 시스템에서 가능합니다.',
+'{loc} 매장에서 CCTV 모바일 원격 모니터링은 외부 출장이 잦은 사장님께 가장 가치 있는 기능입니다. 어디에서나 매장 영상을 실시간으로 확인할 수 있고, 매장 사장님 70%가 매일 1회 이상 모바일로 매장을 체크하신다는 데이터가 있을 정도로 활용도가 높습니다. {loc} 권역에서는 다점포 운영 사장님이 본사에서 모든 매장을 모니터링하시는 사례도 많습니다.',
+'{loc} 권역 사장님들이 CCTV에 대해 가장 자주 묻는 질문은 몇 대를 설치해야 충분한가입니다. 매장 평수와 구조에 따라 다르지만, 일반적으로 입구·카운터·홀·주방·창고 다섯 구역을 커버하는 구성이 기본입니다. {loc} 매장에서 4K 카메라 1대가 풀HD 카메라 4대보다 효율적인 경우도 많기 때문에, 무조건 대수만 늘리시기보다 화질과 위치를 함께 고려하시는 것이 중요합니다.',
+'{loc} 매장의 CCTV 영상 보관 기간은 최소 7일, 권장 30일, 클라우드 옵션을 추가하시면 최대 60일까지 가능합니다. {loc} 권역에서 도난·사고 발생 시 영상 추출 평균 소요 시간은 3분 정도로, 24시간 콜센터를 통해 즉시 처리됩니다. 경찰 수사 협조 영상 발급도 같은 채널로 진행되기 때문에 사장님이 별도로 신경 쓰실 일이 없습니다.',
+'{loc} 매장의 CCTV 화질은 풀HD와 4K 옵션 중 매장 환경에 맞춰 선택하시고, 클라우드 또는 NVR 저장 방식도 사용 패턴에 맞춰 결정합니다. 야간 영업이 있는 매장은 적외선 자동 전환 기능이 필수입니다. {loc} 권역 매장의 도난 사고 70%가 새벽 1시부터 5시 사이에 발생한다는 통계가 있어, 야간 영업이 있는 매장은 적외선 카메라가 사실상 필수입니다.',
+'{loc} 매장의 CCTV 카메라 정기 청소는 6개월 주기를 권장드리며, 무상 점검 일정에 맞춰 함께 진행됩니다. 렌즈에 먼지가 쌓이면 화질이 급격히 떨어지기 때문에 주기적인 점검이 필수입니다. {loc} 권역에서 정기 점검을 받으시는 매장은 그렇지 않은 매장에 비해 영상 추출 실패 빈도가 80% 이상 낮습니다.',
+'{loc} 매장에 4K CCTV를 설치하시면 보험사 인정으로 도난 사고 보험료 인하 혜택을 받으실 수 있습니다. 일반 풀HD보다 식별 가능한 영상 품질을 제공하기 때문에 사고 시 신원 확인이 가능하고, 보험사도 이를 인정해 보험료를 평균 12% 인하해 드립니다. {loc} 권역에서 4K 도입 매장은 매년 보험료 절감 효과까지 함께 받으십니다.',
+'{loc} 매장의 CCTV에 AI 동작 감지 기능을 추가하시면 야간 도난 시도가 즉시 알림으로 전송됩니다. 평균 경찰 출동까지 5분 이내 처리되며, 도난 사고 자체가 거의 사라집니다. {loc} 권역의 24시간 영업 매장에서는 AI 감지 기능 도입 후 도난 사고 빈도가 0건에 가까워진 사례가 많아, 무인 영업 매장의 핵심 보안 인프라로 자리 잡고 있습니다.',
+'{loc} 매장의 CCTV 시스템은 단순 보안 장비가 아니라 운영 인사이트 도구로 활용됩니다. 직원 근태 확인, 고객 분쟁 시 영상 자료, 매장 동선 분석, 피크 타임 손님 흐름까지 한 시스템에서 처리됩니다. {loc} 권역 매장 사장님들이 CCTV를 매장 운영 데이터의 한 축으로 활용하시는 사례가 늘어나고 있습니다.'
+];
+
+const __SEO_BODY_DEMO = [
+'{loc}에서 매장 폐업이나 인테리어 변경 시 철거는 단순한 장비 제거가 아닙니다. 카드단말기 VAN 해지, 포스기 데이터 백업, CCTV 영상 보존, 인테리어 정리, 폐기물 처리까지 동시에 진행되어야 매장이 깔끔하게 정리됩니다. {loc} 권역에서 더세이브 스토어가 제공하는 철거 서비스는 모든 작업을 한 번의 출동으로 끝내며, 평균 작업 시간은 매장 평수에 따라 2~5시간 정도입니다.',
+'{loc} 매장의 철거 작업 비용은 매장 평수, 인테리어 종류, 폐기물 양에 따라 결정됩니다. 일반 매장(15~20평) 기준 평균 철거 비용은 80~150만원 수준이고, 인테리어 자재가 많거나 주방 설비가 복잡한 식당은 200~350만원까지 발생할 수 있습니다. {loc} 권역에서 철거 견적은 무상 현장 방문 후 정확한 금액을 안내해 드립니다.',
+'{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용해 야간 철거도 가능하기 때문에, 후속 임차인의 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. {loc} 권역에서 가장 자주 받는 철거 일정은 폐업 다음 날 오전 시작, 당일 저녁 마무리 형태입니다.',
+'{loc} 매장 철거 시 가장 자주 놓치는 부분은 폐기물 처리 비용입니다. 인테리어 자재, 가구, 주방 설비를 그냥 버리는 것이 아니라 산업 폐기물로 분류 처리해야 하는 경우가 많아, 별도 비용이 발생할 수 있습니다. {loc} 권역에서 더세이브 스토어 철거는 폐기물 처리 비용까지 견적에 포함하므로, 철거 후 추가 비용이 발생하지 않습니다.',
+'{loc} 매장 철거 후 원상복구 의무는 임대 계약서에 따라 다릅니다. 일반적으로 임차인이 설치한 모든 시설을 제거하고 원래 상태로 돌려놓는 것이 원칙이지만, 임대인과 협의 시 일부 시설을 그대로 두는 조건도 가능합니다. {loc} 권역에서 철거 견적 단계에서 원상복구 범위를 명확히 정리해 드립니다.',
+'{loc} 매장의 인테리어 철거는 단순 해체 작업이 아니라 정밀한 분리 작업입니다. 천장재, 벽체, 바닥재, 전기 배선, 수도 배관을 순서대로 분리해야 다음 임차인이 인테리어 공사를 시작할 수 있습니다. {loc} 권역에서 평균 철거 작업 순서는 가구 → 인테리어 자재 → 전기/수도 배선 → 바닥/천장 마감재 순으로 진행됩니다.',
+'{loc} 매장 철거 시 카드단말기와 포스기 해지 절차도 함께 진행하셔야 합니다. VAN사 해지 신청, 포스기 임대 해지, 인터넷 회선 해지 등 행정 처리가 동시에 필요한데, 철거 업체가 한 번에 처리해 드리면 사장님이 별도로 신경 쓰실 일이 없습니다. {loc} 권역에서 통합 철거 서비스는 행정 처리까지 포함됩니다.',
+'{loc} 매장 철거 작업 중 가장 중요한 것은 안전입니다. 인테리어 자재 분리 시 발생하는 분진, 폐기물 운반 시 안전 사고, 전기·가스 차단 미흡 등 다양한 위험이 있어, 전문 철거 업체의 작업이 필수입니다. {loc} 권역의 더세이브 스토어 철거 작업자는 모두 산업안전 교육 이수자이며, 작업 중 사고 발생 시 보험 처리가 가능합니다.',
+'{loc}에서 매장 위치 이전 시 철거와 신규 설치를 동시에 진행하시면 시간과 비용을 크게 절약할 수 있습니다. 기존 매장에서 사용하던 포스기, 카드단말기, CCTV를 새 매장으로 이전 설치할 수 있고, 데이터까지 그대로 옮겨집니다. {loc} 권역에서 이전 + 철거 패키지는 단일 업체 진행 시 평균 30~40% 비용 절감이 가능합니다.',
+'{loc} 매장 철거 견적은 매장 방문 후 1~2일 내 발송됩니다. 매장 평수, 인테리어 상태, 폐기물 종류를 직접 확인한 후 정확한 비용을 안내해 드리며, 견적이 마음에 안 드시면 다른 업체와 비교하셔도 좋습니다. {loc} 권역에서 더세이브 스토어 철거 견적은 무상 출장 견적이 기본입니다.'
+];
 
 function __generateSEOContent(pathname) {
   const decoded = decodeURIComponent(pathname);
@@ -16595,11 +16760,27 @@ function __generateSEOContent(pathname) {
   else if (segs.length >= 1 && !decoded.startsWith('/제품') && !decoded.startsWith('/업종')) loc = segs[0];
   const seed = decoded;
   
+  // 제품 키워드 감지 (페이지 타입별)
+  const __PRODS = ['카드단말기', '포스기', 'CCTV설치', '철거'];
+  const __REGIONS = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
+  let __prodKey = null;
+  if (segs.length === 4 && __PRODS.includes(segs[3])) __prodKey = segs[3];
+  else if (segs.length === 2 && __REGIONS.includes(segs[0]) && __PRODS.includes(segs[1])) __prodKey = segs[1];
+  const __prodLabel = __prodKey === 'CCTV설치' ? 'CCTV' : __prodKey;
+  const __kw = __prodKey ? `${__prodLabel} 설치` : '매장 설비 설치';
+  
   // 인트로 1개 + 본문 5개 + 사례 2개
-  const intros = __seoPick(__SEO_INTRO, seed, 'i', 3);
-  const bodies = __seoPick(__SEO_BODY, seed, 'b', 5);
-  const cases = __seoPick(__SEO_CASE, seed, 'c', 2);
-  const subheads = __seoPick(__SEO_SUBHEAD, seed, 's', 7);
+  const intros = __prodKey && __SEO_INTRO_BY_PROD[__prodKey] ? __seoPick(__SEO_INTRO_BY_PROD[__prodKey], seed, 'i', Math.min(2, __SEO_INTRO_BY_PROD[__prodKey].length)) : __seoPick(__SEO_INTRO, seed, 'i', 3);
+  // 제품별 본문 풀 선택 (카드단말기/포스기/CCTV/철거 페이지는 해당 제품 전용)
+  const __bodyPool = 
+    __prodKey === '카드단말기' ? __SEO_BODY_CARD :
+    __prodKey === '포스기' ? __SEO_BODY_POS :
+    __prodKey === 'CCTV설치' ? __SEO_BODY_CCTV :
+    __prodKey === '철거' ? __SEO_BODY_DEMO :
+    __SEO_BODY;
+  const bodies = __seoPick(__bodyPool, seed, 'b', 5);
+  const cases = __prodKey && __SEO_CASE_BY_PROD[__prodKey] ? __seoPick(__SEO_CASE_BY_PROD[__prodKey], seed, 'c', 2) : __seoPick(__SEO_CASE, seed, 'c', 2);
+  const subheads = __prodKey && __SEO_SUBHEAD_BY_PROD[__prodKey] ? __seoPick(__SEO_SUBHEAD_BY_PROD[__prodKey], seed, 's', 7) : __seoPick(__SEO_SUBHEAD, seed, 's', 7);
   const h2 = __SEO_H2[__seoHash(seed + ':h2') % __SEO_H2.length].replace(/\{loc\}/g, loc);
   
   // 핵심 키워드/숫자 강조
@@ -16621,6 +16802,16 @@ function __generateSEOContent(pathname) {
     const diversified = __diversify(p.replace(/\{loc\}/g, loc), seed + ':b' + i);
     return `<div style="margin-bottom:32px"><h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000;line-height:1.3">${emoji} ${subheads[i].replace(/\{loc\}/g, loc)}</h3><p style="font-size:15px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(diversified)}</p></div>`;
   }).join('');
+  
+  // 키워드 포함 단락 (모든 페이지 - 핵심 키워드 3회 이상 반복)
+  const __kwIntros = [
+    `${loc}에서 ${__kw}를 고려하시는 사장님께서는 ${__kw} 견적 비교가 가장 우선되어야 합니다. ${loc} 매장 환경에 맞는 ${__kw} 사양을 선택하시면 초기 비용을 30~50% 줄이실 수 있습니다. 더세이브 스토어는 ${loc} 권역에서 ${__kw} 5,000건 이상의 시공 경험을 보유하고 있어, 매장 업종과 규모에 맞춘 최적 ${__kw} 안을 제안드립니다.`,
+    `${loc} 매장의 ${__kw}는 단순한 장비 도입이 아니라 매장 운영 방식 자체를 결정하는 중요한 선택입니다. ${loc}의 ${__kw} 평균 단가는 매장 규모에 따라 30만원에서 350만원까지 분포하며, ${__kw} 후 평균 5년 이상 사용하는 경우가 일반적입니다. 더세이브 스토어의 ${loc} ${__kw}는 평균 시공 시간 28분, 영업 중에도 진행이 가능합니다.`,
+    `${loc}에서 ${__kw} 견적을 비교하실 때 가장 중요한 것은 매장 환경 분석과 사양 적합성입니다. ${loc} 권역 매장의 결제 패턴과 운영 시간을 분석하면 어떤 ${__kw} 옵션이 가장 경제적인지 명확하게 보입니다. ${loc} ${__kw} 견적은 무상 출장 견적이 기본으로, 매장 방문 후 정확한 ${__kw} 비용 안내를 받으실 수 있습니다.`,
+    `${loc} ${__kw}의 평균 도입 일정은 상담 후 1~3일이며, 매장 오픈 일정에 맞춘 ${__kw} 진행이 가능합니다. ${loc}에서 ${__kw}를 진행할 때 가장 자주 받는 질문은 약정 조건과 무상 A/S 범위입니다. 더세이브 스토어 ${__kw}는 1년 무상 A/S, VAN사·통신사 비교 견적, 24시간 콜센터가 표준 포함되어 ${loc} 사장님의 부담을 최소화합니다.`
+  ];
+  const __kwIdx = __seoHash(seed + ':kw') % __kwIntros.length;
+  const __kwHtml = `<div style="margin-bottom:32px"><h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000;line-height:1.3">🎯 ${loc} ${__kw} 핵심 안내</h3><p style="font-size:15px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(__kwIntros[__kwIdx])}</p></div>`;
   
   // 항목형 박스 (체크포인트 5가지)
   const __CHECK_TITLES = [
@@ -16659,9 +16850,15 @@ function __generateSEOContent(pathname) {
       {t:'정기 점검 6개월 주기', d:'무상 정기 점검 + 보고서 발송. 사고 발생 빈도 60% 감소 효과.'}
     ]
   ];
-  const __chkIdx = __seoHash(seed + ':chk') % __CHECK_TITLES.length;
-  const __chkItems = __CHECK_ITEMS_POOL[__chkIdx % __CHECK_ITEMS_POOL.length];
-  const __chkTitle = __CHECK_TITLES[__chkIdx].replace(/\{loc\}/g, loc);
+  let __chkTitle, __chkItems;
+  if (__prodKey && __SEO_CHECK_BY_PROD[__prodKey]) {
+    __chkTitle = __SEO_CHECK_BY_PROD[__prodKey].title.replace(/\{loc\}/g, loc);
+    __chkItems = __SEO_CHECK_BY_PROD[__prodKey].items;
+  } else {
+    const __chkIdx = __seoHash(seed + ':chk') % __CHECK_TITLES.length;
+    __chkItems = __CHECK_ITEMS_POOL[__chkIdx % __CHECK_ITEMS_POOL.length];
+    __chkTitle = __CHECK_TITLES[__chkIdx].replace(/\{loc\}/g, loc);
+  }
   const checkBox = `<div style="background:#fff;border:1px solid #EEE;border-radius:16px;padding:30px 28px;margin-bottom:32px"><h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 22px;color:#000">✅ ${__chkTitle}</h3><div style="display:flex;flex-direction:column;gap:14px">${__chkItems.map((it, i) => `<div style="display:flex;gap:14px;align-items:flex-start"><div style="width:28px;height:28px;background:#FF5500;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;margin-top:2px">${i+1}</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:#000;margin-bottom:4px;letter-spacing:-0.02em">${it.t}</div><div style="font-size:13.5px;color:#555;line-height:1.7">${__highlight(it.d)}</div></div></div>`).join('')}</div></div>`;
   
   // 사례 2개
@@ -16675,6 +16872,7 @@ function __generateSEOContent(pathname) {
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">매장 운영 가이드</div>
     <h2 style="font-size:26px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${h2}</h2>
     ${introHtml}
+    ${__kwHtml}
     ${bodyItems}
     ${checkBox}
   </div></section>
@@ -17038,7 +17236,7 @@ const __wrapped_default = {
           region: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&h=700&q=75', // 한국 매장 거리
         };
         const __heroSrc = __heroBgs[__heroType] || __heroBgs.region;
-        const __hero = `<section style="padding:24px 0 0"><div class="container"><div style="position:relative;width:100%;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/8;min-height:320px"><img src="${__heroSrc}" alt="${__sub}" loading="eager" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 50%,rgba(0,0,0,0.55) 100%)"></div><div style="position:absolute;left:0;right:0;bottom:0;padding:32px"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__label}</div><h1 style="font-size:clamp(24px,3.4vw,40px);font-weight:900;letter-spacing:-0.04em;line-height:1.2;margin:0 0 16px;color:#fff">${__h1}</h1><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="#contact" style="background:#FF5500;color:#fff;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">무료 견적 받기 →</a><a href="tel:010-9677-2356" style="background:rgba(255,255,255,0.95);color:#000;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📞 010-9677-2356</a></div></div></div></div></section>`;
+        const __hero = `<section style="padding:24px 0 0"><div class="container"><div style="position:relative;width:100%;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/8;min-height:320px"><img src="${__heroSrc}" alt="${__sub}" loading="eager" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 50%,rgba(0,0,0,0.55) 100%)"></div><div style="position:absolute;left:0;right:0;bottom:0;padding:32px"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__label}</div><h1 style="font-size:clamp(24px,3.4vw,40px);font-weight:900;letter-spacing:-0.04em;line-height:1.2;margin:0 0 16px;color:#fff">${__h1}</h1><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="sms:01096772356" style="background:#1E6FE0;color:#fff;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📨 문자 보내기</a><a href="tel:010-9677-2356" style="background:rgba(255,255,255,0.95);color:#000;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📞 010-9677-2356</a></div></div></div></div></section>`;
         // 브레드크럼 생성
         let __crumbs = '';
         if (__isRegionProduct) {
@@ -17259,6 +17457,20 @@ const __wrapped_default = {
       });
       
       // 8z. 모바일 CSS inject + floating 버튼 아이콘만
+      // 페이지별 발행날짜 (10~15일 주기로 자동 갱신)
+      const __today = new Date();
+      let __pathSeed = 0;
+      for (let __i = 0; __i < url.pathname.length; __i++) __pathSeed = (__pathSeed * 31 + url.pathname.charCodeAt(__i)) >>> 0;
+      const __cyclLen = 10 + (__pathSeed % 6);
+      const __epochDay = Math.floor(__today.getTime() / 86400000);
+      const __dayInCycle = ((__epochDay + __pathSeed) % __cyclLen + __cyclLen) % __cyclLen;
+      const __pubDate = new Date(__today.getTime() - __dayInCycle * 86400000);
+      const __pubY = __pubDate.getFullYear();
+      const __pubM = String(__pubDate.getMonth() + 1).padStart(2, '0');
+      const __pubD = String(__pubDate.getDate()).padStart(2, '0');
+      const __pubISO = `${__pubY}-${__pubM}-${__pubD}`;
+      const __pubKR = `${__pubY}년 ${parseInt(__pubM)}월 ${parseInt(__pubD)}일`;
+      
       const __mobileCSS = `<style>
 @media (max-width: 768px) {
   /* 모든 카드 그리드 모바일 1열 */
@@ -17291,10 +17503,14 @@ const __wrapped_default = {
 }
 </style>`;
       // </head> 직전 inject
-      html = html.replace('</head>', __mobileCSS + '</head>');
+      html = html.replace('</head>', __mobileCSS + `<meta property="article:published_time" content="${__pubISO}T09:00:00+09:00"/><meta property="article:modified_time" content="${__pubISO}T09:00:00+09:00"/>` + '</head>');
       
       // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
       const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
+      // 발행일 섹션 추가 (footer 직전, 모든 페이지)
+      const __dateSec = `<section style="padding:20px 0;background:#FAFAF8;border-top:0.5px solid #EEE"><div class="container"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#888;letter-spacing:-0.01em"><time datetime="${__pubISO}" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#555"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>발행일 ${__pubKR}</time><span style="color:#CCC">·</span><span>전국 17개 시·도 매장 설비 출장 설치 정보</span></div></div></section>`;
+      html = html.replace(/<footer\b/i, __dateSec + '<footer');
+      
       html = html.replace(/<footer[\s\S]*?<\/footer>/, __newFoo);
       
       // 남은 마커 정리
