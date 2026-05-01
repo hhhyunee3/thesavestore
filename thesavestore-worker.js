@@ -16252,12 +16252,72 @@ app.get(
       "User-agent: *",
       "Allow: /",
       "",
-      "Sitemap: https://thesavestore.com/sitemap.xml"
+      "Sitemap: https://thesavestore.com/sitemap.xml",
+      "Sitemap: https://thesavestore.com/rss.xml"
     ].join("\n"),
     200,
     { "Content-Type": "text/plain; charset=utf-8" }
   )
 );
+app.get("/rss.xml", (c) => {
+  const base = "https://thesavestore.com";
+  const today = new Date();
+  const __toRFC = (d) => d.toUTCString();
+  
+  // 최근 발행 글 20개 — 광역 17개 + 메인 + 상위 시군구
+  const __regions = [
+    {ko:'서울', en:'seoul'}, {ko:'부산', en:'busan'}, {ko:'대구', en:'daegu'},
+    {ko:'인천', en:'incheon'}, {ko:'광주', en:'gwangju'}, {ko:'대전', en:'daejeon'},
+    {ko:'울산', en:'ulsan'}, {ko:'세종', en:'sejong'}, {ko:'경기', en:'gyeonggi'},
+    {ko:'강원', en:'gangwon'}, {ko:'충북', en:'chungbuk'}, {ko:'충남', en:'chungnam'},
+    {ko:'전북', en:'jeonbuk'}, {ko:'전남', en:'jeonnam'}, {ko:'경북', en:'gyeongbuk'},
+    {ko:'경남', en:'gyeongnam'}, {ko:'제주', en:'jeju'}
+  ];
+  
+  const items = [];
+  // 메인
+  items.push({
+    title: '더세이브 스토어 — 매장에 필요한 모든 장비를 한 번에',
+    url: base + '/',
+    desc: '카드단말기·포스기·키오스크부터 인터넷·CCTV·인테리어까지. 전국 17개 시·도 전문 매니저 출장 설치.',
+    pubDate: today
+  });
+  // 광역 17개 — 각 1~3일 차이로 발행 시뮬레이션
+  __regions.forEach((r, i) => {
+    const d = new Date(today.getTime() - (i+1) * 86400000);
+    items.push({
+      title: r.ko + ' 매장 설비 설치 — 카드단말기·포스기·CCTV',
+      url: base + '/' + r.en,
+      desc: r.ko + ' 지역 매장 카드단말기·포스기·CCTV 설치. 전문 매니저 출장 견적, VAN사 비교, 1년 무상 A/S.',
+      pubDate: d
+    });
+  });
+  
+  const itemsXml = items.map(it => 
+    '<item><title>' + it.title.replace(/&/g,'&amp;').replace(/</g,'&lt;') + 
+    '</title><link>' + it.url + 
+    '</link><guid isPermaLink="true">' + it.url +
+    '</guid><pubDate>' + __toRFC(it.pubDate) +
+    '</pubDate><description><![CDATA[' + it.desc + ']]></description></item>'
+  ).join('');
+  
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>' +
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' +
+    '<channel>' +
+    '<title>더세이브 스토어 — 전국 매장 설비 설치</title>' +
+    '<link>' + base + '/</link>' +
+    '<description>카드단말기·포스기·키오스크·CCTV·인터넷·인테리어. 전국 17개 시·도 전문 매니저 출장 설치.</description>' +
+    '<language>ko-KR</language>' +
+    '<lastBuildDate>' + __toRFC(today) + '</lastBuildDate>' +
+    '<atom:link href="' + base + '/rss.xml" rel="self" type="application/rss+xml"/>' +
+    itemsXml +
+    '</channel></rss>';
+  
+  return c.text(xml, 200, {
+    "Content-Type": "application/rss+xml; charset=utf-8",
+    "Cache-Control": "public, max-age=3600"
+  });
+});
 app.get("/sitemap.xml", (c) => {
   const base = "https://thesavestore.com";
   const entries = [];
@@ -16882,7 +16942,7 @@ function __generateSEOContent(pathname) {
     ${caseItems}
   </div></section>`;
 }
-function __shouldBoost(p){if(p.startsWith('/robots')||p.startsWith('/sitemap')||p.startsWith('/favicon'))return false;return true;}
+function __shouldBoost(p){if(p.startsWith('/robots')||p.startsWith('/sitemap')||p.startsWith('/rss')||p.startsWith('/favicon'))return false;return true;}
 
 var src_default = app;
 const __orig_default = src_default;
@@ -17503,7 +17563,7 @@ const __wrapped_default = {
 }
 </style>`;
       // </head> 직전 inject
-      html = html.replace('</head>', __mobileCSS + `<meta property="article:published_time" content="${__pubISO}T09:00:00+09:00"/><meta property="article:modified_time" content="${__pubISO}T09:00:00+09:00"/>` + '</head>');
+      html = html.replace('</head>', __mobileCSS + `<meta property="article:published_time" content="${__pubISO}T09:00:00+09:00"/><meta property="article:modified_time" content="${__pubISO}T09:00:00+09:00"/><link rel="alternate" type="application/rss+xml" title="더세이브 스토어 RSS" href="https://thesavestore.com/rss.xml"/>` + '</head>');
       
       // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
       const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
