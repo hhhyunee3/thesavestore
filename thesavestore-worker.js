@@ -15961,6 +15961,13 @@ var __cssPatch = `<style>
 .sec-title .emph,.emph{color:#4A4A4A!important;position:relative;display:inline-block}
 .emph::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:8px;background:rgba(255,180,0,0.3);z-index:-1}
 .sec-sub{font-family:'Nanum Pen Script',cursive!important;font-size:26px!important;color:#2A2A2A!important;max-width:none!important;line-height:1.5!important}
+/* 물음표(?) 글리프만 한글 산세리프로 폴백 — Nanum Pen Script의 ? 가 ¿ 처럼 보이는 문제 해결 */
+@font-face{font-family:'Nanum Pen Script';src:local('Apple SD Gothic Neo'),local('AppleGothic'),local('Malgun Gothic'),local('맑은 고딕'),local('Noto Sans KR'),local('Pretendard');unicode-range:U+003F;font-display:swap}
+/* CORE EQUIPMENT 섹션의 sec-sub 강제로 손글씨 26px (인라인 style 셀렉터 충돌 보호) */
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub{font-family:'Nanum Pen Script',cursive!important;font-size:26px!important;color:#2A2A2A!important;line-height:1.5!important;margin-bottom:48px!important}
+@media(max-width:720px){
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub{font-size:22px!important;margin-bottom:18px!important;padding:0 16px!important}
+}
 .btn-primary{background:#1E6FE0!important;color:#fff!important}
 .btn-primary:hover{background:#1856B5!important;box-shadow:0 6px 18px rgba(30,111,224,0.3)!important}
 .hero-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0!important}
@@ -16116,8 +16123,7 @@ section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .contain
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:22px!important;margin:0 0 18px!important;line-height:1.25!important;font-weight:900!important}
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-label{margin-bottom:8px!important;font-size:11px!important}
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="letter-spacing:0.2em"]{margin-bottom:8px!important;font-size:11px!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub,
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{font-size:13px!important;line-height:1.5!important;margin-bottom:18px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]:not(.sec-sub){font-size:13px!important;line-height:1.5!important;margin-bottom:18px!important}
 /* 그리드: 데스크탑 4열, 가로 스크롤/넘침 차단 */
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(2,1fr)"],
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(4,1fr)"]{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:14px!important;width:100%!important;overflow:visible!important;flex-wrap:wrap!important}
@@ -16138,8 +16144,7 @@ section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a div[st
   section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:17px!important;margin:0 0 14px!important;padding:0 16px!important}
   section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-label,
   section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="letter-spacing:0.2em"]{padding:0 16px!important}
-  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub,
-  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{font-size:12px!important;margin-bottom:14px!important;padding:0 16px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]:not(.sec-sub){font-size:12px!important;margin-bottom:14px!important;padding:0 16px!important}
   /* 그리드 → 가로 스크롤 캐러셀로 전환 */
   section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(2,1fr)"],
   section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(4,1fr)"]{
