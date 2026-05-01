@@ -16153,7 +16153,35 @@ app.use("*", async (c, next) => {
   // 폰트 + CSS 패치
   html = html.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gaegu:wght@400;700&display=swap" rel="stylesheet"/>');
   
-  html = html.replace('</head>', __cssPatch + '</head>');
+  html = html.replace('</head>', __cssPatch + '</head>');  
+  // install-gallery 썸네일 → 업종별 일러스트
+  const __makeThumb = (emoji, c1, c2) => {
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='${c1}'/><stop offset='100%25' stop-color='${c2}'/></linearGradient></defs><rect width='400' height='300' fill='url(%23g)'/><text x='200' y='205' font-size='130' text-anchor='middle' dominant-baseline='middle'>${emoji}</text></svg>`;
+    return 'data:image/svg+xml;charset=utf-8,' + svg;
+  };
+  const __thumbMap = [
+    { keys: ['웨어'], emoji: '👔', c1: '%23FFD89B', c2: '%23E8995E' },
+    { keys: ['유투엠','윤달'], emoji: '📚', c1: '%23FFD93D', c2: '%23F08C00' },
+    { keys: ['이로운','다정쉐프'], emoji: '🍳', c1: '%23FFB347', c2: '%23E85D04' },
+    { keys: ['이현진헤어'], emoji: '✂️', c1: '%23FFA8A8', c2: '%23E63946' },
+    { keys: ['상해테라피'], emoji: '🌿', c1: '%23A8E6CF', c2: '%237FB069' },
+    { keys: ['덤벨'], emoji: '💪', c1: '%23FF6B6B', c2: '%23C92A2A' },
+    { keys: ['벨커피','더카페','커피데이'], emoji: '☕', c1: '%23C9A47E', c2: '%238B5A2B' },
+    { keys: ['베베스텔라','엘리롤스'], emoji: '🥐', c1: '%23FFD6A5', c2: '%23E8A87C' },
+    { keys: ['프레쉬마켓'], emoji: '🛒', c1: '%2306D6A0', c2: '%23118AB2' },
+    { keys: ['호반'], emoji: '🍱', c1: '%23F77F00', c2: '%23D62828' },
+    { keys: ['다라이'], emoji: '🍻', c1: '%23F4A261', c2: '%23E76F51' },
+  ];
+  const __defThumb = { emoji: '🏪', c1: '%23FFA94D', c2: '%23E8590C' };
+  html = html.replace(/<img src="\/images\/install\/[^"]+" alt="([^"]*)"[^/]*\/>/g, (_m, alt) => {
+    let t = __defThumb;
+    for (const it of __thumbMap) {
+      if (it.keys.some(k => alt.includes(k))) { t = it; break; }
+    }
+    return `<img src="${__makeThumb(t.emoji, t.c1, t.c2)}" alt="${alt}" loading="lazy"/>`;
+  });
+  
+  
   
   c.res = new Response(html, { headers: res.headers, status: res.status });
 });
@@ -16179,20 +16207,6 @@ app.get("/sitemap.xml", (c) => {
     return base + "/" + segments.map((s) => encodeURIComponent(s)).join("/");
   };
   entries.push({ url: base + "/", priority: "1.0", changefreq: "weekly" });
-  for (const p of products) {
-    entries.push({
-      url: buildUrl("\uC81C\uD488", p.slug),
-      priority: "0.9",
-      changefreq: "monthly"
-    });
-  }
-  for (const i of industries) {
-    entries.push({
-      url: buildUrl("\uC5C5\uC885", i.slug),
-      priority: "0.8",
-      changefreq: "monthly"
-    });
-  }
   for (const r of regions) {
     entries.push({
       url: buildUrl(r.nameKoShort),
@@ -16231,22 +16245,8 @@ app.get("/sitemap.xml", (c) => {
   });
 });
 app.get("/", (c) => c.html(/* @__PURE__ */ jsxDEV(HomePage, {})));
-app.get("/\uC81C\uD488/:slug", (c) => {
-  const slug = c.req.param("slug");
-  const product = findProduct(slug);
-  if (!product) {
-    return c.notFound();
-  }
-  return c.html(/* @__PURE__ */ jsxDEV(ProductPage, { product }));
-});
-app.get("/\uC5C5\uC885/:slug", (c) => {
-  const slug = c.req.param("slug");
-  const industry = findIndustry(slug);
-  if (!industry) {
-    return c.notFound();
-  }
-  return c.html(/* @__PURE__ */ jsxDEV(IndustryPage, { industry }));
-});
+app.get("/\uC81C\uD488/:slug", (c) => c.notFound());
+app.get("/\uC5C5\uC885/:slug", (c) => c.notFound());
 app.get("/:region", (c) => {
   const regionSlug = c.req.param("region");
   const { region } = resolveRegionPath(regionSlug);
