@@ -5299,23 +5299,23 @@ var CoreProducts = ({ locationPath }) => {
 
 // src/components/sections/InstallGallery.tsx
 var installPhotos = [
-  { src: "/images/install/wear.jpg", caption: "\uC6E8\uC5B4 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/utm-academy.jpg", caption: "\uC720\uD22C\uC5E0\uD559\uC6D0 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/yundal-research.jpg", caption: "\uC724\uB2EC\uC2EC\uB9AC\uC5B8\uC5B4\uD559\uC2B5\uC5F0\uAD6C\uC18C \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/iroun-kitchen.jpg", caption: "\uC774\uB85C\uC6B4\uD0A4\uCE5C \xB7 \uD3EC\uC2A4 + \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/iroun-kitchen-2.jpg", caption: "\uC774\uB85C\uC6B4\uD0A4\uCE5C \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/leehj-hair.jpg", caption: "\uC774\uD604\uC9C4\uD5E4\uC5B4\uD504\uB80C\uC988 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/dumbbell.jpg", caption: "\uC8FC\uC2DD\uD68C\uC0AC \uB364\uBCA8\uC774 \xB7 \uD0A4\uC624\uC2A4\uD06C" },
-  { src: "/images/install/pyeongtaek-bellcoffee.jpg", caption: "\uD3C9\uD0DD \uBCA8\uCEE4\uD53C \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/fresh-market.jpg", caption: "\uD504\uB808\uC26C\uB9C8\uCF13 \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/hoban.jpg", caption: "\uD638\uBC18 \xB7 \uD0A4\uC624\uC2A4\uD06C" },
-  { src: "/images/install/darai-pocha.jpg", caption: "\uB2E4\uB77C\uC774\uD3EC\uCC28 \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/dajeong-cheffood.jpg", caption: "\uB2E4\uC815\uC250\uD504\uD478\uB4DC \xB7 \uD0A4\uC624\uC2A4\uD06C" },
-  { src: "/images/install/cafe-jacob.jpg", caption: "\uB354\uCE74\uD398\uC81C\uC774\uCF65 \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/bebe-stella.jpg", caption: "\uBCA0\uBCA0\uC2A4\uD154\uB77C \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/sanghae-therapy.jpg", caption: "\uC0C1\uD574\uD14C\uB77C\uD53C \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
-  { src: "/images/install/ansan-coffeeday.jpg", caption: "\uC548\uC0B0 \uCEE4\uD53C\uB370\uC774 \xB7 \uD3EC\uC2A4\uAE30" },
-  { src: "/images/install/elly-rolls.jpg", caption: "\uC5D8\uB9AC\uB864\uC2A4 \xB7 \uD3EC\uC2A4\uAE30" }
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a1.png", caption: "\uC6E8\uC5B4 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a2.jpg", caption: "\uC720\uD22C\uC5E0\uD559\uC6D0 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a3.jpg", caption: "\uC724\uB2EC\uC2EC\uB9AC\uC5B8\uC5B4\uD559\uC2B5\uC5F0\uAD6C\uC18C \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a4.jpg", caption: "\uC774\uB85C\uC6B4\uD0A4\uCE5C \xB7 \uD3EC\uC2A4 + \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a5.jpg", caption: "\uC774\uB85C\uC6B4\uD0A4\uCE5C \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a6.jpg", caption: "\uC774\uD604\uC9C4\uD5E4\uC5B4\uD504\uB80C\uC988 \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a7.jpg", caption: "\uC8FC\uC2DD\uD68C\uC0AC \uB364\uBCA8\uC774 \xB7 \uD0A4\uC624\uC2A4\uD06C" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a8.jpg", caption: "\uD3C9\uD0DD \uBCA8\uCEE4\uD53C \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a9.jpg", caption: "\uD504\uB808\uC26C\uB9C8\uCF13 \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a10.jpg", caption: "\uD638\uBC18 \xB7 \uD0A4\uC624\uC2A4\uD06C" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a11.jpg", caption: "\uB2E4\uB77C\uC774\uD3EC\uCC28 \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a12.jpg", caption: "\uB2E4\uC815\uC250\uD504\uD478\uB4DC \xB7 \uD0A4\uC624\uC2A4\uD06C" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a13.jpg", caption: "\uB354\uCE74\uD398\uC81C\uC774\uCF65 \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a14.jpg", caption: "\uBCA0\uBCA0\uC2A4\uD154\uB77C \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a15.jpg", caption: "\uC0C1\uD574\uD14C\uB77C\uD53C \xB7 \uCE74\uB4DC\uB2E8\uB9D0\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a16.jpg", caption: "\uC548\uC0B0 \uCEE4\uD53C\uB370\uC774 \xB7 \uD3EC\uC2A4\uAE30" },
+  { src: "https://cdn.jsdelivr.net/gh/hhhyunee3/\uC138\uC774\uBE0C\uC2A4\uD1A0\uC5B4@main/\uC774\uBBF8\uC9C0/a17.jpg", caption: "\uC5D8\uB9AC\uB864\uC2A4 \xB7 \uD3EC\uC2A4\uAE30" }
 ];
 var InstallGallery = () => /* @__PURE__ */ jsxDEV("section", { class: "install-gallery", children: [
   /* @__PURE__ */ jsxDEV("div", { class: "container", children: [
