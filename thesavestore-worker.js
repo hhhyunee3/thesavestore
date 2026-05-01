@@ -16109,6 +16109,27 @@ var __cssPatch = `<style>
 .hero-bg-ai .ai-glow-line-2{position:absolute;top:0;left:70%;width:1px;height:100%;background:linear-gradient(180deg,transparent 0%,rgba(120,160,255,0.3) 50%,transparent 100%)}
 @keyframes ai-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes ai-rotate-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* 제품 카드 섹션 컴팩트화 (모든 페이지 - 메인/광역/시군구/동/동×제품) */
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:28px 0!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:18px!important;margin:0 0 14px!important;line-height:1.25!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-label{margin-bottom:8px!important;font-size:10px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{margin-bottom:14px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:14px"][style*="letter-spacing:0.2em"]{margin-bottom:6px!important;font-size:10px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub,
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{font-size:13px!important;line-height:1.4!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:12px 12px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:10px"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:11px"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:12px"]{width:30px!important;height:30px!important;font-size:15px!important;margin-bottom:6px!important;border-radius:7px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a h3{font-size:13px!important;margin:0 0 3px!important;letter-spacing:-0.02em!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a p{font-size:10.5px!important;line-height:1.4!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a div[style*="border-radius:6px"]{font-size:9.5px!important;padding:1px 5px!important;margin-bottom:4px!important}
+@media(max-width:600px){
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:20px 0!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:16px!important;margin:0 0 10px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:10px 10px!important}
+}
 </style>`;
 
 var app = new Hono2();
