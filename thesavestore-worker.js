@@ -16318,6 +16318,72 @@ app.get("/rss.xml", (c) => {
     "Cache-Control": "public, max-age=3600"
   });
 });
+app.get("/4e591c0756ed125bd2ba8757cc822c14.txt", (c) => c.text("4e591c0756ed125bd2ba8757cc822c14", 200, { "Content-Type": "text/plain; charset=utf-8" }));
+
+// IndexNow 자동 일괄 제출 (모든 sitemap URL 일괄 ping)
+app.get("/indexnow-bulk", async (c) => {
+  const __KEY = "4e591c0756ed125bd2ba8757cc822c14";
+  const __HOST = "thesavestore.com";
+  
+  // 핵심 URL만 추려서 전송 (전체 27,000개는 너무 많음)
+  const urls = [];
+  urls.push("https://" + __HOST + "/");
+  urls.push("https://" + __HOST + "/regions");
+  
+  // 광역 17개
+  for (const r of regions) {
+    urls.push("https://" + __HOST + "/" + r.nameKoShort);
+    // 광역×제품 4개
+    for (const p of products) {
+      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + p.slug);
+    }
+  }
+  
+  // 시군구 모두
+  for (const r of regions) {
+    for (const d of r.districts) {
+      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug);
+    }
+  }
+  
+  // IndexNow는 1회당 최대 10,000 URL — 핵심만
+  const submitUrls = urls.slice(0, 10000).map(u => encodeURI(u));
+  
+  const body = JSON.stringify({
+    host: __HOST,
+    key: __KEY,
+    keyLocation: "https://" + __HOST + "/" + __KEY + ".txt",
+    urlList: submitUrls
+  });
+  
+  const endpoints = [
+    "https://api.indexnow.org/indexnow",
+    "https://www.bing.com/indexnow",
+    "https://yandex.com/indexnow",
+    "https://searchadvisor.naver.com/indexnow"
+  ];
+  
+  const results = [];
+  for (const ep of endpoints) {
+    try {
+      const r = await fetch(ep, {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: body
+      });
+      results.push({ endpoint: ep, status: r.status });
+    } catch (e) {
+      results.push({ endpoint: ep, error: String(e) });
+    }
+  }
+  
+  return c.json({
+    submitted: submitUrls.length,
+    endpoints: results,
+    timestamp: new Date().toISOString()
+  });
+});
+
 app.get("/sitemap.xml", (c) => {
   const base = "https://thesavestore.com";
   const entries = [];
