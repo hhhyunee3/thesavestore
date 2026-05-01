@@ -16110,25 +16110,34 @@ var __cssPatch = `<style>
 @keyframes ai-rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes ai-rotate-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-/* 제품 카드 섹션 컴팩트화 (모든 페이지 - 메인/광역/시군구/동/동×제품) */
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:28px 0!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:18px!important;margin:0 0 14px!important;line-height:1.25!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-label{margin-bottom:8px!important;font-size:10px!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{margin-bottom:14px!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:14px"][style*="letter-spacing:0.2em"]{margin-bottom:6px!important;font-size:10px!important}
+/* 제품 카드 섹션 — 모든 페이지 강력 컴팩트화 + 4열 가로 배치 */
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:18px 0!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:15px!important;margin:0 0 8px!important;line-height:1.2!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-label{margin-bottom:4px!important;font-size:9px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="letter-spacing:0.2em"]{margin-bottom:4px!important;font-size:9px!important}
 section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] .sec-sub,
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{font-size:13px!important;line-height:1.4!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:12px 12px!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:10px"],
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:11px"],
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="border-radius:12px"]{width:30px!important;height:30px!important;font-size:15px!important;margin-bottom:6px!important;border-radius:7px!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a h3{font-size:13px!important;margin:0 0 3px!important;letter-spacing:-0.02em!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a p{font-size:10.5px!important;line-height:1.4!important}
-section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a div[style*="border-radius:6px"]{font-size:9.5px!important;padding:1px 5px!important;margin-bottom:4px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] [style*="margin-bottom:48px"]{font-size:11px!important;line-height:1.35!important;margin-bottom:8px!important}
+/* 그리드: 모든 화면에서 4열 강제 */
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(2,1fr)"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(4,1fr)!important;gap:6px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:8px 6px!important;border-radius:8px!important}
+/* 아이콘 박스 — 검정 배경 → 연한 베이지로 통일, 크기 축소 */
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="background:#000"]{background:#FFF1E6!important;width:22px!important;height:22px!important;font-size:11px!important;margin-bottom:4px!important;border-radius:5px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="background:#FFE6DC"][style*="border-radius:1"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="background:#E3F2FD"][style*="border-radius:1"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="background:#F3E5F5"][style*="border-radius:1"],
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a > div[style*="background:#E8F5E9"][style*="border-radius:1"]{width:22px!important;height:22px!important;font-size:11px!important;margin-bottom:4px!important;border-radius:5px!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a h3{font-size:11px!important;margin:0 0 2px!important;letter-spacing:-0.02em!important;font-weight:700!important}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a p{font-size:9.5px!important;line-height:1.3!important;margin:0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a div[style*="border-radius:6px"]{font-size:8.5px!important;padding:1px 4px!important;margin-bottom:3px!important}
 @media(max-width:600px){
-  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:20px 0!important}
-  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:16px!important;margin:0 0 10px!important}
-  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:10px 10px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"]{padding:14px 0!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] h2{font-size:13px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(2,1fr)"],
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important;gap:5px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a[style*="border-radius:14px"]{padding:7px 6px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a h3{font-size:10.5px!important}
+  section[style*="border-top:0.5px solid #EEE"][style*="background:#fff"] a p{font-size:9px!important;-webkit-line-clamp:1}
 }
 </style>`;
 
