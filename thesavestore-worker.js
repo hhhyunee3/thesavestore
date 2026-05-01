@@ -16278,6 +16278,8 @@ app.get("/sitemap.xml", (c) => {
         changefreq: "monthly"
       });
       for (const dong of d.dongs) {
+        // 시군구명과 동일한 동 제외 (예: 서울/강남구/강남구)
+        if (dong.slug === d.slug || dong.slug === d.name || dong.name === d.name) continue;
         entries.push({
           url: buildUrl(r.nameKoShort, d.slug, dong.slug),
           priority: "0.5",
@@ -16879,16 +16881,20 @@ const __wrapped_default = {
       }
       __xml = __xml.replace('</urlset>', __rpUrls.join('\n') + '\n</urlset>');
       
+      // 시군구명==동명 collision URL 제거 (예: /seoul/gangnam-gu/gangnam-gu, /incheon/dong-gu/dong-gu/...)
+      __xml = __xml.replace(/<url>\s*<loc>[^<]*\/([^/<]+)\/\1(?:\/[^<]*)?<\/loc>[\s\S]*?<\/url>\s*/g, '');
+      
       // 동×철거 URL 추가 (5,738개) — 원본 사이트맵에 동×철거가 없으면 추가
       if (!__xml.includes('/demolition</loc>') || (__xml.match(/\/demolition</g) || []).length < 100) {
         const __demolUrls = [];
         for (const __key of Object.keys(__URL_DONG_KO2EN)) {
           const __parts = __key.split('/');
           const __r = __parts[0], __s = __parts[1], __d = __parts[2];
+          if (__d === __s) continue; // 시군구명==동명 제외
           const __regEn = __URL_REGION_KO2EN[__r];
           const __sgEn = __URL_SG_KO2EN[`${__r}/${__s}`];
           const __dgEn = __URL_DONG_KO2EN[__key];
-          if (__regEn && __sgEn && __dgEn) {
+          if (__regEn && __sgEn && __dgEn && __sgEn !== __dgEn) {
             __demolUrls.push(`<url><loc>https://${__smHost}/${__regEn}/${__sgEn}/${__dgEn}/demolition</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>`);
           }
         }
@@ -17113,6 +17119,7 @@ const __wrapped_default = {
         for (const __key of Object.keys(__URL_DONG_KO2EN)) {
           if (__key.startsWith(__dongPrefix) && !__key.endsWith('/' + __dg)) {
             const __nb = __key.split('/')[2];
+            if (__nb === __sg) continue; // 시군구명과 동일한 동 제외
             __nearby.push(__nb);
             if (__nearby.length >= 5) break;
           }
@@ -17150,7 +17157,9 @@ const __wrapped_default = {
         const __nearbyDP = [];
         for (const __key of Object.keys(__URL_DONG_KO2EN)) {
           if (__key.startsWith(__dpPrefix) && !__key.endsWith('/' + __dg4)) {
-            __nearbyDP.push(__key.split('/')[2]);
+            const __nb = __key.split('/')[2];
+            if (__nb === __sg4) continue; // 시군구명과 동일한 동 제외
+            __nearbyDP.push(__nb);
             if (__nearbyDP.length >= 5) break;
           }
         }
@@ -17205,6 +17214,9 @@ const __wrapped_default = {
       if (__navSections.length > 0) {
         html = html.replace(/<footer\b/i, __navSections.join('') + '<footer');
       }
+      
+      // 8g4. 시군구명과 동일한 동 링크 제거 (예: /seoul/gangnam-gu/gangnam-gu)
+      html = html.replace(/<a[^>]*href="\/([^/"\s]+)\/([^/"\s]+)\/\2(?:\/[^"]*)?"[^>]*>[\s\S]*?<\/a>/g, '');
       
       // 8h. 모든 한글/percent-encoded URL 링크 → 영문 URL 변환
       // 한글 또는 percent-encoded 둘 다 매칭
