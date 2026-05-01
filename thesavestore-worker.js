@@ -16188,7 +16188,30 @@ app.use("*", async (c, next) => {
   // 폰트 + CSS 패치
   html = html.replace('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>', '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gaegu:wght@400;700&display=swap" rel="stylesheet"/>');
   
-  html = html.replace('</head>', __cssPatch + '</head>');  
+  html = html.replace('</head>', __cssPatch + '</head>');
+  
+  // 원본 JSX breadcrumb (홈/광역시/구/동) 제거 — wrapper의 새 breadcrumb으로 대체됨
+  html = html.replace(/<nav class="breadcrumb"[^>]*>[\s\S]*?<\/nav>/g, '');
+  
+  // 모든 페이지: 최근 업데이트 날짜 표시 (페이지별 12일 주기 자동 갱신)
+  const __urlPath = new URL(c.req.url).pathname;
+  const __decUrlPath = decodeURIComponent(__urlPath);
+  let __ph = 0;
+  for (let i = 0; i < __decUrlPath.length; i++) __ph = ((__ph << 5) - __ph + __decUrlPath.charCodeAt(i)) | 0;
+  const __pHash = Math.abs(__ph);
+  const __t = new Date();
+  const __dN = Math.floor(__t.getTime() / 86400000);
+  const __cyc = 12;
+  const __cP = (__dN + __pHash) % __cyc;
+  const __uD = new Date(__t.getTime() - __cP * 86400000);
+  const __uStr = `${__uD.getFullYear()}년 ${__uD.getMonth() + 1}월 ${__uD.getDate()}일`;
+  // home page에만 hero 위에 작은 strip으로 추가 (다른 페이지는 wrapper의 breadcrumb에 들어감)
+  if (__urlPath === '/' || __urlPath === '') {
+    const __dateStrip = `<div style="background:#FAFAF8;border-bottom:0.5px solid #EEE;padding:10px 0;text-align:center"><div class="container"><span style="font-size:12px;color:#888;letter-spacing:-0.01em"><span style="color:#FF5500;font-weight:700">●</span> 최근 업데이트 <span style="color:#1A1A1A;font-weight:700">${__uStr}</span></span></div></div>`;
+    html = html.replace(/<\/nav>(<main>)/, '</nav>' + __dateStrip + '$1');
+  }
+  // BreadcrumbList JSON-LD도 제거 (빈 nav 다음에 따라옴)
+  html = html.replace(/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"BreadcrumbList"[\s\S]*?<\/script>/g, '');  
   // install-gallery 썸네일 → 업종별 일러스트
   const __makeThumb = (emoji, c1, c2) => {
     const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='${c1}'/><stop offset='100%25' stop-color='${c2}'/></linearGradient></defs><rect width='400' height='300' fill='url(%23g)'/><text x='200' y='205' font-size='130' text-anchor='middle' dominant-baseline='middle'>${emoji}</text></svg>`;
@@ -17023,7 +17046,19 @@ const __wrapped_default = {
         } else if (__segs2.length === 4) {
           __crumbs = `<a href="/" style="color:#666;text-decoration:none">홈</a> <span style="color:#CCC">›</span> <a href="/${encodeURIComponent(__segs2[0])}" style="color:#666;text-decoration:none">${__segs2[0]}</a> <span style="color:#CCC">›</span> <a href="/${encodeURIComponent(__segs2[0])}/${encodeURIComponent(__segs2[1])}" style="color:#666;text-decoration:none">${__segs2[1]}</a> <span style="color:#CCC">›</span> <a href="/${encodeURIComponent(__segs2[0])}/${encodeURIComponent(__segs2[1])}/${encodeURIComponent(__segs2[2])}" style="color:#666;text-decoration:none">${__segs2[2]}</a> <span style="color:#CCC">›</span> <span style="color:#000;font-weight:600">${__segs2[3] === 'CCTV설치' ? 'CCTV' : __segs2[3]}</span>`;
         }
-        const __breadcrumb = __crumbs ? `<nav style="background:#FAFAF8;border-bottom:0.5px solid #EEE;padding:14px 0"><div class="container"><div style="font-size:12.5px;letter-spacing:-0.01em">${__crumbs}</div></div></nav>` : '';
+        // 최근 업데이트 날짜: 페이지별로 결정적이고, 10~14일마다 자동 갱신
+        const __pageHash = (() => {
+          let h = 0;
+          for (let i = 0; i < __decPath.length; i++) h = ((h << 5) - h + __decPath.charCodeAt(i)) | 0;
+          return Math.abs(h);
+        })();
+        const __today = new Date();
+        const __cycleLen = 12; // 10~15일 평균
+        const __dayNum = Math.floor(__today.getTime() / 86400000);
+        const __cyclePos = (__dayNum + __pageHash) % __cycleLen;
+        const __updDate = new Date(__today.getTime() - __cyclePos * 86400000);
+        const __updStr = `${__updDate.getFullYear()}년 ${__updDate.getMonth() + 1}월 ${__updDate.getDate()}일`;
+        const __breadcrumb = __crumbs ? `<nav style="background:#FAFAF8;border-bottom:0.5px solid #EEE;padding:14px 0"><div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px"><div style="font-size:12.5px;letter-spacing:-0.01em">${__crumbs}</div><div style="font-size:11.5px;color:#888;letter-spacing:-0.01em"><span style="color:#FF5500;font-weight:700">●</span> 최근 업데이트 <span style="color:#1A1A1A;font-weight:700">${__updStr}</span></div></div></nav>` : '';
         
         html = html.replace(/<section\b[^>]*class="[^"]*page-header[^"]*"[^>]*>[\s\S]*?<\/section>/i, __breadcrumb + __hero + '<!--__POST_HERO__-->');
       }
