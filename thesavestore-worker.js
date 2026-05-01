@@ -16253,7 +16253,9 @@ app.get(
       "Allow: /",
       "",
       "Sitemap: https://thesavestore.com/sitemap.xml",
-      "Sitemap: https://thesavestore.com/rss.xml"
+      "Sitemap: https://thesavestore.com/rss.xml",
+      "",
+      "#DaumWebMasterTool:83e47a38af5ca0a2c1e93c4a21a07c851c9362ad2f9ad53dc5245519b38b0da3:gymxscrxoHpb6sqWS7OClA=="
     ].join("\n"),
     200,
     { "Content-Type": "text/plain; charset=utf-8" }
@@ -17012,7 +17014,60 @@ function __shouldBoost(p){if(p.startsWith('/robots')||p.startsWith('/sitemap')||
 
 var src_default = app;
 const __orig_default = src_default;
+
+// IndexNow 자동 핑 함수 (cron으로 매일 실행)
+async function __indexNowAutoPing() {
+  const __KEY = "4e591c0756ed125bd2ba8757cc822c14";
+  const __HOST = "thesavestore.com";
+  
+  // 광역 17개 + 메인 + 광역×제품 (약 86개) — 핵심만
+  const urls = [];
+  urls.push("https://" + __HOST + "/");
+  urls.push("https://" + __HOST + "/regions");
+  for (const r of regions) {
+    urls.push("https://" + __HOST + "/" + r.nameKoShort);
+    for (const p of products) {
+      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + p.slug);
+    }
+  }
+  
+  const submitUrls = urls.map(u => encodeURI(u));
+  const body = JSON.stringify({
+    host: __HOST,
+    key: __KEY,
+    keyLocation: "https://" + __HOST + "/" + __KEY + ".txt",
+    urlList: submitUrls
+  });
+  
+  const endpoints = [
+    "https://api.indexnow.org/indexnow",
+    "https://www.bing.com/indexnow",
+    "https://yandex.com/indexnow",
+    "https://searchadvisor.naver.com/indexnow"
+  ];
+  
+  const results = [];
+  for (const ep of endpoints) {
+    try {
+      const r = await fetch(ep, {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: body
+      });
+      results.push({ endpoint: ep, status: r.status });
+    } catch (e) {
+      results.push({ endpoint: ep, error: String(e) });
+    }
+  }
+  console.log("[IndexNow Auto Ping]", JSON.stringify({ submitted: submitUrls.length, results, time: new Date().toISOString() }));
+  return results;
+}
+
 const __wrapped_default = {
+  async scheduled(event, env, ctx) {
+    // Cloudflare Cron Trigger 진입점 — 매일 IndexNow 자동 핑
+    ctx.waitUntil(__indexNowAutoPing());
+  },
   async fetch(request, env, ctx) {
     const __url = new URL(request.url);
     let __path = decodeURIComponent(__url.pathname);
