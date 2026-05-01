@@ -17062,9 +17062,9 @@ const __wrapped_default = {
         if (__nearby.length > 0) {
           const __nearbyCards = __nearby.map(__nb => {
             const __nbEn = __URL_DONG_KO2EN[`${__r3}/${__sg}/${__nb}`];
-            return `<a href="/${__regEnC}/${__sgEnC}/${__nbEn}" style="background:#fff;border:1px solid #EEE;border-radius:12px;padding:18px 18px;display:block;color:inherit;text-decoration:none"><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:#FF5500;margin-bottom:6px">📍 ${__sg}</div><div style="font-size:15px;font-weight:800;letter-spacing:-0.025em;color:#000">${__nb}</div></a>`;
+            return `<a href="/${__regEnC}/${__sgEnC}/${__nbEn}" style="color:#1A1A1A;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:-0.01em;padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 4px 4px 0;transition:all .15s">${__nb}</a>`;
           }).join('');
-          const __nbSec = `<section style="padding:48px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__sg} 인근 지역</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__sg}의 다른 동·읍·면도 살펴보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">${__nearbyCards}</div></div></section>`;
+          const __nbSec = `<section data-nav-bottom="1" style="padding:18px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:#FF5500;margin-bottom:6px">${__sg} 인근 동·읍·면</div><h2 style="font-size:14px;font-weight:800;letter-spacing:-0.03em;margin:0 0 10px;color:#000">${__sg}의 다른 지역도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyCards}</div></div></section>`;
           html = html.replace(/<footer\b/i, __nbSec + '<footer');
         }
       }
@@ -17083,7 +17083,7 @@ const __wrapped_default = {
         const __prodEnMap2 = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv','철거':'demolition'};
         const __otherCardsHtml4 = __others4.map(p => `<a href="/${__regEnD}/${__sgEnD}/${__dgEnD}/${__prodEnMap2[p]}" style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 22px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">${__icons4[p]}</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg4} ${p}</h3><p style="font-size:12.5px;color:#666;line-height:1.6;margin:0">${__descs4[p]}</p></a>`).join('');
         
-        const __navBlock = `<section style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
+        const __navBlock = `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
         html = html.replace(/<footer\b/i, __navBlock + '<footer');
         
         // 8g2. 동×제품 페이지: 인근 동 5개 (같은 제품)
@@ -17099,9 +17099,9 @@ const __wrapped_default = {
         if (__nearbyDP.length > 0) {
           const __nearbyDPCards = __nearbyDP.map(__nb => {
             const __nbEn = __URL_DONG_KO2EN[`${__r4}/${__sg4}/${__nb}`];
-            return `<a href="/${__regEnD}/${__sgEnD}/${__nbEn}/${__dpProdEn}" style="background:#fff;border:1px solid #EEE;border-radius:12px;padding:18px 18px;display:block;color:inherit;text-decoration:none"><div style="font-size:11px;font-weight:700;letter-spacing:0.04em;color:#FF5500;margin-bottom:6px">📍 ${__sg4}</div><div style="font-size:14.5px;font-weight:800;letter-spacing:-0.025em;color:#000;margin-bottom:3px">${__nb}</div><div style="font-size:12px;color:#666">${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}</div></a>`;
+            return `<a href="/${__regEnD}/${__sgEnD}/${__nbEn}/${__dpProdEn}" style="color:#1A1A1A;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:-0.01em;padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #EEE;display:inline-block;margin:0 4px 4px 0;transition:all .15s">${__nb}</a>`;
           }).join('');
-          const __nbDPSec = `<section style="padding:48px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__sg4} 인근 지역</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__sg4}의 다른 동·읍·면 ${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">${__nearbyDPCards}</div></div></section>`;
+          const __nbDPSec = `<section data-nav-bottom="1" style="padding:18px 0;background:#FAF8F3;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:10px;font-weight:700;letter-spacing:0.18em;color:#FF5500;margin-bottom:6px">${__sg4} 인근 동·읍·면</div><h2 style="font-size:14px;font-weight:800;letter-spacing:-0.03em;margin:0 0 10px;color:#000">${__sg4}의 다른 지역 ${__pd4 === 'CCTV설치' ? 'CCTV' : __pd4}도 보세요</h2><div style="display:flex;flex-wrap:wrap;gap:0">${__nearbyDPCards}</div></div></section>`;
           html = html.replace(/<footer\b/i, __nbDPSec + '<footer');
         }
       }
@@ -17136,6 +17136,16 @@ const __wrapped_default = {
           // 동/동×제품 — footer 직전
           html = html.replace(/<footer\b/i, __seoHtml + '<footer');
         }
+      }
+      
+      // 8g3. data-nav-bottom 섹션을 모두 footer 직전으로 이동 (SEO 본문 뒤로)
+      const __navSections = [];
+      html = html.replace(/<section\b[^>]*data-nav-bottom="1"[^>]*>[\s\S]*?<\/section>/g, (m) => {
+        __navSections.push(m);
+        return '';
+      });
+      if (__navSections.length > 0) {
+        html = html.replace(/<footer\b/i, __navSections.join('') + '<footer');
       }
       
       // 8h. 모든 한글/percent-encoded URL 링크 → 영문 URL 변환
