@@ -16125,7 +16125,7 @@ app.use("*", async (c, next) => {
   html = html.replace(/<a href="#contact"[^>]*class="btn btn-primary"[^>]*>무료 견적 받기[^<]*<\/a>/g, '<a href="sms:01096772356" class="btn btn-primary">📨 문자 보내기</a>');
   html = html.replace(/<a[^>]*class="consult-btn consult-btn-secondary"[^>]*>[^<]*<\/a>/g, '');
   html = html.replace(/<section class="mid-cta">[\s\S]*?<\/section>/g, '');
-  html = html.replace(/<div class="float-badge badge-2">[^<]*<\/div>/g, '');
+  html = html.replace(/<div class="float-badge[^"]*">[^<]*<\/div>/g, '');
   html = html.replace(/<div class="hero-stats"[\s\S]*?<\/div>\s*<\/div>\s*<\/section>/g, '</div></section>');
   html = html.replace(/<a[^>]*class="floating-phone"[^>]*>[\s\S]*?<\/a>/g, '<a href="tel:010-9677-2356" class="floating-phone" aria-label="전화 상담"></a><a href="sms:01096772356" class="floating-sms" aria-label="문자 메시지"></a>');
   
@@ -16139,7 +16139,7 @@ app.use("*", async (c, next) => {
   }
   
   // nav 메뉴 3개로
-  html = html.replace(/<ul class="nav-menu"[^>]*>\s*<li><a href="\/#regions" class="nav-link">지역<\/a><\/li>\s*<\/ul>/, '<ul class="nav-menu" data-nav-menu="true"><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'region\');">지역별 설치</a></li><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'product\');">제품별 안내</a></li><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'consult\');">견적 상담</a></li></ul>');
+  html = html.replace(/<ul class="nav-menu"[^>]*>[\s\S]*?<\/ul>/, '<ul class="nav-menu" data-nav-menu="true"><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'region\');">지역별 설치</a></li><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'product\');">제품별 안내</a></li><li><a href="/#regions" class="nav-link" onclick="event.preventDefault();document.getElementById(\'regions\').scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'consult\');">견적 상담</a></li></ul>');
   
   // 제품별 안내 4개 카드
   html = html.replace(/<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid">[\s\S]*?<\/div><\/div>/, '<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid"><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">💳</span><span>카드단말기</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">🖥️</span><span>포스기</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">📹</span><span>CCTV</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">🔨</span><span>철거</span></a></div></div>');
@@ -17170,24 +17170,14 @@ const __wrapped_default = {
   /* HOW IT WORKS 4단계 카드 모바일 1열 */
   .process-steps { grid-template-columns: 1fr !important; gap: 12px !important; }
 }
-/* Floating 무료 상담 버튼 — 원형, 아이콘만 */
+/* Floating 버튼 — 전화(위) + 문자(아래) 분리 */
 .floating-phone {
-  width: 60px !important;
-  height: 60px !important;
-  padding: 0 !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  bottom: 20px !important;
+  bottom: 92px !important;
   right: 20px !important;
 }
-.floating-phone > * { display: none !important; }
-.floating-phone::before {
-  content: '\\1F4DE' !important;
-  font-family: 'Apple Color Emoji','Segoe UI Emoji',sans-serif !important;
-  font-size: 26px !important;
-  display: block !important;
+.floating-sms {
+  bottom: 20px !important;
+  right: 20px !important;
 }
 </style>`;
       // </head> 직전 inject
