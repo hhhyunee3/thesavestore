@@ -3047,7 +3047,40 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
 }
 .solution-grid.product-grid {
-  max-width: 520px;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  flex-wrap: unset;
+  justify-content: unset;
+}
+.solution-grid.product-grid .solution-pill {
+  min-width: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 26px 10px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.solution-grid.product-grid .solution-pill > span:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.solution-grid.product-grid .solution-pill:hover {
+  background: #fff;
+  color: #000;
+  border-color: var(--orange);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255, 85, 0, 0.15);
+}
+@media (max-width: 1024px) {
+  .solution-grid.product-grid { grid-template-columns: repeat(4, 1fr); }
 }
 .solution-pill {
   padding: 11px 22px;
@@ -3062,9 +3095,6 @@ img { max-width: 100%; display: block; }
   letter-spacing: -0.03em;
   color: var(--black);
   min-width: 92px;
-}
-.solution-grid.product-grid .solution-pill {
-  min-width: 140px;
 }
 .solution-pill:hover {
   border-color: var(--orange);
@@ -3158,7 +3188,9 @@ img { max-width: 100%; display: block; }
   .solution-tab .tab-en { font-size: 10px; }
   .solution-grid { gap: 6px; max-width: 380px; }
   .solution-pill { padding: 10px 16px; font-size: 12px; min-width: 72px; }
-  .solution-grid.product-grid .solution-pill { min-width: 110px; }
+  .solution-grid.product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 100%; }
+  .solution-grid.product-grid .solution-pill { min-width: unset; padding: 22px 12px; gap: 10px; font-size: 14px; }
+  .solution-grid.product-grid .solution-pill > span:first-child { font-size: 26px !important; }
   .consult-phone { font-size: 28px; }
 }
 
@@ -13953,7 +13985,7 @@ var Regions = () => {
             class: "solution-tab",
             "data-panel": "product",
             onclick: "switchSolutionTab('product')",
-            children: "\uC81C\uD488\uBCC4 \uC548\uB0B4"
+            children: "\uC5C5\uC885\uBCC4 \uC548\uB0B4"
           }
         ),
         /* @__PURE__ */ jsxDEV(
@@ -16207,7 +16239,7 @@ app.use("*", async (c, next) => {
   html = html.replace(/<ul class="nav-menu"[^>]*>[\s\S]*?<\/ul>/, '<ul class="nav-menu" data-nav-menu="true"><li><a href="/#regions" class="nav-link" onclick="if(location.pathname===\'/\'||location.pathname===\'\'){event.preventDefault();var el=document.getElementById(\'regions\');if(el)el.scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'region\');}">지역별 설치</a></li><li><a href="/#regions" class="nav-link" onclick="if(location.pathname===\'/\'||location.pathname===\'\'){event.preventDefault();var el=document.getElementById(\'regions\');if(el)el.scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'product\');}">업종별 안내</a></li><li><a href="/#regions" class="nav-link" onclick="if(location.pathname===\'/\'||location.pathname===\'\'){event.preventDefault();var el=document.getElementById(\'regions\');if(el)el.scrollIntoView({behavior:\'smooth\'});if(typeof switchSolutionTab===\'function\')switchSolutionTab(\'consult\');}">견적 상담</a></li></ul>');
   
   // 업종별 안내 카드 영역
-  html = html.replace(/<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid">[\s\S]*?<\/div><\/div>/, '<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid"><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">💳</span><span>카드단말기</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">🖥️</span><span>포스기</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">📹</span><span>CCTV</span></a><a href="javascript:void(0)" class="solution-pill product-pill"><span style="font-size:32px">🔨</span><span>철거</span></a></div></div>');
+  html = html.replace(/<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid">[\s\S]*?<\/div><\/div>/, '<div class="solution-panel" id="solution-panel-product"><div class="solution-grid product-grid"><a href="/products/card-terminal/" class="solution-pill product-pill"><span style="font-size:32px">💳</span><span>카드단말기</span></a><a href="/products/pos/" class="solution-pill product-pill"><span style="font-size:32px">🖥️</span><span>포스기</span></a><a href="/products/kiosk/" class="solution-pill product-pill"><span style="font-size:32px">🖱️</span><span>키오스크</span></a><a href="/products/table-order/" class="solution-pill product-pill"><span style="font-size:32px">📱</span><span>테이블오더</span></a><a href="/products/cctv/" class="solution-pill product-pill"><span style="font-size:32px">📹</span><span>CCTV</span></a><a href="/products/vending-machine/" class="solution-pill product-pill"><span style="font-size:32px">🥤</span><span>자동판매기</span></a><a href="/products/demolition/" class="solution-pill product-pill"><span style="font-size:32px">🔨</span><span>철거</span></a></div></div>');
   
   // CORE EQUIPMENT 4개 아이콘 색감
   html = html.replace('<div style="width:56px;height:56px;background:#000;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px">💳</div>', '<div style="width:68px;height:68px;background:#FFE6DC;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:18px">💳</div>');
