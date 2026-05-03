@@ -5014,6 +5014,17 @@ var Layout = ({ meta: meta2, children }) => {
                   name: "\uB354\uC138\uC774\uBE0C \uC2A4\uD1A0\uC5B4",
                   inLanguage: "ko-KR",
                   publisher: { "@id": "https://thesavestore.com/#organization" }
+                },
+                {
+                  "@type": "FAQPage",
+                  mainEntity: [
+                    { "@type": "Question", name: "카드단말기 설치 비용은 얼마인가요?", acceptedAnswer: { "@type": "Answer", text: "매장 규모와 선택 모델에 따라 다르지만, 무상 임대 또는 24~36개월 무이자 할부 옵션을 적용하면 초기 비용 부담 없이 도입 가능합니다. 신규 매장은 첫 3개월 통신비 면제 이벤트도 적용됩니다." } },
+                    { "@type": "Question", name: "카드단말기 수수료는 어떻게 되나요?", acceptedAnswer: { "@type": "Answer", text: "수수료는 VAN사와 매장 업종·매출에 따라 다릅니다. 주요 카드사 평균 수수료는 0.8%~2.3% 수준이며, 영세·중소가맹점은 우대 수수료가 자동 적용됩니다. 견적 요청 시 가장 유리한 VAN사를 비교해 추천드립니다." } },
+                    { "@type": "Question", name: "설치까지 얼마나 걸리나요?", acceptedAnswer: { "@type": "Answer", text: "신청 후 평균 2~3영업일 내 설치 완료됩니다. 인터넷 환경이 갖춰진 매장이라면 당일 설치도 가능하며, 신규 개업 매장은 오픈일에 맞춰 일정을 조율해드립니다." } },
+                    { "@type": "Question", name: "기존 장비에서 교체할 때 영업이 중단되나요?", acceptedAnswer: { "@type": "Answer", text: "중단 없이 교체 가능합니다. 신규 장비 설치 후 시범 운영 확인 → 기존 장비 회수 순서로 진행되어 매장 영업 시간에 영향이 없습니다." } },
+                    { "@type": "Question", name: "A/S는 어떻게 받나요?", acceptedAnswer: { "@type": "Answer", text: "365일 A/S 가능합니다. 전화 한 통으로 원격 진단을 받으시거나, 출장 수리가 필요하면 평일 기준 당일~익일 방문 가능합니다. 응급 시 임시 장비를 즉시 발송해 운영이 멈추지 않게 지원합니다." } },
+                    { "@type": "Question", name: "어느 지역까지 출장 설치가 가능한가요?", acceptedAnswer: { "@type": "Answer", text: "전국 17개 시·도 모두 출장 설치 가능합니다. 서울·경기·인천 수도권은 당일 설치, 지방은 평균 1~2영업일 내 방문하며, 도서·산간 지역도 일정 협의 후 직접 방문해드립니다." } }
+                  ]
                 }
               ]
             })
@@ -17866,7 +17877,18 @@ const __wrapped_default = {
           const __related = __CT_DATA.filter(r => r[3] === __macro && r[0] !== __slug).slice(0, 6);
           const __relHtml = __related.map(r => `<a href="/products/${__pSlug}/${r[3]}/${r[0]}/" class="p-rel-card">${r[1]} ${__PN} →</a>`).join('');
           
-          const __jsonLd = JSON.stringify({"@context":"https://schema.org","@type":"Article","headline":__title,"image":__img,"datePublished":__date,"dateModified":__date,"description":__metaDesc,"author":{"@type":"Organization","name":"더세이브 스토어"},"publisher":{"@type":"Organization","name":"더세이브 스토어"},"mainEntityOfPage":__canon});
+          const __faqJsonLd = __faqIdx.map(i => ({"@type":"Question","name":__faqs[i][0],"acceptedAnswer":{"@type":"Answer","text":__faqs[i][1]}}));
+          const __crumbList = [
+            {"@type":"ListItem","position":1,"name":"홈","item":`${new URL(request.url).origin}/`},
+            {"@type":"ListItem","position":2,"name":__PN,"item":`${new URL(request.url).origin}/products/${__pSlug}/`},
+            {"@type":"ListItem","position":3,"name":__mInfo.name,"item":`${new URL(request.url).origin}/products/${__pSlug}/${__macro}/`},
+            {"@type":"ListItem","position":4,"name":__ko,"item":__canon}
+          ];
+          const __jsonLd = JSON.stringify({"@context":"https://schema.org","@graph":[
+            {"@type":"Article","headline":__title,"image":[{"@type":"ImageObject","url":__img,"width":1200,"height":520}],"datePublished":__date,"dateModified":__date,"description":__metaDesc,"author":{"@type":"Organization","name":"더세이브 스토어","url":new URL(request.url).origin},"publisher":{"@type":"Organization","name":"더세이브 스토어","logo":{"@type":"ImageObject","url":`${new URL(request.url).origin}/logo.png`}},"mainEntityOfPage":{"@type":"WebPage","@id":__canon}},
+            {"@type":"FAQPage","mainEntity":__faqJsonLd},
+            {"@type":"BreadcrumbList","itemListElement":__crumbList}
+          ]});
           
           const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://picsum.photos/seed/'+encodeURIComponent('${__macro}-${__slug}')+'/1200/520';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
@@ -18554,8 +18576,53 @@ const __wrapped_default = {
   right: 20px !important;
 }
 </style>`;
+      // 9.5 SEO 구조화 데이터 (모든 페이지) — 검색 결과 썸네일·FAQ 펼침 노출용
+      const __siteOrigin = new URL(request.url).origin;
+      const __pageUrl = request.url;
+      const __pageHero = (function() {
+        // hero 이미지: 페이지 종류에 따라
+        if (typeof __heroSrc !== 'undefined') return __heroSrc;
+        return 'https://thesavestore.com/images/install/wear.jpg';
+      })();
+      // 공통 FAQ
+      const __commonFAQ = [
+        ['카드단말기 설치 비용은 얼마인가요?', '매장 규모와 선택 모델에 따라 다르지만, 무상 임대 또는 24~36개월 무이자 할부 옵션을 적용하면 초기 비용 부담 없이 도입 가능합니다. 신규 매장은 첫 3개월 통신비 면제 이벤트도 적용됩니다.'],
+        ['카드단말기 수수료는 어떻게 되나요?', '수수료는 VAN사와 매장 업종·매출에 따라 다릅니다. 주요 카드사 평균 수수료는 0.8%~2.3% 수준이며, 영세·중소가맹점은 우대 수수료가 자동 적용됩니다. 견적 요청 시 가장 유리한 VAN사를 비교해 추천드립니다.'],
+        ['설치까지 얼마나 걸리나요?', '신청 후 평균 2~3영업일 내 설치 완료됩니다. 인터넷 환경이 갖춰진 매장이라면 당일 설치도 가능하며, 신규 개업 매장은 오픈일에 맞춰 일정을 조율해드립니다.'],
+        ['기존 장비에서 교체할 때 영업이 중단되나요?', '중단 없이 교체 가능합니다. 신규 장비 설치 후 시범 운영 확인 → 기존 장비 회수 순서로 진행되어 매장 영업 시간에 영향이 없습니다.'],
+        ['A/S는 어떻게 받나요?', '365일 A/S 가능합니다. 전화 한 통으로 원격 진단을 받으시거나, 출장 수리가 필요하면 평일 기준 당일~익일 방문 가능합니다. 응급 시 임시 장비를 즉시 발송해 운영이 멈추지 않게 지원합니다.'],
+        ['어느 지역까지 출장 설치가 가능한가요?', '전국 17개 시·도 모두 출장 설치 가능합니다. 서울·경기·인천 수도권은 당일 설치, 지방은 평균 1~2영업일 내 방문하며, 도서·산간 지역도 일정 협의 후 직접 방문해드립니다.']
+      ];
+      const __faqEntities = __commonFAQ.map(([q, a]) => ({"@type":"Question", name:q, acceptedAnswer:{"@type":"Answer", text:a}}));
+      // BreadcrumbList 빌드 (segs2 기반)
+      const __crumbItems = [{"@type":"ListItem", position:1, name:"홈", item:__siteOrigin + '/'}];
+      if (__segs2 && __segs2.length > 0) {
+        let __pathBuild = __siteOrigin;
+        for (let i = 0; i < __segs2.length; i++) {
+          __pathBuild += '/' + encodeURIComponent(__segs2[i]);
+          __crumbItems.push({"@type":"ListItem", position: i+2, name: __segs2[i], item: __pathBuild});
+        }
+      }
+      // 페이지 H1 추출 (hero 변수에서 추론)
+      const __pageH1 = (typeof __h1 !== 'undefined' ? __h1.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim() : (__segs2 && __segs2[__segs2.length-1] ? __segs2[__segs2.length-1] : '더세이브 스토어'));
+      const __pageDesc = (typeof __sub !== 'undefined' ? __sub : '전국 매장 설비 출장 설치 — 카드단말기·포스기·키오스크·CCTV·인테리어');
+      // 페이지 schema 그래프
+      const __pageSchema = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {"@type":"WebPage", "@id":__pageUrl, name:__pageH1, description:__pageDesc, url:__pageUrl, inLanguage:"ko-KR", isPartOf:{"@id":__siteOrigin + "/#website"}, primaryImageOfPage:{"@type":"ImageObject", url:__pageHero}},
+          {"@type":"ImageObject", url:__pageHero, width:1400, height:700, contentUrl:__pageHero},
+          {"@type":"FAQPage", mainEntity:__faqEntities},
+          {"@type":"BreadcrumbList", itemListElement:__crumbItems},
+          {"@type":"LocalBusiness", "@id":__siteOrigin + "/#business", name:"더세이브 스토어", image:__pageHero, telephone:"+82-10-9677-2356", priceRange:"₩₩", address:{"@type":"PostalAddress", addressCountry:"KR"}, areaServed:{"@type":"Country", name:"South Korea"}, url:__siteOrigin}
+        ]
+      };
+      const __schemaTag = `<script type="application/ld+json">${JSON.stringify(__pageSchema)}</script>`;
+      // og:image 보강 (썸네일 노출용 — 핵심)
+      const __ogImageTag = `<meta property="og:image" content="${__pageHero}"/><meta property="og:image:width" content="1400"/><meta property="og:image:height" content="700"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="${__pageHero}"/>`;
+      
       // </head> 직전 inject
-      html = html.replace('</head>', __mobileCSS + `<meta property="article:published_time" content="${__pubISO}T09:00:00+09:00"/><meta property="article:modified_time" content="${__pubISO}T09:00:00+09:00"/><link rel="alternate" type="application/rss+xml" title="더세이브 스토어 RSS" href="https://thesavestore.com/rss.xml"/>` + '</head>');
+      html = html.replace('</head>', __mobileCSS + __schemaTag + __ogImageTag + `<meta property="article:published_time" content="${__pubISO}T09:00:00+09:00"/><meta property="article:modified_time" content="${__pubISO}T09:00:00+09:00"/><link rel="alternate" type="application/rss+xml" title="더세이브 스토어 RSS" href="https://thesavestore.com/rss.xml"/>` + '</head>');
       
       // 9. 푸터 통째 가로 레이아웃으로 재작성 (모든 페이지)
       const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
