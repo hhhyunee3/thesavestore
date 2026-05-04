@@ -2900,11 +2900,10 @@ var Footer = () => /* @__PURE__ */ jsxDEV("footer", { children: /* @__PURE__ */ 
       /* @__PURE__ */ jsxDEV("div", { class: "footer-col", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "footer-col-label", children: "건축" }),
         /* @__PURE__ */ jsxDEV("ul", { children: [
-          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "/제품/건축철거", children: "철거" }) }),
-          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "/제품/건축인테리어", children: "인테리어" }) })
+          /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "/제품/철거", children: "철거" }) })
         ] }),
         /* @__PURE__ */ jsxDEV("div", { class: "footer-col-label", style: "margin-top:18px", children: "기타" }),
-        /* @__PURE__ */ jsxDEV("ul", { children: /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "/제품/자판기", children: "자판기" }) }) })
+        /* @__PURE__ */ jsxDEV("ul", { children: /* @__PURE__ */ jsxDEV("li", { children: /* @__PURE__ */ jsxDEV("a", { href: "/제품/자동판매기", children: "자동판매기" }) }) })
       ] }),
       /* @__PURE__ */ jsxDEV("div", { class: "footer-col", children: [
         /* @__PURE__ */ jsxDEV("div", { class: "footer-col-label", children: "바로가기" }),
@@ -4832,6 +4831,54 @@ var products = [
       }
     ],
     relatedProducts: ["인터넷설치", "포스기", "키오스크"]
+  },
+  {
+    slug: "키오스크",
+    name: "키오스크",
+    nameEn: "Kiosk",
+    icon: "🖱️",
+    tagline: "무인 주문\xB7결제 자동화",
+    description: "셀프 주문\xB7결제 자동화로 인건비 절감. 분식\xB7카페\xB7패스트푸드 매장에 가장 빠르게 도입할 수 있습니다.",
+    metaCount: "23\xB727\xB732인치",
+    features: ["23인치 컴팩트", "27인치 표준", "32인치 대형", "카드\xB7현금\xB7QR 결제"],
+    useCases: ["인건비 30% 절감", "주문 회전율 향상", "다국어 메뉴 지원"],
+    relatedProducts: ["포스기", "카드단말기", "테이블오더"]
+  },
+  {
+    slug: "테이블오더",
+    name: "테이블오더",
+    nameEn: "Table Order",
+    icon: "📱",
+    tagline: "테이블 태블릿 주문",
+    description: "테이블에서 직접 주문\xB7결제. 다국어 메뉴, 분할 결제, 실시간 메뉴 추천까지 지원하는 태블릿 시스템입니다.",
+    metaCount: "10\xB712인치",
+    features: ["10인치 태블릿", "12인치 태블릿", "분할 결제", "다국어 메뉴"],
+    useCases: ["회전율 향상", "객단가 상승", "직원 호출 감소"],
+    relatedProducts: ["포스기", "키오스크", "카드단말기"]
+  },
+  {
+    slug: "자동판매기",
+    name: "자동판매기",
+    nameEn: "Vending Machine",
+    icon: "🥤",
+    tagline: "24시간 무인 판매",
+    description: "음료\xB7간편식\xB7잡화 무인 운영으로 추가 수익. 매장 입구\xB7휴게실에 설치 가능합니다.",
+    metaCount: "음료\xB7간편식\xB7복합형",
+    features: ["음료 자판기", "간편식 자판기", "복합형 자판기", "무인 결제"],
+    useCases: ["24시간 운영", "추가 수익원", "재고 자동 알림"],
+    relatedProducts: ["키오스크", "포스기", "CCTV설치"]
+  },
+  {
+    slug: "철거",
+    name: "철거",
+    nameEn: "Demolition",
+    icon: "🔨",
+    tagline: "매장 철거\xB7정리",
+    description: "매장 철거, 인테리어 정리, 폐업 처리까지 빠르고 깔끔한 현장 작업으로 마무리해드립니다.",
+    metaCount: "원상복구\xB7전체\xB7부분",
+    features: ["원상복구 철거", "전체 철거", "부분 철거", "폐기물 처리"],
+    useCases: ["폐업 정리", "원상복구", "인테리어 철거"],
+    relatedProducts: ["CCTV설치", "포스기", "카드단말기"]
   }
 ];
 function findProduct(slug) {
@@ -7160,8 +7207,18 @@ app.get("/sitemap.xml", (c) => {
   });
 });
 app.get("/", (c) => c.html(/* @__PURE__ */ jsxDEV(HomePage, {})));
-app.get("/제품/:slug", (c) => c.notFound());
-app.get("/업종/:slug", (c) => c.notFound());
+app.get("/제품/:slug", (c) => {
+  const slug = c.req.param("slug");
+  const product = findProduct(slug);
+  if (product) {
+    // 영문 slug map: 카드단말기→card-terminal 등
+    const ko2en = { "카드단말기": "card-terminal", "포스기": "pos", "CCTV설치": "cctv", "철거": "demolition", "키오스크": "kiosk", "테이블오더": "table-order", "자동판매기": "vending-machine" };
+    const en = ko2en[product.slug];
+    if (en) return c.redirect(`/products/${en}/`, 301);
+  }
+  return c.notFound();
+});
+app.get("/업종/:slug", (c) => c.redirect("/", 301));
 app.get("/:region", (c) => {
   const regionSlug = c.req.param("region");
   const { region } = resolveRegionPath(regionSlug);
@@ -7170,23 +7227,39 @@ app.get("/:region", (c) => {
   return c.html(/* @__PURE__ */ jsxDEV(RegionPage, { region }));
 });
 app.get("/:region/:district", (c) => {
-  const { region, district } = resolveRegionPath(
-    c.req.param("region"),
-    c.req.param("district")
-  );
-  if (!region || !district)
-    return c.notFound();
-  return c.html(/* @__PURE__ */ jsxDEV(RegionPage, { region, district }));
+  const regionSlug = c.req.param("region");
+  const districtSlug = c.req.param("district");
+  const { region, district } = resolveRegionPath(regionSlug, districtSlug);
+  if (region && district)
+    return c.html(/* @__PURE__ */ jsxDEV(RegionPage, { region, district }));
+  // district 매칭 실패 — product인지 체크 (예: /세종/포스기, /sejong/pos)
+  // → 해당 region의 첫 번째 district로 redirect
+  if (region) {
+    const product = findProduct(districtSlug);
+    if (product && region.districts && region.districts.length > 0) {
+      const d0 = region.districts[0];
+      return c.redirect(`/${region.nameKoShort}/${d0.slug}/${product.slug}`, 301);
+    }
+  }
+  return c.notFound();
 });
 app.get("/:region/:district/:dong", (c) => {
-  const { region, district, dong } = resolveRegionPath(
-    c.req.param("region"),
-    c.req.param("district"),
-    c.req.param("dong")
-  );
-  if (!region || !district || !dong)
-    return c.notFound();
-  return c.html(/* @__PURE__ */ jsxDEV(RegionPage, { region, district, dong }));
+  const regionSlug = c.req.param("region");
+  const districtSlug = c.req.param("district");
+  const dongSlug = c.req.param("dong");
+  const { region, district, dong } = resolveRegionPath(regionSlug, districtSlug, dongSlug);
+  if (region && district && dong)
+    return c.html(/* @__PURE__ */ jsxDEV(RegionPage, { region, district, dong }));
+  // dong 매칭 실패 — 마지막 segment가 product인지 체크 (예: /서울/강남구/포스기)
+  // → 해당 district의 첫 dong으로 redirect (district+product는 dong-product 페이지로)
+  if (region && district) {
+    const product = findProduct(dongSlug);
+    if (product && district.dongs && district.dongs.length > 0) {
+      const dg0 = district.dongs[0];
+      return c.redirect(`/${region.nameKoShort}/${district.slug}/${dg0.slug}/${product.slug}`, 301);
+    }
+  }
+  return c.notFound();
 });
 app.get("/:region/:district/:dong/:product", (c) => {
   const { region, district, dong } = resolveRegionPath(
@@ -8673,14 +8746,8 @@ const __wrapped_default = {
       __actualRequest = new Request(__internalUrl, { headers: request.headers });
     }
     
-    // 라우트 차단: /제품/, /업종/ 단독만 차단
-    if (__path.startsWith('/제품/') ||
-        __path.startsWith('/업종/')) {
-      return new Response('<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>Not Found</title></head><body><h1>404</h1><p><a href="/">홈으로</a></p></body></html>', { 
-        status: 404, 
-        headers: {'Content-Type':'text/html; charset=utf-8'} 
-      });
-    }
+    // /제품/, /업종/ 은 별도 라우트 핸들러에서 처리 (redirect 또는 404)
+    // 미들웨어에서 차단하면 라우트가 실행되지 않으므로 통과시킴
     
     const response = await __orig_default.fetch(__actualRequest, env, ctx);
     
@@ -8997,7 +9064,7 @@ const __wrapped_default = {
       }
       
       // 8b3. 시군구 페이지(2-segment): 광역×제품으로 가는 카드 3개 분기 추가
-      if (__isRegional && __segs2.length === 2) {
+      if (__isRegional && __segs2.length === 2 && !__isRegionProduct) {
         const __sgR = __segs2[0], __sgN = __segs2[1];
         const __sgRegEn = __URL_REGION_KO2EN[__sgR] || encodeURIComponent(__sgR);
         // 시군 영문 슬러그 — __URL_SG_KO2EN 맵에서 조회 (안양시 동안구 → anyang-si-dongan-gu 등)
@@ -9015,11 +9082,11 @@ const __wrapped_default = {
       if (__isRegionProduct) {
         const __r2 = __rpRegion;
         const __others = __PRODUCT_NAMES.filter(p => p !== __rpProduct);
-        const __icons = {'카드단말기':'💳','포스기':'🖥️','CCTV설치':'📹'};
-        const __subs = {'카드단말기':'VAN사 비교 설치','포스기':'매장 운영 통합','CCTV설치':'매장 보안·관제','철거':'매장 철거·정리'};
-        const __descs = {'카드단말기':'카드단말기 설치와 수수료 비교 견적.','포스기':'주문·결제·매출을 한 화면에서 통합 관리.','CCTV설치':'사각지대 분석부터 모바일 원격 모니터링까지.','철거':'매장 철거·인테리어 정리·폐업 처리까지.'};
+        const __icons = {'카드단말기':'💳','포스기':'🖥️','CCTV설치':'📹','철거':'🔨','키오스크':'🖱️','테이블오더':'📱','자동판매기':'🥤'};
+        const __subs = {'카드단말기':'VAN사 비교 설치','포스기':'매장 운영 통합','CCTV설치':'매장 보안·관제','철거':'매장 철거·정리','키오스크':'무인 주문·결제','테이블오더':'테이블 태블릿 주문','자동판매기':'24시간 무인 판매'};
+        const __descs = {'카드단말기':'카드단말기 설치와 수수료 비교 견적.','포스기':'주문·결제·매출을 한 화면에서 통합 관리.','CCTV설치':'사각지대 분석부터 모바일 원격 모니터링까지.','철거':'매장 철거·인테리어 정리·폐업 처리까지.','키오스크':'셀프 주문·결제 자동화로 인건비 절감.','테이블오더':'테이블 태블릿 주문으로 회전율과 객단가 향상.','자동판매기':'음료·간편식·잡화 무인 운영으로 추가 수익.'};
         const __regEnB = __URL_REGION_KO2EN[__r2] || encodeURIComponent(__r2);
-        const __prodEnMap = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv','철거':'demolition'};
+        const __prodEnMap = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv','철거':'demolition','키오스크':'kiosk','테이블오더':'table-order','자동판매기':'vending-machine'};
         const __otherCardsHtml = __others.map(p => `<a href="/${__regEnB}/${__prodEnMap[p]}" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:28px 22px;display:block;color:inherit;text-decoration:none"><div style="width:54px;height:54px;background:#000;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px">${__icons[p]}</div><h3 style="font-size:18px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__r2} ${p}</h3><div style="font-size:11px;color:#FF5500;font-weight:700;letter-spacing:0.04em;margin-bottom:10px;display:inline-block;padding:2px 7px;background:#FFE6DC;border-radius:6px">${__subs[p]}</div><p style="font-size:12.5px;color:#666;line-height:1.65;margin:0">${__r2} 매장에 맞는 ${__descs[p]}</p></a>`).join('');
         const __otherSec = `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">다른 제품도 보세요</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${__r2} 매장의 다른 설비 안내</h2><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml}</div></div></section>`;
         // 새 hero 다음(__POST_HERO__ 마커)에 inject
@@ -9062,12 +9129,12 @@ const __wrapped_default = {
         // 다른 제품 2개 카드
         const __PRODS = ['카드단말기', '포스기', 'CCTV설치', '철거', '키오스크', '테이블오더', '자동판매기'];
         const __others4 = __PRODS.filter(p => p !== __pd4);
-        const __icons4 = {'카드단말기':'💳','포스기':'🖥️','CCTV설치':'📹','철거':'🔨'};
-        const __descs4 = {'카드단말기':'카드단말기 설치와 VAN사 비교 견적','포스기':'주문·결제·매출 통합 관리','CCTV설치':'사각지대 분석부터 모바일 원격 모니터링','철거':'매장 철거·인테리어 정리·폐업 처리'};
+        const __icons4 = {'카드단말기':'💳','포스기':'🖥️','CCTV설치':'📹','철거':'🔨','키오스크':'🖱️','테이블오더':'📱','자동판매기':'🥤'};
+        const __descs4 = {'카드단말기':'카드단말기 설치와 VAN사 비교 견적','포스기':'주문·결제·매출 통합 관리','CCTV설치':'사각지대 분석부터 모바일 원격 모니터링','철거':'매장 철거·인테리어 정리·폐업 처리','키오스크':'셀프 주문·결제 자동화','테이블오더':'테이블 태블릿 주문 시스템','자동판매기':'음료·간편식·잡화 무인 운영'};
         const __regEnD = __URL_REGION_KO2EN[__r4] || encodeURIComponent(__r4);
         const __sgEnD = __URL_SG_KO2EN[`${__r4}/${__sg4}`] || encodeURIComponent(__sg4);
         const __dgEnD = __URL_DONG_KO2EN[`${__r4}/${__sg4}/${__dg4}`] || encodeURIComponent(__dg4);
-        const __prodEnMap2 = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv','철거':'demolition'};
+        const __prodEnMap2 = {'카드단말기':'card-terminal','포스기':'pos','CCTV설치':'cctv','철거':'demolition','키오스크':'kiosk','테이블오더':'table-order','자동판매기':'vending-machine'};
         const __otherCardsHtml4 = __others4.map(p => `<a href="/${__regEnD}/${__sgEnD}/${__dgEnD}/${__prodEnMap2[p]}" style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 22px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">${__icons4[p]}</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg4} ${p}</h3><p style="font-size:12.5px;color:#666;line-height:1.6;margin:0">${__descs4[p]}</p></a>`).join('');
         
         const __navBlock = `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
