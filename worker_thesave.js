@@ -7098,110 +7098,110 @@ app.get("/4e591c0756ed125bd2ba8757cc822c14.txt", (c) => c.text("4e591c0756ed125b
 
 // IndexNow 자동 일괄 제출 (모든 sitemap URL 일괄 ping)
 app.get("/indexnow-bulk", async (c) => {
-  const __KEY = "4e591c0756ed125bd2ba8757cc822c14";
-  const __HOST = "thesavestore.com";
-  
-  // 핵심 URL만 추려서 전송 (전체 27,000개는 너무 많음)
-  const urls = [];
-  urls.push("https://" + __HOST + "/");
-  urls.push("https://" + __HOST + "/regions");
-  
-  // 광역 17개
-  for (const r of regions) {
-    urls.push("https://" + __HOST + "/" + r.nameKoShort);
-    // 광역×제품 4개
-    for (const p of products) {
-      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + p.slug);
-    }
-  }
-  
-  // 시군구 모두
-  for (const r of regions) {
-    for (const d of r.districts) {
-      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug);
-    }
-  }
-  
-  // IndexNow는 1회당 최대 10,000 URL — 핵심만
-  const submitUrls = urls.slice(0, 10000).map(u => encodeURI(u));
-  
-  const body = JSON.stringify({
-    host: __HOST,
-    key: __KEY,
-    keyLocation: "https://" + __HOST + "/" + __KEY + ".txt",
-    urlList: submitUrls
-  });
-  
-  const endpoints = [
-    "https://api.indexnow.org/indexnow",
-    "https://www.bing.com/indexnow",
-    "https://yandex.com/indexnow",
-    "https://searchadvisor.naver.com/indexnow"
-  ];
-  
-  const results = [];
-  for (const ep of endpoints) {
-    try {
-      const r = await fetch(ep, {
-        method: "POST",
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: body
-      });
-      results.push({ endpoint: ep, status: r.status });
-    } catch (e) {
-      results.push({ endpoint: ep, error: String(e) });
-    }
-  }
-  
+  // cron과 동일한 통합 핑 함수 호출 (rotation 포함)
+  const result = await __indexNowAutoPing();
   return c.json({
-    submitted: submitUrls.length,
-    endpoints: results,
-    timestamp: new Date().toISOString()
+    submitted: result.submitted,
+    endpoints: result.results,
+    timestamp: new Date().toISOString(),
+    note: "단일 api.indexnow.org 호출로 모든 참여 엔진(Bing, Yandex, Naver, Seznam)에 자동 전파됨. 네이버는 한국 검색 핵심이라 직접도 호출."
   });
 });
 
-app.get("/sitemap.xml", (c) => {
+// === Sitemap helpers ===
+function __buildSitemapEntries() {
   const base = "https://thesavestore.com";
-  const entries = [];
-  const buildUrl = (...segments) => {
-    return base + "/" + segments.map((s) => encodeURIComponent(s)).join("/");
-  };
-  entries.push({ url: base + "/", priority: "1.0", changefreq: "weekly" });
+  const buildUrl = (...segments) => base + "/" + segments.map((s) => encodeURIComponent(s)).join("/");
+  const main = [];      // 홈, regions, 시도, 시군구
+  const dongs = [];     // 모든 동 페이지
+  const dongProducts = []; // 동 × 제품
+  
+  main.push({ url: base + "/", priority: "1.0", changefreq: "weekly" });
+  main.push({ url: base + "/regions", priority: "0.8", changefreq: "weekly" });
+  
   for (const r of regions) {
-    entries.push({
-      url: buildUrl(r.nameKoShort),
-      priority: "0.7",
-      changefreq: "monthly"
-    });
+    main.push({ url: buildUrl(r.nameKoShort), priority: "0.7", changefreq: "weekly" });
+    // 시도 × 제품 (region+product)
+    for (const p of products) {
+      main.push({ url: buildUrl(r.nameKoShort, p.slug), priority: "0.6", changefreq: "weekly" });
+    }
     for (const d of r.districts) {
-      entries.push({
-        url: buildUrl(r.nameKoShort, d.slug),
-        priority: "0.6",
-        changefreq: "monthly"
-      });
+      main.push({ url: buildUrl(r.nameKoShort, d.slug), priority: "0.6", changefreq: "monthly" });
+      // 시군구 × 제품
+      for (const p of products) {
+        main.push({ url: buildUrl(r.nameKoShort, d.slug, p.slug), priority: "0.5", changefreq: "monthly" });
+      }
       for (const dong of d.dongs) {
-        // 시군구명과 동일한 동 제외 (예: 서울/강남구/강남구)
         if (dong.slug === d.slug || dong.slug === d.name || dong.name === d.name) continue;
-        entries.push({
-          url: buildUrl(r.nameKoShort, d.slug, dong.slug),
-          priority: "0.5",
-          changefreq: "monthly"
-        });
+        dongs.push({ url: buildUrl(r.nameKoShort, d.slug, dong.slug), priority: "0.5", changefreq: "monthly" });
         for (const p of products) {
-          entries.push({
-            url: buildUrl(r.nameKoShort, d.slug, dong.slug, p.slug),
-            priority: "0.4",
-            changefreq: "monthly"
-          });
+          dongProducts.push({ url: buildUrl(r.nameKoShort, d.slug, dong.slug, p.slug), priority: "0.4", changefreq: "monthly" });
         }
       }
     }
   }
-  const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + entries.map(
-    (e) => `  <url><loc>${e.url}</loc><lastmod>${today}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`
-  ).join("\n") + "\n</urlset>";
+  return { main, dongs, dongProducts };
+}
+
+function __renderSitemapXml(entries) {
+  const today = (new Date()).toISOString().split("T")[0];
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    entries.map(e => `  <url><loc>${e.url}</loc><lastmod>${today}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`).join("\n") +
+    "\n</urlset>";
+}
+
+// Sitemap index — 검색엔진에 분할된 sitemap 목록 제공 (50000 URL/50MB 한도 회피, 처리 부담 감소)
+app.get("/sitemap.xml", (c) => {
+  const base = "https://thesavestore.com";
+  const today = (new Date()).toISOString().split("T")[0];
+  const sitemaps = [
+    base + "/sitemap-main.xml",
+    base + "/sitemap-dongs.xml",
+    base + "/sitemap-products-1.xml",
+    base + "/sitemap-products-2.xml",
+  ];
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    sitemaps.map(s => `  <sitemap><loc>${s}</loc><lastmod>${today}</lastmod></sitemap>`).join("\n") +
+    "\n</sitemapindex>";
   return c.text(xml, 200, {
+    "Content-Type": "application/xml; charset=utf-8",
+    "Cache-Control": "public, max-age=3600"
+  });
+});
+
+// 분할 sitemap 1: 메인 (홈, regions, 시도, 시도×제품, 시군구, 시군구×제품)
+app.get("/sitemap-main.xml", (c) => {
+  const { main } = __buildSitemapEntries();
+  return c.text(__renderSitemapXml(main), 200, {
+    "Content-Type": "application/xml; charset=utf-8",
+    "Cache-Control": "public, max-age=3600"
+  });
+});
+
+// 분할 sitemap 2: 모든 동
+app.get("/sitemap-dongs.xml", (c) => {
+  const { dongs } = __buildSitemapEntries();
+  return c.text(__renderSitemapXml(dongs), 200, {
+    "Content-Type": "application/xml; charset=utf-8",
+    "Cache-Control": "public, max-age=3600"
+  });
+});
+
+// 분할 sitemap 3: 동×제품 — 절반
+app.get("/sitemap-products-1.xml", (c) => {
+  const { dongProducts } = __buildSitemapEntries();
+  const half = Math.ceil(dongProducts.length / 2);
+  return c.text(__renderSitemapXml(dongProducts.slice(0, half)), 200, {
+    "Content-Type": "application/xml; charset=utf-8",
+    "Cache-Control": "public, max-age=3600"
+  });
+});
+
+// 분할 sitemap 4: 동×제품 — 나머지
+app.get("/sitemap-products-2.xml", (c) => {
+  const { dongProducts } = __buildSitemapEntries();
+  const half = Math.ceil(dongProducts.length / 2);
+  return c.text(__renderSitemapXml(dongProducts.slice(half)), 200, {
     "Content-Type": "application/xml; charset=utf-8",
     "Cache-Control": "public, max-age=3600"
   });
@@ -8076,18 +8076,61 @@ async function __indexNowAutoPing() {
   const __KEY = "4e591c0756ed125bd2ba8757cc822c14";
   const __HOST = "thesavestore.com";
   
-  // 광역 17개 + 메인 + 광역×제품 (약 86개) — 핵심만
-  const urls = [];
-  urls.push("https://" + __HOST + "/");
-  urls.push("https://" + __HOST + "/regions");
+  // 모든 핵심 URL 수집 (메인, 시도, 시도×제품, 시군구, 시군구×제품, 동, 동×제품 일부)
+  const allUrls = [];
+  allUrls.push("https://" + __HOST + "/");
+  allUrls.push("https://" + __HOST + "/regions");
+  
+  // 시도 + 시도×제품 (Tier 1 — 매일 보냄)
+  const tier1 = [];
   for (const r of regions) {
-    urls.push("https://" + __HOST + "/" + r.nameKoShort);
+    tier1.push("https://" + __HOST + "/" + r.nameKoShort);
     for (const p of products) {
-      urls.push("https://" + __HOST + "/" + r.nameKoShort + "/" + p.slug);
+      tier1.push("https://" + __HOST + "/" + r.nameKoShort + "/" + p.slug);
     }
   }
   
-  const submitUrls = urls.map(u => encodeURI(u));
+  // 시군구 + 시군구×제품 (Tier 2 — 매일 보냄, 약 2,200개)
+  const tier2 = [];
+  for (const r of regions) {
+    for (const d of r.districts) {
+      tier2.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug);
+      for (const p of products) {
+        tier2.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug + "/" + p.slug);
+      }
+    }
+  }
+  
+  // 동 + 동×제품 (Tier 3 — 약 46,000개. 로테이션으로 일부씩)
+  const tier3 = [];
+  for (const r of regions) {
+    for (const d of r.districts) {
+      for (const dong of d.dongs) {
+        if (dong.slug === d.slug || dong.slug === d.name || dong.name === d.name) continue;
+        tier3.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug + "/" + dong.slug);
+        for (const p of products) {
+          tier3.push("https://" + __HOST + "/" + r.nameKoShort + "/" + d.slug + "/" + dong.slug + "/" + p.slug);
+        }
+      }
+    }
+  }
+  
+  // 매일 다른 부분을 보내도록 day-of-year 기반 회전
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  
+  // 매일 보낼 URL: 메인 + Tier 1 (전부) + Tier 2 (전부) + Tier 3 (회전)
+  const SUBMIT_LIMIT = 9500;  // IndexNow 10,000 한도 안전 마진
+  const fixed = [...allUrls, ...tier1, ...tier2];
+  const remaining = SUBMIT_LIMIT - fixed.length;
+  
+  // Tier 3을 N일에 걸쳐 분할
+  const cycleDays = Math.ceil(tier3.length / Math.max(remaining, 1));
+  const offset = (dayOfYear % cycleDays) * remaining;
+  const tier3Slice = tier3.slice(offset, offset + remaining);
+  
+  const submitUrls = [...fixed, ...tier3Slice].map(u => encodeURI(u));
+  
   const body = JSON.stringify({
     host: __HOST,
     key: __KEY,
@@ -8095,11 +8138,11 @@ async function __indexNowAutoPing() {
     urlList: submitUrls
   });
   
+  // 단일 엔드포인트로 충분 — IndexNow 프로토콜이 모든 참여 엔진(Bing, Yandex, Naver, Seznam)에 자동 전파
+  // 다만 네이버는 한국 검색의 핵심이므로 직접도 호출
   const endpoints = [
-    "https://api.indexnow.org/indexnow",
-    "https://www.bing.com/indexnow",
-    "https://yandex.com/indexnow",
-    "https://searchadvisor.naver.com/indexnow"
+    "https://api.indexnow.org/indexnow",          // 자동 전파 (전 엔진)
+    "https://searchadvisor.naver.com/indexnow"    // 네이버 직접 (한국 검색)
   ];
   
   const results = [];
@@ -8115,8 +8158,16 @@ async function __indexNowAutoPing() {
       results.push({ endpoint: ep, error: String(e) });
     }
   }
-  console.log("[IndexNow Auto Ping]", JSON.stringify({ submitted: submitUrls.length, results, time: new Date().toISOString() }));
-  return results;
+  console.log("[IndexNow Auto Ping]", JSON.stringify({
+    submitted: submitUrls.length,
+    tier3_total: tier3.length,
+    tier3_offset: offset,
+    cycle_days: cycleDays,
+    day_of_year: dayOfYear,
+    results,
+    time: new Date().toISOString()
+  }));
+  return { submitted: submitUrls.length, results };
 }
 
 const __wrapped_default = {
@@ -8752,7 +8803,13 @@ const __wrapped_default = {
     const response = await __orig_default.fetch(__actualRequest, env, ctx);
     
     // 사이트맵에서도 차단된 URL 제거
-    if (__path.startsWith('/sitemap') && (response.headers.get('content-type') || '').includes('xml')) {
+    // 단, 새 분할 sitemap (sitemap-main, sitemap-dongs, sitemap-products-*)은
+    // 이미 모든 URL을 정확히 포함하므로 inject/변환 미들웨어 통과시킴
+    const __isSplitSitemap = __path === '/sitemap-main.xml' || 
+                              __path === '/sitemap-dongs.xml' || 
+                              __path.startsWith('/sitemap-products-') ||
+                              __path === '/sitemap.xml';  // index file도 그대로
+    if (!__isSplitSitemap && __path.startsWith('/sitemap') && (response.headers.get('content-type') || '').includes('xml')) {
       let __xml = await response.text();
       __xml = __xml.split('\n').filter(line => {
         if (line.includes('/%EC%A0%9C%ED%92%88/') || line.includes('/제품/')) return false;
