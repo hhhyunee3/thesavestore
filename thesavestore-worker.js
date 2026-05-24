@@ -17501,6 +17501,11 @@ const __wrapped_default = {
       const __pCat = (__pSegs[2] || '').trim();
       const __pItemSlug = (__pSegs[3] || '').trim();
       
+      if (__pSlug === 'cctv') {
+        const __cctvSoon = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CCTV 설치 서비스 준비중 — 더세이브 스토어</title><meta name="robots" content="noindex,nofollow"><style>body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard',sans-serif;margin:0;background:#fff;color:#222}</style></head><body><div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px"><div style="max-width:640px;text-align:center"><div style="font-size:72px;margin-bottom:20px">📹</div><h1 style="font-size:30px;font-weight:800;color:#3D2817;margin:0 0 16px;letter-spacing:-0.02em">CCTV 설치 서비스 준비중입니다</h1><p style="font-size:16px;line-height:1.75;color:#666;margin:0 0 36px">현재 CCTV 설치 서비스는 준비중입니다.<br>카드단말기·포스기·키오스크 등 다른 매장 설비는 지금 바로 상담 가능합니다.<br>CCTV 관련 문의는 아래로 연락 주시면 안내해 드리겠습니다.</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="tel:010-9677-2356" style="display:inline-block;background:#FF7900;color:#fff;font-weight:700;font-size:15px;padding:16px 32px;border-radius:12px;text-decoration:none">📞 전화 상담 010-9677-2356</a><a href="/" style="display:inline-block;background:#fff;color:#3D2817;font-weight:700;font-size:15px;padding:16px 32px;border-radius:12px;text-decoration:none;border:1px solid #e5e5e5">홈으로 가기</a></div></div></div></body></html>`;
+        return new Response(__cctvSoon, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
+      }
+      
       // 6개 제품 메타
       const __PRODUCTS = {
         'card-terminal':{name:'카드단말기',emoji:'💳',tag:'유선·무선·블루투스',headline:'매장에 맞는 카드단말기, 비교 견적으로',desc:'매장에 가장 유리한 조건으로 카드단말기를 설치해드립니다. 유선·무선·블루투스·휴대용까지 매장 동선에 맞춰 추천합니다.',ctx:'결제 속도, 영수증 발행 안정성, 단말기 단가까지 — 이 모든 요소가 매장의 일평균 매출을 결정합니다',models:'유선·무선·블루투스·휴대용',key:'결제'},
