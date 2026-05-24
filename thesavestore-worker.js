@@ -17811,7 +17811,7 @@ const __wrapped_default = {
           
           // 섹션 4 체크리스트 (5개 변형)
           const __s4c = [
-            `<div class="p-checks"><div class="p-checks-title">${__ko} 설치 단계별 안내</div><ul><li>1단계 · 무료 견적 상담 (전화·카카오톡, 5~10분)</li><li>2단계 · 매장 방문 또는 사진으로 환경 점검</li><li>3단계 · 장비 모델 확정, 설치 일정 조율</li><li>4단계 · 장비 설치 + 시범 운영 + 직원 교육 (현장 1~2시간)</li><li>5단계 · 사용 시작, 365일 A/S 콜센터 연결</li></ul></div>`,
+            `<div class="p-checks"><div class="p-checks-title">${__ko} 설치 단계별 안내</div><ul><li>1단계 · 무료 견적 상담 (전화·카카오톡, 5~10분)</li><li>2단계 · 담당 매니저 배정</li><li>3단계 · 장비 모델 확정, 설치 일정 조율</li><li>4단계 · 장비 설치 + 시범 운영 + 직원 교육 (현장 1~2시간)</li><li>5단계 · 사용 시작, 365일 A/S 콜센터 연결</li></ul></div>`,
             `<div class="p-checks"><div class="p-checks-title">${__ko} 설치 당일 준비사항</div><ul><li>사업자등록증, 통장사본 준비</li><li>매장 인터넷·와이파이 비밀번호 확인</li><li>전기 콘센트 여유분 1~2개 확보</li><li>설치 시간 동안 응대할 직원 1명 배정</li><li>기존 장비 데이터 백업 위치 확인 (교체 시)</li></ul></div>`,
             `<div class="p-checks"><div class="p-checks-title">설치 후 1주일 체크리스트</div><ul><li>일별 ${__pInfo.key} 정상 처리 확인</li><li>영수증 발행 품질 점검</li><li>직원별 사용 숙련도 점검</li><li>이상 작동 시 즉시 콜센터 신고</li><li>1주일 후 사용 만족도 피드백 전달</li></ul></div>`,
             `<div class="p-checks"><div class="p-checks-title">${__ko} 신규 오픈 매장 설치 가이드</div><ul><li>인테리어 마감 5일 전 견적 확정</li><li>인테리어 마감 2일 전 환경 점검</li><li>오픈 1일 전 장비 설치 + 시범 운영</li><li>오픈 당일 직원 교육 + 응급 콜센터 연결</li><li>오픈 후 1주일 정기 점검 방문</li></ul></div>`,
