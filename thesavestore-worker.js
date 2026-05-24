@@ -16235,8 +16235,13 @@ app.use("*", async (c, next) => {
     const __isCctv = __path.includes('/cctv') || __path.includes('cctv설치') || __path.includes('cctv-');
     if (__isCctv) {
       const __soonHTML = `<div style="max-width:760px;margin:80px auto;padding:64px 28px;text-align:center"><div style="font-size:64px;margin-bottom:18px">📹</div><h1 style="font-size:30px;font-weight:800;color:#3D2817;margin:0 0 14px;letter-spacing:-0.02em">CCTV 설치 서비스 준비중입니다</h1><p style="font-size:16px;line-height:1.7;color:#666;margin:0 0 32px">현재 CCTV 설치 서비스는 준비중입니다.<br>카드단말기·포스기·키오스크 등 다른 매장 설비는 지금 바로 상담 가능합니다.<br>CCTV 관련 문의는 아래로 연락 주시면 안내해 드리겠습니다.</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a href="tel:010-9677-2356" style="display:inline-block;background:#FF7900;color:#fff;font-weight:700;font-size:15px;padding:15px 30px;border-radius:12px;text-decoration:none">📞 전화 상담 010-9677-2356</a><a href="/" style="display:inline-block;background:#fff;color:#3D2817;font-weight:700;font-size:15px;padding:15px 30px;border-radius:12px;text-decoration:none;border:1px solid #e5e5e5">홈으로 가기</a></div></div>`;
-      if (html.includes('</nav>') && html.includes('<footer')) {
-        html = html.replace(/(<\/nav>)[\s\S]*?(<footer)/, '$1' + __soonHTML + '$2');
+      const __bodyStart = html.indexOf('<body');
+      if (__bodyStart !== -1) {
+        const __bodyTagEnd = html.indexOf('>', __bodyStart);
+        const __bodyClose = html.lastIndexOf('</body>');
+        if (__bodyTagEnd !== -1 && __bodyClose !== -1 && __bodyClose > __bodyTagEnd) {
+          html = html.slice(0, __bodyTagEnd + 1) + __soonHTML + html.slice(__bodyClose);
+        }
       }
     }
   } catch (e) {}
