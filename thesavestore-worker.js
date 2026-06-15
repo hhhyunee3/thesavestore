@@ -17258,7 +17258,7 @@ function __generateSEOContent(pathname) {
   ];
   const __sufOpts = [
     ` ${loc} ${__varSido}에서 ${__varOwner}들이 가장 자주 받으시는 질문 중 하나입니다.`,
-    ` ${loc} 권역에서 도입 빈도가 높은 부분이며, ${__varNum2}% 이상 매장이 채택합니다.`,
+    ` ${loc} 권역에서 도입 빈도가 높은 부분이며, 많은 매장에서 채택하고 있습니다.`,
     ` ${loc} ${__varSido}의 ${__varStore} 환경에 맞춰 진행 가능한 옵션입니다.`,
     ` ${loc} 인근 ${__varStore}들에서 검증된 데이터로, ${__varOwner} 만족도가 높습니다.`,
     ` ${loc} 권역 ${__varNum3}건 이상의 시공 사례에서 일관된 결과가 확인됩니다.`,
@@ -17277,10 +17277,10 @@ function __generateSEOContent(pathname) {
   const __locParas = [
     `${loc} ${__varSido}의 ${__varStore} 평균 운영 시간은 일 ${__varNum4}시간이며, ${__varStore} ${__varOwner}들이 가장 자주 묻는 질문은 ${__kw} 견적 비교 방식입니다. 더세이브 스토어는 ${loc} ${__varSido}에서 ${__varNum3}곳 이상의 매장에 ${__kw}를 진행한 데이터를 바탕으로, 매장 환경과 결제 패턴에 가장 적합한 사양을 제안드립니다. 현장 점검 시 통신·전기 환경까지 함께 확인해 안전한 도입을 보장합니다.`,
     `${loc} ${__varSido}에서 ${__kw} 평균 도입 일정은 상담 후 ${__varDay}일 이내이며, 매장 오픈 일정에 맞춘 ${__kw} 진행이 가능합니다. ${loc} 권역에서 ${__varOwner}들이 가장 만족하시는 부분은 견적부터 설치, 교육, A/S까지 같은 매니저가 담당하는 일관성입니다. 평균 ${__kw} 시공 시간은 ${__varNum1}분에서 ${__varNum1 * 2}분 수준이며, 영업 중에도 진행이 가능합니다.`,
-    `${loc} ${__varSido}의 ${__varStore} 운영비 분석을 보면, ${__kw} 도입 후 평균 ${__varPct}% 수준의 운영 효율 향상이 나타납니다. ${loc} 권역에서 ${__varNum2}만원에서 ${__varNum2 + 50}만원 수준의 월간 운영비 절감 사례가 다수 보고되며, 도입 비용은 평균 ${__varHr * 3}~${__varHr * 5}개월 만에 회수되는 패턴이 일반적입니다. ${__varOwner}들의 만족도가 높은 이유입니다.`,
+    `${loc} ${__varSido}의 ${__varStore} 운영비 분석을 보면, ${__kw} 도입 후 운영 효율 향상이 나타납니다. ${loc} 권역에서 운영비 절감 사례가 다수 보고되며, 도입 비용은 상담 시 안내해 드립니다. 도입 비용 회수까지 ${__varHr * 5}개월가량 걸리는 패턴이 일반적입니다. ${__varOwner}들의 만족도가 높은 이유입니다.`,
     `${loc} ${__varSido}에서 ${__kw}를 고려하시는 ${__varOwner}이 가장 흔히 받는 질문은 사후 관리 체계입니다. 더세이브 스토어 ${loc} 권역 사후 관리는 24시간 콜센터를 통해 처리되며, 평균 ${__varHr}시간 내 매장 출동이 표준입니다. 1년 무상 A/S와 6개월 정기 점검이 표준 포함되고, 점검 후 보고서가 카톡 또는 이메일로 발송되어 운영 상태를 파악하실 수 있습니다.`,
-    `${loc} ${__varSido}의 ${__varStore} 매출 패턴을 보면, ${__kw} 도입 매장이 미도입 매장 대비 평균 ${__varPct + 5}% 높은 매출을 기록합니다. ${loc} 권역에서 ${__varNum1}~${__varNum1 + 10}평 규모 매장이 가장 도입이 활발한 사이즈이며, 평균 ${__varDay}~${__varDay + 3}년 사용 후 교체하는 패턴이 일반적입니다. 매장 환경에 맞는 사양을 처음부터 잘 선택하시는 것이 핵심입니다.`,
-    `${loc} ${__varSido}에서 ${__kw} 견적 단가는 매장 평수와 사양에 따라 ${__varNum2 * 2}만원에서 ${__varNum3}만원까지 분포합니다. 할부 구매 모델은 월 ${__varNum1}~${__varNum1 + 5}만원 수준이며, 일시불 구매 시 평균 ${__varNum3 + 50}만원 정도의 비용이 발생합니다. `
+    `${loc} ${__varSido}의 ${__varStore} 매출 패턴을 보면, ${__kw} 도입 매장이 미도입 매장 대비 매출 증가 효과가 나타납니다. ${loc} 권역에서 ${__varNum1}~${__varNum1 + 10}평 규모 매장이 가장 도입이 활발한 사이즈이며, 평균 ${__varDay}~${__varDay + 3}년 사용 후 교체하는 패턴이 일반적입니다. 매장 환경에 맞는 사양을 처음부터 잘 선택하시는 것이 핵심입니다.`,
+    `${loc} ${__varSido}에서 ${__kw} 견적은 매장 평수와 사양에 따라 다르게 책정됩니다. 36개월 할부 또는 일시불 구매로 도입할 수 있으며, 정확한 견적은 상담 시 안내해 드립니다. `
   ];
   const __locIdx = __seoHash(seed + ':lp_idx') % __locParas.length;
   const __locParaHtml = `<div style="margin-bottom:32px"><h3 style="font-size:18px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#000;line-height:1.3">📍 ${loc} 매장 운영 데이터</h3><p style="font-size:15px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(__locParas[__locIdx])}</p></div>`;
