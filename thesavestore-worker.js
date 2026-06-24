@@ -5509,8 +5509,8 @@ var industries = [
     },
     successTips: [
       { number: "01", title: "\uD53C\uD06C\uD0C0\uC784 \uACB0\uC81C \uBCD1\uBAA9 \uD574\uACB0", desc: "\uC810\uC2EC\xB7\uC800\uB141 \uB7EC\uC2DC \uD0C0\uC784\uC5D0 \uACB0\uC81C \uB300\uAE30\uAC00 \uB9E4\uCD9C \uC190\uC2E4\uB85C \uC774\uC5B4\uC9D1\uB2C8\uB2E4. \uCE74\uB4DC\uB2E8\uB9D0\uAE30 \uC678\uC5D0 \uBB34\uC120 \uB2E8\uB9D0\uAE30\uB97C \uCD94\uAC00\uB85C \uAD6C\uBE44\uD558\uBA74 \uD68C\uC804\uC728\uC774 \uD06C\uAC8C \uC0C1\uC2B9\uD569\uB2C8\uB2E4." },
-      { number: "02", title: "\uC8FC\uBC29-\uD640 \uC2E4\uC2DC\uAC04 \uC8FC\uBB38 \uC5F0\uB3D9", desc: "POS\uC5D0\uC11C \uC8FC\uBC29 \uD504\uB9B0\uD130\uB85C \uC790\uB3D9 \uC804\uB2EC\uB418\uB3C4\uB85D \uC5F0\uB3D9\uD558\uBA74 \uC8FC\uBB38 \uB204\uB77D\xB7\uC804\uB2EC \uC624\uB958\uAC00 70% \uC774\uC0C1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4." },
-      { number: "03", title: "\uB9E4\uCD9C \uB370\uC774\uD130\uB85C \uBA54\uB274 \uCD5C\uC801\uD654", desc: "\uC2DC\uAC04\uB300\xB7\uC694\uC77C\uBCC4 \uB9E4\uCD9C \uB370\uC774\uD130\uB97C \uBD84\uC11D\uD574 \uC778\uAE30 \uBA54\uB274 \uC911\uC2EC\uC73C\uB85C \uC7AC\uAD6C\uC131\uD558\uBA74 \uC6D0\uAC00\uC728 3~5% \uAC1C\uC120 \uAC00\uB2A5." }
+      { number: "02", title: "\uC8FC\uBC29-\uD640 \uC2E4\uC2DC\uAC04 \uC8FC\uBB38 \uC5F0\uB3D9", desc: "POS\uC5D0\uC11C \uC8FC\uBC29 \uD504\uB9B0\uD130\uB85C \uC790\uB3D9 \uC804\uB2EC\uB418\uB3C4\uB85D \uC5F0\uB3D9\uD558\uBA74 \uC8FC\uBB38 \uB204\uB77D\xB7\uC804\uB2EC \uC624\uB958\uAC00  \uC774\uC0C1 \uC904\uC5B4\uB4ED\uB2C8\uB2E4." },
+      { number: "03", title: "\uB9E4\uCD9C \uB370\uC774\uD130\uB85C \uBA54\uB274 \uCD5C\uC801\uD654", desc: "\uC2DC\uAC04\uB300\xB7\uC694\uC77C\uBCC4 \uB9E4\uCD9C \uB370\uC774\uD130\uB97C \uBD84\uC11D\uD574 \uC778\uAE30 \uBA54\uB274 \uC911\uC2EC\uC73C\uB85C \uC7AC\uAD6C\uC131\uD558\uBA74 \uC6D0\uAC00\uC728  \uAC1C\uC120 \uAC00\uB2A5." }
     ],
     packages: [
       {
@@ -5574,7 +5574,7 @@ var industries = [
     successTips: [
       { number: "01", title: "\uD0A4\uC624\uC2A4\uD06C\uB85C \uC778\uAC74\uBE44 \uC808\uAC10", desc: "\uC624\uC804 \uD53C\uD06C(7~10\uC2DC)\uC5D0 \uD0A4\uC624\uC2A4\uD06C 1\uB300 \uB3C4\uC785 \uC2DC \uD640 \uC9C1\uC6D0 1\uBA85\uBD84 \uC778\uAC74\uBE44 \uC808\uAC10 \uD6A8\uACFC. \uD22C\uC790 \uD68C\uC218 \uD3C9\uADE0 6\uAC1C\uC6D4." },
       { number: "02", title: "\uC9C4\uB3D9\uBCA8\xB7\uC624\uB354\uBCA8 \uB3C4\uC785", desc: "\uC190\uB2D8\uC774 \uC790\uB9AC\uC5D0 \uC549\uC544\uC11C \uAE30\uB2E4\uB9B4 \uC218 \uC788\uC5B4 \uB9E4\uC7A5 \uD63C\uC7A1\uB3C4\uAC00 \uB0AE\uC544\uC9C0\uACE0, \uC74C\uB8CC \uD53D\uC5C5 \uC2E4\uC218\uAC00 \uC904\uC5B4\uB4ED\uB2C8\uB2E4." },
-      { number: "03", title: "\uB2E8\uACE8 \uACE0\uAC1D \uBA64\uBC84\uC2ED \uC6B4\uC601", desc: "POS\uC5D0 \uBA64\uBC84\uC2ED \uAE30\uB2A5 \uC5F0\uB3D9 \uC2DC \uC7AC\uBC29\uBB38\uC728 \uD3C9\uADE0 38% \uC0C1\uC2B9. \uC0DD\uC77C\xB7\uCFE0\uD3F0 \uBC1C\uC1A1\uC73C\uB85C \uC6D4 \uB9E4\uCD9C \uAFB8\uC900\uD788 \uAD00\uB9AC." }
+      { number: "03", title: "\uB2E8\uACE8 \uACE0\uAC1D \uBA64\uBC84\uC2ED \uC6B4\uC601", desc: "POS\uC5D0 \uBA64\uBC84\uC2ED \uAE30\uB2A5 \uC5F0\uB3D9 \uC2DC \uC7AC\uBC29\uBB38\uC728 \uD3C9\uADE0  \uC0C1\uC2B9. \uC0DD\uC77C\xB7\uCFE0\uD3F0 \uBC1C\uC1A1\uC73C\uB85C \uC6D4 \uB9E4\uCD9C \uAFB8\uC900\uD788 \uAD00\uB9AC." }
     ],
     packages: [
       {
@@ -5612,7 +5612,7 @@ var industries = [
       { q: "\uC18C\uD615 \uCE74\uD398\uC5D0\uB3C4 \uD0A4\uC624\uC2A4\uD06C \uC124\uCE58\uAC00 \uAC00\uB2A5\uD55C\uAC00\uC694?", a: "\uBBF8\uB2C8 \uD0A4\uC624\uC2A4\uD06C(\uB108\uBE44 40cm \uC774\uD558) \uBAA8\uB378\uB85C \uC881\uC740 \uACF5\uAC04\uC5D0\uB3C4 \uC124\uCE58 \uAC00\uB2A5\uD569\uB2C8\uB2E4. 1\uD3C9 \uC774\uD558 \uACF5\uAC04\uC5D0\uB3C4 \uBCBD\uBA74 \uBD80\uCC29\uD615\uC73C\uB85C \uD574\uACB0\uB429\uB2C8\uB2E4." },
       { q: "\uCE74\uD398\uC6A9 POS\uC640 \uC77C\uBC18 POS \uCC28\uC774\uB294 \uBB34\uC5C7\uC778\uAC00\uC694?", a: "\uCE74\uD398\uC6A9\uC740 \uC74C\uB8CC \uC635\uC158(\uC0AC\uC774\uC988\xB7\uC0F7\xB7\uC5BC\uC74C\xB7\uC2DC\uB7FD) \uC120\uD0DD UI\uAC00 \uCD5C\uC801\uD654\uB418\uC5B4 \uC788\uACE0, \uBA64\uBC84\uC2ED\xB7\uCFE0\uD3F0 \uAE30\uB2A5\uC774 \uAE30\uBCF8 \uD0D1\uC7AC\uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4." },
       { q: "\uC2A4\uD0C0\uBC85\uC2A4\uCC98\uB7FC \uC8FC\uBB38 \uC9C4\uD589 \uC0C1\uD669\uC744 \uBCF4\uC5EC\uC904 \uC218 \uC788\uB098\uC694?", a: "\uB124, \uC8FC\uBB38\uD604\uD669\uD310 \uBAA8\uB2C8\uD130\uB97C \uCD94\uAC00\uD558\uBA74 \uC190\uB2D8\uC774 \uC790\uAE30 \uC8FC\uBB38\uC758 \uC81C\uC870 \uC0C1\uD0DC\uB97C \uD655\uC778\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uACE0\uAC1D \uB9CC\uC871\uB3C4\uC640 \uD68C\uC804\uC728\uC774 \uB3D9\uC2DC\uC5D0 \uD5A5\uC0C1\uB429\uB2C8\uB2E4." },
-      { q: "\uBC30\uB2EC\uC571 \uC5F0\uB3D9\uB3C4 \uCE74\uD398\uC5D0 \uD544\uC694\uD55C\uAC00\uC694?", a: "\uD14C\uC774\uD06C\uC544\uC6C3\xB7\uBC30\uB2EC \uBE44\uC911\uC774 \uB192\uC740 \uCE74\uD398\uB294 \uD544\uC218\uC785\uB2C8\uB2E4. \uD2B9\uD788 \uC694\uAE30\uC694\xB7\uBC30\uBBFC \uCEE4\uD53C \uCE74\uD14C\uACE0\uB9AC \uB9E4\uCD9C \uBE44\uC911\uC774 30% \uC774\uC0C1\uC774\uBA74 POS \uC5F0\uB3D9\uC744 \uCD94\uCC9C\uD569\uB2C8\uB2E4." },
+      { q: "\uBC30\uB2EC\uC571 \uC5F0\uB3D9\uB3C4 \uCE74\uD398\uC5D0 \uD544\uC694\uD55C\uAC00\uC694?", a: "\uD14C\uC774\uD06C\uC544\uC6C3\xB7\uBC30\uB2EC \uBE44\uC911\uC774 \uB192\uC740 \uCE74\uD398\uB294 \uD544\uC218\uC785\uB2C8\uB2E4. \uD2B9\uD788 \uC694\uAE30\uC694\xB7\uBC30\uBBFC \uCEE4\uD53C \uCE74\uD14C\uACE0\uB9AC \uB9E4\uCD9C \uBE44\uC911\uC774  \uC774\uC0C1\uC774\uBA74 POS \uC5F0\uB3D9\uC744 \uCD94\uCC9C\uD569\uB2C8\uB2E4." },
       { q: "\uBA64\uBC84\uC2ED\uC740 \uC5B4\uB5BB\uAC8C \uC6B4\uC601\uD558\uB098\uC694?", a: "POS\uC5D0\uC11C \uC804\uD654\uBC88\uD638 \uAE30\uBC18 \uBA64\uBC84\uC2ED \uC790\uB3D9 \uC801\uB9BD\xB7\uC0AC\uC6A9\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uCE74\uCE74\uC624 \uC54C\uB9BC\uD1A1\uC73C\uB85C \uCFE0\uD3F0 \uBC1C\uC1A1\uAE4C\uC9C0 \uC790\uB3D9\uD654 \uAC00\uB2A5\uD569\uB2C8\uB2E4." }
     ]
   },
@@ -5636,7 +5636,7 @@ var industries = [
       popularSetup: "\uC608\uC57D POS + \uCE74\uB4DC\uB2E8\uB9D0\uAE30"
     },
     successTips: [
-      { number: "01", title: "\uC608\uC57D \uAD00\uB9AC \uC790\uB3D9\uD654", desc: "\uCE74\uCE74\uC624\uD1A1\xB7\uB124\uC774\uBC84 \uC608\uC57D \uC5F0\uB3D9 POS \uB3C4\uC785 \uC2DC \uC804\uD654 \uC751\uB300 \uC2DC\uAC04 60% \uAC10\uC18C. \uB178\uC1FC \uBC29\uC9C0 \uC54C\uB9BC\uB3C4 \uC790\uB3D9 \uBC1C\uC1A1." },
+      { number: "01", title: "\uC608\uC57D \uAD00\uB9AC \uC790\uB3D9\uD654", desc: "\uCE74\uCE74\uC624\uD1A1\xB7\uB124\uC774\uBC84 \uC608\uC57D \uC5F0\uB3D9 POS \uB3C4\uC785 \uC2DC \uC804\uD654 \uC751\uB300 \uC2DC\uAC04  \uAC10\uC18C. \uB178\uC1FC \uBC29\uC9C0 \uC54C\uB9BC\uB3C4 \uC790\uB3D9 \uBC1C\uC1A1." },
       { number: "02", title: "\uD68C\uC6D0\uAD8C\xB7\uCFE0\uD3F0 \uAD00\uB9AC", desc: "10+1 \uCFE0\uD3F0, \uC5FC\uC0C9 \uD68C\uC6D0\uAD8C \uB4F1\uC744 POS\uC5D0\uC11C \uAD00\uB9AC\uD558\uBA74 \uACE0\uAC1D\uBCC4 \uC774\uC6A9 \uB0B4\uC5ED\uC744 \uD55C\uB208\uC5D0 \uD30C\uC545\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4." },
       { number: "03", title: "\uB514\uC790\uC774\uB108\uBCC4 \uB9E4\uCD9C \uBD84\uC11D", desc: "\uB514\uC790\uC774\uB108\uBCC4 \uB9E4\uCD9C\xB7\uC2DC\uC220 \uC2DC\uAC04\xB7\uC7AC\uBC29\uBB38\uC728\uC744 POS\uC5D0\uC11C \uCD94\uC801\uD574 \uC778\uC13C\uD2F0\uBE0C \uCCB4\uACC4\uB97C \uAC1D\uAD00\uC801\uC73C\uB85C \uC124\uACC4." }
     ],
@@ -5741,7 +5741,7 @@ var industries = [
       { q: "1\uC778 \uC6B4\uC601\uC5D0 \uAC00\uC7A5 \uC801\uD569\uD55C \uAD6C\uC131\uC740?", a: "\uBBF8\uB2C8 \uD0A4\uC624\uC2A4\uD06C + \uCE74\uB4DC\uB2E8\uB9D0\uAE30 \uC870\uD569\uC744 \uCD94\uCC9C\uD569\uB2C8\uB2E4. \uC8FC\uBB38\xB7\uACB0\uC81C\uAC00 \uC790\uB3D9\uD654\uB418\uC5B4 \uC870\uB9AC\uC5D0\uB9CC \uC9D1\uC911\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4." },
       { q: "\uBC30\uB2EC\uC571\uB3C4 \uD568\uAED8 \uAD00\uB9AC\uD560 \uC218 \uC788\uB098\uC694?", a: "\uBC30\uB2EC POS\uB97C \uCD94\uAC00\uD558\uBA74 \uD0A4\uC624\uC2A4\uD06C \uC8FC\uBB38\uACFC \uBC30\uB2EC\uC571 \uC8FC\uBB38\uC774 \uD55C \uACF3\uC5D0\uC11C \uAD00\uB9AC\uB429\uB2C8\uB2E4. \uC8FC\uBC29 \uD504\uB9B0\uD130\uB85C \uC790\uB3D9 \uCD9C\uB825\uB3C4 \uAC00\uB2A5\uD569\uB2C8\uB2E4." },
       { q: "\uBA54\uB274 \uBCC0\uACBD\uC740 \uC27D\uAC8C \uD560 \uC218 \uC788\uB098\uC694?", a: "\uAD00\uB9AC\uC790 \uC571\uC5D0\uC11C \uBA54\uB274\xB7\uAC00\uACA9\xB7\uC0AC\uC9C4\uC744 \uC2E4\uC2DC\uAC04 \uBCC0\uACBD \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uACC4\uC808 \uBA54\uB274\xB7\uD55C\uC815 \uBA54\uB274 \uC6B4\uC601\uC774 \uC26C\uC6CC\uC9D1\uB2C8\uB2E4." },
-      { q: "\uD604\uAE08 \uC190\uB2D8\uC774 \uB9CE\uC740\uB370 \uD0A4\uC624\uC2A4\uD06C\uB85C \uAD1C\uCC2E\uC744\uAE4C\uC694?", a: "\uC9C0\uD3D0\xB7\uB3D9\uC804 \uD22C\uC785\uC774 \uAC00\uB2A5\uD55C \uD0A4\uC624\uC2A4\uD06C \uBAA8\uB378\uC774 \uC788\uC2B5\uB2C8\uB2E4. \uB2E4\uB9CC \uC720\uC9C0\uBCF4\uC218 \uBE44\uC6A9\uC774 \uCD94\uAC00\uB418\uB2C8 \uD604\uAE08 \uBE44\uC911\uC774 20% \uC774\uC0C1\uC77C \uB54C \uACE0\uB824\uD558\uC138\uC694." }
+      { q: "\uD604\uAE08 \uC190\uB2D8\uC774 \uB9CE\uC740\uB370 \uD0A4\uC624\uC2A4\uD06C\uB85C \uAD1C\uCC2E\uC744\uAE4C\uC694?", a: "\uC9C0\uD3D0\xB7\uB3D9\uC804 \uD22C\uC785\uC774 \uAC00\uB2A5\uD55C \uD0A4\uC624\uC2A4\uD06C \uBAA8\uB378\uC774 \uC788\uC2B5\uB2C8\uB2E4. \uB2E4\uB9CC \uC720\uC9C0\uBCF4\uC218 \uBE44\uC6A9\uC774 \uCD94\uAC00\uB418\uB2C8 \uD604\uAE08 \uBE44\uC911\uC774  \uC774\uC0C1\uC77C \uB54C \uACE0\uB824\uD558\uC138\uC694." }
     ]
   },
   {
@@ -5828,7 +5828,7 @@ var industries = [
       popularSetup: "\uC7AC\uACE0 POS + \uB77C\uBCA8\uD504\uB9B0\uD130"
     },
     successTips: [
-      { number: "01", title: "\uB77C\uBCA8 \uD504\uB9B0\uD130\uB85C \uC720\uD1B5\uAE30\uD55C \uAD00\uB9AC", desc: "\uC81C\uC870\uC77C\xB7\uC720\uD1B5\uAE30\uD55C \uB77C\uBCA8 \uC790\uB3D9 \uCD9C\uB825\uC73C\uB85C \uD3D0\uAE30\uC728 \uD3C9\uADE0 28% \u2192 15%\uB85C \uAC10\uC18C. \uC6D0\uAC00\uC728 \uAC1C\uC120 \uD6A8\uACFC." },
+      { number: "01", title: "\uB77C\uBCA8 \uD504\uB9B0\uD130\uB85C \uC720\uD1B5\uAE30\uD55C \uAD00\uB9AC", desc: "\uC81C\uC870\uC77C\xB7\uC720\uD1B5\uAE30\uD55C \uB77C\uBCA8 \uC790\uB3D9 \uCD9C\uB825\uC73C\uB85C \uD3D0\uAE30\uC728 \uD3C9\uADE0  \uB85C \uAC10\uC18C. \uC6D0\uAC00\uC728 \uAC1C\uC120 \uD6A8\uACFC." },
       { number: "02", title: "\uC2DC\uAC04\uB300\uBCC4 \uD310\uB9E4 \uD328\uD134 \uBD84\uC11D", desc: "\uC544\uCE68\xB7\uC624\uD6C4\xB7\uC800\uB141 \uC2DC\uAC04\uB300\uBCC4 \uC798 \uD314\uB9AC\uB294 \uD488\uBAA9\uC744 \uBD84\uC11D\uD574 \uC0DD\uC0B0\uB7C9\uC744 \uCD5C\uC801\uD654\uD558\uBA74 \uD3D0\uAE30 \uC190\uC2E4\uC744 \uD06C\uAC8C \uC904\uC785\uB2C8\uB2E4." },
       { number: "03", title: "\uC6D0\uC7AC\uB8CC \uC7AC\uACE0 \uCD94\uC801", desc: "\uBC00\uAC00\uB8E8\xB7\uBC84\uD130 \uB4F1 \uC8FC\uC694 \uC6D0\uC7AC\uB8CC \uC785\uCD9C\uACE0\uB97C POS\uC5D0\uC11C \uAD00\uB9AC. \uC608\uC0C1 \uBC1C\uC8FC\uB7C9 \uC790\uB3D9 \uACC4\uC0B0\uC73C\uB85C \uACB0\uD488 \uBC29\uC9C0." }
     ],
@@ -5894,7 +5894,7 @@ var industries = [
     successTips: [
       { number: "01", title: "24\uC2DC\uAC04 \uBB34\uC778 \uCD9C\uC785 \uC2DC\uC2A4\uD15C", desc: "\uC9C0\uBB38\xB7\uCE74\uB4DC\xB7QR\uB85C \uBB34\uC778 \uCD9C\uC785 \uAD00\uB9AC. \uC57C\uAC04 \uC778\uAC74\uBE44 \uC81C\uB85C\uD654\uB85C \uC6D4 150\uB9CC\uC6D0 \uC774\uC0C1 \uC808\uAC10 \uAC00\uB2A5." },
       { number: "02", title: "PT \uC2A4\uCF00\uC904 \uC790\uB3D9\uD654", desc: "\uD2B8\uB808\uC774\uB108\uBCC4 \uC608\uC57D\xB7\uC218\uC5C5 \uD69F\uC218\uB97C POS\uC5D0\uC11C \uAD00\uB9AC. \uD68C\uC6D0 PT \uC794\uC5EC \uD69F\uC218 \uC54C\uB9BC\uC73C\uB85C \uC7AC\uACB0\uC81C\uC728 \uC0C1\uC2B9." },
-      { number: "03", title: "\uD68C\uC6D0\uAD8C \uB9CC\uB8CC \uC790\uB3D9 \uC54C\uB9BC", desc: "\uB9CC\uB8CC 3\uC77C \uC804 \uCE74\uCE74\uC624\uD1A1 \uC790\uB3D9 \uBC1C\uC1A1\uC73C\uB85C \uC7AC\uAC00\uC785\uB960 \uD3C9\uADE0 42% \uD5A5\uC0C1. \uC2E0\uADDC \uBAA8\uC9D1 \uBD80\uB2F4 \uAC10\uC18C." }
+      { number: "03", title: "\uD68C\uC6D0\uAD8C \uB9CC\uB8CC \uC790\uB3D9 \uC54C\uB9BC", desc: "\uB9CC\uB8CC 3\uC77C \uC804 \uCE74\uCE74\uC624\uD1A1 \uC790\uB3D9 \uBC1C\uC1A1\uC73C\uB85C \uC7AC\uAC00\uC785\uB960 \uD3C9\uADE0  \uD5A5\uC0C1. \uC2E0\uADDC \uBAA8\uC9D1 \uBD80\uB2F4 \uAC10\uC18C." }
     ],
     packages: [
       {
@@ -5930,7 +5930,7 @@ var industries = [
     ],
     faq: [
       { q: "24\uC2DC\uAC04 \uBB34\uC778 \uC6B4\uC601\uC774 \uAC00\uB2A5\uD55C\uAC00\uC694?", a: "\uB124, \uCD9C\uC785 \uD0A4\uC624\uC2A4\uD06C + \uC9C0\uBB38\xB7QR\xB7\uCE74\uB4DC \uC778\uC99D \uC2DC\uC2A4\uD15C\uC73C\uB85C 24\uC2DC\uAC04 \uBB34\uC778 \uC6B4\uC601\uC774 \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uC57C\uAC04 CCTV \uB179\uD654\uB3C4 \uD568\uAED8 \uAD6C\uCD95 \uAD8C\uC7A5\uB429\uB2C8\uB2E4." },
-      { q: "\uD68C\uC6D0\uAD8C \uAD00\uB9AC \uC790\uB3D9\uD654\uB294 \uC5B4\uB5BB\uAC8C \uC774\uB8E8\uC5B4\uC9C0\uB098\uC694?", a: "\uB9CC\uB8CC D-30, D-7, D-1 \uC2DC\uC810\uC5D0 \uCE74\uCE74\uC624\uD1A1 \uC790\uB3D9 \uC54C\uB9BC\uC774 \uBC1C\uC1A1\uB429\uB2C8\uB2E4. \uC7AC\uB4F1\uB85D \uC720\uB3C4\uC728\uC774 \uD3C9\uADE0 42% \uD5A5\uC0C1\uB429\uB2C8\uB2E4." },
+      { q: "\uD68C\uC6D0\uAD8C \uAD00\uB9AC \uC790\uB3D9\uD654\uB294 \uC5B4\uB5BB\uAC8C \uC774\uB8E8\uC5B4\uC9C0\uB098\uC694?", a: "\uB9CC\uB8CC D-30, D-7, D-1 \uC2DC\uC810\uC5D0 \uCE74\uCE74\uC624\uD1A1 \uC790\uB3D9 \uC54C\uB9BC\uC774 \uBC1C\uC1A1\uB429\uB2C8\uB2E4. \uC7AC\uB4F1\uB85D \uC720\uB3C4\uC728\uC774 \uD3C9\uADE0  \uD5A5\uC0C1\uB429\uB2C8\uB2E4." },
       { q: "PT \uC2A4\uCF00\uC904\uC740 \uC5B4\uB5BB\uAC8C \uAD00\uB9AC\uD558\uB098\uC694?", a: "\uD2B8\uB808\uC774\uB108\uBCC4 \uC77C\uC815\uD45C\uC5D0\uC11C \uD68C\uC6D0\uC774 \uC9C1\uC811 \uC608\uC57D \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uC794\uC5EC \uD69F\uC218\xB7\uC218\uC5C5 \uB0B4\uC5ED\uB3C4 POS\uC5D0 \uC790\uB3D9 \uAE30\uB85D\uB429\uB2C8\uB2E4." },
       { q: "\uCD9C\uC785 \uC778\uC99D \uBC29\uC2DD\uC740 \uBB34\uC5C7\uC774 \uC788\uB098\uC694?", a: "\uC9C0\uBB38\xB7\uCE74\uB4DC\xB7QR\xB7\uC5BC\uAD74 \uC778\uC99D \uC911 \uC120\uD0DD \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uAC00\uC7A5 \uB9CE\uC774 \uC4F0\uC774\uB294 \uBC29\uC2DD\uC740 \uCE74\uB4DC + QR \uC774\uC911 \uC778\uC99D\uC785\uB2C8\uB2E4." },
       { q: "\uD68C\uC6D0 \uC815\uBCF4 \uC720\uCD9C \uAC71\uC815\uC740 \uC5C6\uB098\uC694?", a: "\uD68C\uC6D0\uAD8C POS\uB294 \uAC1C\uC778\uC815\uBCF4 \uC554\uD638\uD654 \uC800\uC7A5\uC774 \uAE30\uBCF8\uC785\uB2C8\uB2E4. \uC815\uAE30 \uBC31\uC5C5\xB7\uBCF4\uC548 \uC5C5\uB370\uC774\uD2B8\uB3C4 \uBB34\uC0C1\uC73C\uB85C \uC81C\uACF5\uB429\uB2C8\uB2E4." }
@@ -5957,7 +5957,7 @@ var industries = [
     },
     successTips: [
       { number: "01", title: "\uD559\uBD80\uBAA8 \uC790\uB3D9 \uC54C\uB9BC", desc: "\uB4F1\xB7\uD558\uC6D0 \uC2DC\uAC01\uC744 \uD559\uBD80\uBAA8\uC5D0\uAC8C \uC2E4\uC2DC\uAC04 \uCE74\uCE74\uC624\uD1A1 \uC54C\uB9BC. \uC548\uC2EC \uC11C\uBE44\uC2A4\uB85C \uD559\uBD80\uBAA8 \uB9CC\uC871\uB3C4 \uD06C\uAC8C \uC0C1\uC2B9." },
-      { number: "02", title: "\uC218\uAC15\uB8CC \uC790\uB3D9 \uCCAD\uAD6C", desc: "\uB9E4\uC6D4 \uC815\uAE30 \uCCAD\uAD6C \uC790\uB3D9\uD654\uB85C \uC218\uB0A9 \uB204\uB77D \uBC29\uC9C0. \uC5F0\uCCB4 \uC54C\uB9BC\uB3C4 \uC790\uB3D9 \uBC1C\uC1A1\uB418\uC5B4 \uC218\uB0A9\uB960 \uD3C9\uADE0 15% \uAC1C\uC120." },
+      { number: "02", title: "\uC218\uAC15\uB8CC \uC790\uB3D9 \uCCAD\uAD6C", desc: "\uB9E4\uC6D4 \uC815\uAE30 \uCCAD\uAD6C \uC790\uB3D9\uD654\uB85C \uC218\uB0A9 \uB204\uB77D \uBC29\uC9C0. \uC5F0\uCCB4 \uC54C\uB9BC\uB3C4 \uC790\uB3D9 \uBC1C\uC1A1\uB418\uC5B4 \uC218\uB0A9\uB960 \uD3C9\uADE0  \uAC1C\uC120." },
       { number: "03", title: "\uCD9C\uACB0 \uB370\uC774\uD130 \uD559\uC2B5 \uBD84\uC11D", desc: "\uCD9C\uC11D\xB7\uACB0\uC11D \uD328\uD134\uACFC \uC131\uC801\uC744 \uC5F0\uB3D9 \uBD84\uC11D\uD574 \uB9DE\uCDA4 \uC0C1\uB2F4 \uC790\uB8CC\uB85C \uD65C\uC6A9. \uC7AC\uB4F1\uB85D\uB960 \uD5A5\uC0C1\uC5D0 \uAE30\uC5EC." }
     ],
     packages: [
@@ -5988,7 +5988,7 @@ var industries = [
       }
     ],
     warnings: [
-      { title: "\uC218\uAC15\uB8CC \uC218\uAE30 \uAD00\uB9AC", desc: "\uC885\uC774 \uC601\uC218\uC99D\xB7\uC5D1\uC140\uC740 \uC5F0\uCCB4\xB7\uB204\uB77D \uCD94\uC801\uC774 \uC5B4\uB835\uC2B5\uB2C8\uB2E4. POS \uC790\uB3D9 \uCCAD\uAD6C\uB85C \uC218\uB0A9\uB960\uC744 15% \uC774\uC0C1 \uB192\uC774\uC138\uC694." },
+      { title: "\uC218\uAC15\uB8CC \uC218\uAE30 \uAD00\uB9AC", desc: "\uC885\uC774 \uC601\uC218\uC99D\xB7\uC5D1\uC140\uC740 \uC5F0\uCCB4\xB7\uB204\uB77D \uCD94\uC801\uC774 \uC5B4\uB835\uC2B5\uB2C8\uB2E4. POS \uC790\uB3D9 \uCCAD\uAD6C\uB85C \uC218\uB0A9\uB960\uC744  \uC774\uC0C1 \uB192\uC774\uC138\uC694." },
       { title: "\uCD9C\uACB0 \uC218\uB3D9 \uD655\uC778", desc: '\uD559\uBD80\uBAA8\uAC00 \uAC00\uC7A5 \uAD81\uAE08\uD574\uD558\uB294 \uAC8C "\uC6B0\uB9AC \uC544\uC774 \uB3C4\uCC29\uD588\uB098"\uC785\uB2C8\uB2E4. \uD0A4\uC624\uC2A4\uD06C \uCD9C\uACB0 + \uCE74\uCE74\uC624 \uC54C\uB9BC\uC740 \uD544\uC218 \uC218\uC900.' },
       { title: "\uD559\uBD80\uBAA8 \uC18C\uD1B5 \uCC44\uB110 \uBBF8\uD761", desc: "\uC804\uD654\xB7\uBB38\uC790 \uC77C\uC77C\uC774 \uB3CC\uB9AC\uBA74 \uC5C5\uBB34 \uACFC\uBD80\uD558. \uCE74\uCE74\uC624 \uC54C\uB9BC\uD1A1 \uC77C\uAD04 \uBC1C\uC1A1 \uAE30\uB2A5\uC774 \uC788\uB294 POS\uB97C \uC120\uD0DD\uD558\uC138\uC694." }
     ],
@@ -7344,7 +7344,7 @@ var regions = [
     characteristics: {
       summary: "\uACE0\uBC00\uB3C4 \uC0C1\uAD8C\uACFC 24\uC2DC\uAC04 \uC6B4\uC601 \uB9E4\uC7A5\uC774 \uC9D1\uC911\uB41C \uB300\uB3C4\uC2DC\uD615 \uBE44\uC988\uB2C8\uC2A4 \uD658\uACBD",
       storeTypes: ["\uC18C\uD615 \uCE74\uD398\xB7\uC2DD\uB2F9", "24\uC2DC\uAC04 \uD3B8\uC758\uC810", "\uD504\uB9AC\uBBF8\uC5C4 \uBE0C\uB79C\uB4DC\uC0F5", "\uC9C0\uD558\uC0C1\uAC00 \uB9E4\uC7A5"],
-      customerBase: ["\uC9C1\uC7A5\uC778 \uACE0\uAC1D (70%)", "\uC678\uAD6D\uC778 \uAD00\uAD11\uAC1D", "\uC720\uB3D9 \uC778\uAD6C \uC911\uC2EC", "\uBE60\uB978 \uACB0\uC81C \uC120\uD638"],
+      customerBase: ["\uC9C1\uC7A5\uC778 \uACE0\uAC1D ()", "\uC678\uAD6D\uC778 \uAD00\uAD11\uAC1D", "\uC720\uB3D9 \uC778\uAD6C \uC911\uC2EC", "\uBE60\uB978 \uACB0\uC81C \uC120\uD638"],
       businessHours: "24\uC2DC\uAC04\xB7\uC2EC\uC57C \uC6B4\uC601 \uB9E4\uC7A5 \uB2E4\uC218, \uD3C9\uC77C \uC624\uD6C4 6-9\uC2DC \uD53C\uD06C\uD0C0\uC784 \uC9D1\uC911"
     },
     businessEnvironment: {
@@ -8344,7 +8344,7 @@ var regions = [
     characteristics: {
       summary: "\uB300\uD615 \uB9E4\uC7A5\uACFC \uC8FC\uCC28 \uC5EC\uC720\uACF5\uAC04\uC774 \uD2B9\uC9D5\uC778 \uC2E0\uB3C4\uC2DC\xB7\uBCA0\uB4DC\uD0C0\uC6B4\uD615 \uC0C1\uAD8C",
       storeTypes: ["\uB300\uD615 \uC2DD\uB2F9\xB7\uCE74\uD398", "\uBE0C\uB79C\uB4DC \uD504\uB79C\uCC28\uC774\uC988", "\uBCF5\uD569 \uC1FC\uD551\uBAB0", "\uD559\uC6D0\xB7\uAD50\uC721\uC2DC\uC124"],
-      customerBase: ["\uAC00\uC871 \uB2E8\uC704 \uACE0\uAC1D (60%)", "\uC790\uCC28 \uC774\uC6A9 \uACE0\uAC1D", "\uC8FC\uB9D0 \uC9D1\uC911 \uBC29\uBB38", "\uCCB4\uB958\uC2DC\uAC04 \uC7A5\uAE30"],
+      customerBase: ["\uAC00\uC871 \uB2E8\uC704 \uACE0\uAC1D ()", "\uC790\uCC28 \uC774\uC6A9 \uACE0\uAC1D", "\uC8FC\uB9D0 \uC9D1\uC911 \uBC29\uBB38", "\uCCB4\uB958\uC2DC\uAC04 \uC7A5\uAE30"],
       businessHours: "\uC8FC\uC911 \uC624\uD6C4 3-6\uC2DC (\uD559\uC6D0\uAC00), \uC8FC\uB9D0 \uC624\uD6C4 1-8\uC2DC (\uAC00\uC871 \uC678\uC2DD) \uD53C\uD06C"
     },
     businessEnvironment: {
@@ -13746,7 +13746,7 @@ var products = [
     costSavings: {
       title: "\uBE44\uC6A9 \uC808\uC57D \uD6A8\uACFC",
       items: [
-        { metric: "결제\uC0AC \uC218\uC218\uB8CC", amount: "\uC5F0\uAC04 120\uB9CC\uC6D0", description: "\uAE30\uC874 2.3% \u2192 1.9%\uB85C \uC808\uC57D (\uC6D4\uB9E4\uCD9C 1,500\uB9CC\uC6D0 \uAE30\uC900)" },
+        { metric: "결제\uC0AC \uC218\uC218\uB8CC", amount: "\uC5F0\uAC04 120\uB9CC\uC6D0", description: "\uAE30\uC874  \uB85C \uC808\uC57D (\uC6D4\uB9E4\uCD9C 1,500\uB9CC\uC6D0 \uAE30\uC900)" },
         { metric: "\uB2E8\uB9D0\uAE30 \uC784\uB300\uB8CC", amount: "\uC6D4 1.5\uB9CC\uC6D0", description: "\uAD6C\uB9E4\uD615 \uB2E8\uB9D0\uAE30\uB85C \uC804\uD658 \uC2DC \uC784\uB300\uB8CC \uC644\uC804 \uC808\uC57D" },
         { metric: "\uC124\uCE58\uBE44\uC6A9", amount: "15\uB9CC\uC6D0", description: "\uD0C0\uC0AC \uB300\uBE44 \uBB34\uB8CC \uC124\uCE58 + \uAE30\uC874 \uB2E8\uB9D0\uAE30 \uBB34\uC0C1 \uCCA0\uAC70" }
       ]
@@ -13756,9 +13756,9 @@ var products = [
         title: "\uAC15\uB0A8 \uD504\uB9AC\uBBF8\uC5C4 \uCE74\uD398",
         location: "\uC11C\uC6B8 \uAC15\uB0A8\uAD6C \uC5ED\uC0BC\uB3D9",
         businessType: "\uC2A4\uD398\uC15C\uD2F0 \uCEE4\uD53C \uC804\uBB38\uC810",
-        challenge: "\uB192\uC740 결제 \uC218\uC218\uB8CC(2.5%)\uC640 \uC720\uC120 \uB2E8\uB9D0\uAE30\uB85C \uC778\uD55C \uD14C\uC774\uBE14 \uC11C\uBE44\uC2A4 \uBD88\uD3B8",
-        solution: "\uBE14\uB8E8\uD22C\uC2A4 \uBB34\uC120 \uB2E8\uB9D0\uAE30 + 결제\uC0AC \uBCC0\uACBD(1.8%)",
-        result: "\uC6D4 \uC218\uC218\uB8CC 35\uB9CC\uC6D0 \uC808\uC57D, \uD14C\uC774\uBE14 \uACB0\uC81C\uB85C \uACE0\uAC1D \uB9CC\uC871\uB3C4 95% \uD5A5\uC0C1"
+        challenge: "\uB192\uC740 결제 \uC218\uC218\uB8CC\uC640 \uC720\uC120 \uB2E8\uB9D0\uAE30\uB85C \uC778\uD55C \uD14C\uC774\uBE14 \uC11C\uBE44\uC2A4 \uBD88\uD3B8",
+        solution: "\uBE14\uB8E8\uD22C\uC2A4 \uBB34\uC120 \uB2E8\uB9D0\uAE30 + 결제\uC0AC \uBCC0\uACBD",
+        result: "\uC6D4 \uC218\uC218\uB8CC 35\uB9CC\uC6D0 \uC808\uC57D, \uD14C\uC774\uBE14 \uACB0\uC81C\uB85C \uACE0\uAC1D \uB9CC\uC871\uB3C4  \uD5A5\uC0C1"
       }
     ],
     faq: [
@@ -13817,7 +13817,7 @@ var products = [
     costSavings: {
       title: "\uC6B4\uC601 \uD6A8\uC728 \uAC1C\uC120",
       items: [
-        { metric: "\uC7AC\uACE0 \uC190\uC2E4 \uBC29\uC9C0", amount: "\uC6D4 80\uB9CC\uC6D0", description: "\uC790\uB3D9 \uC7AC\uACE0 \uAD00\uB9AC\uB85C \uC720\uD1B5\uAE30\uD55C\xB7\uC7AC\uB8CC \uC190\uC2E4 80% \uAC10\uC18C" },
+        { metric: "\uC7AC\uACE0 \uC190\uC2E4 \uBC29\uC9C0", amount: "\uC6D4 80\uB9CC\uC6D0", description: "\uC790\uB3D9 \uC7AC\uACE0 \uAD00\uB9AC\uB85C \uC720\uD1B5\uAE30\uD55C\xB7\uC7AC\uB8CC \uC190\uC2E4  \uAC10\uC18C" },
         { metric: "\uC138\uBB34 \uC5C5\uBB34 \uC2DC\uAC04", amount: "\uC6D4 20\uC2DC\uAC04", description: "\uC218\uAE30 \uC7A5\uBD80 \uB300\uC2E0 \uC790\uB3D9 \uB9AC\uD3EC\uD2B8\uB85C \uC138\uBB34\uC0AC \uC774\uAD00 \uC989\uC2DC \uAC00\uB2A5" },
         { metric: "\uB9E4\uCD9C \uBD84\uC11D \uD6A8\uACFC", amount: "\uC6D4 150\uB9CC\uC6D0", description: "\uC2DC\uAC04\uB300\xB7\uBA54\uB274\uBCC4 \uBD84\uC11D\uC73C\uB85C \uC7AC\uB8CC \uBC1C\uC8FC\xB7\uC778\uB825 \uBC30\uCE58 \uCD5C\uC801\uD654" }
       ]
@@ -13829,7 +13829,7 @@ var products = [
         businessType: "\uD504\uB9AC\uBBF8\uC5C4 \uC77C\uC2DD \uB808\uC2A4\uD1A0\uB791 (\uD14C\uC774\uBE14 30\uAC1C)",
         challenge: "\uC218\uAE30 \uC8FC\uBB38\uC73C\uB85C \uC778\uD55C \uC2E4\uC218 \uBE48\uBC1C, \uC6D4\uB9D0 \uC815\uC0B0\uC5D0 3\uC77C \uC18C\uC694",
         solution: "\uC77C\uBC18\uD615 POS + \uC8FC\uBC29 \uD504\uB9B0\uD130 3\uB300 + \uC138\uBB34 \uC790\uB3D9 \uB9AC\uD3EC\uD2B8",
-        result: "\uC8FC\uBB38 \uC2E4\uC218 95% \uAC10\uC18C, \uC6D4\uB9D0 \uC815\uC0B0 3\uC2DC\uAC04\uC73C\uB85C \uB2E8\uCD95, \uB9E4\uCD9C 20% \uC99D\uAC00"
+        result: "\uC8FC\uBB38 \uC2E4\uC218  \uAC10\uC18C, \uC6D4\uB9D0 \uC815\uC0B0 3\uC2DC\uAC04\uC73C\uB85C \uB2E8\uCD95, \uB9E4\uCD9C  \uC99D\uAC00"
       },
       {
         title: "\uBD84\uB2F9 \uD504\uB79C\uCC28\uC774\uC988 \uCE58\uD0A8",
@@ -13843,7 +13843,7 @@ var products = [
     faq: [
       {
         question: "\uAE30\uC874 POS \uB370\uC774\uD130 \uC774\uC804\uC774 \uAC00\uB2A5\uD55C\uAC00\uC694?",
-        answer: "\uB124, \uB300\uBD80\uBD84\uC758 POS \uC2DC\uC2A4\uD15C \uB370\uC774\uD130\uB97C 100% \uC774\uC804 \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uBA54\uB274\xB7\uC7AC\uACE0\xB7\uACE0\uAC1D \uB370\uC774\uD130 \uBAA8\uB450 \uBB34\uB8CC\uB85C \uC774\uC804\uD574\uB4DC\uB824\uC694."
+        answer: "\uB124, \uB300\uBD80\uBD84\uC758 POS \uC2DC\uC2A4\uD15C \uB370\uC774\uD130\uB97C  \uC774\uC804 \uAC00\uB2A5\uD569\uB2C8\uB2E4. \uBA54\uB274\xB7\uC7AC\uACE0\xB7\uACE0\uAC1D \uB370\uC774\uD130 \uBAA8\uB450 \uBB34\uB8CC\uB85C \uC774\uC804\uD574\uB4DC\uB824\uC694."
       },
       {
         question: "\uC778\uD130\uB137\uC774 \uB04A\uAE30\uBA74 POS\uB97C \uC4F8 \uC218 \uC5C6\uB098\uC694?",
@@ -13890,8 +13890,8 @@ var products = [
       "\uCD9C\uC785 \uD1B5\uC81C \uC2DC\uC2A4\uD15C"
     ],
     useCases: [
-      "\uB3C4\uB09C\xB7\uBD84\uC2E4 \uC190\uD574 90% \uC608\uBC29",
-      "\uD654\uC7AC\uBCF4\uD5D8 \uD560\uC778 \uCD5C\uB300 20%",
+      "\uB3C4\uB09C\xB7\uBD84\uC2E4 \uC190\uD574  \uC608\uBC29",
+      "\uD654\uC7AC\uBCF4\uD5D8 \uD560\uC778 \uCD5C\uB300 ",
       "\uC9C1\uC6D0\xB7\uACE0\uAC1D \uC548\uC804 \uAD00\uB9AC"
     ],
     specifications: {
@@ -13908,8 +13908,8 @@ var products = [
     costSavings: {
       title: "\uBCF4\uC548 \uD6A8\uACFC \uBC0F \uD560\uC778",
       items: [
-        { metric: "\uB3C4\uB09C \uBC29\uC9C0", amount: "\uC6D4 100\uB9CC\uC6D0", description: "\uC7AC\uACE0 \uC190\uC2E4\xB7\uC9C1\uC6D0 \uBD80\uC815 90% \uC608\uBC29, \uBCF4\uD5D8 \uCCAD\uAD6C \uAC04\uC18C\uD654" },
-        { metric: "\uD654\uC7AC\uBCF4\uD5D8 \uD560\uC778", amount: "\uC5F0 60\uB9CC\uC6D0", description: "\uC5F0\uAE30\xB7\uD654\uC7AC \uAC10\uC9C0 \uC2DC\uC2A4\uD15C\uC73C\uB85C \uBCF4\uD5D8\uB8CC \uCD5C\uB300 20% \uD560\uC778" },
+        { metric: "\uB3C4\uB09C \uBC29\uC9C0", amount: "\uC6D4 100\uB9CC\uC6D0", description: "\uC7AC\uACE0 \uC190\uC2E4\xB7\uC9C1\uC6D0 \uBD80\uC815  \uC608\uBC29, \uBCF4\uD5D8 \uCCAD\uAD6C \uAC04\uC18C\uD654" },
+        { metric: "\uD654\uC7AC\uBCF4\uD5D8 \uD560\uC778", amount: "\uC5F0 60\uB9CC\uC6D0", description: "\uC5F0\uAE30\xB7\uD654\uC7AC \uAC10\uC9C0 \uC2DC\uC2A4\uD15C\uC73C\uB85C \uBCF4\uD5D8\uB8CC \uCD5C\uB300  \uD560\uC778" },
         { metric: "\uBD84\uC7C1 \uD574\uACB0", amount: "\uC6D4 50\uB9CC\uC6D0", description: "\uACE0\uAC1D \uBD84\uC7C1\xB7\uC9C1\uC6D0 \uBB38\uC81C \uBC1C\uC0DD \uC2DC \uC99D\uAC70 \uC601\uC0C1\uC73C\uB85C \uC989\uC2DC \uD574\uACB0" }
       ]
     },
@@ -13920,7 +13920,7 @@ var products = [
         businessType: "\uC2EC\uC57C \uC601\uC5C5 \uBC14 (\uC0C8\uBCBD 4\uC2DC\uAE4C\uC9C0)",
         challenge: "\uCDE8\uAC1D \uB09C\uB3D9, \uB3C4\uB09C \uC0AC\uACE0 \uBE48\uBC1C, \uC9C1\uC6D0 \uC548\uC804 \uC6B0\uB824",
         solution: "4K \uCE74\uBA54\uB77C 8\uB300 + \uB3D9\uC791 \uAC10\uC9C0 + \uACBD\uCC30\uC11C \uC790\uB3D9 \uC5F0\uB3D9",
-        result: "\uC0AC\uAC74\xB7\uC0AC\uACE0 80% \uAC10\uC18C, \uC9C1\uC6D0 \uC548\uC804 \uD655\uBCF4, \uBCF4\uD5D8\uB8CC \uC6D4 15\uB9CC\uC6D0 \uC808\uC57D"
+        result: "\uC0AC\uAC74\xB7\uC0AC\uACE0  \uAC10\uC18C, \uC9C1\uC6D0 \uC548\uC804 \uD655\uBCF4, \uBCF4\uD5D8\uB8CC \uC6D4 15\uB9CC\uC6D0 \uC808\uC57D"
       },
       {
         title: "\uD310\uAD50 IT \uCE74\uD398",
@@ -13934,7 +13934,7 @@ var products = [
     faq: [
       {
         question: "\uAC1C\uC778\uC815\uBCF4\uBCF4\uD638\uBC95 \uAD00\uB828\uD574\uC11C \uBB38\uC81C\uC5C6\uB098\uC694?",
-        answer: "\uBC95\uC801\uC73C\uB85C \uD544\uC218\uC778 CCTV \uC548\uB0B4\uD310 \uC124\uCE58\uC640 \uB179\uD654 \uBAA9\uC801 \uACE0\uC9C0\uAE4C\uC9C0 \uBAA8\uB450 \uD574\uB4DC\uB824\uC694. \uAC1C\uC778\uC815\uBCF4\uBCF4\uD638\uC704\uC6D0\uD68C \uAE30\uC900 100% \uC900\uC218\uD574\uC694."
+        answer: "\uBC95\uC801\uC73C\uB85C \uD544\uC218\uC778 CCTV \uC548\uB0B4\uD310 \uC124\uCE58\uC640 \uB179\uD654 \uBAA9\uC801 \uACE0\uC9C0\uAE4C\uC9C0 \uBAA8\uB450 \uD574\uB4DC\uB824\uC694. \uAC1C\uC778\uC815\uBCF4\uBCF4\uD638\uC704\uC6D0\uD68C \uAE30\uC900  \uC900\uC218\uD574\uC694."
       },
       {
         question: "\uB179\uD654\uB41C \uC601\uC0C1\uC740 \uC5B4\uB5BB\uAC8C \uD655\uC778\uD558\uB098\uC694?",
@@ -14118,7 +14118,7 @@ function fillTemplate(template, vars) {
 // src/data/testimonials.ts
 var testimonialPool = [
   {
-    tag: "\uB9E4\uCD9C 40% \u2191",
+    tag: "\uB9E4\uCD9C  \u2191",
     stars: 5,
     text: "\uCE74\uB4DC\uB2E8\uB9D0\uAE30 \uAD50\uCCB4 \uD6C4\n\uCE74\uB4DC\uB9E4\uCD9C\uC774 \uAE09\uC99D\uD588\uC5B4\uC694",
     body: "결제\uC0AC \uC218\uC218\uB8CC\uAE4C\uC9C0 \uBE44\uAD50\uD574\uC8FC\uC154\uC11C \uC5F0\uAC04 60\uB9CC\uC6D0 \uC808\uC57D. \uB2E8\uB9D0\uAE30 \uC18D\uB3C4\uB3C4 \uBE68\uB77C\uC838\uC11C \uD53C\uD06C \uD0C0\uC784 \uD68C\uC804\uC728\uC774 \uB208\uC5D0 \uB744\uAC8C \uC88B\uC544\uC84C\uC2B5\uB2C8\uB2E4.",
@@ -14127,7 +14127,7 @@ var testimonialPool = [
     regionEn: "SEOUL"
   },
   {
-    tag: "\uC778\uAC74\uBE44 50% \u2193",
+    tag: "\uC778\uAC74\uBE44  \u2193",
     stars: 5,
     text: "\uD0A4\uC624\uC2A4\uD06C \uC124\uCE58 \uD6C4\n\uD640 \uC778\uAC74\uBE44\uAC00 \uBC18\uC73C\uB85C",
     body: "\uD14C\uC774\uBE14\uC624\uB354 + \uD0A4\uC624\uC2A4\uD06C \uC870\uD569\uC73C\uB85C \uD640 \uC9C1\uC6D0 2\uBA85\uC5D0\uC11C 1\uBA85\uC73C\uB85C. \uC11C\uBE44\uC2A4 \uD488\uC9C8\uC740 \uADF8\uB300\uB85C\uC778\uB370 \uB9C8\uC9C4\uC774 \uD655 \uAC1C\uC120\uB410\uC2B5\uB2C8\uB2E4.",
@@ -14139,7 +14139,7 @@ var testimonialPool = [
     tag: "\uBB34\uC778\uD654 \uC131\uACF5",
     stars: 5,
     text: "24\uC2DC\uAC04 \uBB34\uC778\uB9E4\uC7A5\n\uC804\uD658\uC774 \uAC00\uB2A5\uD588\uC2B5\uB2C8\uB2E4",
-    body: "CCTV + \uBB34\uC778\uACB0\uC81C + \uC6D0\uACA9 \uBAA8\uB2C8\uD130\uB9C1\uAE4C\uC9C0 \uD55C\uBC88\uC5D0. \uC0C8\uBCBD \uC2DC\uAC04 \uB9E4\uCD9C\uC774 \uC804\uCCB4\uC758 30%\uB97C \uCC28\uC9C0\uD560 \uC815\uB3C4\uB85C \uD6A8\uACFC\uAC00 \uCEF8\uC2B5\uB2C8\uB2E4.",
+    body: "CCTV + \uBB34\uC778\uACB0\uC81C + \uC6D0\uACA9 \uBAA8\uB2C8\uD130\uB9C1\uAE4C\uC9C0 \uD55C\uBC88\uC5D0. \uC0C8\uBCBD \uC2DC\uAC04 \uB9E4\uCD9C\uC774 \uC804\uCCB4\uC758 \uB97C \uCC28\uC9C0\uD560 \uC815\uB3C4\uB85C \uD6A8\uACFC\uAC00 \uCEF8\uC2B5\uB2C8\uB2E4.",
     authorName: "\uC5F0\uC218\uAD6C \uC2A4\uD130\uB514\uCE74\uD398 \uC0AC\uC7A5\uB2D8",
     authorRegion: "\uC778\uCC9C",
     regionEn: "INCHEON"
@@ -14166,7 +14166,7 @@ var testimonialPool = [
     tag: "\uC7AC\uACE0 \uC790\uB3D9\uD654",
     stars: 5,
     text: "\uBE75 \uC7AC\uACE0 \uAD00\uB9AC\n\uC790\uB3D9\uC73C\uB85C \uB429\uB2C8\uB2E4",
-    body: "\uD310\uB9E4\uB418\uB294 \uC989\uC2DC \uC7AC\uACE0 \uCC28\uAC10\uB418\uACE0, \uBD80\uC871\uD55C \uD488\uBAA9 \uC54C\uB9BC\uAE4C\uC9C0 \uC640\uC694. \uD3D0\uAE30\uC728\uB3C4 20% \uC904\uC5C8\uC2B5\uB2C8\uB2E4.",
+    body: "\uD310\uB9E4\uB418\uB294 \uC989\uC2DC \uC7AC\uACE0 \uCC28\uAC10\uB418\uACE0, \uBD80\uC871\uD55C \uD488\uBAA9 \uC54C\uB9BC\uAE4C\uC9C0 \uC640\uC694. \uD3D0\uAE30\uC728\uB3C4  \uC904\uC5C8\uC2B5\uB2C8\uB2E4.",
     authorName: "\uACE0\uC591\uC2DC \uBCA0\uC774\uCEE4\uB9AC \uC0AC\uC7A5\uB2D8",
     authorRegion: "\uACBD\uAE30",
     regionEn: "GYEONGGI"
@@ -14898,16 +14898,16 @@ var faqPool = [
   }
 ];
 var installRecordTemplates = [
-  { days: 3, industry: "\uCE74\uD398", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uC8FC\uBB38 \uB300\uAE30 \uC2DC\uAC04 40% \uB2E8\uCD95" },
+  { days: 3, industry: "\uCE74\uD398", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uC8FC\uBB38 \uB300\uAE30 \uC2DC\uAC04  \uB2E8\uCD95" },
   { days: 5, industry: "\uC2DD\uB2F9", product: "\uD3EC\uC2A4\uAE30", outcome: "\uBC30\uB2EC \uD1B5\uD569 \uAD00\uB9AC \uC2DC\uC2A4\uD15C \uAD6C\uCD95" },
   { days: 7, industry: "\uBBF8\uC6A9\uC2E4", product: "\uCE74\uB4DC\uB2E8\uB9D0\uAE30", outcome: "\uC608\uC57D\xB7\uACB0\uC81C \uD1B5\uD569 \uC644\uB8CC" },
-  { days: 8, industry: "\uBD84\uC2DD\uC9D1", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uD640 \uC778\uAC74\uBE44 40% \uC808\uAC10" },
+  { days: 8, industry: "\uBD84\uC2DD\uC9D1", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uD640 \uC778\uAC74\uBE44  \uC808\uAC10" },
   { days: 10, industry: "\uBCA0\uC774\uCEE4\uB9AC", product: "\uD3EC\uC2A4\uAE30", outcome: "\uC7AC\uACE0 \uAD00\uB9AC \uC790\uB3D9\uD654" },
   { days: 12, industry: "\uCE58\uD0A8\uC9D1", product: "\uD3EC\uC2A4\uAE30", outcome: "\uBC30\uB2EC \uC571 3\uC0AC \uD1B5\uD569" },
   { days: 14, industry: "\uCE74\uD398", product: "\uCE74\uB4DC\uB2E8\uB9D0\uAE30", outcome: "결제 \uC218\uC218\uB8CC \uC5F0 48\uB9CC\uC6D0 \uC808\uC57D" },
   { days: 15, industry: "\uD559\uC6D0", product: "\uD3EC\uC2A4\uAE30", outcome: "\uC218\uAC15\uB8CC \uC790\uB3D9 \uAD00\uB9AC" },
   { days: 17, industry: "\uD53C\uD2B8\uB2C8\uC2A4", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uD68C\uC6D0\uAD8C \uBB34\uC778 \uD310\uB9E4" },
-  { days: 20, industry: "\uC2DD\uB2F9", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uD53C\uD06C \uD0C0\uC784 \uD68C\uC804\uC728 30% \uAC1C\uC120" },
+  { days: 20, industry: "\uC2DD\uB2F9", product: "\uD0A4\uC624\uC2A4\uD06C", outcome: "\uD53C\uD06C \uD0C0\uC784 \uD68C\uC804\uC728  \uAC1C\uC120" },
   { days: 22, industry: "\uBD84\uC2DD\uC9D1", product: "\uCE74\uB4DC\uB2E8\uB9D0\uAE30", outcome: "\uBB34\uC120 \uB2E8\uB9D0\uAE30\uB85C \uD14C\uC774\uBE14 \uACB0\uC81C" },
   { days: 25, industry: "\uCE74\uD398", product: "\uD3EC\uC2A4\uAE30", outcome: "\uB9E4\uCD9C \uB9AC\uD3EC\uD2B8 \uC790\uB3D9\uD654" }
 ];
@@ -16690,7 +16690,7 @@ const __SEO_BODY = [
 '{loc} 매장에 처음 결제 시스템을 도입하실 때 가장 중요한 것은 통신 회선 안정성입니다. 인터넷 회선 + LTE 백업 이중화가 표준이고, 외곽 매장이나 통신 음영지역은 LTE 우선 단말기가 권장됩니다. {loc} 권역에서 통신 환경에 따라 단말기 선택이 달라지므로, 매니저가 직접 매장 환경을 점검하고 가장 안정적인 옵션을 제안드립니다. 통신 점검 평균 소요 시간은 30분 정도이며, 견적 단계에서 무료로 진행됩니다.',
 '{loc} 권역에서 매장 평수 5평 미만의 소형 매장도 카드단말기 + 포스기 도입이 가능합니다. 일반형 POS는 36개월 할부 또는 일시불 구매가 가능하고, 카드단말기도 1년 무상 A/S와 24시간 콜센터가 표준입니다. {loc} 매장에서는 작은 매장도 매장 운영 효율을 충분히 향상시킬 수 있고, 매출 자동 집계와 세무 자동 정리 기능이 가장 큰 효과를 발휘합니다. 매장 규모가 작을수록 시간 절감 효과가 큽니다.',
 '{loc} 매장에서 적립 카드 시스템은 단골 만들기의 핵심입니다. 포스기에 연동된 적립 시스템은 직원이 별도로 카드를 들고 다니지 않아도 자동으로 처리되며, 고객 휴대폰 번호 입력만으로 적립이 가능합니다. {loc} 권역의 한 카페에서는 적립 시스템 도입 후 단골 비중을 끌어올렸고, 마케팅 효과를 크게 향상시킨 사례도 있습니다. 단순한 결제 도구가 아니라 매장 성장 도구로 활용하실 때 진짜 가치가 나옵니다.',
-'{loc} 매장의 결제 수단별 비중은 운영 패턴에 따라 다릅니다. 일반 카페는 카드 70%, 간편결제 25%, 현금 이고, 식당은 카드 80%, 간편결제 15%, 현금 입니다. {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기를 미리 준비하시는 것이 좋고, 매장 위치에 따라 결제 패턴 분석을 먼저 해보시는 것이 도움이 됩니다. 매장에 맞는 단말기 선택의 기본입니다.',
+'{loc} 매장의 결제 수단별 비중은 운영 패턴에 따라 다릅니다. 일반 카페는 카드 비중이 높고, 식당은 카드 비중이 높, 간편결제와 현금 비중도 일부 있습니다. {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기를 미리 준비하시는 것이 좋고, 매장 위치에 따라 결제 패턴 분석을 먼저 해보시는 것이 도움이 됩니다. 매장에 맞는 단말기 선택의 기본입니다.',
 '{loc}에서 매장 운영을 5년 이상 하신 사장님들이 가장 자주 하시는 조언은 처음부터 좋은 업체를 선택하라는 것입니다. 매장 결제와 보안은 한 번 잘 설치하면 5년 이상 안정적으로 사용할 수 있는 반면, 잘못 설치하면 지속적으로 비용이 새거나 사고가 발생할 수 있습니다. 더세이브 스토어는 {loc} 권역에서 5,000곳 이상의 매장 설치 경험과 평균 5년 이상 거래 사례를 보유하고 있습니다.',
 '{loc} 매장의 결제 사고 예방은 단말기 보안 인증과 통신 안정성에 달려 있습니다. PCI-DSS Level 1 보안 표준 단말기, 이중 통신 회선, 암호화 결제 데이터 처리, 정기 보안 점검 — 이 네 가지가 표준입니다. 더세이브 스토어가 추천하는 모든 단말기는 이 네 가지를 모두 충족하며, 결제 데이터 유출 사고가 발생하지 않도록 사전 점검과 정기 모니터링을 제공합니다. {loc} 권역의 매장 사장님들이 신뢰하는 이유입니다.',
 '{loc}에서 매장 폐업이나 이전을 결정하셨다면 가장 먼저 처리하실 일은 기존 장비 정리입니다. 카드단말기 기존 계약 해지, 포스기 데이터 백업, CCTV 영상 보존이 동시에 진행되어야 하는데, 한 업체에 맡기면 한 번의 출동으로 끝납니다. 더세이브 스토어는 {loc} 권역에서 철거 + 데이터 이전 + 신규 설치를 동시에 처리할 수 있어, 매장 변경 시 사장님 스트레스를 크게 줄여드립니다. 평균 작업 시간은 4~6시간입니다.',
@@ -17045,7 +17045,7 @@ const __SEO_BODY_CARD = [
 '{loc} 매장의 카드 수수료를 절감하는 가장 효과적인 방법은 결제대행사 변경입니다. 같은 단말기와 같은 사용 패턴이어도 어느 결제대행사와 계약하느냐에 따라 매장이 부담하는 수수료가 다릅니다. {loc} 권역의 평균 카드 수수료가 적용되지만 비교 견적을 통해 낮은 수수료대까지 인하되는 사례가 많고, 일정 매출 매장 기준 연간 상당 금액이 매장에 남습니다.',
 '{loc}에서 카페나 식당을 운영하시는 사장님들은 매장 회전율이 매출에 직결됩니다. 결제 처리 속도가 느리면 손님이 줄을 서고, 줄이 길어지면 손님이 매장을 떠납니다. 추천 단말기는 평균 응답 속도 0.3초이며, 자동커팅 영수증 출력이 표준입니다. {loc} 권역의 점심시간 회전율 향상 사례, 매출 증가 사례 등 실제 효과가 검증된 모델만 추천드립니다.',
 '{loc} 매장의 카드단말기 보안은 PCI-DSS Level 1 보안 표준 단말기, 이중 통신 회선, 암호화 결제 데이터 처리, 정기 보안 점검 — 이 네 가지가 표준입니다. 카드 결제 데이터가 외부로 유출되는 사고가 발생하면 매장 신뢰도에 큰 타격이 가기 때문에, 처음 단말기를 선택하실 때부터 보안 인증을 확인하시는 것이 중요합니다.',
-'{loc} 매장의 결제 수단별 비중은 운영 패턴에 따라 다릅니다. 일반 카페는 카드 70%, 간편결제 25%, 현금 이고, 식당은 카드 80%, 간편결제 15%, 현금 입니다. {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기를 미리 준비하시는 것이 좋습니다.',
+'{loc} 매장의 결제 수단별 비중은 운영 패턴에 따라 다릅니다. 일반 카페는 카드 비중이 높고, 식당은 카드 비중이 높, 간편결제와 현금 비중도 일부 있습니다. {loc} 권역에서 외국인 고객 비중이 있는 매장은 해외 카드 승인 대응 단말기를 미리 준비하시는 것이 좋습니다.',
 '{loc} 매장에 카드단말기를 새로 들이실 때 가장 흔한 실수는 약정 조건을 충분히 확인하지 않으시는 것입니다. 36개월 약정에 위약금이 상당 금액을 넘는 사례도 있어, 처음 계약 단계에서 위약금 한도와 중도 해지 절차를 명확히 정리해 두셔야 안전합니다. 더세이브 스토어가 {loc} 권역에서 제공하는 카드단말기 계약은 위약금 상당 금액 한도로 캡이 걸려 있어 부담이 적습니다.',
 '{loc} 매장에서 카드단말기 영수증 출력 옵션은 매장 회전율에 직접 영향을 줍니다. 자동커팅 모델은 손님이 영수증을 직접 떼지 않아도 되고, 출력 속도가 일반 모델 대비 상당 부분 빠릅니다. {loc} 권역의 분식·치킨·카페 매장에서는 자동커팅이 거의 표준으로 자리 잡았으며, 도입 후 카운터 대기 시간이 평균 1.5분에서 0.7분으로 줄어든 사례가 다수입니다.',
 '{loc} 매장의 카드단말기 펌웨어 업데이트는 보안과 호환성을 결정짓는 중요한 작업입니다. 제조사가 제공하는 펌웨어는 자동 업데이트로 처리되지만, 매장에 따라 수동 점검이 필요한 경우도 있습니다. {loc} 권역에서 6개월 정기 점검 시 펌웨어 상태도 함께 확인해, 보안 취약점이나 호환성 문제가 미리 차단되도록 관리하고 있습니다.',
@@ -17180,7 +17180,7 @@ const __SEO_BODY_VENDING = [
 '{loc} 자동판매기 사후 관리는 자판기 운영사와 매장 사장님이 분담합니다. 기계 고장·결제 오류는 운영사가 24시간 출동 처리하며, 재고 보충은 매장 사장님이 직접 또는 위탁 운영으로 처리할 수 있습니다. {loc} 권역의 위탁 운영 모델은 매출의 를 운영사가 가져가는 대신, 사장님은 공간만 제공하고 무인 운영이 가능합니다.',
 '{loc} 매장의 자동판매기는 카드 결제 비중이 높을수록 객단가가 상승합니다. 카드 결제 손님 객단가가 현금 손님 대비 높아, 모바일 페이까지 통합 지원하면 매출이 더욱 상승합니다. {loc} 권역의 자판기 카드 결제 비중은 대부분이며, 현금 사용 손님이 줄어드는 추세입니다.',
 '{loc} 매장의 자동판매기 베스트셀러 분석은 운영 데이터의 핵심입니다. 어떤 음료가 잘 팔리는지, 어떤 시간대에 판매량이 높은지, 어떤 가격대가 회전율이 좋은지 자동 분석되어 카톡으로 발송됩니다. {loc} 권역의 사장님은 베스트셀러 데이터로 상품 라인업을 최적화해 매출이 향상되는 사례가 많습니다.',
-'{loc} 매장의 자동판매기 위탁 운영 모델은 사장님 부담을 최소화합니다. 운영사가 재고 보충, 청소, 기계 점검까지 모두 처리하고, 사장님은 매장 공간만 제공하면 됩니다. {loc} 권역의 위탁 운영 매출 분배 비율은 매장 70% : 운영사 가 표준이며, 사장님이 매상당 금액의 부수입을 안정적으로 확보하실 수 있습니다.',
+'{loc} 매장의 자동판매기 위탁 운영 모델은 사장님 부담을 최소화합니다. 운영사가 재고 보충, 청소, 기계 점검까지 모두 처리하고, 사장님은 매장 공간만 제공하면 됩니다. {loc} 권역의 위탁 운영 매출 분배 비율은 매장이 대부분 가져가는 구조 : 운영사 가 표준이며, 사장님이 매상당 금액의 부수입을 안정적으로 확보하실 수 있습니다.',
 '{loc} 자동판매기의 평균 1회 충전 매출은 상당 금액 수준입니다. 손님 한 명당 평균 구매액은 1,500~일정 금액이고, 인기 상품은 음료, 과자, 컵라면 순으로 회전율이 높습니다. {loc} 권역에서 손님 동선이 좋은 위치의 자판기는 1주일 내 재고 보충이 필요할 정도로 회전율이 높습니다.',
 '{loc} 매장의 자동판매기 결제 데이터는 보안 인증된 모듈로 처리됩니다. PCI-DSS Level 1 인증 모듈이 표준이며, 결제 정보가 외부로 유출될 위험이 거의 없습니다. {loc} 권역의 24시간 무인 매장에서 자판기는 결제 보안의 핵심 인프라로 자리 잡고 있어, 손님이 안심하고 사용하실 수 있습니다.',
 '{loc} 매장의 자동판매기 외관 디자인은 매장 인테리어와 조화를 이루도록 커스텀 가능합니다. 본체 컬러, 로고 부착, 광고 패널까지 매장 브랜드에 맞춰 변경할 수 있고, {loc} 권역의 카페·식당 사장님은 자판기 디자인이 매장 인상에 영향을 준다고 평가하십니다. 디자인 커스텀은 추가 비용 상당 금액 수준입니다.',
@@ -17543,7 +17543,7 @@ const __wrapped_default = {
         const __MACROS = ['restaurant','cafe','convenience','beauty','medical','academy','retail','service','etc'];
         const __pHost = new URL(request.url).host;
         
-        // 카테고리별 안전한 사진 풀 (Unsplash 핫링크) — 사람 얼굴/외국인 노출 0%, 음식·소품·매장·공간 위주
+        // 카테고리별 안전한 사진 풀 (Unsplash 핫링크) — 사람 얼굴/외국인 노출 없이, 음식·소품·매장·공간 위주
         // 같은 카테고리 안에서는 슬러그 해시로 돌려써서 다양성 확보
         const __SAFE_POOL = {
           'restaurant': [
@@ -17856,7 +17856,7 @@ const __wrapped_default = {
           const __s6 = [
             `${__PN}은 ${__ko}의 매출 흐름이 끊기지 않도록 365일 A/S 체계가 갖춰져 있어야 합니다. 더세이브 스토어는 영업 중 장비 오류 발생 시 평일·주말 가리지 않고 출장 A/S를 지원하며, 응급 시에는 임시 장비를 즉시 교체 발송해 ${__pInfo.key}이 멈추지 않도록 합니다. 원격 진단 시스템으로 대부분의 오류는 전화 한 통이면 해결됩니다.`,
             `${__ko} 매장에서 ${__PN}이 멈추면 매출이 즉시 영향을 받기 때문에, A/S 속도가 가장 중요합니다. 더세이브 스토어는 전국 17개 시·도에 권역별 출장 매니저를 배치해, 신고 후 평균 4시간 내 현장 도착을 목표로 운영합니다. 응급 상황에서는 임시 장비를 택배로 즉시 발송하거나, 권역 매니저가 직접 가져다드려 ${__ko} 영업 시간 안에 ${__pInfo.key}이 재개되도록 합니다.`,
-            `${__PN} A/S는 단순 고장 수리가 아니라 ${__ko} 매장 운영의 안전망입니다. 더세이브 스토어 A/S 콜센터는 365일 운영되며, 야간·주말·공휴일에도 전화 응대가 가능합니다. 신고 후 가장 먼저 원격 진단으로 문제를 파악하고, 70% 이상의 오류는 전화 한 통이면 해결됩니다. 부품 교체나 장비 교환이 필요한 경우에는 권역 매니저가 직접 방문해 처리합니다.`,
+            `${__PN} A/S는 단순 고장 수리가 아니라 ${__ko} 매장 운영의 안전망입니다. 더세이브 스토어 A/S 콜센터는 365일 운영되며, 야간·주말·공휴일에도 전화 응대가 가능합니다. 신고 후 가장 먼저 원격 진단으로 문제를 파악하고, 대부분의 오류는 전화 한 통이면 해결됩니다. 부품 교체나 장비 교환이 필요한 경우에는 권역 매니저가 직접 방문해 처리합니다.`,
             `${__ko} 사장님이 가장 안심하고 ${__PN}을 사용하실 수 있도록, 더세이브 스토어는 A/S에 가장 큰 자원을 투입합니다. 정기 점검은 무상이고, 응급 출장도 출장비 무료입니다. 부품 교체비도 보증 기간 내라면 발생하지 않습니다. 보증 기간 이후에도 권역 매니저를 통해 신속한 수리가 가능하며, 비용은 시중 평균 대비 저렴하게 책정되어 있습니다.`,
             `${__PN}이 잘 작동할 때보다 멈췄을 때의 대처가 더 중요합니다. ${__ko}에서 ${__pInfo.key}이 1시간 멈추면 매출도 그만큼 사라지기 때문입니다. 더세이브 스토어는 권역별 매니저, 24시간 콜센터, 임시 장비 발송 시스템을 갖추고 있어 ${__ko} 매장의 ${__pInfo.key}이 멈추는 시간을 최소화합니다. 1년 평균 ${__pInfo.key} 중단 시간은 30분 미만입니다.`,
             `${__ko} 매장에서 가장 흔한 ${__PN} 문제는 영수증 용지 걸림, 통신 끊김, 직원 사용 미숙으로 인한 오작동입니다. 이런 사소한 문제는 전화 한 통으로 즉시 해결됩니다. 더세이브 스토어 콜센터는 흔한 문제별 가이드를 매뉴얼화해두고, 신고 즉시 단계별로 안내드립니다. 5분 안에 해결되는 경우가 대부분입니다.`,
