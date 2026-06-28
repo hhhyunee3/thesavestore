@@ -7539,7 +7539,7 @@ const __SEO_CHECK_BY_PROD = {
       {t:'여러 결제사 비교 견적', d:'같은 단말기여도 결제 대행사에 따라 비용이 다릅니다. 비교 견적이 중요합니다.'},
       {t:'기존 카드단말기 무상 철거', d:'견적서에 무상 철거 조건 명시 여부 확인. 보통 표준 조건.'},
       {t:'해지 비용 처리', d:'기존 계약 해지 비용이 있으면 새 업체가 대신 처리해 주는지 확인하세요.'},
-      {t:'1년 무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 즉시 출동 보장. 24시간 콜센터 운영 여부.'},
+      {t:'무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 신속하게 출동합니다. 콜센터 운영 여부를 확인하세요.'},
       {t:'검증된 결제 보안', d:'결제 정보를 안전하게 처리하는 검증된 단말기인지 확인하세요.'}
     ]
   },
@@ -7823,7 +7823,7 @@ function __generateSEOContent(pathname) {
     ];
     const ac = __accents[i % __accents.length];
     return `<div style="background:${ac.bg};border-left:4px solid ${ac.bar};border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:${ac.chip};border-radius:10px;font-size:18px;flex-shrink:0">${emoji}</span><span>${subheads[i].replace(/\{loc\}/g, loc)}</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(wrapped)}</p></div>`;
-  }).join('');
+  });
   
   // 위치별 동적 단락 풀 (제품과 무관, 위치 정보 강조)
   const __locParas = [
@@ -7859,29 +7859,29 @@ function __generateSEOContent(pathname) {
       {t:'여러 결제사 비교 견적', d:'같은 단말기여도 결제 대행사에 따라 비용이 다릅니다. 비교 견적이 중요합니다.'},
       {t:'기존 단말기 무상 철거', d:'견적서에 무상 철거 조건 명시 여부 확인. 보통 표준 조건.'},
       {t:'해지 비용 처리', d:'기존 계약 해지 비용이 있으면 새 업체가 대신 처리해 주는지 확인하세요.'},
-      {t:'1년 무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 즉시 출동 보장. 24시간 콜센터 운영 여부.'},
+      {t:'무상 A/S 포함', d:'단말기 멈춤·통신 오류 시 신속하게 출동합니다. 콜센터 운영 여부를 확인하세요.'},
       {t:'검증된 결제 보안', d:'결제 정보를 안전하게 처리하는 검증된 단말기인지 확인하세요.'}
     ],
     [
       {t:'매장 통신 환경 사전 점검', d:'외곽 매장은 LTE 백업, 도심은 인터넷 회선 안정성 확인.'},
       {t:'결제 패턴별 단말기 추천', d:'카운터 위주는 유선, 테이블 결제는 무선, 시술 자리는 블루투스.'},
-      {t:'4년차 이상 단말기 점검', d:'평균 사용 연한 4년 4개월. 그 이후 응답 속도 저하 시작.'},
+      {t:'노후 단말기 점검', d:'오래 사용한 단말기는 응답 속도가 느려질 수 있어 점검이 필요합니다.'},
       {t:'간편결제 호환 확인', d:'카카오페이·네이버페이·삼성페이까지 다양한 결제를 지원하는 모델인지 확인하세요.'},
       {t:'설치 시간 영업 영향 최소화', d:'설치가 빠르게 끝나며, 영업 중에도 진행 가능한지 미리 협의합니다.'}
     ],
     [
-      {t:'카드 비용 절감 효과', d:'결제 대행사만 바꿔도 매장에 남는 금액이 늘어난 사례가 많습니다.'},
-      {t:'포스기 인건비 절감 효과', d:'배달앱 자동 수신·매출 자동 집계로 마감 1시간 단축, 인건비 25~40만원.'},
-      {t:'도난 예방 효과', d:'매장 보안 강화로 도난 사고 보험료 인하 가능.'},
-      {t:'재고 자동 차감으로 손실 방지', d:'포스기 재고 관리 기능으로 월 평균 재고 손실 15만원 절감.'},
-      {t:'정기 점검 사고 예방 효과', d:'점검 매장은 그렇지 않은 매장보다 사고 빈도 60% 낮음.'}
+      {t:'카드 비용 절감', d:'결제 대행사만 바꿔도 매장에 남는 금액이 늘어난 사례가 많습니다.'},
+      {t:'포스기 인건비 절감', d:'배달앱 자동 수신과 매출 자동 집계로 마감 시간이 줄고 인건비를 아낄 수 있습니다.'},
+      {t:'도난 예방', d:'매장 보안을 강화해 도난 사고를 줄일 수 있습니다.'},
+      {t:'재고 손실 방지', d:'포스기 재고 관리 기능으로 재고 손실을 줄일 수 있습니다.'},
+      {t:'정기 점검 사고 예방', d:'정기 점검을 받는 매장은 사고가 줄어드는 경향이 있습니다.'}
     ],
     [
-      {t:'매장 환경 사전 분석', d:'매장 평수, 통신 환경, 결제 패턴을 점검 후 최적 모델 추천.'},
-      {t:'1시간 내 출동 보장', d:'단말기 멈춤 시 평균 1시간 내 매장 도착. 24시간 콜센터 운영.'},
-      {t:'데이터 자동 백업', d:'포스기 매출·고객 데이터 클라우드 자동 백업. 단말기 고장에도 안전.'},
-      {t:'사용법 교육 + 매뉴얼', d:'30분~1시간 직원 교육. 카톡으로 매뉴얼 받을 수 있어 신규 직원도 OK.'},
-      {t:'정기 점검 6개월 주기', d:'무상 정기 점검 + 보고서 발송. 사고 발생 빈도 60% 감소 효과.'}
+      {t:'매장 환경 사전 분석', d:'매장 평수와 통신 환경, 결제 패턴을 점검한 뒤 맞는 모델을 추천합니다.'},
+      {t:'빠른 출동 대응', d:'단말기 멈춤 시 신속하게 매장으로 출동합니다. 콜센터 상시 운영.'},
+      {t:'데이터 자동 백업', d:'포스기 매출·고객 데이터를 클라우드에 자동 백업해 안전합니다.'},
+      {t:'사용법 교육 + 매뉴얼', d:'직원 교육을 진행하고, 카톡으로 매뉴얼을 받을 수 있어 신규 직원도 쉽게 익힙니다.'},
+      {t:'정기 점검 지원', d:'무상 정기 점검과 보고서 발송으로 사고를 미리 예방합니다.'}
     ]
   ];
   let __chkTitle, __chkItems;
@@ -7895,26 +7895,46 @@ function __generateSEOContent(pathname) {
   }
   const checkBox = `<div style="background:#fff;border:1px solid #EEE;border-radius:16px;padding:30px 28px;margin-bottom:32px"><h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 22px;color:#000">✅ ${__chkTitle}</h3><div style="display:flex;flex-direction:column;gap:14px">${__chkItems.map((it, i) => `<div style="display:flex;gap:14px;align-items:flex-start"><div style="width:28px;height:28px;background:#FF5500;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;margin-top:2px">${i+1}</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:#000;margin-bottom:4px;letter-spacing:-0.02em">${__diversify(it.t, seed+':ct'+i)}</div><div style="font-size:13.5px;color:#555;line-height:1.7">${__highlight(__diversify(it.d, seed+':cd'+i))}</div></div></div>`).join('')}</div></div>`;
   
-  // 사례 2개
+  // 사례 — 글 카드와 다른 디자인(어두운 배경 강조 박스)
   const caseItems = cases.map((p, i) => {
     const emoji = __caseEmojis[__seoHash(seed + ':ce' + i) % __caseEmojis.length];
     const diversified = __diversify(p.replace(/\{loc\}/g, loc), seed + ':c' + i);
-    return `<div style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 26px;margin-bottom:16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span style="font-size:22px">${emoji}</span><div style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#FF5500;background:#FFE6DC;padding:3px 10px;border-radius:100px">CASE ${String(i+1).padStart(2,'0')}</div><h3 style="font-size:15.5px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#000">${subheads[5 + i].replace(/\{loc\}/g, loc)}</h3></div><p style="font-size:14.5px;line-height:1.85;color:#333;margin:0;letter-spacing:-0.005em">${__highlight(diversified)}</p></div>`;
-  }).join('');
-  
+    return `<div style="background:linear-gradient(135deg,#1B2940 0%,#0E1729 100%);border-radius:18px;padding:28px 26px;margin-bottom:18px;position:relative;overflow:hidden"><div style="position:absolute;top:-20px;right:-10px;font-size:90px;opacity:0.08;line-height:1">${emoji}</div><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative"><span style="font-size:22px">${emoji}</span><div style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#FFB400;background:rgba(255,180,0,0.15);padding:4px 11px;border-radius:100px">REVIEW ${String(i+1).padStart(2,'0')}</div><h3 style="font-size:15.5px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#fff">${subheads[5 + i].replace(/\{loc\}/g, loc)}</h3></div><p style="font-size:14.5px;line-height:1.85;color:rgba(255,255,255,0.82);margin:0;letter-spacing:-0.005em;position:relative">${__highlight(diversified)}</p></div>`;
+  });
+
+  // 시각적 리듬용 인용구 강조 박스 (글 카드와 완전히 다른 패턴)
+  const __quotePool = [
+    `한 번 잘 설치하면 오래 안심하고 쓰는 매장 장비, ${loc}에서 처음부터 제대로 시작하세요.`,
+    `${loc} 매장에 맞는 장비는 따로 있습니다. 직접 보고 골라드립니다.`,
+    `견적부터 설치, 사후 관리까지 같은 매니저가 끝까지 책임집니다.`,
+    `${loc} 매장의 결제·운영·보안, 한 번의 방문으로 정리해 드립니다.`
+  ];
+  const __quote = __quotePool[__seoHash(seed + ':qt') % __quotePool.length];
+  const quoteBox = `<div style="background:#000;border-radius:18px;padding:34px 30px;margin-bottom:18px;text-align:center"><div style="font-size:38px;line-height:1;color:#FFB400;margin-bottom:8px;font-family:Georgia,serif">&ldquo;</div><p style="font-size:18px;font-weight:800;line-height:1.5;color:#fff;margin:0;letter-spacing:-0.03em">${__quote}</p><div style="margin-top:18px"><a href="tel:010-9677-2356" style="display:inline-flex;align-items:center;gap:7px;background:#FF5500;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 22px;border-radius:100px;letter-spacing:-0.02em">📞 무료 상담 010-9677-2356</a></div></div>`;
+
+  // 본문을 앞(3개) / 뒤(나머지)로 나눠 중간에 사례·인용구 끼워넣기 — 가독성 향상
+  const __bodyArr = bodyItems;
+  const __bodyFront = __bodyArr.slice(0, 3).join('');
+  const __bodyBack = __bodyArr.slice(3).join('');
+  const __caseFirst = caseItems.length > 0 ? caseItems[0] : '';
+  const __caseRest = caseItems.slice(1).join('');
+
   return `<section style="padding:56px 0;border-top:0.5px solid #EEE;background:#FAF8F3"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">매장 운영 가이드</div>
     <h2 style="font-size:26px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${h2}</h2>
     ${introHtml}
     ${__kwHtml}
+    ${__bodyFront}
+    ${__caseFirst}
+    ${quoteBox}
     ${__locParaHtml}
-    ${bodyItems}
+    ${__bodyBack}
     ${checkBox}
   </div></section>
   <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">실제 설치 사례</div>
-    <h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${loc} 매장 설치 사례</h2>
-    ${caseItems}
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">실제 설치 후기</div>
+    <h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${loc} 매장 설치 후기</h2>
+    ${__caseRest || caseItems.join('')}
   </div></section>`;
 }
 function __shouldBoost(p){if(p.startsWith('/robots')||p.startsWith('/sitemap')||p.startsWith('/rss')||p.startsWith('/favicon'))return false;return true;}
