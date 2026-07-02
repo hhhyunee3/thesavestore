@@ -7804,7 +7804,7 @@ function __generateSEOContent(pathname) {
   const __kw = __prodKey ? `${__prodLabel} 설치` : '매장 설비 설치';
   
   // 인트로 1개 + 본문 5개 + 사례 2개
-  const intros = __prodKey && __SEO_INTRO_BY_PROD[__prodKey] ? __seoPick(__SEO_INTRO_BY_PROD[__prodKey], seed, 'i', Math.min(2, __SEO_INTRO_BY_PROD[__prodKey].length)) : __seoPick(__SEO_INTRO, seed, 'i', 3);
+  const intros = __prodKey && __SEO_INTRO_BY_PROD[__prodKey] ? __seoPick(__SEO_INTRO_BY_PROD[__prodKey], seed, 'i', 1) : __seoPick(__SEO_INTRO, seed, 'i', 1);
   // 제품별 본문 풀 선택 (카드단말기/포스기/철거 페이지는 해당 제품 전용)
   const __bodyPool = 
     __prodKey === '카드단말기' ? __SEO_BODY_CARD :
@@ -7829,7 +7829,7 @@ function __generateSEOContent(pathname) {
   const __caseEmojis = ['🏪','🍴','📷','✂️','📚','🍱','💻','🏋️'];
   
   // 인트로 — 박스 카드
-  const introHtml = intros.map((__it, __ii) => `<div style="background:linear-gradient(135deg,#FFF8F4 0%,#FAF8F3 100%);border-left:4px solid #FF5500;border-radius:0 14px 14px 0;padding:24px 28px;margin-bottom:24px"><p style="font-size:15.5px;line-height:1.85;color:#222;margin:0;letter-spacing:-0.01em">${__highlight(__diversify(__it.replace(/\{loc\}/g, loc), seed + ':intro' + __ii))}</p></div>`).join('');
+  const introHtml = intros.map((__it, __ii) => `<p style="font-size:17px;line-height:1.85;color:#1A1A1A;margin:0 0 32px;letter-spacing:-0.015em;font-weight:500">${__highlight(__diversify(__it.replace(/\{loc\}/g, loc), seed + ':intro' + __ii))}</p>`).join('');
   
   // 페이지별 가변 변수 (시드 기반)
   const __varNum1 = 5 + (__seoHash(seed + ':n1') % 30);
