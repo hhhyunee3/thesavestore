@@ -7814,7 +7814,7 @@ function __generateSEOContent(pathname) {
     __prodKey === '테이블오더' ? __SEO_BODY_TABLE :
     __prodKey === '자동판매기' ? __SEO_BODY_VENDING :
     __SEO_BODY;
-  const bodies = __seoPick(__bodyPool, seed, 'b', 5);
+  const bodies = __seoPick(__bodyPool, seed, 'b', 3);
   const cases = __prodKey && __SEO_CASE_BY_PROD[__prodKey] ? __seoPick(__SEO_CASE_BY_PROD[__prodKey], seed, 'c', 2) : __seoPick(__SEO_CASE, seed, 'c', 2);
   const subheads = __prodKey && __SEO_SUBHEAD_BY_PROD[__prodKey] ? __seoPick(__SEO_SUBHEAD_BY_PROD[__prodKey], seed, 's', 7) : __seoPick(__SEO_SUBHEAD, seed, 's', 7);
   const h2 = __SEO_H2[__seoHash(seed + ':h2') % __SEO_H2.length].replace(/\{loc\}/g, loc);
@@ -7878,7 +7878,19 @@ function __generateSEOContent(pathname) {
       { bar: '#D97706', bg: '#FFF8EE', chip: '#FEF0D9' },
     ];
     const ac = __accents[i % __accents.length];
-    return `<div style="background:${ac.bg};border-left:4px solid ${ac.bar};border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:${ac.chip};border-radius:10px;font-size:18px;flex-shrink:0">${emoji}</span><span>${subheads[i].replace(/\{loc\}/g, loc)}</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(wrapped)}</p></div>`;
+    const __sh = subheads[i].replace(/\{loc\}/g, loc);
+    const __txt = __highlight(wrapped);
+    // 단락마다 구조가 다른 디자인 (반복감 제거)
+    if (i % 3 === 0) {
+      // 스타일 A: 심플 좌측 굵은 바 + 큰 리드 (배경 없음)
+      return `<div style="border-left:5px solid ${ac.bar};padding:6px 0 6px 22px;margin-bottom:26px"><h3 style="font-size:19px;font-weight:900;letter-spacing:-0.03em;margin:0 0 12px;color:#0A0A0A;line-height:1.3">${__sh}</h3><p style="font-size:15.5px;line-height:1.95;color:#333;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+    } else if (i % 3 === 1) {
+      // 스타일 B: 넘버 뱃지 + 카드 (연한 배경)
+      return `<div style="background:${ac.bg};border-radius:16px;padding:26px 28px;margin-bottom:26px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:${ac.bar};color:#fff;border-radius:50%;font-size:15px;font-weight:900;flex-shrink:0">${Math.floor(i/1)+1}</span><h3 style="font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#111;line-height:1.35">${__sh}</h3></div><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+    } else {
+      // 스타일 C: 이모지 칩 + 좌측 바 카드 (기존)
+      return `<div style="background:#fff;border:1px solid #EEE;border-left:4px solid ${ac.bar};border-radius:0 14px 14px 0;padding:24px 26px;margin-bottom:26px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:${ac.chip};border-radius:10px;font-size:18px;flex-shrink:0">${emoji}</span><span>${__sh}</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+    }
   });
   
   // 위치별 동적 단락 풀 (제품과 무관, 위치 정보 강조)
@@ -7970,10 +7982,10 @@ function __generateSEOContent(pathname) {
 
   // 본문을 여러 조각으로 나눠 시각 요소를 촘촘히 끼워넣기 — 경쟁사 수준 가독성
   const __bodyArr = bodyItems;
-  const __b1 = __bodyArr.slice(0, 2).join('');
-  const __b2 = __bodyArr.slice(2, 4).join('');
-  const __b3 = __bodyArr.slice(4, 6).join('');
-  const __b4 = __bodyArr.slice(6).join('');
+  const __b1 = __bodyArr.slice(0, 1).join('');
+  const __b2 = __bodyArr.slice(1, 2).join('');
+  const __b3 = __bodyArr.slice(2, 3).join('');
+  const __b4 = __bodyArr.slice(3).join('');
   const __caseFirst = caseItems.length > 0 ? caseItems[0] : '';
   const __caseRest = caseItems.slice(1).join('');
 
