@@ -7880,16 +7880,16 @@ function __generateSEOContent(pathname) {
     const ac = __accents[i % __accents.length];
     const __sh = subheads[i].replace(/\{loc\}/g, loc);
     const __txt = __highlight(wrapped);
-    // 단락마다 구조가 다른 디자인 (반복감 제거)
+    // 단락마다 구조가 확연히 다른 디자인 (모바일에서도 구분됨)
     if (i % 3 === 0) {
-      // 스타일 A: 심플 좌측 굵은 바 + 큰 리드 (배경 없음)
-      return `<div style="border-left:5px solid ${ac.bar};padding:6px 0 6px 22px;margin-bottom:26px"><h3 style="font-size:19px;font-weight:900;letter-spacing:-0.03em;margin:0 0 12px;color:#0A0A0A;line-height:1.3">${__sh}</h3><p style="font-size:15.5px;line-height:1.95;color:#333;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+      // 스타일 A: 컬러 헤더 바 카드 (제목이 색 배경 안에)
+      return `<div style="border-radius:14px;overflow:hidden;margin-bottom:26px;box-shadow:0 1px 3px rgba(0,0,0,0.06)"><div style="background:${ac.bar};padding:14px 22px"><h3 style="font-size:16.5px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#fff;line-height:1.35">${__sh}</h3></div><div style="background:#fff;padding:20px 24px"><p style="font-size:15px;line-height:1.9;color:#333;margin:0;letter-spacing:-0.005em">${__txt}</p></div></div>`;
     } else if (i % 3 === 1) {
-      // 스타일 B: 넘버 뱃지 + 카드 (연한 배경)
-      return `<div style="background:${ac.bg};border-radius:16px;padding:26px 28px;margin-bottom:26px"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:${ac.bar};color:#fff;border-radius:50%;font-size:15px;font-weight:900;flex-shrink:0">${Math.floor(i/1)+1}</span><h3 style="font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#111;line-height:1.35">${__sh}</h3></div><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+      // 스타일 B: 큰 인용 스타일 (따옴표 강조, 배경 연함)
+      return `<div style="background:${ac.bg};border-radius:14px;padding:28px 30px;margin-bottom:26px;position:relative"><div style="font-size:15px;font-weight:800;color:${ac.bar};letter-spacing:-0.02em;margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="font-size:20px">${emoji}</span>${__sh}</div><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
     } else {
-      // 스타일 C: 이모지 칩 + 좌측 바 카드 (기존)
-      return `<div style="background:#fff;border:1px solid #EEE;border-left:4px solid ${ac.bar};border-radius:0 14px 14px 0;padding:24px 26px;margin-bottom:26px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:${ac.chip};border-radius:10px;font-size:18px;flex-shrink:0">${emoji}</span><span>${__sh}</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
+      // 스타일 C: 심플 좌측 세로선 (배경 없음, 여백형)
+      return `<div style="border-left:3px solid ${ac.bar};padding:2px 0 2px 22px;margin-bottom:26px"><h3 style="font-size:18px;font-weight:900;letter-spacing:-0.03em;margin:0 0 12px;color:#0A0A0A;line-height:1.3">${__sh}</h3><p style="font-size:15.5px;line-height:1.95;color:#333;margin:0;letter-spacing:-0.005em">${__txt}</p></div>`;
     }
   });
   
@@ -8026,7 +8026,7 @@ function __generateSEOContent(pathname) {
   const __calloutBox = `<div style="background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:20px 24px;margin-bottom:32px"><p style="font-size:14.5px;line-height:1.8;color:#5D4400;margin:0"><strong style="color:#3D2C00">직접 들은 이야기</strong> · ${__callout}</p></div>`;
 
   // 하단 상담 CTA 박스 (경쟁사 스타일 — 보라 테두리)
-  const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${loc}에서 매장 설비 설치를 고민 중이신가요?</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">상담 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
+  const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${loc}에서 매장 설비 설치를 고민 중이신가요?</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">문자 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
 
   return `<section style="padding:56px 0;border-top:0.5px solid #EEE;background:#FAF8F3"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">매장 운영 가이드</div>
