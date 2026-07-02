@@ -7456,6 +7456,39 @@ function __diversify(text, seed) {
 }
 
 function __seoHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}h^=h>>>13;h=Math.imul(h,16777619)>>>0;return h>>>0;}
+const __THUMB_POOL = [
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-419907350-37856472.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-anhdanghihi-20454105.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-anhdanghihi-20454106.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-b-o-minh-1883288-35228891.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-betul-341981540-32814268.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-chipi1189-33964546.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-dung-ph-m-694024428-18405036.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-ekrulila-32416016.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-hexuye-ye-81431575-8784720.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-ketut-subiyanto-4349944.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-kevinbidwell-2323432.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-laotie-miao-523854977-16464587.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-mavicair2tw-29867234.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-minchephoto-6879450.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-mtyutina-5091144.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-nam-quan-nguy-n-459228913-16024411.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-nhi-tran-863971602-33618578.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-peterdanthy-34363536.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-rachel-claire-5531303.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-roopsarkar-32550034.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-roopsarkar-34517063.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-soc-nang-d-ng-2150345854-34771315.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-soc-nang-d-ng-2150345854-36433589.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-soc-nang-d-ng-2150345854-36649774.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-speedwagwon-35774245-11482921.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-toktak-phitsinee-19163808-8780450.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-vi-t-anh-nguy-n-2150409023-31133774.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-vi-t-anh-nguy-n-2150409023-33707727.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-voltfather-18235152.jpg",
+  "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-voltfather-18243122.jpg"
+];
 function __seoPick(arr,seed,salt,n){const used=new Set();const out=[];const startI=__seoHash(seed+':'+salt+':start')%arr.length;let i=startI;const lim=arr.length*4;let cnt=0;while(out.length<n&&cnt<lim){const idx=__seoHash(seed+':'+salt+':p'+i+':r'+cnt)%arr.length;if(!used.has(idx)){used.add(idx);out.push(arr[idx]);}i++;cnt++;}while(out.length<n){out.push(arr[out.length%arr.length]);}return out;}
 
 // 제품별 인트로
@@ -8307,17 +8340,13 @@ const __wrapped_default = {
         
         // 슬러그 해시로 풀에서 사진 선택 (같은 슬러그 → 항상 같은 사진, 다른 슬러그 → 분산)
         const __pickImg = (cat, slug, w, h) => {
-          const pool = __SAFE_POOL[cat] || __SAFE_POOL['restaurant'];
-          let hash = 0;
-          const s = slug || cat;
-          for (let i=0; i<s.length; i++) hash = ((hash<<5)-hash+s.charCodeAt(i))|0;
-          const id = pool[Math.abs(hash) % pool.length];
-          return `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
+          const s = (slug || cat || '') + ':' + (cat || '');
+          return __THUMB_POOL[__seoHash('pimg:' + s) % __THUMB_POOL.length];
         };
         
         const __getCatImg = (cat) => __pickImg(cat, cat, 600, 450);
         const __getArticleImg = (cat, slug) => __pickImg(cat, slug, 1200, 520);
-        const __getImg = (seed, w, h) => `https://picsum.photos/seed/${encodeURIComponent(seed)}/${w}/${h}`;
+        const __getImg = (seed, w, h) => __THUMB_POOL[__seoHash('gimg:' + seed) % __THUMB_POOL.length];
         
         // 카테고리별 이모티콘 풀 (작업 2 — 리스트 꾸미기)
         const __EMOJI_POOL = {
@@ -8603,7 +8632,7 @@ const __wrapped_default = {
             {"@type":"BreadcrumbList","itemListElement":__crumbList}
           ]});
           
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://picsum.photos/seed/'+encodeURIComponent('${__macro}-${__slug}')+'/1200/520';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -9004,16 +9033,7 @@ const __wrapped_default = {
           __heroType = __p4 === '카드단말기' ? 'card' : __p4 === '포스기' ? 'pos' : __p4 === '철거' ? 'demo' : __p4 === '키오스크' ? 'kiosk' : __p4 === '테이블오더' ? 'table' : __p4 === '자동판매기' ? 'vending' : 'region';
         }
         // 페이지 타입별 실제 매장/장비 사진 (Unsplash CDN)
-        const __heroBgs = {
-          card: 'https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=1400&h=700&q=75',
-          pos: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=1400&h=700&q=75',
-          demo: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&h=700&q=75',
-          kiosk: 'https://images.unsplash.com/photo-1556741533-411cf82e4e2d?auto=format&fit=crop&w=1400&h=700&q=75', // 키오스크 매장
-          table: 'https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=1400&h=700&q=75', // 테이블 식당
-          vending: 'https://images.unsplash.com/photo-1525373698358-041e3a460346?auto=format&fit=crop&w=1400&h=700&q=75', // 자판기
-          region: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&h=700&q=75',
-        };
-        const __heroSrc = __heroBgs[__heroType] || __heroBgs.region;
+        const __heroSrc = __THUMB_POOL[__seoHash('hero:' + (typeof __seoPath !== 'undefined' && __seoPath ? __seoPath : __path)) % __THUMB_POOL.length];
         const __hero = `<section style="padding:24px 0 0"><div class="container"><div style="position:relative;width:100%;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/8;min-height:320px"><img src="${__heroSrc}" alt="${__sub}" loading="eager" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 50%,rgba(0,0,0,0.55) 100%)"></div><div style="position:absolute;left:0;right:0;bottom:0;padding:32px"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:10px">${__label}</div><h1 style="font-size:clamp(24px,3.4vw,40px);font-weight:900;letter-spacing:-0.04em;line-height:1.2;margin:0 0 16px;color:#fff">${__h1}</h1><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="sms:01096772356" style="background:#1E6FE0;color:#fff;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📨 문자 보내기</a><a href="tel:010-9677-2356" style="background:rgba(255,255,255,0.95);color:#000;padding:11px 20px;border-radius:100px;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;gap:6px">📞 010-9677-2356</a></div></div></div></div></section>`;
         // 브레드크럼 생성
         let __crumbs = '';
@@ -9317,7 +9337,9 @@ const __wrapped_default = {
       const __pageHero = (function() {
         // hero 이미지: 페이지 종류에 따라
         if (typeof __heroSrc !== 'undefined') return __heroSrc;
-        return 'https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/a1.png';
+        // 페이지 경로(슬러그) 기반 해시로 실제 매장 사진 로테이션
+        const __hseed = (typeof __seoPath !== 'undefined' && __seoPath) ? __seoPath : __path;
+        return __THUMB_POOL[__seoHash('thumb:' + __hseed) % __THUMB_POOL.length];
       })();
       // 공통 FAQ — 지역명·제품명을 넣어 검색 노출 최적화
       const __faqLoc = (() => {
