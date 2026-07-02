@@ -2711,9 +2711,10 @@ var Layout = ({ meta: meta2, children }) => {
       /* @__PURE__ */ jsxDEV("title", { children: meta2.title }),
       /* @__PURE__ */ jsxDEV("meta", { name: "description", content: meta2.description }),
       meta2.canonical && /* @__PURE__ */ jsxDEV("link", { rel: "canonical", href: meta2.canonical }),
+      /* @__PURE__ */ jsxDEV("link", { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32.png" }),
       /* @__PURE__ */ jsxDEV("link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }),
-      /* @__PURE__ */ jsxDEV("link", { rel: "apple-touch-icon", href: "/favicon.svg" }),
-      /* @__PURE__ */ jsxDEV("link", { rel: "shortcut icon", type: "image/svg+xml", href: "/favicon.svg" }),
+      /* @__PURE__ */ jsxDEV("link", { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon-180.png" }),
+      /* @__PURE__ */ jsxDEV("link", { rel: "shortcut icon", href: "/favicon.ico" }),
       /* @__PURE__ */ jsxDEV("meta", { name: "theme-color", content: "#FF5500" }),
       /* @__PURE__ */ jsxDEV("meta", { property: "og:title", content: meta2.title }),
       /* @__PURE__ */ jsxDEV("meta", { property: "og:description", content: meta2.description }),
@@ -2753,7 +2754,7 @@ var Layout = ({ meta: meta2, children }) => {
                   "@id": "https://thesavestore.com/#organization",
                   name: "더세이브 스토어",
                   url: "https://thesavestore.com",
-                  logo: "https://thesavestore.com/favicon.svg",
+                  logo: "https://thesavestore.com/logo.png",
                   image: "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/a1.png",
                   telephone: "+82-10-9677-2356",
                   description: "카드단말기 \xB7 포스기 \xB7 키오스크부터 인터넷 \xB7 인테리어까지. 매장에 필요한 모든 장비를 전국 17개 시\xB7도 전문 매니저가 출장 설치합니다.",
@@ -6638,8 +6639,8 @@ var RegionPage = ({ region, district, dong, product }) => {
   const districtKey = district?.slug || district?.name;
   const meta2 = districtKey ? getDistrictMeta(region.code, districtKey) ?? defaultDistrictMeta : null;
   const patternIdx = seededInt(seed, 99, 0, 4);
-  const title2 = product ? `${locationLabel} ${product.name} 출장 설치 \xB7 더세이브 스토어` : `${locationLabel} 매장 설비 설치 \xB7 더세이브 스토어`;
-  const description = product ? `${locationLabel} ${product.name} 전문 매니저가 방문 설치합니다. ${meta2?.insight ?? ""}` : `${locationLabel} 지역 매장 설비 출장 설치. ${meta2?.insight ?? ""} 카드단말기 \xB7 포스기 \xB7 키오스크 원스톱.`;
+  const title2 = product ? `${locationLabel} ${product.name} 설치비\xB7관리비 0원 \xB7 더세이브 스토어` : `${locationLabel} 매장 설비 설치 \xB7 설치비\xB7관리비 0원 \xB7 더세이브 스토어`;
+  const description = product ? `${locationLabel} ${product.name} 설치비\xB7관리비 0원, 전문 매니저가 방문 설치합니다. ${meta2?.insight ?? ""} 무료 견적 상담 가능.` : `${locationLabel} 매장 설비 설치비\xB7관리비 0원 출장 설치. ${meta2?.insight ?? ""} 카드단말기 \xB7 포스기 \xB7 키오스크 원스톱.`;
   const canonicalPath = [region.nameKoShort, district?.slug, dong?.slug, product?.slug].filter(Boolean).join("/");
   const currentPath = [region.nameKoShort, district?.slug, dong?.slug].filter(Boolean).join("/");
   const shouldShowInsight = meta2 !== null && (level === "district" || level === "dong" || level === "dong-product");
@@ -8097,16 +8098,24 @@ const __wrapped_default = {
     const __url = new URL(request.url);
     let __path = decodeURIComponent(__url.pathname);
     
-    // 파비콘/로고 서빙 — 검색결과 로고 표시용 (외부 파일 의존 없이 인라인 응답)
-    if (__path === '/favicon.svg' || __path === '/favicon.ico' || /^\/favicon-\d+\.png$/.test(__path) || __path === '/apple-touch-icon.png') {
-      const __faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="104" fill="#FF5500"/><g fill="#fff"><rect x="150" y="170" width="212" height="148" rx="20"/><rect x="150" y="206" width="212" height="30" fill="#FF5500"/><circle cx="186" cy="280" r="14" fill="#FF5500"/><rect x="220" y="270" width="120" height="20" rx="10" fill="#FF5500"/><path d="M196 318 h120 v40 a20 20 0 0 1 -20 20 h-80 a20 20 0 0 1 -20 -20 z"/></g><circle cx="256" cy="388" r="18" fill="#fff"/></svg>`;
-      return new Response(__faviconSvg, {
-        status: 200,
-        headers: {
-          'content-type': 'image/svg+xml; charset=utf-8',
-          'cache-control': 'public, max-age=604800'
-        }
-      });
+    // 파비콘/로고 서빙 — 검색결과 로고 표시용 (PNG 실제 응답, 외부 의존 없음)
+    if (__path === '/favicon.svg' || __path === '/favicon.ico' || /^\/favicon-\d+\.png$/.test(__path) || __path === '/apple-touch-icon.png' || __path === '/logo.png') {
+      const __FAV32 = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAkklEQVR4nO2XSw7AIAhEB+IV20PWQ9pVE0JqBNPChln5wcwTP1GC0jgwdNuXog6SdY40f/PgWUcUBEebawjKMJfidUgBFMC/aubIy3lYTlrHwJoBr7ljjD0DgHlWHuD0PZAO4FuCnb2wUHoGCqAAbADWC2hjTL2ICqAAWP/VIkUdxE8hwxwQSxAJIb141hFhDgA3lT4k7UKg+qwAAAAASUVORK5CYII=";
+      const __FAV180 = "iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAD3klEQVR4nO3dW3LaShRA0cZ1p5gMMh6k70eKlOOAeaiFYGut/zS22HXSUhpyGBv6+DE+tnx91nF4H4fNXvtRLyTefXtU5Ku+iIg5Zc24V1lYyFxjjbCnLihk7jEz7CkLCZkZZoT9tnQBMTPLjJYWBS1mZlva1F0jXsg8wj1bkJsntJh5lHtauyloMfNotzZ3ddBiZiu3tHdV0GJma9c2eDFoMfMsrmlx8XNoeCbfBm0682wuNXk2aDHzrL5r82TQYubZnWvUHpqUf4I2nXkVp1o1oUn5K2jTmVfztVkTmpQ/QZvOvKrP7ZrQpAialLcxbDd4fceGTWhSBE2KoEkRNCkHN4SUmNCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETcp/W/8AD/HLF6yOMcb4edj6J1hd++t0hXxaOOzulkPM54WvTTPo8Bs2TfQaNYNmt3pBRyfPKoLXqhc0uyZoUgRNyj7+YeWc6vPY4N74Wvud0NWYx2j/bhfsN2iSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE3KfoMun3co/24X7Ptw0o7f+Kr9TmiSBE2KoEkRNCmCJkXQpOz7sd1Xnz+6NOOR3uz11lozxIQ++vo5vKWfy5u93lprxgh6jPNh3BvM7PXWWjNI0KQImhRBj3H+5urem67Z6621ZpCgj76GsTSU2euttWZM77+k8CbfJnZTaUKTImhSBE2KoElxluMzZzlengl95CxHgqDHcJYjRNCkCJoUQY/hLEeIoI+c5UhwlmPvYjeVJjQpgiZF0KQImhRBkyJoUgRNSi/o2HPVVQWvVS9odq0ZdHDyTBe9Rs2gx8i+YVOEr03vLMcpznf8Fg75aB9BsxvdLQe7JGhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhS3g7vo/+FZ+zC4X0cTGhSBE2KoEkRNClvY/zeTG/9g8ASx4ZNaFIETcqfoG07eFWf2zWhSfkraFOaV/O1WROalH+CNqV5FadaNaFJORm0Kc2zO9fo2Qktap7Vd21+u+UQNc/mUpP20KRcDNqU5llc0+JVE1rUbO3aBq/ecoiardzS3k17aFHzaLc2d/NNoah5lHtaWxTnx4/xseTPwylLhuaix3amNbMtbWrxc2hRM8uMlqbGaAvCPWYOxVWmq7C5xhp/u6+6XRA2p6y5TX3Y/lfc+/aoe61Nb+hE3rTlg4L/AXmH5VVt/X5UAAAAAElFTkSuQmCC";
+      const __FAV512 = "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";
+      // SVG 요청은 벡터로
+      if (__path === '/favicon.svg') {
+        const __svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="104" fill="#FF5500"/><rect x="150" y="175" width="212" height="170" rx="20" fill="#fff"/><rect x="178" y="200" width="156" height="35" rx="6" fill="#FF5500"/><g fill="#FF5500"><circle cx="195" cy="265" r="9"/><circle cx="253" cy="265" r="9"/><circle cx="311" cy="265" r="9"/><circle cx="195" cy="300" r="9"/><circle cx="253" cy="300" r="9"/><circle cx="311" cy="300" r="9"/></g></svg>`;
+        return new Response(__svg, { status: 200, headers: { 'content-type': 'image/svg+xml; charset=utf-8', 'cache-control': 'public, max-age=604800' } });
+      }
+      // PNG 요청 — 크기별 실제 PNG 응답
+      let __b64 = __FAV32;
+      if (__path === '/favicon-512.png' || __path === '/logo.png') __b64 = __FAV512;
+      else if (__path === '/favicon-180.png' || __path === '/apple-touch-icon.png') __b64 = __FAV180;
+      const __bin = atob(__b64);
+      const __bytes = new Uint8Array(__bin.length);
+      for (let i = 0; i < __bin.length; i++) __bytes[i] = __bin.charCodeAt(i);
+      return new Response(__bytes, { status: 200, headers: { 'content-type': 'image/png', 'cache-control': 'public, max-age=604800' } });
     }
     
     // URL 영문 → 한글 변환 + 광역×제품 가로채기
