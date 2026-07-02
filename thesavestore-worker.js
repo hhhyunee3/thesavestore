@@ -7968,15 +7968,31 @@ function __generateSEOContent(pathname) {
   const __quote = __quotePool[__seoHash(seed + ':qt') % __quotePool.length];
   const quoteBox = `<div style="background:#000;border-radius:18px;padding:34px 30px;margin-bottom:18px;text-align:center"><div style="font-size:38px;line-height:1;color:#FFB400;margin-bottom:8px;font-family:Georgia,serif">&ldquo;</div><p style="font-size:18px;font-weight:800;line-height:1.5;color:#fff;margin:0;letter-spacing:-0.03em">${__quote}</p><div style="margin-top:18px"><a href="tel:010-9677-2356" style="display:inline-flex;align-items:center;gap:7px;background:#FF5500;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 22px;border-radius:100px;letter-spacing:-0.02em">📞 무료 상담 010-9677-2356</a></div></div>`;
 
-  // 본문을 앞(3개) / 뒤(나머지)로 나눠 중간에 사례·인용구 끼워넣기 — 가독성 향상
+  // 본문을 여러 조각으로 나눠 시각 요소를 촘촘히 끼워넣기 — 경쟁사 수준 가독성
   const __bodyArr = bodyItems;
-  const __bodyFront = __bodyArr.slice(0, 3).join('');
-  const __bodyBack = __bodyArr.slice(3).join('');
+  const __b1 = __bodyArr.slice(0, 2).join('');
+  const __b2 = __bodyArr.slice(2, 4).join('');
+  const __b3 = __bodyArr.slice(4, 6).join('');
+  const __b4 = __bodyArr.slice(6).join('');
   const __caseFirst = caseItems.length > 0 ? caseItems[0] : '';
   const __caseRest = caseItems.slice(1).join('');
 
   // 비교 표 (검정 헤더) — 업종 페이지처럼 가독성 향상용
   const __tableBox = `<div style="margin-bottom:32px;overflow-x:auto"><div style="font-size:13px;font-weight:800;color:#000;margin-bottom:12px;letter-spacing:-0.02em">📊 ${loc} 매장 장비 비교</div><table style="width:100%;border-collapse:collapse;font-size:14px;min-width:480px"><thead><tr><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:8px 0 0 0">비교 항목</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">경제형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">표준형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:0 8px 0 0">프리미엄</th></tr></thead><tbody><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">처리 속도</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">보통</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">빠름</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매우 빠름</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매장 적합성</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★★</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">부가 기능</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">기본</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">POS 연동</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">완전 통합</td></tr><tr><td style="padding:13px 14px;color:#333">A/S 지원</td><td style="padding:13px 14px;color:#333">기본</td><td style="padding:13px 14px;color:#333">표준</td><td style="padding:13px 14px;color:#333">우선 지원</td></tr></tbody></table></div>`;
+
+  // 진행 순서 표 (상담→제안→설치→유지) — 경쟁사 스타일
+  const __stepBox = `<div style="margin-bottom:32px;background:#fff;border:1px solid #EEE;border-radius:14px;overflow:hidden"><div style="font-size:15px;font-weight:900;color:#000;letter-spacing:-0.02em;padding:20px 24px 4px">🗓️ 상담부터 설치까지, ${loc} 진행 순서</div><table style="width:100%;border-collapse:collapse;font-size:14px"><tbody>${[['상담 단계',`${loc} 매장 운영 패턴 청취`],['제안 단계','매장에 맞는 사양 + 부가 장비 안내'],['설치 단계','현장 진행, 사용법까지 안내'],['유지 단계','매니저 직통, 신속 대응']].map(([a,b],i)=>`<tr><td style="padding:14px 24px;font-weight:800;color:#000;white-space:nowrap;border-bottom:${i<3?'1px solid #F0F0F0':'none'};width:110px">${a}</td><td style="padding:14px 24px;color:#666;border-bottom:${i<3?'1px solid #F0F0F0':'none'}">${b}</td></tr>`).join('')}</tbody></table></div>`;
+
+  // 콜아웃 박스 (보라 왼쪽 바 강조) — 핵심 메시지
+  const __calloutInline = `<div style="margin-bottom:32px;background:#F5F3FF;border-left:4px solid #7C3AED;border-radius:8px;padding:18px 22px"><p style="font-size:14.5px;line-height:1.75;color:#4C2889;margin:0;font-weight:600">✓ 어디서든 결제, 모든 결제 수단 OK — ${loc} 매장 운영 중 흔한 어려움을 해소하는 데 효과적입니다.</p></div>`;
+
+  // FAQ 박스 (Q&A 카드) — 화면에 보이는 자주 묻는 질문
+  const __faqBoxItems = [
+    [`${loc} ${__prodLabel || "매장 설비"} 설치, 시간은 얼마나 걸리나요?`, '설치는 보통 짧은 시간 안에 끝납니다. 매장 환경에 따라 달라질 수 있어요.'],
+    [`${loc}에서 설치 후 문제가 생기면 어떻게 하나요?`, `담당 매니저에게 연락하시면 원격 지원으로 빠르게 처리하고, 필요하면 ${loc} 매장으로 직접 출동합니다.`],
+    [`${loc}에서 견적은 얼마나 빨리 받을 수 있나요?`, `전화·카카오톡으로 문의 주시면 빠르게 견적 안내드립니다. ${loc} 매장 환경을 듣고 적합한 사양으로 정직하게 안내드려요.`]
+  ];
+  const __faqBox = `<div style="margin-bottom:32px"><div style="font-size:16px;font-weight:900;color:#000;letter-spacing:-0.02em;margin-bottom:16px">❓ ${loc} 자주 묻는 질문</div><div style="display:flex;flex-direction:column;gap:12px">${__faqBoxItems.map(([q,a])=>`<div style="background:#fff;border:1px solid #EEE;border-radius:12px;padding:18px 22px"><div style="font-size:14.5px;font-weight:800;color:#000;margin-bottom:8px;letter-spacing:-0.02em"><span style="color:#7C3AED;margin-right:6px">Q.</span>${q}</div><div style="font-size:13.5px;color:#666;line-height:1.7;padding-left:20px">${a}</div></div>`).join('')}</div></div>`;
 
   // 점검 항목 체크리스트 (✓ 박스) — 업종 페이지 p-checks 스타일
   const __checkPool = [
@@ -7997,20 +8013,29 @@ function __generateSEOContent(pathname) {
   const __callout = __calloutPool[__seoHash(seed + ':co') % __calloutPool.length];
   const __calloutBox = `<div style="background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:20px 24px;margin-bottom:32px"><p style="font-size:14.5px;line-height:1.8;color:#5D4400;margin:0"><strong style="color:#3D2C00">직접 들은 이야기</strong> · ${__callout}</p></div>`;
 
+  // 하단 상담 CTA 박스 (경쟁사 스타일 — 보라 테두리)
+  const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${loc}에서 매장 설비 설치를 고민 중이신가요?</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">상담 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
+
   return `<section style="padding:56px 0;border-top:0.5px solid #EEE;background:#FAF8F3"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">매장 운영 가이드</div>
     <h2 style="font-size:26px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${h2}</h2>
     ${introHtml}
     ${__kwHtml}
-    ${__bodyFront}
+    ${__b1}
     ${__checkBox2}
-    ${__caseFirst}
+    ${__b2}
     ${__tableBox}
-    ${quoteBox}
+    ${__caseFirst}
+    ${__calloutInline}
+    ${__b3}
+    ${__faqBox}
+    ${__stepBox}
     ${__locParaHtml}
-    ${__bodyBack}
+    ${__b4}
     ${__calloutBox}
     ${checkBox}
+    ${quoteBox}
+    ${__ctaBox}
   </div></section>
   <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">실제 설치 후기</div>
