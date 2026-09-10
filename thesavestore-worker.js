@@ -7047,6 +7047,21 @@ function __buildSitemapEntries() {
   
   main.push({ url: base + "/", priority: "1.0", changefreq: "weekly" });
   main.push({ url: base + "/regions", priority: "0.8", changefreq: "weekly" });
+
+  /*
+   * 업종별 철거 — /products/demolition/ 아래.
+   * 지금까지 사이트맵에도 RSS 에도 없어서 내부 링크로만 발견되던 곳이다.
+   * 허브와 카테고리 10개를 먼저 올린다. 업종 500개는 이쪽이 색인되는 걸
+   * 확인한 뒤에 열기로 했다 — 한 번에 올리면 크롤 예산만 얇게 퍼진다.
+   */
+  const __DEMOL_MACROS = [
+    "restaurant", "cafe", "convenience", "beauty", "medical",
+    "academy", "retail", "service", "etc"
+  ];
+  main.push({ url: base + "/products/demolition/", priority: "0.8", changefreq: "weekly" });
+  for (const m of __DEMOL_MACROS) {
+    main.push({ url: base + "/products/demolition/" + m + "/", priority: "0.6", changefreq: "monthly" });
+  }
   
   for (const r of regions) {
     main.push({ url: buildUrl(r.nameKoShort), priority: "0.7", changefreq: "weekly" });
@@ -8520,7 +8535,9 @@ const __wrapped_default = {
           }
           const [__slug, __ko, __cat, __macro, __idx] = __row;
           const __mInfo = __MACRO_META[__macro];
-          const __pats = [`${__pInfo.name} 설치`,`${__pInfo.name} 추천`,`${__pInfo.name} 비교`,`무선 ${__pInfo.name}`,__pInfo.name];
+          const __pats = __pSlug === 'demolition'
+            ? ['철거', '철거 견적', '철거 비용', '매장 정리', '폐업 정리']
+            : [`${__pInfo.name} 설치`,`${__pInfo.name} 추천`,`${__pInfo.name} 비교`,`무선 ${__pInfo.name}`,__pInfo.name];
           const __pat = __pats[__idx % 5];
           const __title = `${__ko} ${__pat}`;
           const __img = __getArticleImg(__macro, __slug);
@@ -8769,7 +8786,9 @@ const __wrapped_default = {
           const __startIdx = (__page - 1) * __perPage;
           const __pageItems = __catItems.slice(__startIdx, __startIdx + __perPage);
           
-          const __pats = [`${__pInfo.name} 설치`,`${__pInfo.name} 추천`,`${__pInfo.name} 비교`,`무선 ${__pInfo.name}`,__pInfo.name];
+          const __pats = __pSlug === 'demolition'
+            ? ['철거', '철거 견적', '철거 비용', '매장 정리', '폐업 정리']
+            : [`${__pInfo.name} 설치`,`${__pInfo.name} 추천`,`${__pInfo.name} 비교`,`무선 ${__pInfo.name}`,__pInfo.name];
           const __listHtml = __pageItems.map(r => {
             const [__s, __k, __c, __m, __i] = r;
             const __t = __k + ' ' + __pats[__i % 5];
@@ -8808,7 +8827,7 @@ const __wrapped_default = {
           }).join('');
           
           const __canon = `https://${__pHost}/products/${__pSlug}/`;
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pInfo.name} 설치 — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pInfo.name} 설치 — 더세이브 스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section><section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section><section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8878,8 +8897,10 @@ const __wrapped_default = {
       __ddProd = __reqSegs[3];
       const __internalUrl = new URL('/' + __reqSegs.slice(0,3).map(encodeURIComponent).join('/'), request.url).href;
       __actualRequest = new Request(__internalUrl, { headers: request.headers });
-    } else if (__reqSegs.length === 3 && __REGION_NAMES.includes(__reqSegs[0]) && ['키오스크', '테이블오더', '자동판매기'].includes(__reqSegs[2])) {
-      // 시군구×{키오스크/테이블오더/자동판매기} 가로채기 — 시군구(2-seg)으로 internal fetch
+    } else if (__reqSegs.length === 3 && __REGION_NAMES.includes(__reqSegs[0]) && ['철거', '키오스크', '테이블오더', '자동판매기'].includes(__reqSegs[2])) {
+      // 시군구×{철거/키오스크/테이블오더/자동판매기} 가로채기 — 시군구(2-seg)으로 internal fetch
+      // 철거는 여기 없어서 Hono 로 흘러갔고, 첫 동으로 301 되고 있었다.
+      // 사이트맵에는 276개가 올라가 있는데 전부 리다이렉트였다.
       const __internalUrl = new URL('/' + __reqSegs.slice(0,2).map(encodeURIComponent).join('/'), request.url).href;
       __actualRequest = new Request(__internalUrl, { headers: request.headers });
     } else if (__isEnglishUrl) {
@@ -9029,6 +9050,44 @@ const __wrapped_default = {
       const url = new URL(request.url);
       if (!__shouldBoost(url.pathname)) return response;
       let html = await response.text();
+
+      /*
+       * 제품 페이지는 상위 페이지를 internal fetch 해서 본문만 바꿔치는 구조다.
+       * 그래서 head 는 상위 것이 그대로 남아, canonical 이 상위를 가리키고
+       * title 에도 제품명이 빠져 있었다. 사이트맵에는 올려놓고 페이지에서는
+       * 색인하지 말라고 말하는 셈이라, 여기서 head 를 이 페이지 것으로 맞춘다.
+       */
+      {
+        const __prodSegs = decodeURIComponent(url.pathname).split('/').filter(Boolean);
+        const __lastSeg = __prodSegs[__prodSegs.length - 1] || '';
+        const __isProdPage =
+          __prodSegs.length >= 2 && __prodSegs.length <= 4 &&
+          __REGION_NAMES.includes(__prodSegs[0]) &&
+          __PRODUCT_NAMES.includes(__lastSeg);
+        if (__isProdPage) {
+          const __placeKo = __prodSegs.slice(0, -1).join(' ');
+          const __spotKo = __prodSegs[__prodSegs.length - 2];
+          const __selfUrl = 'https://thesavestore.com/' +
+            __prodSegs.map(encodeURIComponent).join('/');
+          // 철거는 설치가 아니라 걷어내는 일이라 문구를 따로 쓴다
+          const __isDemol = __lastSeg === '철거';
+          const __newTitle = __isDemol
+            ? `${__placeKo} 철거 · 매장 정리·폐업까지 · 더세이브스토어`
+            : `${__placeKo} ${__lastSeg} 설치 · 설치비·관리비 0원 · 더세이브스토어`;
+          const __newDesc = __isDemol
+            ? `${__spotKo} 매장 철거·인테리어 정리·폐업 처리. 현장 확인 후 견적을 드리고 폐기물까지 정리해 드립니다.`
+            : `${__spotKo} ${__lastSeg} 설치비·관리비 0원, 전문 매니저가 방문 설치합니다. 무료 견적 상담 가능.`;
+          html = html.replace(/<link rel="canonical" href="[^"]*"/, `<link rel="canonical" href="${__selfUrl}"`);
+          html = html.replace(/<meta property="og:url" content="[^"]*"/, `<meta property="og:url" content="${__selfUrl}"`);
+          html = html.replace(/<title>[^<]*<\/title>/, `<title>${__newTitle}</title>`);
+          html = html.replace(/<meta property="og:title" content="[^"]*"/, `<meta property="og:title" content="${__newTitle}"`);
+          html = html.replace(/<meta name="twitter:title" content="[^"]*"/, `<meta name="twitter:title" content="${__newTitle}"`);
+          html = html.replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${__newDesc}"`);
+          html = html.replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${__newDesc}"`);
+          html = html.replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${__newDesc}"`);
+        }
+      }
+
       // ───────── 후처리 v2 — 전체 정리 ─────────
       let __decPath = decodeURIComponent(url.pathname);
       let __segs2 = __decPath.split('/').filter(Boolean);
