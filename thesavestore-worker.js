@@ -2716,6 +2716,8 @@ var Layout = ({ meta: meta2, children }) => {
       /* @__PURE__ */ jsxDEV("link", { rel: "apple-touch-icon", sizes: "180x180", href: "/favicon-180.png" }),
       /* @__PURE__ */ jsxDEV("link", { rel: "shortcut icon", href: "/favicon.ico" }),
       /* @__PURE__ */ jsxDEV("meta", { name: "theme-color", content: "#FF5500" }),
+      /* @__PURE__ */ jsxDEV("meta", { property: "og:site_name", content: "더세이브스토어" }),
+      /* @__PURE__ */ jsxDEV("meta", { property: "og:locale", content: "ko_KR" }),
       /* @__PURE__ */ jsxDEV("meta", { property: "og:title", content: meta2.title }),
       /* @__PURE__ */ jsxDEV("meta", { property: "og:description", content: meta2.description }),
       /* @__PURE__ */ jsxDEV("meta", { property: "og:type", content: "website" }),
@@ -2752,9 +2754,15 @@ var Layout = ({ meta: meta2, children }) => {
                 {
                   "@type": "Organization",
                   "@id": "https://thesavestore.com/#organization",
-                  name: "더세이브 스토어",
-                  url: "https://thesavestore.com",
-                  logo: "https://thesavestore.com/logo.png",
+                  name: "더세이브스토어",
+                  alternateName: ["더세이브 스토어", "THE SAVE STORE"],
+                  url: "https://thesavestore.com/",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://thesavestore.com/logo.png",
+                    width: 512,
+                    height: 512
+                  },
                   image: "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/a1.png",
                   telephone: "+82-10-9677-2356",
                   description: "카드단말기 \xB7 포스기 \xB7 키오스크부터 인터넷 \xB7 인테리어까지. 매장에 필요한 모든 장비를 전국 17개 시\xB7도 전문 매니저가 출장 설치합니다.",
@@ -2769,8 +2777,9 @@ var Layout = ({ meta: meta2, children }) => {
                 {
                   "@type": "WebSite",
                   "@id": "https://thesavestore.com/#website",
-                  url: "https://thesavestore.com",
-                  name: "더세이브 스토어",
+                  url: "https://thesavestore.com/",
+                  name: "더세이브스토어",
+                  alternateName: "더세이브 스토어",
                   inLanguage: "ko-KR",
                   publisher: { "@id": "https://thesavestore.com/#organization" }
                 }
@@ -8167,7 +8176,51 @@ const __wrapped_default = {
   async fetch(request, env, ctx) {
     const __url = new URL(request.url);
     let __path = decodeURIComponent(__url.pathname);
-    
+
+    /*
+     * 검색결과에 로고와 한글 이름이 함께 뜨도록 모든 페이지 head 에 넣는다.
+     * 네이버·구글 모두 사이트명은 og:site_name 과 WebSite 의 name/alternateName 에서,
+     * 로고는 파비콘과 Organization.logo 에서 가져간다.
+     * /products 쪽 페이지에는 지금까지 이 셋이 다 빠져 있어서 도메인만 노출됐다.
+     */
+    const __SITE_NAME = '더세이브스토어';
+    const __SITE_HEAD =
+      '<meta property="og:site_name" content="' + __SITE_NAME + '">' +
+      '<meta property="og:locale" content="ko_KR">' +
+      '<link rel="icon" href="/favicon.svg" type="image/svg+xml">' +
+      '<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">' +
+      '<link rel="apple-touch-icon" href="/apple-touch-icon.png">' +
+      '<script type="application/ld+json">' +
+      JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Organization',
+            '@id': 'https://thesavestore.com/#organization',
+            name: __SITE_NAME,
+            alternateName: ['더세이브 스토어', 'THE SAVE STORE'],
+            url: 'https://thesavestore.com/',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://thesavestore.com/logo.png',
+              width: 512,
+              height: 512,
+            },
+            telephone: '+82-10-9677-2356',
+          },
+          {
+            '@type': 'WebSite',
+            '@id': 'https://thesavestore.com/#website',
+            name: __SITE_NAME,
+            alternateName: '더세이브 스토어',
+            url: 'https://thesavestore.com/',
+            inLanguage: 'ko-KR',
+            publisher: { '@id': 'https://thesavestore.com/#organization' },
+          },
+        ],
+      }) +
+      '</script>';
+
     // 파비콘/로고 서빙 — 검색결과 로고 표시용 (PNG 실제 응답, 외부 의존 없음)
     if (__path === '/favicon.svg' || __path === '/favicon.ico' || /^\/favicon-\d+\.png$/.test(__path) || __path === '/apple-touch-icon.png' || __path === '/logo.png') {
       const __FAV32 = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAkklEQVR4nO2XSw7AIAhEB+IV20PWQ9pVE0JqBNPChln5wcwTP1GC0jgwdNuXog6SdY40f/PgWUcUBEebawjKMJfidUgBFMC/aubIy3lYTlrHwJoBr7ljjD0DgHlWHuD0PZAO4FuCnb2wUHoGCqAAbADWC2hjTL2ICqAAWP/VIkUdxE8hwxwQSxAJIb141hFhDgA3lT4k7UKg+qwAAAAASUVORK5CYII=";
@@ -8261,6 +8314,39 @@ const __wrapped_default = {
       const __pSlug = (__pSegs[1] || '').trim();
       const __pCat = (__pSegs[2] || '').trim();
       const __pItemSlug = (__pSegs[3] || '').trim();
+
+      /*
+       * 편의점 포스기는 다루지 않는다.
+       * 본사에서 지정한 포스를 쓰는 곳이라 우리가 넣어드릴 수 있는 게 없다.
+       * 이미 네이버에 색인돼 있어서, 없는 척(404)하지 않고 410 으로 지웠다고 알린다.
+       * 카드단말기·키오스크 등 다른 제품 쪽 편의점 페이지는 그대로 둔다.
+       */
+      const __POS_NO_CVS = [
+        'convenience-store', 'cu-store', 'gs25-store',
+        'seven-eleven', 'emart24', 'ministop', 'unmanned-cvs'
+      ];
+      const __isGonePage = (item) => __pSlug === 'pos' && __POS_NO_CVS.includes(item);
+      if (__isGonePage(__pItemSlug)) {
+        return new Response(
+          '<!doctype html><html lang="ko"><head><meta charset="utf-8">' +
+          '<title>더는 안내하지 않는 페이지 · 더세이브스토어</title>' +
+          '<meta name="robots" content="noindex">' + __SITE_HEAD +
+          '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+          '<style>body{font-family:-apple-system,BlinkMacSystemFont,Pretendard,sans-serif;margin:0;' +
+          'display:flex;min-height:100vh;align-items:center;justify-content:center;color:#222;padding:24px}' +
+          'div{max-width:520px;line-height:1.75}h1{font-size:22px;margin:0 0 14px}' +
+          'p{color:#555;margin:0 0 12px}a{color:#FF5500;font-weight:600}</style></head><body><div>' +
+          '<h1>편의점 포스기는 안내하지 않습니다</h1>' +
+          '<p>편의점은 본사에서 지정한 포스를 쓰기 때문에 저희가 도와드릴 수 있는 부분이 없습니다. ' +
+          '그래서 이 페이지는 내렸습니다.</p>' +
+          '<p>같은 매장에서 쓰시는 <a href="/products/card-terminal/">카드단말기</a>나 ' +
+          '<a href="/products/kiosk/">키오스크</a>는 안내해 드리고 있습니다. ' +
+          '<a href="/products/pos/">다른 업종 포스기</a>도 보실 수 있습니다.</p>' +
+          '<p><a href="/">더세이브스토어 홈으로</a></p>' +
+          '</div></body></html>',
+          { status: 410, headers: { 'Content-Type': 'text/html;charset=utf-8', 'X-Robots-Tag': 'noindex' } }
+        );
+      }
       
       // 6개 제품 메타
       const __PRODUCTS = {
@@ -8653,7 +8739,7 @@ const __wrapped_default = {
           const __faqIdx = __faqPool[__idx % 5];
           const __faqHtml = __faqIdx.map(i => `<details class="p-faq"><summary>${__faqs[i][0]}</summary><p>${__faqs[i][1]}</p></details>`).join('');
           
-          const __related = __CT_DATA.filter(r => r[3] === __macro && r[0] !== __slug).slice(0, 6);
+          const __related = __CT_DATA.filter(r => r[3] === __macro && r[0] !== __slug && !__isGonePage(r[0])).slice(0, 6);
           const __relHtml = __related.map(r => `<a href="/products/${__pSlug}/${r[3]}/${r[0]}/" class="p-rel-card">${r[1]} ${__PN} →</a>`).join('');
           
           const __faqJsonLd = __faqIdx.map(i => ({"@type":"Question","name":__faqs[i][0],"acceptedAnswer":{"@type":"Answer","text":__faqs[i][1]}}));
@@ -8669,14 +8755,14 @@ const __wrapped_default = {
             {"@type":"BreadcrumbList","itemListElement":__crumbList}
           ]});
           
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
         // ============= CASE 2: 카테고리 목록 페이지 =============
         if (__pCat && !__pItemSlug && __MACRO_META[__pCat]) {
           const __mInfo = __MACRO_META[__pCat];
-          const __catItems = __CT_DATA.filter(r => r[3] === __pCat);
+          const __catItems = __CT_DATA.filter(r => r[3] === __pCat && !__isGonePage(r[0]));
           const __page = parseInt(__url.searchParams.get('page') || '1', 10);
           const __perPage = 50;
           const __totalPages = Math.ceil(__catItems.length / __perPage);
@@ -8708,7 +8794,7 @@ const __wrapped_default = {
           const __title = `${__mInfo.name} ${__pInfo.name} 안내 — 더세이브 스토어`;
           const __desc = `${__mInfo.desc} 등 ${__catItems.length}개 업종별 ${__mInfo.name} ${__pInfo.name} 설치 안내.`;
           
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title}</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title}"><meta property="og:description" content="${__desc}"><meta property="og:type" content="website">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__pInfo.name}</a> · <span style="color:#000;font-weight:700">${__mInfo.name}</span></div><div class="p-tag">${__mInfo.emoji} ${__mInfo.name}</div><h1 class="p-h1">${__mInfo.name} ${__pInfo.name}</h1><p class="p-lead">${__mInfo.desc} 매장에 맞는 ${__pInfo.name}를 골라보세요.</p></div></section><section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 업종별 안내 (총 ${__catItems.length}개)</h2><div class="p-titlelist">${__listHtml}</div>${__pagerHtml}</div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title}</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title}"><meta property="og:description" content="${__desc}"><meta property="og:type" content="website">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__pInfo.name}</a> · <span style="color:#000;font-weight:700">${__mInfo.name}</span></div><div class="p-tag">${__mInfo.emoji} ${__mInfo.name}</div><h1 class="p-h1">${__mInfo.name} ${__pInfo.name}</h1><p class="p-lead">${__mInfo.desc} 매장에 맞는 ${__pInfo.name}를 골라보세요.</p></div></section><section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 업종별 안내 (총 ${__catItems.length}개)</h2><div class="p-titlelist">${__listHtml}</div>${__pagerHtml}</div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8722,7 +8808,7 @@ const __wrapped_default = {
           }).join('');
           
           const __canon = `https://${__pHost}/products/${__pSlug}/`;
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pInfo.name} 설치 — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pInfo.name} 설치 — 더세이브 스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section><section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pInfo.name} 설치 — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pInfo.name} 설치 — 더세이브 스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section><section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8735,7 +8821,7 @@ const __wrapped_default = {
     // /regions 페이지 — 모든 시·군·구·동 노출
     if (__path === '/regions' || __path === '/regions/') {
       const __regionsHost = new URL(request.url).host;
-      let __regionsHtml = '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>전국 지역 안내 — 더세이브 스토어</title><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="전국 17개 광역, 276개 시·군·구, 5,738개 동·읍·면 매장 설치 안내."><style>body{font-family:-apple-system,BlinkMacSystemFont,\'Pretendard\',sans-serif;margin:0;background:#FAF8F3;color:#222;line-height:1.6}.wrap{max-width:1100px;margin:0 auto;padding:48px 24px}h1{font-size:32px;font-weight:900;letter-spacing:-0.04em;margin:0 0 12px;color:#000}.sub{font-size:14px;color:#666;margin-bottom:36px}.region{background:#fff;border:1px solid #EEE;border-radius:14px;margin-bottom:18px;overflow:hidden}.region-head{padding:18px 24px;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center}.region-head a{color:#fff;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:-0.02em}.region-head .stat{font-size:12px;color:rgba(255,255,255,0.6);font-weight:600}.region-body{padding:18px 24px}.sg{margin-bottom:14px}.sg-name{font-size:14px;font-weight:800;color:#000;margin-bottom:6px;letter-spacing:-0.02em}.sg-name a{color:#FF5500;text-decoration:none}.dongs{font-size:12.5px;color:#444;line-height:1.85}.dongs a{color:#444;text-decoration:none;display:inline-block;padding:1px 4px;margin:0 2px 2px 0}.dongs a:hover{color:#FF5500;text-decoration:underline}@media(max-width:768px){.wrap{padding:24px 16px}h1{font-size:24px}.region-head{padding:14px 18px}.region-body{padding:14px 18px}}</style></head><body><div class="wrap"><h1>전국 지역 안내</h1><p class="sub">17개 광역 · 276개 시·군·구 · 5,738개 동·읍·면 매장 설치 정보</p>';
+      let __regionsHtml = '<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>전국 지역 안내 — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="전국 17개 광역, 276개 시·군·구, 5,738개 동·읍·면 매장 설치 안내."><style>body{font-family:-apple-system,BlinkMacSystemFont,\'Pretendard\',sans-serif;margin:0;background:#FAF8F3;color:#222;line-height:1.6}.wrap{max-width:1100px;margin:0 auto;padding:48px 24px}h1{font-size:32px;font-weight:900;letter-spacing:-0.04em;margin:0 0 12px;color:#000}.sub{font-size:14px;color:#666;margin-bottom:36px}.region{background:#fff;border:1px solid #EEE;border-radius:14px;margin-bottom:18px;overflow:hidden}.region-head{padding:18px 24px;background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center}.region-head a{color:#fff;text-decoration:none;font-size:18px;font-weight:900;letter-spacing:-0.02em}.region-head .stat{font-size:12px;color:rgba(255,255,255,0.6);font-weight:600}.region-body{padding:18px 24px}.sg{margin-bottom:14px}.sg-name{font-size:14px;font-weight:800;color:#000;margin-bottom:6px;letter-spacing:-0.02em}.sg-name a{color:#FF5500;text-decoration:none}.dongs{font-size:12.5px;color:#444;line-height:1.85}.dongs a{color:#444;text-decoration:none;display:inline-block;padding:1px 4px;margin:0 2px 2px 0}.dongs a:hover{color:#FF5500;text-decoration:underline}@media(max-width:768px){.wrap{padding:24px 16px}h1{font-size:24px}.region-head{padding:14px 18px}.region-body{padding:14px 18px}}</style></head><body><div class="wrap"><h1>전국 지역 안내</h1><p class="sub">17개 광역 · 276개 시·군·구 · 5,738개 동·읍·면 매장 설치 정보</p>';
       
       // 광역별 그룹화
       const __byRegion = {};
