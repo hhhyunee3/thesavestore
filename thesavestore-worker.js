@@ -8293,6 +8293,40 @@ const __wrapped_default = {
       ['💰', '집기 매입', '주방 기기, 냉장·냉동고, 테이블과 의자, 에어컨처럼 아직 쓸 수 있는 물건은 값을 쳐서 사들입니다. 그만큼 철거 비용에서 빼 드립니다. 버리면 처리비가 나가지만 넘기시면 돌려받으시는 셈입니다.'],
       ['🏛️', '폐업 정부 지원금 안내', '점포 정리에 드는 비용 일부를 지원받으실 수 있는 제도가 있습니다. 신청 시기와 서류를 몰라 놓치시는 분이 많습니다. 대상이 되시는지 확인해 드리고 신청 절차도 함께 안내해 드립니다.'],
     ];
+    const __demolIntroHtml =
+      '<section class="p-section"><div class="p-wrap">' +
+      '<h2>매장 정리, 어디까지 해야 끝나나요</h2>' +
+      '<p>문을 닫기로 하셨다면 뜯어내는 일만 남은 게 아닙니다. 임대차 계약서에 적힌 원상복구 범위를 맞춰야 보증금이 제때 돌아오고, ' +
+      '쓰시던 집기 중 값이 나가는 것은 골라내야 손해를 덜 보시고, 나머지는 종류별로 분류해 폐기물로 처리해야 합니다. ' +
+      '여기에 카드단말기와 포스 해지 같은 행정 처리까지 겹칩니다.</p>' +
+      '<p>이 과정을 나눠서 맡기시면 일정이 어긋나기 쉽습니다. 철거 업체는 다 끝냈다고 하는데 폐기물이 남아 있거나, ' +
+      '임대인이 요구하는 복구 범위가 견적에 없던 것이어서 추가 비용이 붙는 식입니다. ' +
+      '더세이브스토어는 이걸 한 번에 맡아, 방문 견적 때 정리한 범위 그대로 마무리합니다.</p>' +
+      '<p>전화로는 금액을 말씀드리기 어렵습니다. 같은 20평이라도 뜯어낼 인테리어의 양, 나오는 폐기물의 종류, ' +
+      '엘리베이터 유무, 작업 차량을 댈 자리가 있는지에 따라 달라집니다. ' +
+      '그래서 먼저 찾아뵙고 눈으로 본 뒤에 말씀드립니다. 방문 견적은 무료이고, 보시고 다른 곳과 비교하셔도 됩니다.</p>' +
+      '</div></section>';
+
+    const __DEMOL_STEPS = [
+      ['전화 주시면', '매장 주소와 업종, 평수, 언제까지 비워야 하는지만 알려주세요. 방문 일정을 잡습니다.'],
+      ['방문 견적', '현장을 보고 복구 범위와 폐기물, 매입 가능한 집기를 함께 확인해 금액을 드립니다. 무료입니다.'],
+      ['서류 확인', '임대차 계약서의 복구 범위를 견적서에 적어 둡니다. 폐업 지원금 대상이신지도 이때 봅니다.'],
+      ['작업', '영업 마지막 날에 맞춰 진행합니다. 야간·주말도 가능합니다. 폐기물은 분류해 합법 처리합니다.'],
+      ['마무리', '복구까지 끝낸 상태로 넘겨드립니다. 필요하시면 처리 증빙을 드립니다.'],
+    ];
+    const __demolStepHtml =
+      '<section class="p-section"><div class="p-wrap">' +
+      '<h2>연락부터 마무리까지</h2>' +
+      '<div style="border:1px solid #EEE;border-radius:14px;overflow:hidden">' +
+      __DEMOL_STEPS.map(([t, dsc], i) =>
+        '<div style="display:flex;gap:16px;padding:18px 22px;' +
+        (i < __DEMOL_STEPS.length - 1 ? 'border-bottom:1px solid #F0F0F0;' : '') + '">' +
+        '<div style="flex-shrink:0;width:26px;height:26px;background:#000;color:#fff;border-radius:8px;' +
+        'display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">' + (i + 1) + '</div>' +
+        '<div><div style="font-weight:800;color:#000;letter-spacing:-0.02em;margin-bottom:4px">' + t + '</div>' +
+        '<div style="font-size:13.5px;color:#666;line-height:1.7">' + dsc + '</div></div></div>').join('') +
+      '</div></div></section>';
+
     const __demolServiceHtml = (heading) =>
       '<section style="padding:48px 0;background:#FAFAFA;border-top:0.5px solid #EEE">' +
       '<div style="max-width:1080px;margin:0 auto;padding:0 24px">' +
@@ -8928,7 +8962,7 @@ const __wrapped_default = {
           }).join('');
           
           const __canon = `https://${__pHost}/products/${__pSlug}/`;
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section>${__pSlug === 'demolition' ? __demolServiceHtml('철거, 이렇게 해드립니다') : ''}${__otherCards ? `<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>` : ''}${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>${__pSlug === 'demolition' ? '업종마다 걷어낼 것이 다릅니다. 주방 설비가 들어간 곳, 시술 의자가 고정된 곳, 진열장이 벽에 붙은 곳은 작업도 비용도 달라집니다. 업종별로 정리해 두었습니다.' : `매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.`}</p><div class="p-mcat-grid">${__mcatCards}</div></div></section>${__pSlug === 'demolition' ? __demolIntroHtml + __demolServiceHtml('철거, 이렇게 해드립니다') + __demolStepHtml : ''}${__otherCards ? `<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>` : ''}${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8998,10 +9032,15 @@ const __wrapped_default = {
       __ddProd = __reqSegs[3];
       const __internalUrl = new URL('/' + __reqSegs.slice(0,3).map(encodeURIComponent).join('/'), request.url).href;
       __actualRequest = new Request(__internalUrl, { headers: request.headers });
-    } else if (__reqSegs.length === 3 && __REGION_NAMES.includes(__reqSegs[0]) && ['철거', '키오스크', '테이블오더', '자동판매기'].includes(__reqSegs[2])) {
-      // 시군구×{철거/키오스크/테이블오더/자동판매기} 가로채기 — 시군구(2-seg)으로 internal fetch
-      // 철거는 여기 없어서 Hono 로 흘러갔고, 첫 동으로 301 되고 있었다.
-      // 사이트맵에는 276개가 올라가 있는데 전부 리다이렉트였다.
+    } else if (__reqSegs.length === 3 && __REGION_NAMES.includes(__reqSegs[0]) && __PRODUCT_NAMES.includes(__reqSegs[2])) {
+      // 시군구×제품 가로채기 — 시군구(2-seg)으로 internal fetch
+      //
+      // 원래 Hono 쪽은 시군구×제품 페이지를 만들지 않고 그 구의 첫 동으로 301 시켰다.
+      // 나중에 키오스크·테이블오더·자동판매기를 여기에 넣어 실제 페이지를 만들었는데,
+      // 철거는 광역(2-seg)·동(4-seg) 목록에만 들어가고 여기서 빠졌고,
+      // 카드단말기·포스기는 예전 301 동작에 그대로 남았다.
+      // 사이트맵은 여섯 제품을 다 올리고 있어서 276×3=828개가 리다이렉트였다.
+      // 목록으로 두지 않고 제품 전체를 받는다.
       const __internalUrl = new URL('/' + __reqSegs.slice(0,2).map(encodeURIComponent).join('/'), request.url).href;
       __actualRequest = new Request(__internalUrl, { headers: request.headers });
     } else if (__isEnglishUrl) {
@@ -9298,6 +9337,13 @@ const __wrapped_default = {
         } else if (__segs2.length === 2) {
           __h1 = `${__segs2[1]} 매장 설비<br><span style="color:#FF5500">설치 전문</span>`;
           __label = 'DISTRICT'; __sub = `${__segs2[0]} ${__segs2[1]}`;
+        } else if (__segs2.length === 3 && __PRODUCT_NAMES.includes(__segs2[2])) {
+          // 시군구×제품 — /서울/강남구/카드단말기
+          // 동으로 취급하면 '강남구 카드단말기 매장 설비 설치 전문' 처럼 말이 겹친다
+          __h1 = __segs2[2] === '철거'
+            ? `${__segs2[1]} 매장 철거<br><span style="color:#FF5500">전문</span>`
+            : `${__segs2[1]} ${__segs2[2]}<br><span style="color:#FF5500">설치 전문</span>`;
+          __label = 'DISTRICT × PRODUCT'; __sub = `${__segs2[0]} ${__segs2[1]} · ${__segs2[2]}`;
         } else if (__segs2.length === 3) {
           __h1 = `${__segs2[1]} ${__segs2[2]} 매장 설비<br><span style="color:#FF5500">설치 전문</span>`;
           __label = 'DONG'; __sub = `${__segs2[0]} ${__segs2[1]} ${__segs2[2]}`;
