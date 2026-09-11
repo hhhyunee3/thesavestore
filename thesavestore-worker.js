@@ -7401,7 +7401,7 @@ const __SEO_H2 = [
   '{loc} 매장 사장님을 위한 설비 선택 가이드',
   '{loc} 권역 매장 운영의 핵심',
   '{loc} 매장에 맞는 장비 구성 방법',
-  '{loc} 매장 설치, 무엇을 따져야 하나',
+  '{loc} 매장 철거, 무엇을 따져야 하나',
   '{loc} 매장 운영자라면 알아두실 정보',
   '{loc} 권역 매장 설비 도입 가이드',
   '{loc} 매장의 진짜 운영 비용 분석',
@@ -7427,14 +7427,14 @@ const __SYN = {
   '자동판매기': ['자동판매기', '자판기', '무인 판매기'],
   '철거': ['철거', '점포 철거', '매장 정리'],
   '매장': ['매장', '점포', '영업장'],
-  '사장님': ['사장님', '점주님', '운영자'],
+  '사장님': ['사장님', '점주님'],   // '사장님은' → '운영자은' 이 된다
   '단골': ['단골', '재방문 고객', '단골 손님'],
   '직원': ['직원', '스태프', '근로자'],
   '카드 결제': ['카드 결제', '카드 매출', '카드 사용'],
   '결제 단말기': ['결제 단말기', '결제기', '단말기'],
   '운영': ['운영', '영업', '관리'],
   '도입': ['도입', '설치', '도입·설치'],
-  '비용': ['비용', '가격', '단가'],
+  '비용': ['비용'],                 // '단가을' 처럼 조사가 깨진다
   '권역': ['권역', '지역', '인근 권역'],
   '평균': ['평균', '대체로', '통상적으로'],
   '효율': ['효율', '효율', '효율'],
@@ -7442,16 +7442,16 @@ const __SYN = {
   '진행': ['진행', '진행', '진행'],
   '제공': ['제공', '안내', '지원'],
   '경험': ['경험', '실적', '시공 사례'],
-  '준비': ['준비', '대비', '갖춤'],
-  '필요': ['필요', '필수', '요구'],
+  '준비': ['준비', '대비'],         // '준비하시는' → '갖춤하시는' 이 된다
+  '필요': ['필요'],                 // '필요한데' → '필수한데' 가 된다
   '환경': ['환경', '조건', '여건'],
   '결정': ['결정', '선택', '판단'],
   '서비스': ['서비스', '솔루션', '지원 체계'],
   '문제': ['문제', '이슈', '사고'],
-  '간단': ['간단', '단순', '어렵지 않게'],
+  '간단': ['간단', '단순'],         // '간단합니다' → '어렵지 않게합니다' 가 된다
   '가능합니다': ['가능합니다', '가능합니다', '가능합니다'],
-  '드립니다': ['드립니다', '제공해 드립니다', '안내해 드립니다'],
-  '받으실': ['받으실', '확인하실', '얻으실'],
+  '드립니다': ['드립니다'],         // '도와드립니다' → '도와제공해 드립니다' 가 된다
+  '받으실': ['받으실'],             // '지원받으실' → '지원얻으실' 이 된다
   '하실': ['하실', '하실', '하실'],
   '됩니다': ['됩니다', '됩니다', '됩니다'],
   '있습니다': ['있습니다', '있습니다', '있습니다'],
@@ -7530,7 +7530,11 @@ const __SEO_INTRO_BY_PROD = {
  '철거': [
  '{loc}에서 매장 철거를 결정하셨다면 가장 먼저 확인하실 것은 철거 범위와 폐기물 처리 비용입니다. 일반적인 매장 기준 철거 비용은 매장 규모에 따라 다른 수준이고, 인테리어 자재가 많거나 주방 설비가 복잡한 매장은 일정 금액까지 발생할 수 있습니다. 더세이브 스토어는 {loc} 권역에서 무상 출장 견적을 기본으로 제공합니다.',
  '{loc} 매장 철거는 단순한 장비 제거가 아닙니다. 카드단말기 결제 대행사 해지, 포스기 데이터 백업, 인테리어 정리, 폐기물 처리까지 동시에 진행되어야 매장이 깔끔하게 정리됩니다. {loc} 권역에서 더세이브 스토어 통합 철거 서비스는 모든 작업을 한 번의 출동으로 끝냅니다.',
- '{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용한 야간 철거도 가능해 후속 임차인 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. 작업 소요 시간은 매장 평수에 따라 달라집니다.'
+ '{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용한 야간 철거도 가능해 후속 임차인 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. 작업 소요 시간은 매장 평수에 따라 달라집니다.',
+ '{loc} 상가 철거는 원상복구까지 맡아 드립니다. 임대차 계약서에 적힌 복구 범위를 먼저 확인하고, 어디까지 되돌려 놓아야 하는지 정리한 다음 작업에 들어갑니다. 견적 단계에서 범위를 문서로 남겨 두면 보증금 반환 때 임대인과 부딪힐 일이 줄어듭니다.',
+ '{loc} 매장 철거 견적은 무료 방문 견적입니다. 직접 찾아뵙고 평수와 인테리어 상태, 나올 폐기물을 눈으로 확인한 뒤 금액을 말씀드립니다. 보고 나서 다른 곳과 비교해 보셔도 됩니다. 견적을 봤다고 해서 꼭 맡기셔야 하는 것은 아닙니다.',
+ '{loc}에서 쓰시던 집기는 버리기 전에 매입 여부를 먼저 봐 드립니다. 주방 기기, 냉장·냉동고, 테이블과 의자, 에어컨처럼 아직 쓸 수 있는 물건은 값을 쳐서 사들이고, 그만큼 철거 비용에서 빼 드립니다. 버리면 폐기물 처리비가 나가지만 넘기시면 오히려 돌려받으시는 셈입니다.',
+ '{loc}에서 폐업을 준비하시는 소상공인을 위한 정부 지원 제도가 있습니다. 점포를 정리하는 데 드는 비용 일부를 지원받으실 수 있는데, 신청 시기와 서류를 놓쳐 못 받으시는 분이 많습니다. 대상이 되시는지 확인해 드리고 신청 절차도 함께 안내해 드립니다.'
  ],
  '키오스크': [
  '{loc} 매장에서 키오스크는 무인 셀프 주문 시스템으로, 인건비 부담이 큰 매장 운영자에게 가장 즉각적인 해법이 되고 있습니다. 손님이 화면에서 직접 메뉴와 옵션을 선택하고 결제까지 완료하는 방식이라, 직원은 조리와 응대에 집중할 수 있게 됩니다. {loc} 권역의 분식·패스트푸드·카페 매장에서 도입 빈도가 가장 높은 무인화 장비입니다.',
@@ -7605,7 +7609,7 @@ const __SEO_CASE_BY_PROD = {
 const __SEO_SUBHEAD_BY_PROD = {
   '카드단말기': ['{loc} 매장 카드단말기 설치 핵심','{loc}에서 카드단말기 견적 비교하실 때','{loc} 카드단말기 결제사 비교','{loc} 매장에 맞는 카드단말기 선택','{loc} 카드단말기 설치 후 운영','{loc} 카드 비용 줄이기','{loc} 카드단말기 보안과 안정성'],
   '포스기': ['{loc} 매장 포스기 도입 핵심','{loc}에서 포스기 사양 선택','{loc} 포스기 운영 효율 향상','{loc} 매장에 맞는 포스기 종류','{loc} 포스기 직원 교육과 운영','{loc} 포스기 매출 데이터 활용','{loc} 포스기와 매장 운영 자동화'],
-  '철거': ['{loc} 매장 철거 작업 핵심','{loc}에서 철거 견적 받으실 때','{loc} 매장 철거 일정과 진행','{loc} 매장에 맞는 철거 범위','{loc} 철거 후 폐기물 처리','{loc} 철거 + 데이터 이전 통합','{loc} 매장 철거 안전과 사고 예방'],
+  '철거': ['{loc} 매장 철거 작업 핵심','{loc}에서 철거 견적 받으실 때','{loc} 매장 철거 일정과 진행','{loc} 상가 철거와 원상복구','{loc} 철거 후 폐기물 처리','{loc} 집기 처리와 매입','{loc} 폐업을 준비하실 때'],
   '키오스크': ['{loc} 매장 키오스크 도입 핵심','{loc}에서 키오스크 위치 설계','{loc} 키오스크 화면 UX 최적화','{loc} 매장에 맞는 키오스크 사양','{loc} 키오스크 무인 야간 영업','{loc} 키오스크 객단가 향상 노하우','{loc} 키오스크 사후 관리'],
   '테이블오더': ['{loc} 식당 테이블오더 도입 핵심','{loc}에서 테이블오더 인건비 절감','{loc} 테이블오더 회전율 향상','{loc} 매장에 맞는 테이블오더 사양','{loc} 테이블오더 다국어 메뉴','{loc} 테이블오더 분할 결제','{loc} 테이블오더 사후 관리'],
   '자동판매기': ['{loc} 매장 자동판매기 설치 핵심','{loc}에서 자동판매기 위치 선정','{loc} 자동판매기 상품 라인업','{loc} 매장에 맞는 자판기 모델','{loc} 자동판매기 IoT 원격 관리','{loc} 자동판매기 위탁 운영','{loc} 자동판매기 사후 관리']
@@ -7634,13 +7638,15 @@ const __SEO_CHECK_BY_PROD = {
     ]
   },
   '철거': {
-    title: '{loc} 매장 철거 시 꼭 확인하실 5가지',
+    title: '{loc} 매장 철거 시 꼭 확인하실 7가지',
     items: [
-      {t:'무상 출장 견적', d:'매장 직접 방문 후 정확한 비용 산정. 평수·인테리어·폐기물 점검.'},
-      {t:'폐기물 처리 비용 포함', d:'산업 폐기물 분류 처리. 견적에 포함되어야 추가 비용 발생 없음.'},
-      {t:'카드단말기·포스기 해지 처리', d:'VAN 해지·포스 데이터 백업까지 한 번에. 행정 처리 통합.'},
-      {t:'원상복구 범위 명시', d:'임대 계약 조건 확인. 견적 단계에서 복구 범위 명확히 정리.'},
-      {t:'야간/주말 작업 가능', d:'영업 종료 후 즉시 진행. 후속 임차인 입주 일정에 맞춰 조정.'}
+      {t:'무료 방문 견적', d:'직접 찾아뵙고 평수·인테리어·나올 폐기물을 확인한 뒤 금액을 드립니다.'},
+      {t:'상가 원상복구까지', d:'임대차 계약서의 복구 범위를 먼저 정리하고 그 기준대로 되돌려 놓습니다.'},
+      {t:'집기 매입', d:'아직 쓸 수 있는 주방기기·냉장고·테이블은 값을 쳐서 사들이고 철거비에서 뺍니다.'},
+      {t:'폐업 정부 지원금 안내', d:'점포 정리 비용을 지원받으실 수 있는지 확인해 드리고 신청도 도와드립니다.'},
+      {t:'폐기물 처리 비용 포함', d:'산업 폐기물 분류 처리. 견적에 포함되어야 나중에 추가로 붙지 않습니다.'},
+      {t:'카드단말기·포스기 해지 처리', d:'결제 대행사 해지와 포스 데이터 백업까지 한 번에 정리합니다.'},
+      {t:'야간·주말 작업 가능', d:'영업 종료 후 바로 진행. 후속 임차인 입주 일정에 맞춰 조정합니다.'}
     ]
   },
   '키오스크': {
@@ -7824,8 +7830,10 @@ function __generateSEOContent(pathname) {
   let __prodKey = null;
   if (segs.length === 4 && __PRODS.includes(segs[3])) __prodKey = segs[3];
   else if (segs.length === 2 && __REGIONS.includes(segs[0]) && __PRODS.includes(segs[1])) __prodKey = segs[1];
+  // 시군구×제품(3-seg)이 빠져 있어 /서울/강남구/철거 가 제품 없는 페이지로 취급됐다
+  else if (segs.length === 3 && __REGIONS.includes(segs[0]) && __PRODS.includes(segs[2])) __prodKey = segs[2];
   const __prodLabel = __prodKey;
-  const __kw = __prodKey ? `${__prodLabel} 설치` : '매장 설비 설치';
+  const __kw = __prodKey === '철거' ? '철거' : (__prodKey ? `${__prodLabel} 설치` : '매장 설비 설치');
   
   // 인트로 1개 + 본문 5개 + 사례 2개
   const intros = __prodKey && __SEO_INTRO_BY_PROD[__prodKey] ? __seoPick(__SEO_INTRO_BY_PROD[__prodKey], seed, 'i', 1) : __seoPick(__SEO_INTRO, seed, 'i', 1);
@@ -7926,8 +7934,13 @@ function __generateSEOContent(pathname) {
  `${loc} ${__varSido}의 ${__varStore}를 보면, ${__kw}를 도입한 매장이 운영 면에서 더 안정적인 모습을 보입니다. ${loc} 권역에서 다양한 규모의 매장이 도입하고 있으며, 오래 사용한 뒤 교체하는 패턴이 일반적입니다. 매장 환경에 맞는 사양을 처음부터 잘 선택하시는 것이 가장 중요합니다.`,
  `${loc} ${__varSido}에서 ${__kw} 비용은 매장 규모와 사양에 따라 달라집니다. 무상 임대 모델은 월 부담이 적고, 일시불 구매도 선택하실 수 있습니다. ${loc} 권역의 ${__varOwner}들은 초기 부담이 적은 무상 임대를 선호하시는 편이며, 매장 운영 계획에 맞춰 가장 유리한 방식을 함께 비교해 드립니다.`
  ];
-  const __locIdx = __seoHash(seed + ':lp_idx') % __locParas.length;
-  const __locParaHtml = `<div style="background:#F0FAFB;border-left:4px solid #0891B2;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#CFF3F7;border-radius:10px;font-size:18px;flex-shrink:0">📍</span><span>${loc} 매장 운영 데이터</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__locParas[__locIdx])}</p></div>`;
+  const __locParasFinal = __prodKey === '철거' ? [
+ `${loc} ${__varSido}에서 철거를 맡기실 때 가장 많이 물으시는 것은 비용이 얼마나 나오느냐입니다. 평수, 인테리어 자재의 양, 주방 설비 유무, 나올 폐기물의 종류에 따라 달라져서 전화로는 정확히 말씀드리기 어렵습니다. 그래서 ${loc} 권역은 직접 방문해 보고 금액을 드립니다.`,
+ `${loc} ${__varSido}에서 폐업하시는 ${__varOwner}들이 놓치시는 것이 둘 있습니다. 하나는 쓰시던 집기를 그냥 폐기물로 버리시는 것이고, 다른 하나는 점포 정리 지원 제도를 모르고 지나치시는 것입니다. ${loc}에서는 두 가지를 먼저 확인해 드립니다.`,
+ `${loc} ${__varSido}의 상가 철거는 원상복구 조건을 어떻게 정리하느냐에서 갈립니다. 계약서에 적힌 범위를 견적 단계에서 문서로 남겨 두면 보증금 반환이 늦어지거나 임대인과 부딪히는 일이 줄어듭니다. ${loc} 권역에서 이 부분을 먼저 정리해 드립니다.`
+  ] : __locParas;
+  const __locIdx = __seoHash(seed + ':lp_idx') % __locParasFinal.length;
+  const __locParaHtml = `<div style="background:#F0FAFB;border-left:4px solid #0891B2;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#CFF3F7;border-radius:10px;font-size:18px;flex-shrink:0">📍</span><span>${__prodKey === '철거' ? loc + ' 철거 비용은 이렇게 정해집니다' : loc + ' 매장 운영 데이터'}</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__locParasFinal[__locIdx])}</p></div>`;
   
   // 키워드 포함 단락 (모든 페이지 - 핵심 키워드 3회 이상 반복)
   const __kwIntros = [
@@ -7936,8 +7949,16 @@ function __generateSEOContent(pathname) {
  `${loc}에서 ${__kw} 견적을 비교하실 때 가장 중요한 것은 매장 환경 분석과 사양 적합성입니다. ${loc} 권역 매장의 결제 패턴과 운영 시간을 분석하면 어떤 ${__kw} 옵션이 가장 경제적인지 명확하게 보입니다. ${loc} ${__kw} 견적은 무상 출장 견적이 기본으로, 매장 방문 후 정확한 ${__kw} 비용 안내를 받으실 수 있습니다.`,
  `${loc} ${__kw}의 도입이 빠르게 진행, 매장 오픈 일정에 맞춘 ${__kw} 진행이 가능합니다. ${loc}에서 ${__kw}를 진행할 때 가장 자주 받는 질문은 계약 조건과 무상 A/S 범위입니다. 더세이브 스토어 ${__kw}는 A/S, 결제 대행사·통신사 비교 견적, 콜센터 지원이 표준 포함되어 ${loc} 사장님의 부담을 최소화합니다.`
  ];
-  const __kwIdx = __seoHash(seed + ':kw') % __kwIntros.length;
-  const __kwHtml = `<div style="background:#FFF7ED;border-left:4px solid #EA580C;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#FFE4CC;border-radius:10px;font-size:18px;flex-shrink:0">🎯</span><span>${loc} ${__kw} 핵심 안내</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__diversify(__kwIntros[__kwIdx], seed + ':kwp'))}</p></div>`;
+  // 철거는 장비를 들이는 일이 아니라 걷어내는 일이라 위 문장이 맞지 않는다.
+  // A/S, 결제 대행사 비교, 오픈 일정 같은 말은 철거에 붙일 수 없다.
+  const __kwIntrosFinal = __prodKey === '철거' ? [
+ `${loc}에서 매장 철거를 알아보고 계시다면 먼저 볼 것은 철거 범위와 원상복구 조건입니다. 어디까지 걷어내고 어디까지 되돌려 놓아야 하는지는 임대차 계약서에 적혀 있습니다. ${loc} 권역에서 무료 방문 견적으로 직접 확인해 드린 뒤 금액을 말씀드립니다.`,
+ `${loc} 매장 철거는 뜯어내는 일만이 아닙니다. 쓰시던 집기 중 값이 나가는 것을 골라내고, 나머지는 폐기물로 분류해 처리하고, 계약서에 적힌 대로 원상복구까지 마쳐야 끝납니다. ${loc}에서 이 과정을 한 번에 맡아 드립니다.`,
+ `${loc}에서 폐업을 정하셨다면 서두르지 않으셔도 됩니다. 점포 정리 비용을 지원받으실 수 있는 제도가 있는지부터 확인해 드리고, 집기 매입으로 돌려받으실 금액까지 계산한 다음 실제로 드는 비용을 알려드립니다.`,
+ `${loc} 매장 철거 일정은 영업 마지막 날에 맞춰 잡습니다. 야간이나 주말에도 작업하기 때문에 후속 임차인 입주 날짜가 정해져 있어도 맞출 수 있습니다. ${loc} 권역은 방문 견적부터 시작합니다.`
+  ] : __kwIntros;
+  const __kwIdx = __seoHash(seed + ':kw') % __kwIntrosFinal.length;
+  const __kwHtml = `<div style="background:#FFF7ED;border-left:4px solid #EA580C;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#FFE4CC;border-radius:10px;font-size:18px;flex-shrink:0">🎯</span><span>${loc} ${__kw} 핵심 안내</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__diversify(__kwIntrosFinal[__kwIdx], seed + ':kwp'))}</p></div>`;
   
   // 항목형 박스 (체크포인트 5가지)
   const __CHECK_TITLES = [
@@ -8014,16 +8035,26 @@ function __generateSEOContent(pathname) {
   const __caseRest = caseItems.slice(1).join('');
 
   // 비교 표 (검정 헤더) — 업종 페이지처럼 가독성 향상용
-  const __tableBox = `<div style="margin-bottom:32px;overflow-x:auto"><div style="font-size:13px;font-weight:800;color:#000;margin-bottom:12px;letter-spacing:-0.02em">📊 ${loc} 매장 장비 비교</div><table style="width:100%;border-collapse:collapse;font-size:14px;min-width:480px"><thead><tr><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:8px 0 0 0">비교 항목</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">경제형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">표준형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:0 8px 0 0">프리미엄</th></tr></thead><tbody><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">처리 속도</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">보통</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">빠름</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매우 빠름</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매장 적합성</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★★</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">부가 기능</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">기본</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">POS 연동</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">완전 통합</td></tr><tr><td style="padding:13px 14px;color:#333">A/S 지원</td><td style="padding:13px 14px;color:#333">기본</td><td style="padding:13px 14px;color:#333">표준</td><td style="padding:13px 14px;color:#333">우선 지원</td></tr></tbody></table></div>`;
+  // 철거에는 '경제형/표준형/프리미엄' 같은 등급이 없다
+  const __tableBox = __prodKey === '철거' ? '' : `<div style="margin-bottom:32px;overflow-x:auto"><div style="font-size:13px;font-weight:800;color:#000;margin-bottom:12px;letter-spacing:-0.02em">📊 ${loc} 매장 장비 비교</div><table style="width:100%;border-collapse:collapse;font-size:14px;min-width:480px"><thead><tr><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:8px 0 0 0">비교 항목</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">경제형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">표준형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:0 8px 0 0">프리미엄</th></tr></thead><tbody><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">처리 속도</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">보통</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">빠름</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매우 빠름</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매장 적합성</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★★</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">부가 기능</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">기본</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">POS 연동</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">완전 통합</td></tr><tr><td style="padding:13px 14px;color:#333">A/S 지원</td><td style="padding:13px 14px;color:#333">기본</td><td style="padding:13px 14px;color:#333">표준</td><td style="padding:13px 14px;color:#333">우선 지원</td></tr></tbody></table></div>`;
 
   // 진행 순서 표 (상담→제안→설치→유지) — 경쟁사 스타일
   const __stepBox = `<div style="margin-bottom:32px;background:#fff;border:1px solid #EEE;border-radius:14px;overflow:hidden"><div style="font-size:15px;font-weight:900;color:#000;letter-spacing:-0.02em;padding:20px 24px 4px">🗓️ 상담부터 설치까지, ${loc} 진행 순서</div><table style="width:100%;border-collapse:collapse;font-size:14px"><tbody>${[['상담 단계',`${loc} 매장 운영 패턴 청취`],['제안 단계','매장에 맞는 사양 + 부가 장비 안내'],['설치 단계','현장 진행, 사용법까지 안내'],['유지 단계','매니저 직통, 신속 대응']].map(([a,b],i)=>`<tr><td style="padding:14px 24px;font-weight:800;color:#000;white-space:nowrap;border-bottom:${i<3?'1px solid #F0F0F0':'none'};width:110px">${a}</td><td style="padding:14px 24px;color:#666;border-bottom:${i<3?'1px solid #F0F0F0':'none'}">${b}</td></tr>`).join('')}</tbody></table></div>`;
 
   // 콜아웃 박스 (보라 왼쪽 바 강조) — 핵심 메시지
-  const __calloutInline = `<div style="margin-bottom:32px;background:#F5F3FF;border-left:4px solid #7C3AED;border-radius:8px;padding:18px 22px"><p style="font-size:14.5px;line-height:1.75;color:#4C2889;margin:0;font-weight:600">✓ 어디서든 결제, 모든 결제 수단 OK — ${loc} 매장 운영 중 흔한 어려움을 해소하는 데 효과적입니다.</p></div>`;
+  const __calloutText = __prodKey === '철거'
+    ? `✓ 집기는 버리기 전에 매입부터 — ${loc}에서 쓰시던 물건 값을 쳐서 철거 비용에서 빼 드립니다.`
+    : `✓ 어디서든 결제, 모든 결제 수단 OK — ${loc} 매장 운영 중 흔한 어려움을 해소하는 데 효과적입니다.`;
+  const __calloutInline = `<div style="margin-bottom:32px;background:#F5F3FF;border-left:4px solid #7C3AED;border-radius:8px;padding:18px 22px"><p style="font-size:14.5px;line-height:1.75;color:#4C2889;margin:0;font-weight:600">${__calloutText}</p></div>`;
 
   // FAQ 박스 (Q&A 카드) — 화면에 보이는 자주 묻는 질문
-  const __faqBoxItems = [
+  const __faqBoxItems = __prodKey === '철거' ? [
+    [`${loc} 매장 철거, 며칠이나 걸리나요?`, '평수와 인테리어 상태에 따라 다릅니다. 방문해서 보고 말씀드리며, 영업 마지막 날 저녁이나 주말에도 작업합니다.'],
+    [`원상복구는 어디까지 해주시나요?`, '임대차 계약서에 적힌 범위대로 해드립니다. 견적 단계에서 범위를 함께 정리해 문서로 남겨 드립니다.'],
+    [`쓰던 집기는 어떻게 되나요?`, '아직 쓸 수 있는 것은 값을 쳐서 매입해 철거 비용에서 빼 드립니다. 나머지는 폐기물로 분류해 처리합니다.'],
+    [`정부 지원금을 받을 수 있나요?`, '폐업하시는 소상공인을 위한 지원 제도가 있습니다. 대상이 되시는지 확인해 드리고 신청 절차도 안내해 드립니다.'],
+    [`${loc}에서 견적은 얼마나 걸리나요?`, `전화 주시면 방문 일정을 잡습니다. 무료 방문 견적이고, 보시고 다른 곳과 비교하셔도 됩니다.`]
+  ] : [
     [`${loc} ${__prodLabel || "매장 설비"} 설치, 시간은 얼마나 걸리나요?`, '설치는 보통 짧은 시간 안에 끝납니다. 매장 환경에 따라 달라질 수 있어요.'],
     [`${loc}에서 설치 후 문제가 생기면 어떻게 하나요?`, `담당 매니저에게 연락하시면 원격 지원으로 빠르게 처리하고, 필요하면 ${loc} 매장으로 직접 출동합니다.`],
     [`${loc}에서 견적은 얼마나 빨리 받을 수 있나요?`, `전화·카카오톡으로 문의 주시면 빠르게 견적 안내드립니다. ${loc} 매장 환경을 듣고 적합한 사양으로 정직하게 안내드려요.`]
@@ -8036,8 +8067,15 @@ function __generateSEOContent(pathname) {
     ['매장 주소와 평수 — 출장 견적 산정 기준','일평균 결제 건수와 평균 객단가','현재 사용 중인 장비 모델 (교체 시)','POS·앱 연동 필요 여부','희망 도입 일정 (오픈·교체 시점)'],
     ['모델 단가가 아니라 운영 편의까지 함께 보기','A/S 출장 가능 권역 사전 확인','정부 규정 변경 시 업데이트 지원 여부','매장 업종에 맞는 특수 기능','계약 조건과 해지 절차 확인']
   ];
-  const __chk = __checkPool[__seoHash(seed + ':chk') % __checkPool.length];
-  const __checkTitle2 = `${loc} 매장 장비 도입 전 점검 항목`;
+  const __demolChk = [
+    '매장 주소와 평수 — 방문 견적 산정 기준',
+    '임대차 계약서의 원상복구 범위',
+    '남길 집기와 넘길 집기 구분 — 매입 대상 확인',
+    '영업 종료일과 후속 임차인 입주 일정',
+    '폐업 지원금 대상 여부와 신청 시기'
+  ];
+  const __chk = __prodKey === '철거' ? __demolChk : __checkPool[__seoHash(seed + ':chk') % __checkPool.length];
+  const __checkTitle2 = __prodKey === '철거' ? `${loc} 철거 전 점검 항목` : `${loc} 매장 장비 도입 전 점검 항목`;
   const __checkBox2 = `<div style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 26px;margin-bottom:32px"><div style="font-size:15px;font-weight:900;color:#000;letter-spacing:-0.02em;margin-bottom:16px">${__checkTitle2}</div><div style="display:flex;flex-direction:column;gap:11px">${__chk.map(item => `<div style="position:relative;padding-left:28px;font-size:14.5px;color:#333;line-height:1.65"><span style="position:absolute;left:0;top:0;color:#FF5500;font-weight:900;font-size:16px">✓</span>${item}</div>`).join('')}</div></div>`;
 
   // 노란 인용 후기 박스 (업종 페이지 p-callout 스타일)
@@ -8046,11 +8084,18 @@ function __generateSEOContent(pathname) {
     `${loc}의 한 사장님은 "처음엔 다 비슷한 줄 알았는데, 매장 동선까지 고려해서 추천해주시니 확실히 운영이 편해졌어요"라며 만족해하셨습니다.`,
     `${loc}에서 매장을 운영하시는 사장님께서는 "견적부터 설치까지 같은 분이 챙겨주셔서 믿고 맡길 수 있었다"고 평가해 주셨습니다.`
   ];
-  const __callout = __calloutPool[__seoHash(seed + ':co') % __calloutPool.length];
+  const __demolCallouts = [
+    `${loc}에서 고깃집을 접으신 한 사장님께서는 "냉장고랑 불판 테이블을 그냥 버리는 줄 알았는데 값을 쳐주셔서 철거비가 많이 줄었어요. 진작 물어볼 걸 그랬습니다"라고 하셨습니다.`,
+    `${loc}에서 카페를 정리하신 한 사장님께서는 "원상복구를 어디까지 해야 하는지 몰라 임대인과 얘기가 길어졌는데, 견적서에 범위를 적어 주셔서 그걸로 정리가 됐습니다"라고 하셨습니다.`,
+    `${loc}에서 옷가게를 닫으신 한 사장님께서는 "폐업 지원금이 있는 줄도 몰랐어요. 알려주셔서 신청했고 서류도 같이 챙겨 주셨습니다"라고 하셨습니다.`,
+  ];
+  const __callout = __prodKey === '철거'
+    ? __demolCallouts[__seoHash(seed + ':co') % __demolCallouts.length]
+    : __calloutPool[__seoHash(seed + ':co') % __calloutPool.length];
   const __calloutBox = `<div style="background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:20px 24px;margin-bottom:32px"><p style="font-size:14.5px;line-height:1.8;color:#5D4400;margin:0"><strong style="color:#3D2C00">직접 들은 이야기</strong> · ${__callout}</p></div>`;
 
   // 하단 상담 CTA 박스 (경쟁사 스타일 — 보라 테두리)
-  const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${loc}에서 매장 설비 설치를 고민 중이신가요?</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">문자 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
+  const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${__prodKey === '철거' ? loc + ' 매장 철거를 알아보고 계신가요?' : loc + '에서 매장 설비 설치를 고민 중이신가요?'}</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">문자 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
 
   return `<section style="padding:56px 0;border-top:0.5px solid #EEE;background:#FAF8F3"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">매장 운영 가이드</div>
@@ -8074,8 +8119,8 @@ function __generateSEOContent(pathname) {
     ${__ctaBox}
   </div></section>
   <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">실제 설치 후기</div>
-    <h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${loc} 매장 설치 후기</h2>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">${__prodKey === '철거' ? '실제 작업 후기' : '실제 설치 후기'}</div>
+    <h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${loc} ${__prodKey === '철거' ? '매장 철거 후기' : '매장 설치 후기'}</h2>
     ${__caseRest || caseItems.join('')}
   </div></section>`;
 }
@@ -8235,6 +8280,34 @@ const __wrapped_default = {
         ],
       }) +
       '</script>';
+
+    /*
+     * 철거 페이지에 항상 들어가는 안내.
+     * 본문 문단은 페이지마다 골라 쓰는 구조라 어떤 페이지에는 안 나올 수 있는데,
+     * 이 넷은 실제로 해드리는 일이라 모든 철거 페이지에 그대로 둔다.
+     * 후처리(동의어 치환) 뒤에 붙여서 문장이 바뀌지 않게 한다.
+     */
+    const __DEMOL_ITEMS = [
+      ['🏠', '상가 철거·원상복구', '임대차 계약서에 적힌 복구 범위를 먼저 확인하고, 그 기준대로 되돌려 놓습니다. 범위를 견적서에 적어 두면 보증금 돌려받으실 때 임대인과 부딪힐 일이 줄어듭니다.'],
+      ['📋', '무료 방문 견적', '직접 찾아뵙고 평수와 인테리어 상태, 나올 폐기물을 눈으로 본 뒤 금액을 말씀드립니다. 보시고 다른 곳과 비교하셔도 됩니다. 견적을 봤다고 맡기셔야 하는 것은 아닙니다.'],
+      ['💰', '집기 매입', '주방 기기, 냉장·냉동고, 테이블과 의자, 에어컨처럼 아직 쓸 수 있는 물건은 값을 쳐서 사들입니다. 그만큼 철거 비용에서 빼 드립니다. 버리면 처리비가 나가지만 넘기시면 돌려받으시는 셈입니다.'],
+      ['🏛️', '폐업 정부 지원금 안내', '점포 정리에 드는 비용 일부를 지원받으실 수 있는 제도가 있습니다. 신청 시기와 서류를 몰라 놓치시는 분이 많습니다. 대상이 되시는지 확인해 드리고 신청 절차도 함께 안내해 드립니다.'],
+    ];
+    const __demolServiceHtml = (heading) =>
+      '<section style="padding:48px 0;background:#FAFAFA;border-top:0.5px solid #EEE">' +
+      '<div style="max-width:1080px;margin:0 auto;padding:0 24px">' +
+      '<div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">WHAT WE DO</div>' +
+      '<h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">' +
+      heading + '</h2>' +
+      '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">' +
+      __DEMOL_ITEMS.map(([ic, t, dsc]) =>
+        '<div style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 22px">' +
+        '<div style="width:44px;height:44px;background:#000;border-radius:11px;display:flex;' +
+        'align-items:center;justify-content:center;font-size:21px;margin-bottom:13px">' + ic + '</div>' +
+        '<h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 8px;color:#000">' + t + '</h3>' +
+        '<p style="font-size:13.5px;color:#555;line-height:1.75;margin:0">' + dsc + '</p>' +
+        '</div>').join('') +
+      '</div></div></section>';
 
     // 파비콘/로고 서빙 — 검색결과 로고 표시용 (PNG 실제 응답, 외부 의존 없음)
     if (__path === '/favicon.svg' || __path === '/favicon.ico' || /^\/favicon-\d+\.png$/.test(__path) || __path === '/apple-touch-icon.png' || __path === '/logo.png') {
@@ -8522,7 +8595,7 @@ const __wrapped_default = {
         const __pCSS = `<style>:root{--orange:#FF5500;--black:#1A1A1A}*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard',sans-serif;margin:0;background:#fff;color:#222;line-height:1.7}.nav-menu .nav-link:hover{color:var(--orange) !important}.p-hero{background:linear-gradient(180deg,#FAF8F3 0%,#fff 100%);padding:56px 0 36px}.p-wrap{max-width:1080px;margin:0 auto;padding:0 24px}.p-crumb{font-size:13px;color:#888;margin-bottom:18px}.p-crumb a{color:#888;text-decoration:none}.p-crumb a:hover{color:var(--orange)}.p-tag{display:inline-block;background:#FFE6DC;color:var(--orange);font-size:12px;font-weight:800;letter-spacing:0.04em;padding:5px 12px;border-radius:7px;margin-bottom:14px}.p-h1{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-0.04em;line-height:1.25;margin:0 0 14px;color:#000}.p-lead{font-size:16px;color:#444;max-width:720px;margin:0 0 24px;line-height:1.7}.p-cta{display:inline-block;background:var(--orange);color:#fff;font-weight:800;padding:14px 28px;border-radius:10px;text-decoration:none;font-size:15px;letter-spacing:-0.02em}.p-cta:hover{background:#E04A00}.p-section{padding:48px 0;border-top:1px solid #EEE}.p-section h2{font-size:clamp(20px,3vw,28px);font-weight:900;letter-spacing:-0.04em;margin:0 0 18px;color:#000;line-height:1.3}.p-section h3{font-size:clamp(18px,2.4vw,22px);font-weight:900;letter-spacing:-0.03em;margin:32px 0 12px;color:#000;line-height:1.35}.p-section p{font-size:15.5px;color:#333;margin:0 0 18px;line-height:1.85}.p-mcat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.p-mcat-card{display:flex;flex-direction:column;background:#fff;border:1px solid #EEE;border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04)}.p-mcat-card:hover{transform:translateY(-3px);border-color:var(--cat-color,#FF5500);box-shadow:0 12px 28px rgba(0,0,0,0.10)}.p-mcat-card:hover .p-mcat-img{transform:scale(1.05)}.p-mcat-thumb{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:#F5F5F5}.p-mcat-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}.p-mcat-toplabel{position:absolute;top:10px;left:10px;background:var(--cat-color,#FF5500);color:#fff;font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:5px;letter-spacing:0.04em;z-index:2;box-shadow:0 2px 6px rgba(0,0,0,0.2)}.p-mcat-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:5px}.p-mcat-name{font-size:17px;font-weight:900;color:#000;letter-spacing:-.03em;line-height:1.3}.p-mcat-desc{font-size:12px;color:#888;line-height:1.5;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:36px}.p-mcat-cnt{font-size:12px;color:var(--cat-color,#FF5500);font-weight:800;letter-spacing:-.01em;margin-top:4px;display:flex;align-items:center;gap:6px}.p-mcat-arrow{transition:transform .2s;display:inline-block}.p-mcat-card:hover .p-mcat-arrow{transform:translateX(4px)}.p-titlelist{display:flex;flex-direction:column;border-top:1px solid #EEE}.p-titleitem{display:flex;justify-content:space-between;align-items:center;padding:18px 4px;border-bottom:1px solid #EEE;text-decoration:none;color:inherit;transition:background .15s}.p-titleitem:hover{background:#FAFAFA}.p-titleitem-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}.p-titleitem-emoji{font-size:22px;flex-shrink:0;width:36px;text-align:center}.p-titleitem-cat{font-size:11px;color:var(--orange);font-weight:800;background:#FFE6DC;padding:4px 9px;border-radius:5px;letter-spacing:0.02em;flex-shrink:0}.p-titleitem-title{font-size:15.5px;font-weight:700;color:#000;letter-spacing:-.02em;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.p-titleitem-date{font-size:12px;color:#999;font-weight:500;flex-shrink:0;margin-left:14px}.p-pager{display:flex;justify-content:center;gap:6px;margin-top:36px}.p-pager a,.p-pager span{padding:8px 14px;border:1px solid #EEE;border-radius:7px;font-size:13px;color:#444;text-decoration:none;font-weight:600}.p-pager a:hover{border-color:var(--orange);color:var(--orange)}.p-pager .cur{background:var(--orange);border-color:var(--orange);color:#fff}.p-article-img{width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:14px;margin-top:20px;background:#F5F5F5;position:relative}.p-article-imgwrap{position:relative;margin-top:20px;border-radius:16px;overflow:hidden;aspect-ratio:21/9;box-shadow:0 20px 50px rgba(0,0,0,0.18)}.p-article-imgwrap img{width:100%;height:100%;object-fit:cover;display:block}.p-article-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:32px 40px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 50%,rgba(0,0,0,0.85) 100%)}.p-article-cat-bar{position:absolute;left:0;right:0;top:0;height:5px;background:var(--cat-color,#FF5500)}.p-article-overlay-tag{display:inline-block;background:var(--cat-color,#FF5500);color:#fff;font-size:13px;font-weight:800;letter-spacing:0.04em;padding:7px 16px;border-radius:8px;margin-bottom:18px}.p-article-overlay-emoji{font-size:clamp(48px,7vw,72px);margin-bottom:10px;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.6))}.p-article-overlay-text{color:#fff;font-size:clamp(22px,3.5vw,32px);font-weight:900;letter-spacing:-.04em;line-height:1.2;text-shadow:0 4px 20px rgba(0,0,0,0.7);margin:0 0 8px;max-width:760px;text-align:left}.p-article-overlay-sub{color:rgba(255,255,255,0.85);font-size:clamp(13px,1.5vw,15px);font-weight:600;margin-top:0;letter-spacing:-.01em;text-shadow:0 2px 8px rgba(0,0,0,0.5);text-align:left}.p-meta-row{display:flex;gap:14px;align-items:center;font-size:13px;color:#666;margin:16px 0;flex-wrap:wrap}.p-meta-row .dot{width:3px;height:3px;border-radius:50%;background:#CCC}.p-toc{background:#FAFAFA;border:1px solid #EEE;border-radius:12px;padding:20px 24px;margin:24px 0 32px}.p-toc strong{font-size:13px;color:#666;letter-spacing:0.04em;text-transform:uppercase;display:block;margin-bottom:10px}.p-toc ul{list-style:none;padding:0;margin:0}.p-toc li{margin-bottom:6px}.p-toc a{font-size:14.5px;color:#000;text-decoration:none;font-weight:600;letter-spacing:-.02em}.p-toc a:hover{color:var(--orange)}.p-callout{background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:18px 22px;margin:22px 0;font-size:15px;line-height:1.75;color:#5D4400}.p-callout strong{color:#3D2C00}.p-checks{background:#fff;border:1px solid #EEE;border-radius:12px;padding:22px 24px;margin:22px 0}.p-checks-title{font-size:15px;font-weight:900;color:#000;letter-spacing:-.02em;margin-bottom:14px}.p-checks ul{list-style:none;padding:0;margin:0}.p-checks li{position:relative;padding-left:28px;margin-bottom:10px;font-size:14.5px;color:#333;line-height:1.65}.p-checks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--orange);font-weight:900;font-size:16px}.p-table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14px}.p-table th{background:#000;color:#fff;padding:12px 14px;font-weight:700;text-align:left;letter-spacing:-.02em}.p-table td{padding:12px 14px;border-bottom:1px solid #EEE;color:#333}.p-table tr:hover td{background:#FAFAFA}.p-faq{border:1px solid #EEE;border-radius:10px;padding:14px 18px;margin-bottom:10px}.p-faq summary{cursor:pointer;font-size:15px;color:#000;letter-spacing:-.02em;list-style:none;padding-right:24px;position:relative;font-weight:700}.p-faq summary::after{content:"+";position:absolute;right:0;top:0;color:var(--orange);font-weight:900;font-size:18px}.p-faq[open] summary::after{content:"−"}.p-faq summary::-webkit-details-marker{display:none}.p-faq p{margin:14px 0 0;font-size:14px;color:#555;line-height:1.75}.p-rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.p-rel-card{display:block;background:#FAFAFA;border:1px solid #EEE;border-radius:10px;padding:14px 16px;font-size:13.5px;font-weight:700;color:#000;text-decoration:none;letter-spacing:-.02em;transition:all .15s}.p-rel-card:hover{background:#fff;border-color:var(--orange);color:var(--orange)}.p-other{margin-top:48px;padding-top:48px;border-top:1px solid #EEE}.p-other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.p-other-card{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #EEE;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit;transition:all .15s}.p-other-card:hover{border-color:var(--orange);background:#FAFAFA}.p-other-emoji{font-size:22px;flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:#FFF1E6;border-radius:8px}.p-other-name{font-size:14px;font-weight:800;color:#000;letter-spacing:-.02em}.p-other-tag{font-size:11px;color:#888;margin-top:2px}@media(max-width:768px){.p-hero{padding:36px 0 24px}.p-section{padding:36px 0}.p-mcat-grid{grid-template-columns:repeat(2,1fr);gap:12px}.p-mcat-name{font-size:15px}.p-mcat-body{padding:13px 14px 15px}.p-mcat-desc{font-size:11.5px;min-height:34px}.p-rel-grid{grid-template-columns:1fr;gap:8px}.p-other-grid{grid-template-columns:1fr;gap:8px}.p-titleitem{flex-direction:column;align-items:flex-start;gap:8px;padding:14px 4px}.p-titleitem-left{width:100%}.p-titleitem-date{margin-left:0;font-size:11px}.p-titleitem-title{white-space:normal;font-size:14.5px}.p-table{display:block;overflow-x:auto;font-size:13px}.p-article-imgwrap{aspect-ratio:16/9}.p-article-overlay{padding:20px 22px}.nav-menu{gap:14px !important}.nav-menu .nav-link{font-size:12.5px !important}}</style>`;
         
         // 다른 제품 카드 (페이지 하단)
-        const __otherCards = Object.keys(__PRODUCTS).filter(k => k !== __pSlug).map(k => {
+        const __otherCards = (__pSlug === 'demolition' ? [] : Object.keys(__PRODUCTS).filter(k => k !== __pSlug)).map(k => {
           const o = __PRODUCTS[k];
           return `<a href="/products/${k}/" class="p-other-card"><div class="p-other-emoji">${o.emoji}</div><div><div class="p-other-name">${o.name}</div><div class="p-other-tag">${o.tag}</div></div></a>`;
         }).join('');
@@ -8772,7 +8845,7 @@ const __wrapped_default = {
             {"@type":"BreadcrumbList","itemListElement":__crumbList}
           ]});
           
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section><section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title} — 더세이브 스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__metaDesc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title} — 더세이브 스토어"><meta property="og:description" content="${__metaDesc}"><meta property="og:image" content="${__img}"><meta property="og:type" content="article"><meta property="og:url" content="${__canon}"><meta property="article:published_time" content="${__date}"><script type="application/ld+json">${__jsonLd}</script>${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__PN}</a> · <a href="/products/${__pSlug}/${__macro}/">${__mInfo.name}</a> · <span style="color:#000;font-weight:700">${__ko}</span></div><div class="p-tag">${__cat}</div><h1 class="p-h1">${__title}</h1><div class="p-meta-row"><span>${__dateFmt}</span><span class="dot"></span><span>${__cat}</span><span class="dot"></span><span>읽는 시간 6분</span></div><div class="p-article-imgwrap" style="--cat-color:${__mInfo.color}"><img src="${__img}" alt="${__ko} ${__PN}" loading="eager" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-charlotte-may-5946963.jpg';this.style.filter='none'"><div class="p-article-cat-bar"></div><div class="p-article-overlay"><span class="p-article-overlay-tag">${__mInfo.name} · ${__cat}</span><h2 class="p-article-overlay-text">${__title}</h2><div class="p-article-overlay-sub">${__ko} 매장에 맞는 ${__PN} 안내</div></div></div></div></section><section class="p-section"><div class="p-wrap">${__toc}${__body}</div></section>${__pSlug === 'demolition' ? __demolServiceHtml(__ko + ' 철거, 이렇게 해드립니다') : ''}<section class="p-section"><div class="p-wrap"><h2>자주 묻는 질문</h2>${__faqHtml}</div></section>${__related.length > 0 ? `<section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 다른 글</h2><div class="p-rel-grid">${__relHtml}</div></div></section>` : ''}${__otherCards ? `<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>` : ''}${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8813,7 +8886,7 @@ const __wrapped_default = {
           const __title = `${__mInfo.name} ${__pInfo.name} 안내 — 더세이브 스토어`;
           const __desc = `${__mInfo.desc} 등 ${__catItems.length}개 업종별 ${__mInfo.name} ${__pInfo.name} 설치 안내.`;
           
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title}</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title}"><meta property="og:description" content="${__desc}"><meta property="og:type" content="website">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__pInfo.name}</a> · <span style="color:#000;font-weight:700">${__mInfo.name}</span></div><div class="p-tag">${__mInfo.emoji} ${__mInfo.name}</div><h1 class="p-h1">${__mInfo.name} ${__pInfo.name}</h1><p class="p-lead">${__mInfo.desc} 매장에 맞는 ${__pInfo.name}를 골라보세요.</p></div></section><section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 업종별 안내 (총 ${__catItems.length}개)</h2><div class="p-titlelist">${__listHtml}</div>${__pagerHtml}</div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__title}</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__title}"><meta property="og:description" content="${__desc}"><meta property="og:type" content="website">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="/products/${__pSlug}/">${__pInfo.name}</a> · <span style="color:#000;font-weight:700">${__mInfo.name}</span></div><div class="p-tag">${__mInfo.emoji} ${__mInfo.name}</div><h1 class="p-h1">${__mInfo.name} ${__pInfo.name}</h1><p class="p-lead">${__mInfo.desc} 매장에 맞는 ${__pInfo.name}를 골라보세요.</p></div></section><section class="p-section"><div class="p-wrap"><h2>${__mInfo.name} 업종별 안내 (총 ${__catItems.length}개)</h2><div class="p-titlelist">${__listHtml}</div>${__pagerHtml}</div></section>${__pSlug === 'demolition' ? __demolServiceHtml(__mInfo.name + ' 철거, 이렇게 해드립니다') : ''}${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -8827,7 +8900,7 @@ const __wrapped_default = {
           }).join('');
           
           const __canon = `https://${__pHost}/products/${__pSlug}/`;
-          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section><section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>${__pFooter}</body></html>`;
+          const __html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어</title>${__SITE_HEAD}<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${__pInfo.desc}"><link rel="canonical" href="${__canon}"><meta property="og:title" content="${__pSlug === 'demolition' ? '매장 철거·정리' : __pInfo.name + ' 설치'} — 더세이브스토어"><meta property="og:description" content="${__pInfo.desc}"><meta property="og:type" content="website"><meta property="og:url" content="${__canon}">${__pCSS}</head><body>${__pHeader}<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <span style="color:#000;font-weight:700">${__pInfo.name}</span></div><div class="p-tag">${__pInfo.emoji} ${__pInfo.tag}</div><h1 class="p-h1">${__pInfo.headline}</h1><p class="p-lead">${__pInfo.desc}</p></div></section><section class="p-section"><div class="p-wrap"><h2>업종별 ${__pInfo.name} 안내</h2><p>매장 업종에 맞춰 ${__pInfo.name}를 골라보세요. 업종별로 추천 모델, 설치 사례, 견적 가이드가 정리되어 있습니다.</p><div class="p-mcat-grid">${__mcatCards}</div></div></section>${__pSlug === 'demolition' ? __demolServiceHtml('철거, 이렇게 해드립니다') : ''}${__otherCards ? `<section class="p-section"><div class="p-wrap"><h2>다른 매장 장비도 함께 알아보세요</h2><div class="p-other-grid">${__otherCards}</div></div></section>` : ''}${__pFooter}</body></html>`;
           return new Response(__html, { status:200, headers:{'Content-Type':'text/html; charset=utf-8'} });
         }
         
@@ -9278,7 +9351,9 @@ const __wrapped_default = {
       }
       
       // 8c. 광역×제품 페이지: 같은 위치에 카드 3개 (다른 제품으로 분기) 추가 — 단, 현재 제품 제외
-      if (__isRegionProduct) {
+      // 철거 페이지에서는 다른 장비로 넘어가는 버튼을 두지 않는다.
+      // 철거 알아보러 오신 분께 포스기·카드단말기를 들이미는 꼴이 된다.
+      if (__isRegionProduct && __rpProduct !== '철거') {
         const __r2 = __rpRegion;
         const __others = __PRODUCT_NAMES.filter(p => p !== __rpProduct);
         const __icons = {'카드단말기':'💳','포스기':'🖥️','철거':'🔨','키오스크':'🖱️','테이블오더':'📱','자동판매기':'🥤'};
@@ -9293,7 +9368,8 @@ const __wrapped_default = {
       }
       
       // 8e. 동 페이지(3-segment): 동×제품 카드 3개 분기 추가
-      if (__isRegional && __segs2.length === 3) {
+      // 마지막이 제품명이면 시군구×제품 페이지지 동 페이지가 아니다 (/서울/강남구/철거)
+      if (__isRegional && __segs2.length === 3 && !__PRODUCT_NAMES.includes(__segs2[2])) {
         const __r3 = __segs2[0], __sg = __segs2[1], __dg = __segs2[2];
         const __regEnC = __URL_REGION_KO2EN[__r3] || encodeURIComponent(__r3);
         const __sgEnC = __URL_SG_KO2EN[`${__r3}/${__sg}`] || encodeURIComponent(__sg);
@@ -9323,6 +9399,34 @@ const __wrapped_default = {
         }
       }
       
+      // 8e2. 시군구×제품 페이지: 다른 제품 카드 (철거는 제외)
+      if (__isRegional && __segs2.length === 3 && __PRODUCT_NAMES.includes(__segs2[2]) && __segs2[2] !== '철거') {
+        const __r5 = __segs2[0], __sg5 = __segs2[1], __pd5 = __segs2[2];
+        const __icons5 = {'카드단말기':'💳','포스기':'🖥️','철거':'🔨','키오스크':'🖱️','테이블오더':'📱','자동판매기':'🥤'};
+        const __descs5 = {'카드단말기':'카드단말기 설치와 결제사 비교 견적','포스기':'주문·결제·매출 통합 관리','철거':'매장 철거·인테리어 정리·폐업 처리','키오스크':'셀프 주문·결제 자동화','테이블오더':'테이블 태블릿 주문 시스템','자동판매기':'음료·간편식·잡화 무인 운영'};
+        const __pmap5 = {'카드단말기':'card-terminal','포스기':'pos','철거':'demolition','키오스크':'kiosk','테이블오더':'table-order','자동판매기':'vending-machine'};
+        const __regEn5 = __URL_REGION_KO2EN[__r5] || encodeURIComponent(__r5);
+        const __sgEn5 = __URL_SG_KO2EN[`${__r5}/${__sg5}`] || encodeURIComponent(__sg5);
+        const __cards5 = __PRODUCT_NAMES.filter(x => x !== __pd5).map(x =>
+          `<a href="/${__regEn5}/${__sgEn5}/${__pmap5[x]}" style="background:#fff;border:0.5px solid #EEE;border-radius:14px;padding:24px 20px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">${__icons5[x]}</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__sg5} ${x}</h3><p style="font-size:12px;color:#666;line-height:1.6;margin:0">${__descs5[x]}</p></a>`
+        ).join('');
+        __preBodyCards = `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">다른 제품도 보세요</div><h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${__sg5} 매장의 다른 설비 안내</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">${__cards5}</div></div></section>`;
+        html = html.replace('<!--__POST_HERO__-->', '');
+      }
+
+      // 8f2. 철거 페이지에는 실제로 해드리는 일을 고정으로 넣는다
+      {
+        const __dSegs = decodeURIComponent(url.pathname).split('/').filter(Boolean);
+        const __dLast = __dSegs[__dSegs.length - 1];
+        if (__dLast === '철거' && __REGION_NAMES.includes(__dSegs[0])) {
+          const __where = __dSegs.length === 1 ? '' : __dSegs[__dSegs.length - 2];
+          html = html.replace(
+            /<footer\b/i,
+            __demolServiceHtml((__where ? __where + ' ' : '') + '철거, 이렇게 해드립니다') + '<footer'
+          );
+        }
+      }
+
       // 8g. 동×제품 페이지(4-segment) 하단 navigation: 다른 제품 + 같은 시군구 다른 동
       if (__isRegional && __segs2.length === 4) {
         const __r4 = __segs2[0], __sg4 = __segs2[1], __dg4 = __segs2[2], __pd4 = __segs2[3];
@@ -9337,8 +9441,8 @@ const __wrapped_default = {
         const __prodEnMap2 = {'카드단말기':'card-terminal','포스기':'pos','철거':'demolition','키오스크':'kiosk','테이블오더':'table-order','자동판매기':'vending-machine'};
         const __otherCardsHtml4 = __others4.map(p => `<a href="/${__regEnD}/${__sgEnD}/${__dgEnD}/${__prodEnMap2[p]}" style="background:#fff;border:1px solid #EEE;border-radius:14px;padding:24px 22px;display:block;color:inherit;text-decoration:none"><div style="width:48px;height:48px;background:#000;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px">${__icons4[p]}</div><h3 style="font-size:16px;font-weight:900;letter-spacing:-0.03em;margin:0 0 6px">${__dg4} ${p}</h3><p style="font-size:12.5px;color:#666;line-height:1.6;margin:0">${__descs4[p]}</p></a>`).join('');
         
-        const __navBlock = `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
-        html = html.replace(/<footer\b/i, __navBlock + '<footer');
+        const __navBlock = __pd4 === '철거' ? '' : `<section data-nav-bottom="1" style="padding:48px 0;background:#fff;border-top:0.5px solid #EEE"><div class="container"><div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:14px">${__dg4}의 다른 제품</div><h2 style="font-size:20px;font-weight:900;letter-spacing:-0.04em;margin:0 0 22px;color:#000;line-height:1.25">${__dg4} 매장의 다른 설비도 보세요</h2><div data-grid-mobile-1col style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">${__otherCardsHtml4}</div></div></section>`;
+        if (__navBlock) html = html.replace(/<footer\b/i, __navBlock + '<footer');
         
         // 8g2. 동×제품 페이지: 인근 동 5개 (같은 제품)
         const __dpPrefix = `${__r4}/${__sg4}/`;
