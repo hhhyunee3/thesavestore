@@ -11,8 +11,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Deploy to Cloudflare
-        uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          fetch-depth: 0   # 본문 날짜를 git 기록에서 계산하므로 전체 기록이 필요하다
+
+      # 사이트맵 lastmod 에 들어갈 본문 날짜 (한국 시간).
+      # 배포 설정·문서만 바꾼 커밋은 빼고, 마지막으로 본문이 바뀐 커밋의 날짜를 쓴다.
+      # 커밋 메시지에 [본문 아님] 이 있으면 그 커밋도 뺀다 (~/projects/deploy.sh 와 같은 규칙).
+      - name: Content date
+        id: date
+        run: |
+          d=$(TZ=Asia/Seoul git log -1 --invert-grep --grep='\[본문 아님\]' \
+                --date=format-local:%Y-%m-%d --format=%cd -- . \
+                ':!.github' ':!README.md' ':!.gitignore' ':!docs' ':!t.html')
+          [ -n "$d" ] || { echo "본문 날짜를 계산하지 못함"; exit 1; }
+          echo "CONTENT_DATE=$d"
+          echo "d=$d" >> "$GITHUB_OUTPUT"
+
+      - name: Install
+        run: npm ci
+
+      # --define 는 JS 식으로 들어가므로 문자열 따옴표까지 넣어야 한다.
+      - name: Deploy to Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler deploy --define "CONTENT_DATE:\"${{ steps.date.outputs.d }}\""
+
+      # 운영 사이트맵에 날짜가 들어갔는지 캐시를 피해 확인한다.
+      - name: Verify sitemap lastmod
+        run: |
+          sleep 10
+          got=$(curl -s "https://thesavestore.com/sitemap.xml?v=$GITHUB_SHA" | grep -o '<lastmod>[^<]*' | head -1 | cut -c10-)
+          echo "운영 lastmod=$got / 기대값=${{ steps.date.outputs.d }}"
+          [ "$got" = "${{ steps.date.outputs.d }}" ]

@@ -7091,17 +7091,23 @@ function __buildSitemapEntries() {
   return { main, dongs, dongProducts };
 }
 
+/*
+ * 사이트맵 lastmod — 요청한 날이 아니라 배포한 본문의 날짜.
+ * GitHub Actions(deploy.yml)가 마지막 본문 커밋 날짜(한국 시간)를 wrangler --define 으로 넣는다.
+ * 사람이 손으로 올리는 값이 아니다. 로컬 wrangler dev 처럼 주입이 없으면 lastmod 를 아예 뺀다.
+ */
+const __CONTENT_DATE = typeof CONTENT_DATE !== "undefined" ? CONTENT_DATE : "";
+const __lastmodTag = () => __CONTENT_DATE ? `<lastmod>${__CONTENT_DATE}</lastmod>` : "";
+
 function __renderSitemapXml(entries) {
-  const today = (new Date()).toISOString().split("T")[0];
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    entries.map(e => `  <url><loc>${e.url}</loc><lastmod>${today}</lastmod><changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`).join("\n") +
+    entries.map(e => `  <url><loc>${e.url}</loc>${__lastmodTag()}<changefreq>${e.changefreq}</changefreq><priority>${e.priority}</priority></url>`).join("\n") +
     "\n</urlset>";
 }
 
 // Sitemap index — 검색엔진에 분할된 sitemap 목록 제공 (50000 URL/50MB 한도 회피, 처리 부담 감소)
 app.get("/sitemap.xml", (c) => {
   const base = "https://thesavestore.com";
-  const today = (new Date()).toISOString().split("T")[0];
   const sitemaps = [
     base + "/sitemap-main.xml",
     base + "/sitemap-dongs.xml",
@@ -7109,7 +7115,7 @@ app.get("/sitemap.xml", (c) => {
     base + "/sitemap-products-2.xml",
   ];
   const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    sitemaps.map(s => `  <sitemap><loc>${s}</loc><lastmod>${today}</lastmod></sitemap>`).join("\n") +
+    sitemaps.map(s => `  <sitemap><loc>${s}</loc>${__lastmodTag()}</sitemap>`).join("\n") +
     "\n</sitemapindex>";
   return c.text(xml, 200, {
     "Content-Type": "application/xml; charset=utf-8",
