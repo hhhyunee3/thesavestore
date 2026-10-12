@@ -3,3 +3,6 @@ dist/
 .wrangler/
 .env
 *.log
+
+# 제조사 자료(연락처·가격 포함) — 공개 저장소라 올리지 않음
+docs/vending/
