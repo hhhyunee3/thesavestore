@@ -53,12 +53,34 @@ const SVG = {
     `<text x="120" y="56" font-size="11" fill="#666" text-anchor="middle">냉장·냉동 없음</text>`, '굿즈·담배 자판기 도식'),
 };
 
+/* ---------- 사진 (제조사 PDF에서 뽑은 이미지, images/vending/) ----------
+ * 설치 장소 이름·간판·브랜드명이 보이는 사진은 쓰지 않는다. */
+export const VEND_IMG_BASE = 'https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/vending/';
+const IMG_DIM = {'model-frozen':[700,898],'model-smart-multi':[461,900],'model-extension':[895,900],'smart-pair-room':[1200,802],'smart-lobby':[900,900],'rail-push':[645,390],'rail-spring':[645,484],'extension-photo':[439,391],'model-goods':[439,391],'school-1':[660,790],'school-2':[663,790],'school-3':[660,790],'sports-1':[646,772],'sports-2':[646,772],'sports-3':[505,604],'hotel-1':[646,772],'hospital-1':[646,772],'hospital-2':[646,772],'hospital-3':[646,772],'cafe-1':[487,583],'cafe-2':[646,772],'cafe-3':[413,493],'frz-store':[661,503],'frz-camping':[661,503],'frz-park':[661,503],'frz-specialty':[661,503],'frz-gas':[661,503],'frz-cake':[661,503],'frz-pet':[661,503],'frz-icecream':[661,503],'frz-mealkit':[718,704],'frz-meat':[632,619],'tray-school':[1200,675],'tray-sports':[1200,675]};
+const imgUrl = (n) => VEND_IMG_BASE + n + '.jpg';
+const imgTag = (n, alt, cls = '', eager = false) => {
+  const [w, h] = IMG_DIM[n] || [800, 600];
+  return `<img src="${imgUrl(n)}" alt="${alt}" width="${w}" height="${h}"${cls ? ` class="${cls}"` : ''}${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
+};
+const fig = ([n, alt, cap]) => `<figure>${imgTag(n, alt)}<figcaption>${cap}</figcaption></figure>`;
+const gallery = (list) => list && list.length ? `<div class="vm-gallery">${list.map(fig).join('')}</div>` : '';
+const CAP_DOC = '제품 자료 이미지';
+const CAP_PROP = '제조사 설치 제안 이미지';
+
 /* ---------- 모델 데이터 ---------- */
 export const VEND_MODELS = {
   'smart-multi': {
     name: '스마트 멀티 자판기',
     short: '키오스크 화면, 냉장·온장 전환',
     tag: '키오스크 결합형 · 냉장/온장',
+    photo: ['model-smart-multi', '스마트 멀티 자판기 정면, 왼쪽에 진열창과 오른쪽에 터치 화면'],
+    gallery: [
+      ['smart-pair-room', '스마트 멀티 자판기 옆에 확장형을 붙여 둔 모습', CAP_DOC + ' · 오른쪽이 확장형'],
+      ['smart-lobby', '로비에 스마트 멀티 자판기 두 대를 둔 모습', CAP_DOC],
+      ['rail-push', '소형 푸시 방식 레일', '소형 푸시 방식 레일'],
+      ['rail-spring', '스프링 방식 레일', '스프링 방식 레일'],
+      ['cafe-2', '무인카페에 스마트 멀티 자판기 두 대를 나란히 둔 모습', '자료에 실린 무인카페 설치 사진'],
+    ],
     card: '23.8인치 화면에서 고르고 결제합니다. 냉장과 온장을 바꿔 쓰고, 화면에 매장 광고를 띄웁니다.',
     lead: '23.8인치 터치 화면에서 상품을 고르고 카드나 모바일 결제로 사는 자판기입니다. 냉장(2~7℃)과 온장(0~30℃)을 바꿔 쓰고, 손님이 없을 때는 화면에 매장 광고나 공지를 띄웁니다.',
     desc: '스마트 멀티 자판기(광고형 홈타운) 크기 955×1970×920mm, 23.8인치 화면, 소비전력 434W, 냉장·온장 온도, 넣을 수 있는 상품 규격과 맞는 업종을 정리했습니다.',
@@ -118,6 +140,10 @@ export const VEND_MODELS = {
     name: '멀티 자판기 확장형',
     short: '메인 자판기 옆에 붙이는 보조기',
     tag: '단독 사용 불가',
+    photo: ['model-extension', '왼쪽 스마트 멀티 자판기와 오른쪽 확장형을 붙여 둔 모습'],
+    gallery: [
+      ['extension-photo', '화면이 있는 메인 자판기 옆에 확장형을 붙여 쓰는 모습', '자료에 실린 설치 사진 · 오른쪽이 확장형'],
+    ],
     card: '스마트 멀티 자판기 옆에 붙여 진열량을 늘립니다. 혼자서는 쓸 수 없습니다.',
     lead: '스마트 멀티 자판기 옆에 붙여 진열 칸을 늘리는 보조 자판기입니다. 메인 자판기 없이 혼자서는 쓸 수 없습니다.',
     desc: '멀티 자판기 확장형은 스마트 멀티 자판기에 연결해 쓰는 보조기입니다. 단독으로 쓸 수 없다는 점과 확장형보다 메인 자판기를 늘리는 편이 나은 경우를 정리했습니다.',
@@ -146,6 +172,12 @@ export const VEND_MODELS = {
 
   'frozen-showcase': {
     name: '블록형 냉동 쇼케이스 자판기',
+    photo: ['model-frozen', '블록형 냉동 쇼케이스 자판기, 칸마다 상품이 든 진열창과 옆에 붙은 화면'],
+    gallery: [
+      ['frz-mealkit', '가로 3 × 세로 8 배열 칸에 밀키트를 넣은 모습', CAP_PROP],
+      ['frz-meat', '큰 칸에 육류를 넣은 모습', CAP_PROP],
+      ['frz-store', '무인매장에 냉동 쇼케이스와 스마트 멀티 자판기를 나란히 둔 모습', CAP_PROP],
+    ],
     short: '칸마다 잠기는 냉동 자판기',
     tag: '냉동 · 칸별 잠금',
     card: '결제한 칸만 열리는 냉동 쇼케이스입니다. 밀키트·디저트·아이스크림·육류에 맞습니다.',
@@ -187,6 +219,7 @@ export const VEND_MODELS = {
 
   'goods': {
     name: '굿즈·담배 자판기',
+    photo: ['model-goods', '노란색 굿즈 자판기 정면'],
     short: '냉장·냉동이 없는 작은 자판기',
     tag: '상온 · 소형',
     card: '냉장·냉동이 없는 작은 모델입니다. 굿즈, 세차수건 같은 상온 상품을 좁은 자리에서 팝니다.',
@@ -245,7 +278,7 @@ export const VEND_CSS = `<style>
 .vm-alt-case{font-weight:800;color:#000;font-size:15px;margin-bottom:4px}
 .vm-alt-why{font-size:14px;color:#555;line-height:1.7}
 .vm-alt-why a{color:#FF5500;font-weight:800;text-decoration:none}
-.vm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.vm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
 .vm-card{display:flex;flex-direction:column;gap:8px;border:1px solid #EEE;border-radius:14px;padding:16px;text-decoration:none;color:inherit;background:#fff;transition:border-color .15s}
 .vm-card:hover{border-color:#FF5500}
 .vm-card-fig{background:#FAFAFA;border-radius:10px;padding:10px;display:flex;justify-content:center}
@@ -259,6 +292,13 @@ export const VEND_CSS = `<style>
 .vm-reco-k{flex-shrink:0;width:180px;word-break:keep-all;font-weight:800;color:#000;font-size:14px}
 .vm-reco-v{font-size:14px;color:#444;line-height:1.7}
 .vm-reco-v a{color:#FF5500;font-weight:800;text-decoration:none}
+.vm-figure img{width:100%;height:auto;display:block;border-radius:10px}
+.vm-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:6px 0 18px}
+.vm-gallery figure,.vm-wide{margin:0}.vm-gallery img,.vm-wide img{width:100%;height:auto;display:block;border-radius:10px;background:#F5F5F5}
+.vm-gallery figcaption,.vm-wide figcaption{font-size:12.5px;color:#888;margin-top:6px;line-height:1.5}
+.vm-wide{margin:6px 0 18px}
+.vm-card-photo{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:10px;background:#FAFAFA}
+.vm-card-photo.fit{object-fit:contain;background:#fff}
 @media(max-width:768px){.vm-hero{grid-template-columns:1fr}.vm-figure{max-width:240px}.vm-reco-row{flex-direction:column;gap:4px}.vm-reco-k{width:auto}.vm-table{font-size:13.5px}}
 </style>`;
 
@@ -293,7 +333,7 @@ function altBlock(m) {
 export function vendModelCards(exclude) {
   return `<div class="vm-cards">` + VEND_MODEL_ORDER.filter(k => k !== exclude).map(k => {
     const m = VEND_MODELS[k];
-    return `<a class="vm-card" href="${modelUrl(k)}"><div class="vm-card-fig">${SVG[k]}</div><div class="vm-card-tag">${m.tag}</div><div class="vm-card-name">${m.name}</div><div class="vm-card-desc">${m.card}</div></a>`;
+    return `<a class="vm-card" href="${modelUrl(k)}">${m.photo ? imgTag(m.photo[0], m.photo[1], 'vm-card-photo fit') : `<div class="vm-card-fig">${SVG[k]}</div>`}<div class="vm-card-tag">${m.tag}</div><div class="vm-card-name">${m.name}</div><div class="vm-card-desc">${m.card}</div></a>`;
   }).join('') + `</div>`;
 }
 
@@ -369,18 +409,20 @@ export function vendModelPage(k, ctx) {
         { '@type': 'ListItem', position: 2, name: '자동판매기', item: `https://${host}${BASE}/` },
         { '@type': 'ListItem', position: 3, name: m.name, item: canon },
       ] },
-      { '@type': 'Product', name: m.name, description: m.desc, category: '자동판매기' },
+      { '@type': 'Product', name: m.name, description: m.desc, category: '자동판매기', ...(m.photo ? { image: imgUrl(m.photo[0]) } : {}) },
     ],
   });
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${title}</title>${siteHead}` +
     `<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${m.desc}">` +
     `<link rel="canonical" href="${canon}"><meta property="og:title" content="${title}"><meta property="og:description" content="${m.desc}">` +
-    `<meta property="og:type" content="website"><meta property="og:url" content="${canon}">` +
+    `<meta property="og:type" content="website"><meta property="og:url" content="${canon}">${m.photo ? `<meta property="og:image" content="${imgUrl(m.photo[0])}">` : ''}` +
     `<script type="application/ld+json">${jsonLd}</script>${css}${VEND_CSS}</head><body>${header}${vendSubnav(k)}` +
     `<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="${BASE}/">자동판매기</a> · <span style="color:#000;font-weight:700">${m.name}</span></div>` +
     `<div class="vm-hero"><div><div class="p-tag">${m.tag}</div><h1 class="p-h1">${m.name}</h1><p class="p-lead">${m.lead}</p>` +
-    `<a href="tel:010-9677-2356" class="p-cta">설치 상담 010-9677-2356</a></div><div class="vm-figure">${SVG[k]}</div></div></div></section>` +
-    body + vendModelIndustriesHtml(k) +
+    `<a href="tel:010-9677-2356" class="p-cta">설치 상담 010-9677-2356</a></div><div class="vm-figure">${m.photo ? imgTag(m.photo[0], m.photo[1], '', true) : SVG[k]}</div></div></div></section>` +
+    body +
+    (m.gallery ? `<section class="p-section"><div class="p-wrap"><h2>실제로 놓으면 어떤 모습인가요?</h2>${gallery(m.gallery)}</div></section>` : '') +
+    vendModelIndustriesHtml(k) +
     `<section class="p-section"><div class="p-wrap"><h2>다른 자판기 모델도 비교해 볼까요?</h2>${vendModelCards(k)}</div></section>` +
     footer + `</body></html>`;
 }
@@ -406,6 +448,7 @@ export const VEND_INDUSTRY_ORDER = ['school', 'sports', 'hotel', 'hospital', 'ca
 
 export const VEND_INDUSTRIES = {
   'school': {
+    photos: [['school-1','학교 복도에 스마트 멀티 자판기와 다른 자판기를 함께 둔 모습','자료에 실린 학교 설치 사진'],['school-2','스마트 멀티 자판기 두 대를 나란히 둔 모습','자료에 실린 학교 설치 사진'],['school-3','넓은 휴게 공간에 스마트 멀티 자판기 두 대를 둔 모습','자료에 실린 학교 설치 사진']],
     name: '학교·학원 자판기',
     tag: '스마트 멀티 · 운영 자료 있음',
     card: '쉬는 시간 10분과 점심시간에 판매가 몰립니다. 자극적인 맛, 적은 용량이 잘 나갑니다.',
@@ -423,6 +466,7 @@ export const VEND_INDUSTRIES = {
         '<p>자료가 꼽은 기준은 두 가지입니다. <strong>자극적인 맛</strong>과 <strong>적은 용량</strong>입니다.</p>' +
         '<p>판매 순위 위쪽에는 매운맛 과자, 초콜릿 과자, 감자 과자, 팩 초코우유가 올라 있습니다. 막대 과자, 샌드 쿠키, 감자칩이 그 뒤를 잇습니다.</p>' +
         '<p>추천 트레이 구성은 위 칸에 초콜릿·껌·사탕·젤리·소시지 간식·막대 과자를, 아래 칸에 이온음료·탄산음료·과즙 음료·팩 음료를 넣는 방식입니다.</p>' +
+        'IMG:tray-school|학교 추천 트레이 구성 그림. 위 칸에 과자와 젤리, 아래 칸에 캔·팩 음료|자료의 학교 추천 트레이 구성|' +
         '<p>유행하는 상품으로 빨리 바꿔 줄수록 판매가 크게 오를 수 있다고 자료에 나와 있습니다. 상품을 바꿀 때 트레이 수정에는 상품을 정한 뒤 5영업일 정도 걸립니다.</p>'],
       ['확장형을 붙이는 게 나을까요, 자판기를 한 대 더 두는 게 나을까요?',
         '<p>자료에는 학교·학원에서 LINK:extension을 붙이는 것보다 메인 자판기를 여러 대 설치하는 편이 유리하다고 나와 있습니다.</p>'],
@@ -431,6 +475,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'sports': {
+    photos: [['sports-1','실내 시설에 스마트 멀티 자판기를 둔 모습','자료에 실린 스포츠·위락시설 설치 사진'],['sports-2','나무 바닥 공간에 둔 스마트 멀티 자판기','자료에 실린 스포츠·위락시설 설치 사진'],['sports-3','메인 자판기 옆에 확장형을 붙여 둔 모습','자료에 실린 스포츠·위락시설 설치 사진 · 오른쪽이 확장형']],
     name: '헬스장·골프장 자판기',
     tag: '스마트 멀티 · 운영 자료 있음',
     card: '주말 판매 비중이 높습니다. 프로틴·에너지 음료와 이온음료, 생수가 잘 나갑니다.',
@@ -447,7 +492,8 @@ export const VEND_INDUSTRIES = {
         '<p>생수는 고가와 저가로 2~3종을 함께 넣어도 각각 판매가 일어납니다.</p>' +
         '<p>판매 순위는 이렇습니다.</p>' +
         ol(['캔맥주', '초코맛 단백질 음료', '저렴한 생수', '이온음료', '옥수수수염차', '컵라면', '에너지 음료', '땅콩 과자', '프로틴 음료', '보리 탄산음료']) +
-        '<p>추천 트레이에는 컵라면과 땅콩·오징어 과자, 단백질 음료, 이온음료, 캔커피와 병커피, 아이스티, 에너지 음료, 생수가 들어갑니다.</p>'],
+        '<p>추천 트레이에는 컵라면과 땅콩·오징어 과자, 단백질 음료, 이온음료, 캔커피와 병커피, 아이스티, 에너지 음료, 생수가 들어갑니다.</p>' +
+        'IMG:tray-sports|스포츠시설 추천 트레이 구성 그림. 컵라면과 과자, 단백질 음료, 커피, 이온음료, 생수|자료의 스포츠·위락시설 추천 트레이 구성|'],
       ['맥주도 넣을 수 있나요?',
         '<p>자료에는 성인인증 기능을 추가하고 캔맥주를 팔 경우 판매 상승폭이 크다고 나와 있습니다. 판매 순위 1위도 캔맥주입니다.</p>' +
         '<p>성인인증은 기본 기능이 아니라 추가하는 기능입니다. 넣으실 수 있는지는 설치 장소 조건과 함께 상담 때 확인합니다.</p>'],
@@ -456,6 +502,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'hotel': {
+    photos: [['hotel-1','창가에 둔 스마트 멀티 자판기','자료에 실린 호텔·리조트 설치 사진']],
     name: '호텔·리조트 자판기',
     tag: '스마트 멀티 · 운영 자료 있음',
     card: '수영장이 있으면 판매가 크게 늘어납니다. 튜브·물안경, 방수용품, 어린이 칫솔이 잘 나갑니다.',
@@ -480,6 +527,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'hospital': {
+    photos: [['hospital-1','병원 대기 공간에 둔 스마트 멀티 자판기','자료에 실린 병원 설치 사진'],['hospital-2','벽면 공간에 맞춰 둔 스마트 멀티 자판기','자료에 실린 병원 설치 사진'],['hospital-3','복도에 둔 스마트 멀티 자판기','자료에 실린 병원 설치 사진']],
     name: '병원·치과 자판기',
     tag: '스마트 멀티 · 운영 자료 있음',
     card: '안내데스크 일을 덜고 화면을 진료 안내로 씁니다. 입원실이 있으면 어메니티가 잘 나갑니다.',
@@ -500,6 +548,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'cafe-community': {
+    photos: [['cafe-1','무인카페에 둔 베이지색 스마트 멀티 자판기','자료에 실린 무인카페 설치 사진'],['cafe-2','무인카페에 스마트 멀티 자판기 두 대를 나란히 둔 모습','자료에 실린 무인카페 설치 사진'],['cafe-3','커뮤니티카페에 둔 스마트 멀티 자판기','자료에 실린 커뮤니티카페 설치 사진']],
     name: '무인카페·커뮤니티카페 자판기',
     tag: '스마트 멀티 · 설치 사진 있음',
     card: '인테리어가 보이는 공간용 곡선형 흰색 자판기입니다. 무인카페와 커뮤니티카페 설치 사진이 있습니다.',
@@ -520,6 +569,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'unmanned-store': {
+    photos: [['frz-store','무인매장에 냉동 쇼케이스와 스마트 멀티 자판기를 나란히 둔 모습',CAP_PROP]],
     name: '무인매장 자판기',
     tag: '스마트 멀티 + 냉동 쇼케이스',
     card: '스마트 멀티 자판기와 냉동 쇼케이스를 나란히 두는 구성입니다. 결제한 칸만 열립니다.',
@@ -539,6 +589,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'dessert': {
+    photos: [['frz-cake','칸마다 케이크를 넣은 냉동 쇼케이스',CAP_PROP],['frz-icecream','칸마다 아이스크림을 넣은 냉동 쇼케이스',CAP_PROP]],
     name: '케이크·디저트·아이스크림 매장 자판기',
     tag: '냉동 쇼케이스 · 픽업박스',
     card: '수제 케이크 픽업과 고급 아이스크림 판매에 칸별 잠금 냉동 쇼케이스를 씁니다.',
@@ -559,6 +610,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'specialty': {
+    photos: [['frz-specialty','칸마다 선물용 특산물을 넣은 냉동 쇼케이스',CAP_PROP]],
     name: '지역 특산물 매장 자판기',
     tag: '냉동 쇼케이스 · 선물용',
     card: '곶감 같은 특산물과 선물용 디저트를 칸별 잠금 쇼케이스에 넣어 팝니다.',
@@ -576,6 +628,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'camping': {
+    photos: [['frz-camping','캠핑장에 둔 고기 자판기',CAP_PROP],['frz-park','공원에 둔 피크닉세트 자판기',CAP_PROP]],
     name: '캠핑장·공원 자판기',
     tag: '냉동 쇼케이스 · 고기·피크닉',
     card: '캠핑장에는 고기 자판기, 공원에는 샌드위치·도시락 피크닉세트 자판기가 제안되어 있습니다.',
@@ -595,6 +648,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'pet': {
+    photos: [['frz-pet','애견유치원에 둔 수제간식 냉동 쇼케이스',CAP_PROP]],
     name: '애견유치원·애견호텔 자판기',
     tag: '냉동 쇼케이스 · 수제간식',
     card: '애견유치원과 애견호텔에서 수제간식을 칸별 잠금 냉동 쇼케이스로 팝니다.',
@@ -612,6 +666,7 @@ export const VEND_INDUSTRIES = {
   },
 
   'gas-station': {
+    photos: [['frz-gas','주유소에 둔 요소수 전용 쇼케이스',CAP_PROP]],
     name: '주유소 요소수 자판기',
     tag: '냉동 쇼케이스 · 요소수 전용',
     card: '온도에 민감하고 단가가 높은 요소수를 전용 쇼케이스로 팝니다.',
@@ -639,7 +694,7 @@ export function vendIndustryCards(exclude, only) {
   const keys = (only || VEND_INDUSTRY_ORDER).filter(k => k !== exclude);
   return `<div class="vm-cards">` + keys.map(k => {
     const d = VEND_INDUSTRIES[k];
-    return `<a class="vm-card" href="${industryUrl(k)}"><div class="vm-card-tag">${d.tag}</div><div class="vm-card-name">${d.name}</div><div class="vm-card-desc">${d.card}</div></a>`;
+    return `<a class="vm-card" href="${industryUrl(k)}">${d.photos ? imgTag(d.photos[0][0], d.photos[0][1], 'vm-card-photo') : ''}<div class="vm-card-tag">${d.tag}</div><div class="vm-card-name">${d.name}</div><div class="vm-card-desc">${d.card}</div></a>`;
   }).join('') + `</div>`;
 }
 
@@ -650,10 +705,10 @@ export function vendIndustryPage(k, ctx) {
   const { css, header, footer, siteHead, host } = ctx;
   const canon = `https://${host}${industryUrl(k)}`;
   const title = `${d.name} — 맞는 모델과 운영 자료 | 더세이브스토어`;
-  const body = d.sections.map(([h2, html]) =>
-    `<section class="p-section"><div class="p-wrap"><h2>${h2}</h2>${fillLinks(html)}</div></section>`).join('');
+  const body = d.sections.map(([h2, html], i) =>
+    `<section class="p-section"><div class="p-wrap"><h2>${h2}</h2>${fillLinks(html).replace(/IMG:([a-z0-9-]+)\|([^|]*)\|([^|]*)\|/g, (_, n, alt, cap) => `<figure class="vm-wide">${imgTag(n, alt)}<figcaption>${cap}</figcaption></figure>`)}${i === 0 ? gallery(d.photos) : ''}</div></section>`).join('');
   const modelsSec = `<section class="p-section"><div class="p-wrap"><h2>이 업종에 맞는 자판기 모델은 무엇인가요?</h2><div class="vm-cards">` +
-    d.models.map(m => `<a class="vm-card" href="${modelUrl(m)}"><div class="vm-card-fig">${SVG[m]}</div><div class="vm-card-tag">${VEND_MODELS[m].tag}</div><div class="vm-card-name">${VEND_MODELS[m].name}</div><div class="vm-card-desc">${VEND_MODELS[m].card}</div></a>`).join('') +
+    d.models.map(m => `<a class="vm-card" href="${modelUrl(m)}">${VEND_MODELS[m].photo ? imgTag(VEND_MODELS[m].photo[0], VEND_MODELS[m].photo[1], 'vm-card-photo fit') : `<div class="vm-card-fig">${SVG[m]}</div>`}<div class="vm-card-tag">${VEND_MODELS[m].tag}</div><div class="vm-card-name">${VEND_MODELS[m].name}</div><div class="vm-card-desc">${VEND_MODELS[m].card}</div></a>`).join('') +
     `</div>${d.note || ''}</div></section>`;
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -669,7 +724,7 @@ export function vendIndustryPage(k, ctx) {
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><title>${title}</title>${siteHead}` +
     `<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${d.desc}">` +
     `<link rel="canonical" href="${canon}"><meta property="og:title" content="${title}"><meta property="og:description" content="${d.desc}">` +
-    `<meta property="og:type" content="website"><meta property="og:url" content="${canon}">` +
+    `<meta property="og:type" content="website"><meta property="og:url" content="${canon}">${d.photos ? `<meta property="og:image" content="${imgUrl(d.photos[0][0])}">` : ''}` +
     `<script type="application/ld+json">${jsonLd}</script>${css}${VEND_CSS}</head><body>${header}${vendSubnav('industry')}` +
     `<section class="p-hero"><div class="p-wrap"><div class="p-crumb"><a href="/">홈</a> · <a href="${BASE}/">자동판매기</a> · <a href="${BASE}/#industries">업종별 자판기</a> · <span style="color:#000;font-weight:700">${d.name}</span></div>` +
     `<div class="p-tag">${d.tag}</div><h1 class="p-h1">${d.name}</h1><p class="p-lead">${d.lead}</p>` +
