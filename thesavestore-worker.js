@@ -8210,24 +8210,28 @@ async function __indexNowAutoPing() {
     }
   }
   
-  // 매일 다른 부분을 보내도록 day-of-year 기반 회전
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-  
-  // 매일 보낼 URL: 메인 + Tier 1 (전부) + Tier 2 (전부) + Tier 3 (회전)
-  const SUBMIT_LIMIT = 9500;  // IndexNow 10,000 한도 안전 마진
-  const fixed = [...allUrls, ...tier1, ...tier2];
-  const remaining = SUBMIT_LIMIT - fixed.length;
-  
-  // Tier 3을 N일에 걸쳐 분할
-  const cycleDays = Math.ceil(tier3.length / Math.max(remaining, 1));
-  const offset = (dayOfYear % cycleDays) * remaining;
-  // 동×철거(noindex,follow, 2026-10-15)는 보내지 않는다.
-  // 회전 계산(cycleDays·offset)은 원래 목록 그대로 두고 잘라낸 뒤에만 거른다 —
-  // 그래야 다른 제품 주소가 보내지는 날이 바뀌지 않는다.
-  const tier3Slice = tier3.slice(offset, offset + remaining).filter(u => !(u.endsWith('/철거') && u.split('/').length === 7));
-  
-  const submitUrls = [...fixed, ...tier3Slice].map(u => encodeURI(u));
+  /*
+   * 본문 날짜(CONTENT_DATE) 기준으로 한 바퀴만 보낸다 (2026-10-15).
+   * 예전에는 홈·시도·시군구(×제품) 2,053개를 매일, 동(×제품)은 6일 주기로 계속 다시 보냈다.
+   * 이제는 CONTENT_DATE(배포 때 GitHub Actions 가 넣는 마지막 본문 커밋 날짜, 한국 시간) 다음 날부터
+   * 하루 PER_DAY 개씩 목록 끝까지 보내고, 다 보내면 다음 CONTENT_DATE 가 바뀔 때까지 0건이다.
+   * 상태를 저장하지 않으므로 'CONTENT_DATE 에서 며칠째인가' 만으로 오늘 보낼 몫이 정해진다.
+   * CONTENT_DATE 가 없으면(로컬 dev 등) 보내지 않는다.
+   */
+  const PER_DAY = 8000;  // 이전 하루 최대(8,437) 이하, IndexNow 10,000 한도 안
+  // 동×철거(noindex,follow)는 보내지 않는다
+  const all = [...allUrls, ...tier1, ...tier2, ...tier3.filter(u => !(u.endsWith('/철거') && u.split('/').length === 7))];
+  const __kstToday = new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10);
+  // 본문 날짜 '다음 날' 을 0일째로 센다. 당일로 세면 cron 이 그날 배포보다 먼저 돌 때
+  // 0일째 몫(홈·시도·시군구가 들어 있다)을 건너뛴다.
+  const dayIndex = __CONTENT_DATE ? Math.round((Date.parse(__kstToday) - Date.parse(__CONTENT_DATE)) / 86400000) - 1 : -1;
+  const cycleDays = Math.ceil(all.length / PER_DAY);
+  const offset = dayIndex * PER_DAY;
+  if (!__CONTENT_DATE || dayIndex < 0 || offset >= all.length) {
+    console.log("[IndexNow Auto Ping]", JSON.stringify({ submitted: 0, reason: !__CONTENT_DATE ? "CONTENT_DATE 없음" : "이번 본문 날짜의 한 바퀴를 이미 다 보냄", content_date: __CONTENT_DATE, day_index: dayIndex, cycle_days: cycleDays, total: all.length, time: new Date().toISOString() }));
+    return { submitted: 0, results: [] };
+  }
+  const submitUrls = all.slice(offset, offset + PER_DAY).map(u => encodeURI(u));
   
   const body = JSON.stringify({
     host: __HOST,
@@ -8258,10 +8262,11 @@ async function __indexNowAutoPing() {
   }
   console.log("[IndexNow Auto Ping]", JSON.stringify({
     submitted: submitUrls.length,
-    tier3_total: tier3.length,
-    tier3_offset: offset,
+    content_date: __CONTENT_DATE,
+    day_index: dayIndex,
+    offset,
     cycle_days: cycleDays,
-    day_of_year: dayOfYear,
+    total: all.length,
     results,
     time: new Date().toISOString()
   }));
