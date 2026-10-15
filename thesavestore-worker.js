@@ -7492,6 +7492,37 @@ function __diversify(text, seed) {
   return result;
 }
 
+// 철거 지역 페이지 전용 동의어 치환.
+// __diversify 는 치환한 말을 다시 치환해 '매장 철거' → '매장 매장 정리' → '점포 점포 정리' 가 되고,
+// 받침이 다른 말로 바꾸면서 조사를 그대로 둬 '점포이'·'솔루션는' 이 생겼다.
+// 여기서는 한 번에 한 자리씩만 바꾸고(치환 결과를 다시 보지 않음), 바꾼 말 뒤 조사를 받침에 맞춘다.
+// '철거'(→매장 정리), '도입'(→설치), '경험'(→시공 사례)은 철거 글에 맞지 않아 바꾸지 않는다.
+const __DEMOL_SYN_SKIP = new Set(['철거', '도입', '경험']);
+const __DEMOL_SYN_KEYS = Object.keys(__SYN).filter(k => !__DEMOL_SYN_SKIP.has(k)).sort((a, b) => b.length - a.length);
+// 조사는 바로 뒤가 띄어쓰기·문장부호일 때만 조사로 본다('매장이라는' 의 '이' 는 건드리지 않음)
+const __DEMOL_SYN_RE = new RegExp('(' + __DEMOL_SYN_KEYS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')((?:이라는|이라고|이라면|이라서|이지만|이라|이란|이고|이며|이나|으로|이|가|은|는|을|를|과|와|로|며|나)(?=[\\s,.·)?!]|$))?', 'g');
+function __hasBatchim(w) {
+  const c = w.charCodeAt(w.length - 1);
+  if (c < 0xAC00 || c > 0xD7A3) return null;            // 한글이 아니면 판단하지 않는다
+  return (c - 0xAC00) % 28;                              // 0 = 받침 없음, 8 = ㄹ
+}
+function __josaFor(w, j) {
+  const b = __hasBatchim(w);
+  if (b === null || !j) return j || '';
+  const pairs = { '이': ['이', '가'], '가': ['이', '가'], '은': ['은', '는'], '는': ['은', '는'], '을': ['을', '를'], '를': ['을', '를'], '과': ['과', '와'], '와': ['과', '와'], '이며': ['이며', '며'], '며': ['이며', '며'], '이나': ['이나', '나'], '나': ['이나', '나'] };
+  if (j === '으로' || j === '로') return (b === 0 || b === 8) ? '로' : '으로';
+  // 서술격 조사: 받침이 없으면 앞의 '이' 를 뺀다 (점포이라는 → 점포라는)
+  if (/^이(라는|라고|라면|라서|지만|라|란|고)$/.test(j)) return b ? j : j.slice(1);
+  const pr = pairs[j]; return pr ? (b ? pr[0] : pr[1]) : j;
+}
+function __diversifyDemol(text, seed) {
+  return text.replace(__DEMOL_SYN_RE, (m, src, j) => {
+    const vars = __SYN[src]; const pick = vars[__synHash(seed + ':' + src) % vars.length];
+    if (pick === src) return m;
+    return pick + __josaFor(pick, j);
+  });
+}
+
 function __seoHash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}h^=h>>>13;h=Math.imul(h,16777619)>>>0;return h>>>0;}
 const __THUMB_POOL = [
   "https://cdn.jsdelivr.net/gh/hhhyunee3/thesavestore@main/images/main/pexels-419907350-37856472.jpg",
@@ -7541,9 +7572,9 @@ const __SEO_INTRO_BY_PROD = {
  '{loc} 매장의 포스기 평균 도입 비용은 일반형 기준 월 일정 금액 수준이며, 무상 임대 조건도 가능합니다. 메뉴 등록과 직원 사용법 교육 모두 짧은 시간이면 충분합니다. {loc} 권역에서 포스기 도입 후 매장 정산 시간이 크게 단축되는 효과가 검증되어 있습니다.'
  ],
  '철거': [
- '{loc}에서 매장 철거를 결정하셨다면 가장 먼저 확인하실 것은 철거 범위와 폐기물 처리 비용입니다. 일반적인 매장 기준 철거 비용은 매장 규모에 따라 다른 수준이고, 인테리어 자재가 많거나 주방 설비가 복잡한 매장은 일정 금액까지 발생할 수 있습니다. 더세이브 스토어는 {loc} 권역에서 무상 출장 견적을 기본으로 제공합니다.',
+ '{loc}에서 매장 철거를 결정하셨다면 가장 먼저 확인하실 것은 철거 범위와 폐기물 처리 비용입니다. 더세이브 스토어는 {loc} 권역에서 무상 출장 견적을 기본으로 제공합니다.',
  '{loc} 매장 철거는 단순한 장비 제거가 아닙니다. 카드단말기 결제 대행사 해지, 포스기 데이터 백업, 인테리어 정리, 폐기물 처리까지 동시에 진행되어야 매장이 깔끔하게 정리됩니다. {loc} 권역에서 더세이브 스토어 통합 철거 서비스는 모든 작업을 한 번의 출동으로 끝냅니다.',
- '{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용한 야간 철거도 가능해 후속 임차인 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. 작업 소요 시간은 매장 평수에 따라 달라집니다.',
+ '{loc}에서는 영업 마지막 날 저녁 또는 주말을 활용한 야간 철거도 가능해 후속 임차인 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. 작업 소요 시간은 매장 평수에 따라 달라집니다.',
  '{loc} 상가 철거는 원상복구까지 맡아 드립니다. 임대차 계약서에 적힌 복구 범위를 먼저 확인하고, 어디까지 되돌려 놓아야 하는지 정리한 다음 작업에 들어갑니다. 견적 단계에서 범위를 문서로 남겨 두면 보증금 반환 때 임대인과 부딪힐 일이 줄어듭니다.',
  '{loc} 매장 철거 견적은 무료 방문 견적입니다. 직접 찾아뵙고 평수와 인테리어 상태, 나올 폐기물을 눈으로 확인한 뒤 금액을 말씀드립니다. 보고 나서 다른 곳과 비교해 보셔도 됩니다. 견적을 봤다고 해서 꼭 맡기셔야 하는 것은 아닙니다.',
  '{loc}에서 쓰시던 집기는 버리기 전에 매입 여부를 먼저 봐 드립니다. 주방 기기, 냉장·냉동고, 테이블과 의자, 에어컨처럼 아직 쓸 수 있는 물건은 값을 쳐서 사들이고, 그만큼 철거 비용에서 빼 드립니다. 버리면 폐기물 처리비가 나가지만 넘기시면 오히려 돌려받으시는 셈입니다.',
@@ -7742,24 +7773,21 @@ const __SEO_BODY_POS = [
 
 const __SEO_BODY_DEMO = [
 '{loc}에서 매장 폐업이나 인테리어 변경 시 철거는 단순한 장비 제거가 아닙니다. 카드단말기 해지, 포스기 데이터 백업, 인테리어 정리, 폐기물 처리까지 동시에 진행되어야 매장이 깔끔하게 정리됩니다. {loc} 권역에서 더세이브 스토어가 제공하는 철거 서비스는 모든 작업을 한 번의 출동으로 끝내며, 작업 소요 시간은 매장 평수에 따라 달라집니다.',
-'{loc} 매장의 철거 작업 비용은 매장 평수, 인테리어 종류, 폐기물 양에 따라 결정됩니다. 일반적인 매장 기준 철거 비용은 매장 규모에 따라 다른 수준이고, 인테리어 자재가 많거나 주방 설비가 복잡한 식당은 일정 금액까지 발생할 수 있습니다. {loc} 권역에서 철거 견적은 무상 현장 방문 후 정확한 금액을 안내해 드립니다.',
-'{loc}에서 매장 철거 일정은 영업 종료 후 2~3일 내 진행이 일반적입니다. 영업 마지막 날 저녁 또는 주말을 활용해 야간 철거도 가능하기 때문에, 후속 임차인의 입주 일정에 맞춰 유연하게 조정하실 수 있습니다. {loc} 권역에서 가장 자주 받는 철거 일정은 폐업 다음 날 오전 시작, 당일 저녁 마무리 형태입니다.',
+'{loc} 매장의 철거 작업 비용은 매장 평수, 인테리어 종류, 폐기물 양에 따라 결정됩니다. {loc} 권역에서 철거 견적은 무상 현장 방문 후 정확한 금액을 안내해 드립니다.',
 '{loc} 매장 철거 시 가장 자주 놓치는 부분은 폐기물 처리 비용입니다. 인테리어 자재, 가구, 주방 설비를 그냥 버리는 것이 아니라 산업 폐기물로 분류 처리해야 하는 경우가 많아, 별도 비용이 발생할 수 있습니다. {loc} 권역에서 더세이브 스토어 철거는 폐기물 처리 비용까지 견적에 포함하므로, 철거 후 추가 비용이 발생하지 않습니다.',
 '{loc} 매장 철거 후 원상복구 의무는 임대 계약서에 따라 다릅니다. 일반적으로 임차인이 설치한 모든 시설을 제거하고 원래 상태로 돌려놓는 것이 원칙이지만, 임대인과 협의 시 일부 시설을 그대로 두는 조건도 가능합니다. {loc} 권역에서 철거 견적 단계에서 원상복구 범위를 명확히 정리해 드립니다.',
 '{loc} 매장의 인테리어 철거는 단순 해체 작업이 아니라 정밀한 분리 작업입니다. 천장재, 벽체, 바닥재, 전기 배선, 수도 배관을 순서대로 분리해야 다음 임차인이 인테리어 공사를 시작할 수 있습니다. {loc} 권역에서 평균 철거 작업 순서는 가구 → 인테리어 자재 → 전기/수도 배선 → 바닥/천장 마감재 순으로 진행됩니다.',
 '{loc} 매장 철거 시 카드단말기와 포스기 해지 절차도 함께 진행하셔야 합니다. 결제 대행사 해지 신청, 포스기 임대 해지, 인터넷 회선 해지 등 행정 처리가 동시에 필요한데, 철거 업체가 한 번에 처리해 드리면 사장님이 별도로 신경 쓰실 일이 없습니다. {loc} 권역에서 통합 철거 서비스는 행정 처리까지 포함됩니다.',
-'{loc} 매장 철거 작업 중 가장 중요한 것은 안전입니다. 인테리어 자재 분리 시 발생하는 분진, 폐기물 운반 시 안전 사고, 전기·가스 차단 미흡 등 다양한 위험이 있어, 전문 철거 업체의 작업이 필수입니다. {loc} 권역의 더세이브 스토어 철거 작업자는 모두 산업안전 교육 이수자이며, 작업 중 사고 발생 시 보험 처리가 가능합니다.',
-'{loc}에서 매장 위치 이전 시 철거와 신규 설치를 동시에 진행하시면 시간과 비용을 크게 절약할 수 있습니다. 기존 매장에서 사용하던 포스기, 카드단말기를 새 매장으로 이전 설치할 수 있고, 데이터까지 그대로 옮겨집니다. {loc} 권역에서 이전 + 철거 패키지는 단일 업체 진행 시 평균 상당 부분 비용 절감이 가능합니다.',
-'{loc} 매장 철거 견적은 매장 방문 후 1~2일 내 발송됩니다. 매장 평수, 인테리어 상태, 폐기물 종류를 직접 확인한 후 정확한 비용을 안내해 드리며, 견적이 마음에 안 드시면 다른 업체와 비교하셔도 좋습니다. {loc} 권역에서 더세이브 스토어 철거 견적은 무상 출장 견적이 기본입니다.',
-'{loc} 매장 철거 시 가구·주방 설비를 중고 매입으로 처리하실 수 있는 옵션이 있습니다. 사용 가능한 상태의 인테리어 자재나 주방 기기를 중고 시장에 위탁 판매하면, 철거 비용 일부를 회수하실 수 있습니다. {loc} 권역에서 평균 매입 가능 금액은 매장 규모에 따라 일정 금액 수준으로, 폐기 비용 절감 효과가 큽니다.',
-'{loc} 매장 철거의 폐기물 발생량은 매장 규모에 따라 달라집니다. 인테리어 자재, 가구, 주방 설비, 전선·배관 폐기물이 주된 구성이고, 산업 폐기물 분류 기준에 따라 전문 처리 업체를 통해 합법적으로 처분됩니다. {loc} 권역에서 폐기물 처리 자체 인증 업체와 협력해 안전한 처리가 보장됩니다.',
-'{loc} 매장 철거 후 임대인 점검 단계에서 발생하는 분쟁의 상당 부분는 원상복구 범위 차이입니다. 처음 임대 계약 시 인테리어 시설을 어디까지 매장이 처리해야 하는지 명확히 정리되어 있지 않아 발생하는 문제가 많습니다. {loc} 권역에서 더세이브 스토어 철거 견적 단계에서 임대 계약서 검토를 함께 진행해, 분쟁 예방을 돕고 있습니다.',
-'{loc} 매장 철거의 작업 인력은 매장 규모에 따라 배치됩니다. {loc} 권역에서 작업 인력은 모두 산업안전 교육 이수자이며, 작업 중 사고 발생 시 보험 처리가 가능합니다. 매장 사장님이 안전을 걱정하실 일이 거의 없습니다.',
-'{loc} 매장 철거 시 전기·가스·수도 차단 절차는 안전 작업의 핵심입니다. 전기는 차단기 OFF 후 콘센트 점검, 가스는 메인 밸브 잠금 후 누설 점검, 수도는 메인 밸브 차단 후 배관 잔수 처리가 표준입니다. {loc} 권역에서 작업자가 직접 한국전력·도시가스 공사·수도사업소에 차단 신청을 대행해 드립니다.',
-'{loc} 매장 철거 시 매장 간판·외벽 정리는 별도 작업으로 진행됩니다. 외부 간판 철거는 도시미관 조례를 위반하지 않도록 시청·구청 신고 후 작업하며, 외벽 인테리어 자재는 건물주와 협의해 보존 또는 철거를 결정합니다. {loc} 권역에서 신고 절차까지 한 번에 처리해 매장 사장님 부담이 거의 없습니다.',
-'{loc} 매장 철거 후 청소·소독 작업도 별도 옵션으로 가능합니다. 폐기물 처리 후 매장 바닥·벽면·천장 청소, 곰팡이·해충 방제 작업까지 진행하면 다음 임차인이 바로 인테리어를 시작할 수 있는 상태가 됩니다. {loc} 권역에서 청소·소독 옵션은 매장 평수에 따라 일정 금액 추가 비용으로 진행 가능합니다.',
+'{loc} 매장 철거 작업 중 가장 중요한 것은 안전입니다. 인테리어 자재 분리 시 발생하는 분진, 폐기물 운반 시 안전 사고, 전기·가스 차단 미흡 등 다양한 위험이 있어, 전문 철거 업체의 작업이 필수입니다.',
+'{loc} 매장 철거 견적은 매장 평수, 인테리어 상태, 폐기물 종류를 직접 확인한 후 정확한 비용을 안내해 드리며, 견적이 마음에 안 드시면 다른 업체와 비교하셔도 좋습니다. {loc} 권역에서 더세이브 스토어 철거 견적은 무상 출장 견적이 기본입니다.',
+'{loc} 매장 철거 시 가구·주방 설비를 중고 매입으로 처리하실 수 있는 옵션이 있습니다. 사용 가능한 상태의 인테리어 자재나 주방 기기를 중고 시장에 위탁 판매하면, 철거 비용 일부를 회수하실 수 있습니다.',
+'{loc} 매장 철거의 폐기물 발생량은 매장 규모에 따라 달라집니다. 인테리어 자재, 가구, 주방 설비, 전선·배관 폐기물이 주된 구성이고, 산업 폐기물 분류 기준에 따라 전문 처리 업체를 통해 합법적으로 처분됩니다.',
+'{loc} 매장 철거 후 임대인 점검 단계에서는 처음 임대 계약 시 인테리어 시설을 어디까지 매장이 처리해야 하는지 명확히 정리되어 있지 않아 발생하는 문제가 많습니다. {loc} 권역에서 더세이브 스토어 철거 견적 단계에서 임대 계약서 검토를 함께 진행해, 분쟁 예방을 돕고 있습니다.',
+'{loc} 매장 철거 시 전기·가스·수도 차단 절차는 안전 작업의 핵심입니다. 전기는 차단기 OFF 후 콘센트 점검, 가스는 메인 밸브 잠금 후 누설 점검, 수도는 메인 밸브 차단 후 배관 잔수 처리가 표준입니다. {loc} 권역에서 전기·가스·수도 해지 신청을 대행해 드립니다.',
+'{loc} 매장 철거 시 매장 간판·외벽 정리는 별도 작업으로 진행됩니다. 외벽 인테리어 자재는 건물주와 협의해 보존 또는 철거를 결정합니다.',
+'{loc} 매장 철거 후 청소·소독 작업도 별도 옵션으로 가능합니다. 폐기물 처리 후 매장 바닥·벽면·천장 청소, 곰팡이·해충 방제 작업까지 진행하면 다음 임차인이 바로 인테리어를 시작할 수 있는 상태가 됩니다.',
 '{loc} 매장 철거 견적은 정액제와 매장 방문 후 산정 방식 두 가지가 있습니다. 정액제는 평수만으로 산정하는 간이 방식이고, 방문 산정은 인테리어 상태와 폐기물량을 직접 확인 후 정밀 산정하는 방식입니다. {loc} 권역에서 정확한 비용을 원하시면 방문 산정을 추천드리며, 무상 출장이 기본입니다.',
-'{loc} 매장 철거 작업 시 손님 응대 시간 외 작업이 가능합니다. 야간 작업, 주말 작업, 새벽 작업이 모두 가능하며, 매장 영업과 충돌하지 않도록 일정 조율을 해 드립니다. {loc} 권역에서 야간 작업 비중은 상당수 수준이며, 후속 임차인의 빠른 입주가 필요할 때 가장 자주 채택되는 방식입니다.'
+'{loc} 매장 철거 작업 시 손님 응대 시간 외 작업이 가능합니다. 야간 작업, 주말 작업, 새벽 작업이 모두 가능하며, 매장 영업과 충돌하지 않도록 일정 조율을 해 드립니다.'
 ];
 
 const __SEO_BODY_KIOSK = [
@@ -7847,6 +7875,10 @@ function __generateSEOContent(pathname) {
   else if (segs.length === 3 && __REGIONS.includes(segs[0]) && __PRODS.includes(segs[2])) __prodKey = segs[2];
   const __prodLabel = __prodKey;
   const __kw = __prodKey === '철거' ? '철거' : (__prodKey ? `${__prodLabel} 설치` : '매장 설비 설치');
+  // 철거: /서울/철거 · /서울/중구/철거 는 마지막 조각이 제품이라 지역명 자리에 '철거' 가 들어갔다 → 지역명으로
+  if (__prodKey === '철거' && segs.length <= 3) loc = segs[segs.length - 2];
+  // 철거는 조사를 맞추는 치환을 쓴다 (다른 제품은 그대로)
+  const __div = __prodKey === '철거' ? __diversifyDemol : __diversify;
   
   // 인트로 1개 + 본문 5개 + 사례 2개
   const intros = __prodKey && __SEO_INTRO_BY_PROD[__prodKey] ? __seoPick(__SEO_INTRO_BY_PROD[__prodKey], seed, 'i', 1) : __seoPick(__SEO_INTRO, seed, 'i', 1);
@@ -7860,9 +7892,11 @@ function __generateSEOContent(pathname) {
     __prodKey === '자동판매기' ? __SEO_BODY_VENDING :
     __SEO_BODY;
   const bodies = __seoPick(__bodyPool, seed, 'b', 3);
-  const cases = __prodKey && __SEO_CASE_BY_PROD[__prodKey] ? __seoPick(__SEO_CASE_BY_PROD[__prodKey], seed, 'c', 2) : __seoPick(__SEO_CASE, seed, 'c', 2);
+  const cases = __prodKey === '철거' ? [] : __prodKey && __SEO_CASE_BY_PROD[__prodKey] ? __seoPick(__SEO_CASE_BY_PROD[__prodKey], seed, 'c', 2) : __seoPick(__SEO_CASE, seed, 'c', 2);
   const subheads = __prodKey && __SEO_SUBHEAD_BY_PROD[__prodKey] ? __seoPick(__SEO_SUBHEAD_BY_PROD[__prodKey], seed, 's', 7) : __seoPick(__SEO_SUBHEAD, seed, 's', 7);
-  const h2 = __SEO_H2[__seoHash(seed + ':h2') % __SEO_H2.length].replace(/\{loc\}/g, loc);
+  // 철거는 설치·설비·장비·'분석' 제목을 쓰지 않는다
+  const __h2Pool = __prodKey === '철거' ? __SEO_H2.filter(t => !/설치|설비|장비|분석|도입/.test(t)) : __SEO_H2;
+  const h2 = __h2Pool[__seoHash(seed + ':h2') % __h2Pool.length].replace(/\{loc\}/g, loc);
   
   // 핵심 키워드/숫자 강조
   const __highlight = (text) => {
@@ -7874,7 +7908,7 @@ function __generateSEOContent(pathname) {
   const __caseEmojis = ['🏪','🍴','📷','✂️','📚','🍱','💻','🏋️'];
   
   // 인트로 — 박스 카드
-  const introHtml = intros.map((__it, __ii) => `<p style="font-size:17px;line-height:1.85;color:#1A1A1A;margin:0 0 32px;letter-spacing:-0.015em;font-weight:500">${__highlight(__diversify(__it.replace(/\{loc\}/g, loc), seed + ':intro' + __ii))}</p>`).join('');
+  const introHtml = intros.map((__it, __ii) => `<p style="font-size:17px;line-height:1.85;color:#1A1A1A;margin:0 0 32px;letter-spacing:-0.015em;font-weight:500">${__highlight(__div(__it.replace(/\{loc\}/g, loc), seed + ':intro' + __ii))}</p>`).join('');
   
   // 페이지별 가변 변수 (시드 기반)
   const __varNum1 = 5 + (__seoHash(seed + ':n1') % 30);
@@ -7908,11 +7942,15 @@ function __generateSEOContent(pathname) {
     ` ${loc} 권역의 많은 시공 사례에서 일관된 결과가 확인됩니다.`,
     ` ${loc} ${__varSido}에서 무상 출장 점검 후 정확한 안내가 가능합니다.`
   ];
+  // 철거: '매장 데이터를 보면'·'사례를 보면'·'분석 결과'·'평균을 살펴보면'·'도입을 고민하실 때',
+  // '도입 빈도'·'검증된 데이터·만족도'·'시공 사례 일관된 결과'·'가장 자주 받으시는 질문' 은 근거 없는 주장이라 뺀다
+  const __pfxUse = __prodKey === '철거' ? [__pfxOpts[0], __pfxOpts[1], __pfxOpts[4]] : __pfxOpts;
+  const __sufUse = __prodKey === '철거' ? [__sufOpts[2], __sufOpts[5]] : __sufOpts;
   const bodyItems = bodies.map((p, i) => {
     const emoji = __subEmojis[__seoHash(seed + ':e' + i) % __subEmojis.length];
-    const diversified = __diversify(p.replace(/\{loc\}/g, loc), seed + ':b' + i);
-    const pfx = __pfxOpts[__seoHash(seed + ':pfx' + i) % __pfxOpts.length];
-    const suf = __sufOpts[__seoHash(seed + ':suf' + i) % __sufOpts.length];
+    const diversified = __div(p.replace(/\{loc\}/g, loc), seed + ':b' + i);
+    const pfx = __pfxUse[__seoHash(seed + ':pfx' + i) % __pfxUse.length];
+    const suf = __sufUse[__seoHash(seed + ':suf' + i) % __sufUse.length];
     const wrapped = pfx + diversified + suf;
     // 단락마다 다른 포인트 색상 — 카드형 디자인으로 가독성 향상
     const __accents = [
@@ -7971,7 +8009,7 @@ function __generateSEOContent(pathname) {
  `${loc} 매장 철거 일정은 영업 마지막 날에 맞춰 잡습니다. 야간이나 주말에도 작업하기 때문에 후속 임차인 입주 날짜가 정해져 있어도 맞출 수 있습니다. ${loc} 권역은 방문 견적부터 시작합니다.`
   ] : __kwIntros;
   const __kwIdx = __seoHash(seed + ':kw') % __kwIntrosFinal.length;
-  const __kwHtml = `<div style="background:#FFF7ED;border-left:4px solid #EA580C;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#FFE4CC;border-radius:10px;font-size:18px;flex-shrink:0">🎯</span><span>${loc} ${__kw} 핵심 안내</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__diversify(__kwIntrosFinal[__kwIdx], seed + ':kwp'))}</p></div>`;
+  const __kwHtml = `<div style="background:#FFF7ED;border-left:4px solid #EA580C;border-radius:0 16px 16px 0;padding:24px 26px;margin-bottom:20px"><h3 style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;letter-spacing:-0.025em;margin:0 0 12px;color:#111;line-height:1.35"><span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#FFE4CC;border-radius:10px;font-size:18px;flex-shrink:0">🎯</span><span>${loc} ${__kw} 핵심 안내</span></h3><p style="font-size:15px;line-height:1.9;color:#374151;margin:0;letter-spacing:-0.005em">${__highlight(__div(__kwIntrosFinal[__kwIdx], seed + ':kwp'))}</p></div>`;
   
   // 항목형 박스 (체크포인트 5가지)
   const __CHECK_TITLES = [
@@ -8019,12 +8057,12 @@ function __generateSEOContent(pathname) {
     __chkItems = __CHECK_ITEMS_POOL[__chkIdx % __CHECK_ITEMS_POOL.length];
     __chkTitle = __CHECK_TITLES[__chkIdx].replace(/\{loc\}/g, loc);
   }
-  const checkBox = `<div style="background:#fff;border:1px solid #EEE;border-radius:16px;padding:30px 28px;margin-bottom:32px"><h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 22px;color:#000">✅ ${__chkTitle}</h3><div style="display:flex;flex-direction:column;gap:14px">${__chkItems.map((it, i) => `<div style="display:flex;gap:14px;align-items:flex-start"><div style="width:28px;height:28px;background:#FF5500;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;margin-top:2px">${i+1}</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:#000;margin-bottom:4px;letter-spacing:-0.02em">${__diversify(it.t, seed+':ct'+i)}</div><div style="font-size:13.5px;color:#555;line-height:1.7">${__highlight(__diversify(it.d, seed+':cd'+i))}</div></div></div>`).join('')}</div></div>`;
+  const checkBox = `<div style="background:#fff;border:1px solid #EEE;border-radius:16px;padding:30px 28px;margin-bottom:32px"><h3 style="font-size:17px;font-weight:900;letter-spacing:-0.03em;margin:0 0 22px;color:#000">✅ ${__chkTitle}</h3><div style="display:flex;flex-direction:column;gap:14px">${__chkItems.map((it, i) => `<div style="display:flex;gap:14px;align-items:flex-start"><div style="width:28px;height:28px;background:#FF5500;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0;margin-top:2px">${i+1}</div><div style="flex:1"><div style="font-size:15px;font-weight:800;color:#000;margin-bottom:4px;letter-spacing:-0.02em">${__div(it.t, seed+':ct'+i)}</div><div style="font-size:13.5px;color:#555;line-height:1.7">${__highlight(__div(it.d, seed+':cd'+i))}</div></div></div>`).join('')}</div></div>`;
   
   // 사례 — 글 카드와 다른 디자인(어두운 배경 강조 박스)
   const caseItems = cases.map((p, i) => {
     const emoji = __caseEmojis[__seoHash(seed + ':ce' + i) % __caseEmojis.length];
-    const diversified = __diversify(p.replace(/\{loc\}/g, loc), seed + ':c' + i);
+    const diversified = __div(p.replace(/\{loc\}/g, loc), seed + ':c' + i);
     return `<div style="background:linear-gradient(135deg,#1B2940 0%,#0E1729 100%);border-radius:18px;padding:28px 26px;margin-bottom:18px;position:relative;overflow:hidden"><div style="position:absolute;top:-20px;right:-10px;font-size:90px;opacity:0.08;line-height:1">${emoji}</div><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative"><span style="font-size:22px">${emoji}</span><div style="font-size:11px;font-weight:700;letter-spacing:0.18em;color:#FFB400;background:rgba(255,180,0,0.15);padding:4px 11px;border-radius:100px">REVIEW ${String(i+1).padStart(2,'0')}</div><h3 style="font-size:15.5px;font-weight:800;letter-spacing:-0.025em;margin:0;color:#fff">${subheads[5 + i].replace(/\{loc\}/g, loc)}</h3></div><p style="font-size:14.5px;line-height:1.85;color:rgba(255,255,255,0.82);margin:0;letter-spacing:-0.005em;position:relative">${__highlight(diversified)}</p></div>`;
   });
 
@@ -8036,7 +8074,7 @@ function __generateSEOContent(pathname) {
     `${loc} 매장의 결제·운영·보안, 한 번의 방문으로 정리해 드립니다.`
   ];
   const __quote = __quotePool[__seoHash(seed + ':qt') % __quotePool.length];
-  const quoteBox = `<div style="background:#000;border-radius:18px;padding:34px 30px;margin-bottom:18px;text-align:center"><div style="font-size:38px;line-height:1;color:#FFB400;margin-bottom:8px;font-family:Georgia,serif">&ldquo;</div><p style="font-size:18px;font-weight:800;line-height:1.5;color:#fff;margin:0;letter-spacing:-0.03em">${__quote}</p><div style="margin-top:18px"><a href="tel:010-9677-2356" style="display:inline-flex;align-items:center;gap:7px;background:#FF5500;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 22px;border-radius:100px;letter-spacing:-0.02em">📞 무료 상담 010-9677-2356</a></div></div>`;
+  const quoteBox = __prodKey === '철거' ? '' : `<div style="background:#000;border-radius:18px;padding:34px 30px;margin-bottom:18px;text-align:center"><div style="font-size:38px;line-height:1;color:#FFB400;margin-bottom:8px;font-family:Georgia,serif">&ldquo;</div><p style="font-size:18px;font-weight:800;line-height:1.5;color:#fff;margin:0;letter-spacing:-0.03em">${__quote}</p><div style="margin-top:18px"><a href="tel:010-9677-2356" style="display:inline-flex;align-items:center;gap:7px;background:#FF5500;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 22px;border-radius:100px;letter-spacing:-0.02em">📞 무료 상담 010-9677-2356</a></div></div>`;
 
   // 본문을 여러 조각으로 나눠 시각 요소를 촘촘히 끼워넣기 — 경쟁사 수준 가독성
   const __bodyArr = bodyItems;
@@ -8052,7 +8090,7 @@ function __generateSEOContent(pathname) {
   const __tableBox = __prodKey === '철거' ? '' : `<div style="margin-bottom:32px;overflow-x:auto"><div style="font-size:13px;font-weight:800;color:#000;margin-bottom:12px;letter-spacing:-0.02em">📊 ${loc} 매장 장비 비교</div><table style="width:100%;border-collapse:collapse;font-size:14px;min-width:480px"><thead><tr><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:8px 0 0 0">비교 항목</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">경제형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em">표준형</th><th style="background:#000;color:#fff;padding:13px 14px;text-align:left;font-weight:700;letter-spacing:-0.02em;border-radius:0 8px 0 0">프리미엄</th></tr></thead><tbody><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">처리 속도</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">보통</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">빠름</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매우 빠름</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">매장 적합성</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#FF5500">★★★★★</td></tr><tr><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">부가 기능</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">기본</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">POS 연동</td><td style="padding:13px 14px;border-bottom:1px solid #EEE;color:#333">완전 통합</td></tr><tr><td style="padding:13px 14px;color:#333">A/S 지원</td><td style="padding:13px 14px;color:#333">기본</td><td style="padding:13px 14px;color:#333">표준</td><td style="padding:13px 14px;color:#333">우선 지원</td></tr></tbody></table></div>`;
 
   // 진행 순서 표 (상담→제안→설치→유지) — 경쟁사 스타일
-  const __stepBox = `<div style="margin-bottom:32px;background:#fff;border:1px solid #EEE;border-radius:14px;overflow:hidden"><div style="font-size:15px;font-weight:900;color:#000;letter-spacing:-0.02em;padding:20px 24px 4px">🗓️ 상담부터 설치까지, ${loc} 진행 순서</div><table style="width:100%;border-collapse:collapse;font-size:14px"><tbody>${[['상담 단계',`${loc} 매장 운영 패턴 청취`],['제안 단계','매장에 맞는 사양 + 부가 장비 안내'],['설치 단계','현장 진행, 사용법까지 안내'],['유지 단계','매니저 직통, 신속 대응']].map(([a,b],i)=>`<tr><td style="padding:14px 24px;font-weight:800;color:#000;white-space:nowrap;border-bottom:${i<3?'1px solid #F0F0F0':'none'};width:110px">${a}</td><td style="padding:14px 24px;color:#666;border-bottom:${i<3?'1px solid #F0F0F0':'none'}">${b}</td></tr>`).join('')}</tbody></table></div>`;
+  const __stepBox = __prodKey === '철거' ? '' : `<div style="margin-bottom:32px;background:#fff;border:1px solid #EEE;border-radius:14px;overflow:hidden"><div style="font-size:15px;font-weight:900;color:#000;letter-spacing:-0.02em;padding:20px 24px 4px">🗓️ 상담부터 설치까지, ${loc} 진행 순서</div><table style="width:100%;border-collapse:collapse;font-size:14px"><tbody>${[['상담 단계',`${loc} 매장 운영 패턴 청취`],['제안 단계','매장에 맞는 사양 + 부가 장비 안내'],['설치 단계','현장 진행, 사용법까지 안내'],['유지 단계','매니저 직통, 신속 대응']].map(([a,b],i)=>`<tr><td style="padding:14px 24px;font-weight:800;color:#000;white-space:nowrap;border-bottom:${i<3?'1px solid #F0F0F0':'none'};width:110px">${a}</td><td style="padding:14px 24px;color:#666;border-bottom:${i<3?'1px solid #F0F0F0':'none'}">${b}</td></tr>`).join('')}</tbody></table></div>`;
 
   // 콜아웃 박스 (보라 왼쪽 바 강조) — 핵심 메시지
   const __calloutText = __prodKey === '철거'
@@ -8105,7 +8143,7 @@ function __generateSEOContent(pathname) {
   const __callout = __prodKey === '철거'
     ? __demolCallouts[__seoHash(seed + ':co') % __demolCallouts.length]
     : __calloutPool[__seoHash(seed + ':co') % __calloutPool.length];
-  const __calloutBox = `<div style="background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:20px 24px;margin-bottom:32px"><p style="font-size:14.5px;line-height:1.8;color:#5D4400;margin:0"><strong style="color:#3D2C00">직접 들은 이야기</strong> · ${__callout}</p></div>`;
+  const __calloutBox = __prodKey === '철거' ? '' : `<div style="background:#FFF8E1;border-left:4px solid #FFB300;border-radius:8px;padding:20px 24px;margin-bottom:32px"><p style="font-size:14.5px;line-height:1.8;color:#5D4400;margin:0"><strong style="color:#3D2C00">직접 들은 이야기</strong> · ${__callout}</p></div>`;
 
   // 하단 상담 CTA 박스 (경쟁사 스타일 — 보라 테두리)
   const __ctaBox = `<div style="border:1.5px solid #7C3AED;border-radius:16px;padding:32px 28px;text-align:center;margin-bottom:8px;background:#FEFEFF"><p style="font-size:16px;font-weight:800;color:#000;margin:0 0 6px;letter-spacing:-0.02em">${__prodKey === '철거' ? loc + ' 매장 철거를 알아보고 계신가요?' : loc + '에서 매장 설비 설치를 고민 중이신가요?'}</p><p style="font-size:13.5px;color:#666;margin:0 0 20px">전문 매니저가 무료로 상담해드립니다.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="sms:01096772356" style="background:#000;color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">문자 문의 →</a><a href="tel:010-9677-2356" style="background:#fff;color:#000;border:1px solid #DDD;text-decoration:none;font-weight:800;font-size:14px;padding:12px 26px;border-radius:10px;letter-spacing:-0.02em">☎ 전화 문의</a></div></div>`;
@@ -8130,12 +8168,12 @@ function __generateSEOContent(pathname) {
     ${checkBox}
     ${quoteBox}
     ${__ctaBox}
-  </div></section>
+  </div></section>${__prodKey === '철거' ? '' : `
   <section style="padding:56px 0;border-top:0.5px solid #EEE;background:#fff"><div style="max-width:980px;margin:0 auto;padding:0 28px">
     <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;color:#FF5500;margin-bottom:12px">${__prodKey === '철거' ? '실제 작업 후기' : '실제 설치 후기'}</div>
     <h2 style="font-size:22px;font-weight:900;letter-spacing:-0.04em;margin:0 0 24px;color:#000;line-height:1.25">${loc} ${__prodKey === '철거' ? '매장 철거 후기' : '매장 설치 후기'}</h2>
     ${__caseRest || caseItems.join('')}
-  </div></section>`;
+  </div></section>`}`;
 }
 function __shouldBoost(p){if(p.startsWith('/robots')||p.startsWith('/sitemap')||p.startsWith('/rss')||p.startsWith('/favicon'))return false;return true;}
 
@@ -9834,7 +9872,9 @@ const __wrapped_default = {
       const __newFoo = '<footer style="background:#000;color:#fff;padding:56px 0"><div style="max-width:1100px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><div style="display:flex;align-items:center;gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF5500" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg><span style="font-weight:900;font-size:14px;letter-spacing:-0.03em">더세이브 스토어</span><span style="font-size:11px;color:rgba(255,255,255,0.5);margin-left:4px">전국 매장 설비 설치</span></div><a href="tel:010-9677-2356" style="font-size:17px;font-weight:800;color:#FF5500;text-decoration:none;letter-spacing:-0.02em">010-9677-2356</a><div style="display:flex;gap:16px;font-size:12px;color:rgba(255,255,255,0.7)"><a href="/regions" style="color:inherit;text-decoration:none">전국 지역</a><a href="/#process" style="color:inherit;text-decoration:none">설치 절차</a><a href="/products/vending-machine/#models" style="color:inherit;text-decoration:none">자판기 모델</a><a href="/#faq" style="color:inherit;text-decoration:none">자주 묻는 질문</a><a href="/#contact" style="color:inherit;text-decoration:none">무료 견적</a></div><div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.05em">© 2026 THE SAVE STORE</div></div></footer>';
       // 발행일 섹션 추가 (footer 직전, 메인페이지 제외 모든 페이지)
       if (!__isHome) {
-        const __dateSec = `<section style="padding:20px 0;background:#FAFAF8;border-top:0.5px solid #EEE"><div class="container"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#888;letter-spacing:-0.01em"><time datetime="${__pubISO}" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#555"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>발행일 ${__pubKR}</time><span style="color:#CCC">·</span><span>전국 17개 시·도 매장 설비 출장 설치 정보</span></div></div></section>`;
+        // 철거 지역 페이지(/서울/철거 …)에는 설치 안내 문구를 붙이지 않는다
+        const __isDemolRegionPage = (() => { const __s = __decPath.split('/').filter(Boolean); return __s[__s.length - 1] === '철거' && __REGION_NAMES.includes(__s[0]); })();
+        const __dateSec = `<section style="padding:20px 0;background:#FAFAF8;border-top:0.5px solid #EEE"><div class="container"><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11.5px;color:#888;letter-spacing:-0.01em"><time datetime="${__pubISO}" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#555"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>발행일 ${__pubKR}</time>${__isDemolRegionPage ? '' : '<span style="color:#CCC">·</span><span>전국 17개 시·도 매장 설비 출장 설치 정보</span>'}</div></div></section>`;
         html = html.replace(/<footer\b/i, __dateSec + '<footer');
       }
       
