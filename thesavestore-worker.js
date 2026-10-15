@@ -7026,17 +7026,9 @@ app.get("/rss.xml", (c) => {
 });
 app.get("/4e591c0756ed125bd2ba8757cc822c14.txt", (c) => c.text("4e591c0756ed125bd2ba8757cc822c14", 200, { "Content-Type": "text/plain; charset=utf-8" }));
 
-// IndexNow 자동 일괄 제출 (모든 sitemap URL 일괄 ping)
-app.get("/indexnow-bulk", async (c) => {
-  // cron과 동일한 통합 핑 함수 호출 (rotation 포함)
-  const result = await __indexNowAutoPing();
-  return c.json({
-    submitted: result.submitted,
-    endpoints: result.results,
-    timestamp: new Date().toISOString(),
-    note: "단일 api.indexnow.org 호출로 모든 참여 엔진(Bing, Yandex, Naver, Seznam)에 자동 전파됨. 네이버는 한국 검색 핵심이라 직접도 호출."
-  });
-});
+// /indexnow-bulk — 인증 없이 누구나 열면 IndexNow 제출이 실행되던 공개 주소라 닫는다 (2026-10-15).
+// 제출은 cron(scheduled) 에서만 한다.
+app.get("/indexnow-bulk", (c) => c.text("Not Found", 404));
 
 // === Sitemap helpers ===
 function __buildSitemapEntries() {
