@@ -7148,7 +7148,8 @@ app.get("/sitemap-dongs.xml", (c) => {
 app.get("/sitemap-products-1.xml", (c) => {
   const { dongProducts } = __buildSitemapEntries();
   const half = Math.ceil(dongProducts.length / 2);
-  return c.text(__renderSitemapXml(dongProducts.slice(0, half)), 200, {
+  // 동×철거는 noindex 라 사이트맵에서 뺀다 (half 는 원래 목록 기준 그대로)
+  return c.text(__renderSitemapXml(dongProducts.slice(0, half).filter(e => !e.url.endsWith('/' + encodeURIComponent('철거')))), 200, {
     "Content-Type": "application/xml; charset=utf-8",
     "Cache-Control": "public, max-age=3600"
   });
@@ -7158,7 +7159,8 @@ app.get("/sitemap-products-1.xml", (c) => {
 app.get("/sitemap-products-2.xml", (c) => {
   const { dongProducts } = __buildSitemapEntries();
   const half = Math.ceil(dongProducts.length / 2);
-  return c.text(__renderSitemapXml(dongProducts.slice(half)), 200, {
+  // 동×철거는 noindex 라 사이트맵에서 뺀다 (half 는 원래 목록 기준 그대로)
+  return c.text(__renderSitemapXml(dongProducts.slice(half).filter(e => !e.url.endsWith('/' + encodeURIComponent('철거')))), 200, {
     "Content-Type": "application/xml; charset=utf-8",
     "Cache-Control": "public, max-age=3600"
   });
@@ -9328,6 +9330,14 @@ const __wrapped_default = {
           html = html.replace(/<meta name="description" content="[^"]*"/, `<meta name="description" content="${__newDesc}"`);
           html = html.replace(/<meta property="og:description" content="[^"]*"/, `<meta property="og:description" content="${__newDesc}"`);
           html = html.replace(/<meta name="twitter:description" content="[^"]*"/, `<meta name="twitter:description" content="${__newDesc}"`);
+          // 동×철거(5,487개)는 문장이 거의 공통이라 색인하지 않는다. 링크는 따라가게 둔다.
+          // 시·도×철거·시군구×철거는 색인 유지. 2026-10-15
+          if (__isDemol && __prodSegs.length === 4) {
+            const __rb = '<meta name="robots" content="noindex,follow">';
+            html = /<meta name="robots"[^>]*>/.test(html)
+              ? html.replace(/<meta name="robots"[^>]*>/, __rb)
+              : html.replace(/(<link rel="canonical" href="[^"]*"[^>]*>)/, `$1${__rb}`);
+          }
         }
       }
 
