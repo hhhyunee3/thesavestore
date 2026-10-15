@@ -8230,7 +8230,10 @@ async function __indexNowAutoPing() {
   // Tier 3을 N일에 걸쳐 분할
   const cycleDays = Math.ceil(tier3.length / Math.max(remaining, 1));
   const offset = (dayOfYear % cycleDays) * remaining;
-  const tier3Slice = tier3.slice(offset, offset + remaining);
+  // 동×철거(noindex,follow, 2026-10-15)는 보내지 않는다.
+  // 회전 계산(cycleDays·offset)은 원래 목록 그대로 두고 잘라낸 뒤에만 거른다 —
+  // 그래야 다른 제품 주소가 보내지는 날이 바뀌지 않는다.
+  const tier3Slice = tier3.slice(offset, offset + remaining).filter(u => !(u.endsWith('/철거') && u.split('/').length === 7));
   
   const submitUrls = [...fixed, ...tier3Slice].map(u => encodeURI(u));
   
